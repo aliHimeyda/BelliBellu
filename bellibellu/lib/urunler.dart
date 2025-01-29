@@ -1,4 +1,5 @@
-import 'dart:io';
+// ignore: depend_on_referenced_packages
+import 'package:http/http.dart' as http;
 
 class Urunler {
   late String resimYolu;
@@ -15,25 +16,34 @@ class Urunler {
     begenisayisi = 0;
   }
   static Future<void> urunleritanima() async {
-    File file = File('urunbilgileri.txt');
-    String content = await file.readAsString(); // 🔥 Dosyanın tamamını oku
-    int index = 0;
+    List<String> satirlar;
+    try {
+      // 🔥 GitHub'dan dosyayı çeken URL (sen kendi URL'ni yazmalısın)
+      var url = Uri.parse(
+          'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/urunbilgileri.txt');
+      var response = await http.get(url);
 
-    for (String satir in content.split('\n')) {
-      // Satırları '\n' ile böldük
-      if (satir.trim().isNotEmpty) {
-        // Boş satırları atla
-        Urunler u = Urunler();
-        if (index % 5 == 0) u.resimYolu = satir;
-        if (index % 5 == 1) u.urunAdi = satir;
-        if (index % 5 == 2) u.urunfiyati = double.parse(satir);
-        if (index % 5 == 3) u.urunAciklamasi = satir;
-        if (index % 5 == 4) {
-          u.begenisayisi = int.parse(satir);
-          urunler.add(u); // �� Ürünleri listeye ekle
-        }
-        index++;
+      if (response.statusCode == 200) {
+        // ✅ Dosya içeriğini satır satır böl ve liste olarak döndür
+        satirlar = response.body
+            .split('\n')
+            .where((line) => line.trim().isNotEmpty)
+            .toList();
+      } else {
+        throw Exception("❌ Dosya yüklenemedi: ${response.statusCode}");
       }
+    } catch (e) {
+      throw Exception("🚨 Hata: $e");
+    }
+
+    for (int i = 0; i < (satirlar.length); i += 5) {
+      Urunler u = Urunler();
+      u.resimYolu = satirlar[i];
+      u.urunAdi = satirlar[i + 1];
+      u.urunfiyati = double.parse(satirlar[i + 2]);
+      u.urunAciklamasi = satirlar[i + 3];
+      u.begenisayisi = int.parse(satirlar[i + 4]);
+      urunler.add(u);
     }
   }
 }
