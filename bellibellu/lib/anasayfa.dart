@@ -2,94 +2,80 @@
 
 import 'package:bellibellu/renkler.dart';
 import 'package:flutter/material.dart';
-import 'package:bellibellu/urunlerseridi.dart';
+import 'package:go_router/go_router.dart';
 
-class Anasayfa extends StatefulWidget {
-  const Anasayfa({super.key});
+class Anasayfa extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
+  const Anasayfa({super.key, required this.navigationShell});
 
-  @override
-  State<Anasayfa> createState() => _AnasayfaState();
-}
-
-class _AnasayfaState extends State<Anasayfa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Renkler.kahverengi,
-        title: const Text('BelliBellu',
-            style: TextStyle(fontSize: 20, color: Colors.white)),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: Image.asset(
-              'lib/icons/aramaiconu.png',
-              width: 20,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          )
-        ],
-        leading: IconButton(
-            onPressed: () {},
-            icon: Image.asset(
-              'lib/icons/menuiconu.png',
-              width: 20,
-              color: Colors.white,
-            )),
-      ),
-      body: ListView(
-        children: [
-          SingleChildScrollView(
-              scrollDirection: Axis.horizontal, // Yatay kaydırmayı aktif et
-              child: Wrap(
-                spacing: 15,
-                children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width - 10,
-                      height: 300,
-                      decoration: BoxDecoration(
-                        color: Renkler.kuyubeyaz,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image(
-                            image: NetworkImage(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/slider1.png'),
-                            fit: BoxFit.cover,
-                          ))),
-                  Container(
-                      decoration: BoxDecoration(
-                        color: Renkler.kuyubeyaz,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      width: MediaQuery.of(context).size.width - 10,//ekran genisligi kadar
-                      height: 300,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image(
-                              image: NetworkImage(
-                                  'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/slider2.png'),
-                              fit: BoxFit.cover))),
-                  Container(
-                      decoration: BoxDecoration(
-                        color: Renkler.kuyubeyaz,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      width: MediaQuery.of(context).size.width - 10,
-                      height: 300,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image(
-                              image: NetworkImage(
-                                  'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/slider3.png'),
-                              fit: BoxFit.cover)))
-                ],
-              )),
-          Serid('2025'),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   leading: Padding(
+      //     padding: EdgeInsets.only(left: 20),
+      //     child: SizedBox(
+      //       width: 200,
+      //       child: TextField(
+      //         onChanged: (value) {
+      //           // Arama işlemleri burada yazılacak
+      //         },
+      //         decoration: InputDecoration(
+      //           suffixIcon: IconButton(
+      //             icon: Image.asset(
+      //               'lib/icons/aramaiconu.png',
+      //               width: 20,
+      //               color: Renkler.kahverengi,
+      //             ),
+      //             onPressed: () {},
+      //           ),
+      //           hintText: 'Arama yap',
+      //           border:
+      //               OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+      //           filled: true,
+      //           fillColor: Renkler.kuyubeyaz,
+      //           contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      //   actions: const [
+      //     Padding(
+      //       padding: EdgeInsets.only(right: 10),
+      //       child: Text('BelliBellu',
+      //           style: TextStyle(fontSize: 20, color: Renkler.kahverengi)),
+      //     ),
+      //   ],
+      // ),
+      bottomNavigationBar: NavigationBar(
+        backgroundColor: Renkler.kuyubeyaz,
+        height: 60,
+        selectedIndex: navigationShell.currentIndex,
+        indicatorColor: Renkler.krem,
+        onDestinationSelected: navigationShell.goBranch,
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.home, color: Renkler.kahverengi),
+            label: 'Anasayfa',
+          ),
+          NavigationDestination(
+              icon: Icon(
+                Icons.category,
+                color: Renkler.kahverengi,
+              ),
+              label: 'Katagoriler'),
+          NavigationDestination(
+              icon: Icon(Icons.bookmark, color: Renkler.kahverengi),
+              label: 'Kaydedilenler'),
+          NavigationDestination(
+              icon: Icon(Icons.contact_mail, color: Renkler.kahverengi),
+              label: 'Iletisim'),
+          NavigationDestination(
+              icon: Icon(Icons.menu, color: Renkler.kahverengi), label: 'Menu'),
         ],
       ),
+      body: navigationShell,
       backgroundColor: Renkler.kuyubeyaz,
     );
   }

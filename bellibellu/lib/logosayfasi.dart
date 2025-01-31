@@ -1,5 +1,6 @@
-import 'package:bellibellu/anasayfa.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/router.dart';
+import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 
 class Logosayfasi extends StatefulWidget {
@@ -12,11 +13,17 @@ class Logosayfasi extends StatefulWidget {
 class _LogosayfasiState extends State<Logosayfasi> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Urunler.urunleritanima();
+
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
           // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(builder: (context) => const Anasayfa()));
+          MaterialPageRoute(
+              builder: (context) => MaterialApp.router(
+                    routerConfig: router,
+                    debugShowCheckedModeBanner: false,
+                  )));
     });
     super.initState();
   }
@@ -25,6 +32,8 @@ class _LogosayfasiState extends State<Logosayfasi> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Renkler.kahverengi,
-        body: Center(child: Image.asset('lib/icons/logo.png')));
+        body: Center(
+            child: Image.network(
+                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/icons/logo.png')));
   }
 }

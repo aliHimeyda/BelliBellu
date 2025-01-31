@@ -1,7 +1,6 @@
 
+import 'package:bellibellu/logosayfasi.dart';
 import 'package:flutter/material.dart';
-import 'package:grock/grock.dart';
-import 'logosayfasi.dart';
 
 void main() {
   runApp(const Program());
@@ -12,10 +11,12 @@ class Program extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    return MaterialApp(
-        navigatorKey: Grock.navigationKey,
-        scaffoldMessengerKey: Grock.scaffoldMessengerKey,
-        home: const Logosayfasi());
+    return const MaterialApp(
+      
+      debugShowCheckedModeBanner: false,
+      home: Logosayfasi(),
+      
+
+    );
   }
 }

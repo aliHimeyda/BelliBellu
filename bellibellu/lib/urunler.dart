@@ -7,6 +7,11 @@ class Urunler {
   late String urunAdi;
   late String urunAciklamasi;
   late int begenisayisi;
+  late String materyali;
+  late String turu;
+  late String agirligi;
+
+
   static List<Urunler> urunler = [];
   Urunler() {
     resimYolu = "";
