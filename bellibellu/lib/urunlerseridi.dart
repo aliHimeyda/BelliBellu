@@ -2,11 +2,13 @@ import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
+import 'package:grock/grock.dart';
 
 // ignore: must_be_immutable
 class Serid extends StatelessWidget {
   String vasif;
-  Serid(this.vasif, {super.key});
+  int sayi;
+  Serid(this.vasif, this.sayi, {super.key});
 
   // final Future<void> _urunlerFuture =
   //     Urunler.urunleritanima(); // 🔥 `Future` sadece bir kere çalışacak
@@ -14,6 +16,8 @@ class Serid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const int urunKartiGenisligi = 150;
+    int arttirma = Urunler.urunler.length ~/ sayi;
+    debugPrint(arttirma.toString());
     debugPrint('$vasif olusturuldu');
 
     // return FutureBuilder<void>(
@@ -29,7 +33,6 @@ class Serid extends StatelessWidget {
     //     //     debugPrint("✔ Hata yok ");
 
     return Column(
-      
       children: [
         Container(
           padding: const EdgeInsets.all(10),
@@ -68,9 +71,15 @@ class Serid extends StatelessWidget {
           child: Wrap(
             spacing: 10,
             children: [
-              for (Urunler urun in Urunler.urunler)
-                Urunkarti(urun.resimYolu, urun.urunAdi, urun.urunfiyati,
-                    urun.urunAciklamasi, urun.begenisayisi),
+              for (int i = random.nextInt(9);
+                  i < Urunler.urunler.length;
+                  i += arttirma)
+                Urunkarti(
+                    Urunler.urunler[i].resimYolu,
+                    Urunler.urunler[i].urunAdi,
+                    Urunler.urunler[i].urunfiyati,
+                    Urunler.urunler[i].urunAciklamasi,
+                    Urunler.urunler[i].begenisayisi),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
@@ -78,10 +87,10 @@ class Serid extends StatelessWidget {
                   height: urunKartiGenisligi * 1.8,
                   padding: const EdgeInsets.only(bottom: 10),
                   decoration: BoxDecoration(
-                    gradient:const LinearGradient(
+                    gradient: const LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
-                      colors:  [Renkler.krem, Renkler.kuyubeyaz],
+                      colors: [Renkler.krem, Renkler.kuyubeyaz],
                     ),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Renkler.gri),
@@ -106,7 +115,7 @@ class Serid extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment
                             .center, // 📌 Yatay eksende ortala
                         children: [
-                         const Text(
+                          const Text(
                             'Tüm Urunler',
                             style: TextStyle(
                               color: Renkler.kahverengi,
@@ -127,7 +136,7 @@ class Serid extends StatelessWidget {
                                   color: Renkler.kahverengi,
                                   width: 2), // 📌 Çerçeve ekledik
                             ),
-                            child:const Center(
+                            child: const Center(
                               child: Icon(
                                 Icons.chevron_right,
                                 size: 25,

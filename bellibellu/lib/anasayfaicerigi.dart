@@ -19,7 +19,7 @@ class Anasayfaicerigi extends StatelessWidget {
                   scrollDirection: Axis.horizontal, // Yatay kaydırmayı aktif et
 
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 50),
+                    padding: const EdgeInsets.only(top: 100),
                     child: Wrap(
                       spacing: 15,
                       children: [
@@ -69,59 +69,305 @@ class Anasayfaicerigi extends StatelessWidget {
                   )),
               Column(
                 children: [
-                  Serid('2025 Urunlari'),
-                  Serid('En Cok Favorilenen'),
-                  Serid('Ofis Mobilya Urunleri'),
-                  Serid('Ev Urunleri'),
+                  Serid('2025 Urunlari', 15),
+                  Serid('En Cok Favorilenen', 20),
+                  Serid('Ofis Mobilya Urunleri', 10),
+                  Serid('Ev Urunleri', 9),
                 ],
               ),
             ],
           ),
-          Container(
-            color: Renkler.kuyubeyaz,
-            child: Row(
-              children: [
-                Positioned(
-                  top: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20, right: 20, bottom: 10, top: 10),
-                    child: SizedBox(
-                      width: 400,
-                      height: 35,
-                      child: TextField(
-                        cursorColor: Renkler.bordo,
-                        onChanged: (value) {
-                          // Arama işlemleri burada yazılacak
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: IconButton(
-                            icon: const Icon(
-                              Icons.search,
-                              color: Renkler.kahverengi,
-                              size: 17,
+          aramaMetodu(),
+        ],
+      ),
+    );
+  }
+
+  Column aramaMetodu() {
+    return Column(
+          children: [
+            Container(
+              color: Renkler.kahverengi,
+              child: Row(
+                children: [
+                  Positioned(
+                    top: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 10, top: 10),
+                      child: SizedBox(
+                        width: 400,
+                        height: 35,
+                        child: TextField(
+                          cursorColor: Renkler.bordo,
+                          onChanged: (value) {
+                            // Arama işlemleri burada yazılacak
+                          },
+                          decoration: InputDecoration(
+                            prefixIcon: IconButton(
+                              icon: const Icon(
+                                Icons.search,
+                                color: Renkler.kahverengi,
+                                size: 17,
+                              ),
+                              onPressed: () {},
                             ),
-                            onPressed: () {},
+                            hintText: 'Magazada Arayin',
+                            focusColor: Renkler.kahverengi,
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7)),
+                            filled: true,
+                            fillColor: Renkler.kuyubeyaz,
+                            contentPadding: const EdgeInsets.all(10),
                           ),
-                          hintText: 'Magazada Arayin',
-                          focusColor: Renkler.kahverengi,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(7)),
-                          filled: true,
-                          fillColor: Renkler.kuyubeyaz,
-                          contentPadding: const EdgeInsets.all(10),
                         ),
                       ),
                     ),
                   ),
-                ),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.email)),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.))
-              ],
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.email,
+                        color: Renkler.kuyubeyaz,
+                      )),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+            Container(
+              color: Renkler.krem,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    Positioned(
+                      top: 33,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10, top: 10),
+                          child: Row(
+                            children: [
+                              Container(
+                                  width: 65,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                          color: Renkler.kahverengi),
+                                      borderRadius:
+                                          BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      'masa',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Renkler.kahverengi,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                            ],
+                          )),
+                    ),
+                    Positioned(
+                      top: 33,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10, top: 10),
+                          child: Row(
+                            children: [
+                              Container(
+                                  width: 65,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                          color: Renkler.kahverengi),
+                                      borderRadius:
+                                          BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      'sandalye',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Renkler.kahverengi,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                            ],
+                          )),
+                    ),
+                    Positioned(
+                      top: 33,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10, top: 10),
+                          child: Row(
+                            children: [
+                              Container(
+                                  width: 65,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                          color: Renkler.kahverengi),
+                                      borderRadius:
+                                          BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      'ev',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Renkler.kahverengi,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                            ],
+                          )),
+                    ),
+                    Positioned(
+                      top: 33,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10, top: 10),
+                          child: Row(
+                            children: [
+                              Container(
+                                  width: 65,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                          color: Renkler.kahverengi),
+                                      borderRadius:
+                                          BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      'ofis',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Renkler.kahverengi,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                            ],
+                          )),
+                    ),
+                    Positioned(
+                      top: 33,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10, top: 10),
+                          child: Row(
+                            children: [
+                              Container(
+                                  width: 65,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                          color: Renkler.kahverengi),
+                                      borderRadius:
+                                          BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      'kafe',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Renkler.kahverengi,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                            ],
+                          )),
+                    ),
+                    Positioned(
+                      top: 33,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10, top: 10),
+                          child: Row(
+                            children: [
+                              Container(
+                                  width: 110,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                          color: Renkler.kahverengi),
+                                      borderRadius:
+                                          BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      'en cok begenilenler',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Renkler.kahverengi,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                            ],
+                          )),
+                    ),
+                    Positioned(
+                      top: 33,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10, top: 10),
+                          child: Row(
+                            children: [
+                              Container(
+                                  width: 110,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                          color: Renkler.kahverengi),
+                                      borderRadius:
+                                          BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      '2025 uretimi',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Renkler.kahverengi,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                            ],
+                          )),
+                    ),
+                    Positioned(
+                      top: 33,
+                      child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 10, top: 10),
+                          child: Row(
+                            children: [
+                              Container(
+                                  width: 110,
+                                  height: 22,
+                                  decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                          color: Renkler.kahverengi),
+                                      borderRadius:
+                                          BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      'efsane urunler',
+                                      style: TextStyle(
+                                          fontSize: 10,
+                                          color: Renkler.kahverengi,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  )),
+                            ],
+                          )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
   }
 }

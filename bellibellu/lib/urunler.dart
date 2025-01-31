@@ -9,8 +9,8 @@ class Urunler {
   late int begenisayisi;
   late String materyali;
   late String turu;
+  late String ortami;
   late String agirligi;
-
 
   static List<Urunler> urunler = [];
   Urunler() {
@@ -19,6 +19,10 @@ class Urunler {
     urunAdi = "";
     urunAciklamasi = "";
     begenisayisi = 0;
+    materyali = "";
+    turu = "";
+    ortami = "";
+    agirligi = "";
   }
   static Future<void> urunleritanima() async {
     List<String> satirlar;
@@ -41,13 +45,18 @@ class Urunler {
       throw Exception("🚨 Hata: $e");
     }
 
-    for (int i = 0; i < (satirlar.length); i += 5) {
+    for (int i = 0; i < (satirlar.length); i += 9) {
       Urunler u = Urunler();
       u.resimYolu = satirlar[i];
       u.urunAdi = satirlar[i + 1];
       u.urunfiyati = double.parse(satirlar[i + 2]);
       u.urunAciklamasi = satirlar[i + 3];
       u.begenisayisi = int.parse(satirlar[i + 4]);
+      u.materyali = satirlar[i + 5];
+      u.turu = satirlar[i + 6];
+      u.ortami = satirlar[i + 7];
+      u.agirligi = satirlar[i + 8];
+      // �� Ürünleri listeye ekle
       urunler.add(u);
     }
   }

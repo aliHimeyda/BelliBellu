@@ -68,12 +68,12 @@ class Urunkarti extends StatelessWidget {
                 ])),
             Text(
               urunAdi,
-              style: TextStyle(
+              style:const TextStyle(
                   color: Renkler.kahverengi, fontWeight: FontWeight.bold),
             ),
             Text(
               '$urunfiyati TL   ❤$begenisayisi',
-              style: TextStyle(color: Renkler.kahverengi),
+              style: const TextStyle(color: Renkler.kahverengi),
             ),
           ],
         ),
