@@ -48,32 +48,44 @@ class Anasayfa extends StatelessWidget {
       //     ),
       //   ],
       // ),
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: Renkler.kuyubeyaz,
-        height: 60,
-        selectedIndex: navigationShell.currentIndex,
-        indicatorColor: Renkler.krem,
-        onDestinationSelected: navigationShell.goBranch,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home, color: Renkler.kahverengi),
-            label: 'Anasayfa',
+      bottomNavigationBar: NavigationBarTheme(
+        data: NavigationBarThemeData(
+          labelTextStyle: WidgetStateProperty.all(
+            const TextStyle(
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                color: Renkler.kahverengi),
           ),
-          NavigationDestination(
-              icon: Icon(
-                Icons.category,
-                color: Renkler.kahverengi,
-              ),
-              label: 'Katagoriler'),
-          NavigationDestination(
-              icon: Icon(Icons.bookmark, color: Renkler.kahverengi),
-              label: 'Kaydedilenler'),
-          NavigationDestination(
+        ),
+        child: NavigationBar(
+          backgroundColor: Renkler.kuyubeyaz,
+          height: 60,
+          selectedIndex: navigationShell.currentIndex,
+          indicatorColor: Renkler.krem,
+          onDestinationSelected: navigationShell.goBranch,
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.home, color: Renkler.kahverengi),
+              label: 'Anasayfa',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.category, color: Renkler.kahverengi),
+              label: 'Katagoriler',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.favorite, color: Renkler.kahverengi),
+              label: 'Favorilerim',
+            ),
+            NavigationDestination(
               icon: Icon(Icons.contact_mail, color: Renkler.kahverengi),
-              label: 'Iletisim'),
-          NavigationDestination(
-              icon: Icon(Icons.menu, color: Renkler.kahverengi), label: 'Menu'),
-        ],
+              label: 'Iletisim',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.menu, color: Renkler.kahverengi),
+              label: 'Menu',
+            ),
+          ],
+        ),
       ),
       body: navigationShell,
       backgroundColor: Renkler.kuyubeyaz,
