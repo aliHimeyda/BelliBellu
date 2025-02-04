@@ -1,3 +1,4 @@
+
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/urunler.dart';
@@ -14,6 +15,7 @@ class _LogosayfasiState extends State<Logosayfasi> {
   @override
   void initState() {
     Urunler.urunleritanima();
+    
 
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(

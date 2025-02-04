@@ -1,10 +1,27 @@
+import 'package:bellibellu/bellekislemleri.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Anasayfaicerigi extends StatelessWidget {
+class Anasayfaicerigi extends StatefulWidget {
   const Anasayfaicerigi({super.key});
+
+  @override
+  State<Anasayfaicerigi> createState() => _AnasayfaicerigiState();
+}
+
+class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
+  @override
+  void initState() {
+    _bellekguncelle;
+    super.initState();
+  }
+
+  Future<void> _bellekguncelle() async {
+    await Hafizaislemleri.bellektekiUrunleriGuncelle();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +236,8 @@ class Anasayfaicerigi extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    
                     debugPrint('tiklandi');
                   },
                   icon: const Icon(Icons.email, color: Renkler.kuyubeyaz),
