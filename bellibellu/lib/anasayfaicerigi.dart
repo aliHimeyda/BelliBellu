@@ -23,65 +23,73 @@ class Anasayfaicerigi extends StatelessWidget {
                   false, // 🔥 Yeniden oluşturulmasını engeller
               children: [
                 SingleChildScrollView(
-                    scrollDirection:
-                        Axis.horizontal, // Yatay kaydırmayı aktif et
+                  scrollDirection: Axis.horizontal, // Yatay kaydırmayı aktif et
 
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 110),
-                      child: Wrap(
-                        spacing: 15,
-                        children: [
-                          Container(
-                              width: MediaQuery.of(context).size.width - 10,
-                              height: 190,
-                              decoration: BoxDecoration(
-                                color: Renkler.kuyubeyaz,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: const Image(
-                                    image: NetworkImage(
-                                        'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/slider1.png'),
-                                    fit: BoxFit.contain,
-                                  ))),
-                          Container(
-                              decoration: BoxDecoration(
-                                color: Renkler.kuyubeyaz,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              width: MediaQuery.of(context).size.width -
-                                  10, //ekran genisligi kadar
-                              height: 190,
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: const Image(
-                                      image: NetworkImage(
-                                          'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/slider2.png'),
-                                      fit: BoxFit.contain))),
-                          Container(
-                              decoration: BoxDecoration(
-                                color: Renkler.kuyubeyaz,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              width: MediaQuery.of(context).size.width - 10,
-                              height: 190,
-                              child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: const Image(
-                                      image: NetworkImage(
-                                          'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/slider3.png'),
-                                      fit: BoxFit.contain)))
-                        ],
-                      ),
-                    )),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 110),
+                    child: Wrap(
+                      spacing: 15,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width - 10,
+                          height: 190,
+                          decoration: BoxDecoration(
+                            color: Renkler.kuyubeyaz,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              'assets/slider1.png',
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Renkler.kuyubeyaz,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          width:
+                              MediaQuery.of(context).size.width -
+                              10, //ekran genisligi kadar
+                          height: 190,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              'assets/slider2.png',
+
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Renkler.kuyubeyaz,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          width: MediaQuery.of(context).size.width - 10,
+                          height: 190,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              'assets/slider3.png',
+
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 Column(
                   children: [
                     Serid('2025 Urunlari', 15),
                     Serid('En Cok Favorilenen', 20),
                     Serid('Ofis Mobilya Urunleri', 10),
                     Serid('Ev Urunleri', 9),
-                    yildizlikatagoriler(context)
+                    yildizlikatagoriler(context),
                   ],
                 ),
               ],
@@ -103,10 +111,14 @@ class Anasayfaicerigi extends StatelessWidget {
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: 145,
-            margin:
-                const EdgeInsets.only(top: 15, left: 5, right: 5, bottom: 1),
-            child: Image.network(
-              'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/yildizliurunlerresmi.png',
+            margin: const EdgeInsets.only(
+              top: 15,
+              left: 5,
+              right: 5,
+              bottom: 1,
+            ),
+            child: Image.asset(
+              'assets/yildizliurunlerresmi.png',
               fit: BoxFit.contain,
             ),
           ),
@@ -119,10 +131,7 @@ class Anasayfaicerigi extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: 145,
             margin: const EdgeInsets.only(top: 1, left: 5, right: 5, bottom: 1),
-            child: Image.network(
-              'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/masalarresmi.png',
-              fit: BoxFit.contain,
-            ),
+            child: Image.asset('assets/masalarresmi.png', fit: BoxFit.contain),
           ),
         ),
         GestureDetector(
@@ -133,10 +142,7 @@ class Anasayfaicerigi extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: 145,
             margin: const EdgeInsets.only(top: 1, left: 5, right: 5, bottom: 1),
-            child: Image.network(
-              'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/sandalyeresmi.png',
-              fit: BoxFit.contain,
-            ),
+            child: Image.asset('assets/sandalyeresmi.png', fit: BoxFit.contain),
           ),
         ),
         GestureDetector(
@@ -147,10 +153,7 @@ class Anasayfaicerigi extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: 145,
             margin: const EdgeInsets.only(top: 1, left: 5, right: 5, bottom: 1),
-            child: Image.network(
-              'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/ofisresmi.png',
-              fit: BoxFit.contain,
-            ),
+            child: Image.asset('assets/ofisresmi.png', fit: BoxFit.contain),
           ),
         ),
         GestureDetector(
@@ -161,10 +164,7 @@ class Anasayfaicerigi extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: 145,
             margin: const EdgeInsets.only(top: 1, left: 5, right: 5, bottom: 1),
-            child: Image.network(
-              'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/evresmi.png',
-              fit: BoxFit.contain,
-            ),
+            child: Image.asset('assets/evresmi.png', fit: BoxFit.contain),
           ),
         ),
       ],
@@ -183,7 +183,11 @@ class Anasayfaicerigi extends StatelessWidget {
                   top: 0,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 20, right: 20, bottom: 10, top: 10),
+                      left: 20,
+                      right: 20,
+                      bottom: 10,
+                      top: 10,
+                    ),
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width / 1.5,
                       height: 35,
@@ -204,7 +208,8 @@ class Anasayfaicerigi extends StatelessWidget {
                           hintText: 'Magazada Arayin',
                           focusColor: Renkler.kahverengi,
                           border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(7)),
+                            borderRadius: BorderRadius.circular(7),
+                          ),
                           filled: true,
                           fillColor: Renkler.kuyubeyaz,
                           contentPadding: const EdgeInsets.all(10),
@@ -214,13 +219,11 @@ class Anasayfaicerigi extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                    onPressed: () {
-                      debugPrint('tiklandi');
-                    },
-                    icon: const Icon(
-                      Icons.email,
-                      color: Renkler.kuyubeyaz,
-                    )),
+                  onPressed: () {
+                    debugPrint('tiklandi');
+                  },
+                  icon: const Icon(Icons.email, color: Renkler.kuyubeyaz),
+                ),
               ],
             ),
           ),
@@ -230,10 +233,11 @@ class Anasayfaicerigi extends StatelessWidget {
             color: Renkler.krem,
             boxShadow: [
               BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 8,
-                  spreadRadius: 1,
-                  offset: Offset(1, 1)),
+                color: Colors.black,
+                blurRadius: 8,
+                spreadRadius: 1,
+                offset: Offset(1, 1),
+              ),
             ],
           ),
           child: SingleChildScrollView(
@@ -247,29 +251,36 @@ class Anasayfaicerigi extends StatelessWidget {
                   child: Positioned(
                     top: 33,
                     child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10, top: 10),
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 65,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                    color: Renkler.kuyubeyaz,
-                                    border:
-                                        Border.all(color: Renkler.kahverengi),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                  child: Text(
-                                    'masa',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        color: Renkler.kahverengi,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        )),
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                        top: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'masa',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Renkler.kahverengi,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -279,29 +290,36 @@ class Anasayfaicerigi extends StatelessWidget {
                   child: Positioned(
                     top: 33,
                     child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10, top: 10),
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 65,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                    color: Renkler.kuyubeyaz,
-                                    border:
-                                        Border.all(color: Renkler.kahverengi),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                  child: Text(
-                                    'sandalye',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        color: Renkler.kahverengi,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        )),
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                        top: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'sandalye',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Renkler.kahverengi,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -311,29 +329,36 @@ class Anasayfaicerigi extends StatelessWidget {
                   child: Positioned(
                     top: 33,
                     child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10, top: 10),
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 65,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                    color: Renkler.kuyubeyaz,
-                                    border:
-                                        Border.all(color: Renkler.kahverengi),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                  child: Text(
-                                    'ev',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        color: Renkler.kahverengi,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        )),
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                        top: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'ev',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Renkler.kahverengi,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -343,29 +368,36 @@ class Anasayfaicerigi extends StatelessWidget {
                   child: Positioned(
                     top: 33,
                     child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10, top: 10),
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 65,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                    color: Renkler.kuyubeyaz,
-                                    border:
-                                        Border.all(color: Renkler.kahverengi),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                  child: Text(
-                                    'ofis',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        color: Renkler.kahverengi,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        )),
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                        top: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'ofis',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Renkler.kahverengi,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -375,29 +407,36 @@ class Anasayfaicerigi extends StatelessWidget {
                   child: Positioned(
                     top: 33,
                     child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10, top: 10),
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 65,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                    color: Renkler.kuyubeyaz,
-                                    border:
-                                        Border.all(color: Renkler.kahverengi),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                  child: Text(
-                                    'kafe',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        color: Renkler.kahverengi,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        )),
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                        top: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 65,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'kafe',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Renkler.kahverengi,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -407,29 +446,36 @@ class Anasayfaicerigi extends StatelessWidget {
                   child: Positioned(
                     top: 33,
                     child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10, top: 10),
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 110,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                    color: Renkler.kuyubeyaz,
-                                    border:
-                                        Border.all(color: Renkler.kahverengi),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                  child: Text(
-                                    'en cok begenilenler',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        color: Renkler.kahverengi,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        )),
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                        top: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 110,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'en cok begenilenler',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Renkler.kahverengi,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -439,29 +485,36 @@ class Anasayfaicerigi extends StatelessWidget {
                   child: Positioned(
                     top: 33,
                     child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10, top: 10),
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 110,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                    color: Renkler.kuyubeyaz,
-                                    border:
-                                        Border.all(color: Renkler.kahverengi),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                  child: Text(
-                                    '2025 uretimi',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        color: Renkler.kahverengi,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        )),
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                        top: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 110,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                '2025 uretimi',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Renkler.kahverengi,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -471,29 +524,36 @@ class Anasayfaicerigi extends StatelessWidget {
                   child: Positioned(
                     top: 33,
                     child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 20, bottom: 10, top: 10),
-                        child: Row(
-                          children: [
-                            Container(
-                                width: 110,
-                                height: 22,
-                                decoration: BoxDecoration(
-                                    color: Renkler.kuyubeyaz,
-                                    border:
-                                        Border.all(color: Renkler.kahverengi),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
-                                  child: Text(
-                                    'efsane urunler',
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        color: Renkler.kahverengi,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )),
-                          ],
-                        )),
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        right: 20,
+                        bottom: 10,
+                        top: 10,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 110,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                'efsane urunler',
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  color: Renkler.kahverengi,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],

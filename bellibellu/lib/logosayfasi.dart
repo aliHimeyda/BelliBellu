@@ -17,13 +17,16 @@ class _LogosayfasiState extends State<Logosayfasi> {
 
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
-          // ignore: use_build_context_synchronously
-          context,
-          MaterialPageRoute(
-              builder: (context) => MaterialApp.router(
-                    routerConfig: router,
-                    debugShowCheckedModeBanner: false,
-                  )));
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(
+          builder:
+              (context) => MaterialApp.router(
+                routerConfig: router,
+                debugShowCheckedModeBanner: false,
+              ),
+        ),
+      );
     });
     super.initState();
   }
@@ -31,9 +34,8 @@ class _LogosayfasiState extends State<Logosayfasi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Renkler.kahverengi,
-        body: Center(
-            child: Image.network(
-                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/icons/logo.png')));
+      backgroundColor: Renkler.kahverengi,
+      body: Center(child: Image.asset('assets/logo.png')),
+    );
   }
 }

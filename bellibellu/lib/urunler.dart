@@ -11,6 +11,7 @@ class Urunler {
   late String turu;
   late String ortami;
   late String agirligi;
+  late bool begenilmismi;
 
   static List<Urunler> urunler = [];
   Urunler() {
@@ -23,21 +24,24 @@ class Urunler {
     turu = "";
     ortami = "";
     agirligi = "";
+    begenilmismi = false;
   }
   static Future<void> urunleritanima() async {
     List<String> satirlar;
     try {
       // 🔥 GitHub'dan dosyayı çeken URL (sen kendi URL'ni yazmalısın)
       var url = Uri.parse(
-          'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/urunbilgileri.txt');
+        'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/urunbilgileri.txt',
+      );
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
         // ✅ Dosya içeriğini satır satır böl ve liste olarak döndür
-        satirlar = response.body
-            .split('\n')
-            .where((line) => line.trim().isNotEmpty)
-            .toList();
+        satirlar =
+            response.body
+                .split('\n')
+                .where((line) => line.trim().isNotEmpty)
+                .toList();
       } else {
         throw Exception("❌ Dosya yüklenemedi: ${response.statusCode}");
       }
@@ -56,6 +60,7 @@ class Urunler {
       u.turu = satirlar[i + 6];
       u.ortami = satirlar[i + 7];
       u.agirligi = satirlar[i + 8];
+      u.begenilmismi = false;
       // �� Ürünleri listeye ekle
       urunler.add(u);
     }

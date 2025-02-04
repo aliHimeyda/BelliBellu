@@ -30,10 +30,11 @@ class Katagoriler extends StatelessWidget {
                             decoration: BoxDecoration(
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                    offset: Offset(1, 1)),
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
                               ],
                               border: Border.all(color: Renkler.kahverengi),
                               borderRadius: BorderRadius.circular(10),
@@ -42,8 +43,8 @@ class Katagoriler extends StatelessWidget {
                                 (MediaQuery.of(context).size.width / 2) - 50,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/ozelkatagori.png',
+                              child: Image.asset(
+                                'assets/ozelkatagori.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -53,11 +54,12 @@ class Katagoriler extends StatelessWidget {
                           child: Text(
                             'Ozel Urunler',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Renkler.kahverengi),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -82,16 +84,17 @@ class Katagoriler extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                    offset: Offset(1, 1)),
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
                               ],
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/yenikatagori.png',
+                              child: Image.asset(
+                                'assets/yenikatagori.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -101,11 +104,12 @@ class Katagoriler extends StatelessWidget {
                           child: Text(
                             '2025 Yen Urunler',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Renkler.kahverengi),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -130,16 +134,17 @@ class Katagoriler extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                    offset: Offset(1, 1)),
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
                               ],
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/ensevilenkatagori.png',
+                              child: Image.asset(
+                                'assets/ensevilenkatagori.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -149,11 +154,12 @@ class Katagoriler extends StatelessWidget {
                           child: Text(
                             'En Begenilen Urunler',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Renkler.kahverengi),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -178,16 +184,17 @@ class Katagoriler extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                    offset: Offset(1, 1)),
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
                               ],
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/metalkatagori.png',
+                              child: Image.asset(
+                                'assets/metalkatagori.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -197,11 +204,12 @@ class Katagoriler extends StatelessWidget {
                           child: Text(
                             'Metal Urunleri',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Renkler.kahverengi),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -226,16 +234,17 @@ class Katagoriler extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                    offset: Offset(1, 1)),
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
                               ],
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/ahsapkatagori.png',
+                              child: Image.asset(
+                                'assets/ahsapkatagori.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -245,11 +254,12 @@ class Katagoriler extends StatelessWidget {
                           child: Text(
                             'Ahsap Urunler',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Renkler.kahverengi),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -274,16 +284,17 @@ class Katagoriler extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                    offset: Offset(1, 1)),
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
                               ],
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/masakatagori.png',
+                              child: Image.asset(
+                                'assets/masakatagori.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -293,11 +304,12 @@ class Katagoriler extends StatelessWidget {
                           child: Text(
                             'Masalar',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Renkler.kahverengi),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -322,16 +334,17 @@ class Katagoriler extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                    offset: Offset(1, 1)),
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
                               ],
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/sandalyekatagori.png',
+                              child: Image.asset(
+                                'assets/sandalyekatagori.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -341,11 +354,12 @@ class Katagoriler extends StatelessWidget {
                           child: Text(
                             'Sandalyeler',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Renkler.kahverengi),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -370,16 +384,17 @@ class Katagoriler extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                    offset: Offset(1, 1)),
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
                               ],
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/evkatagori.png',
+                              child: Image.asset(
+                                'assets/evkatagori.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -389,11 +404,12 @@ class Katagoriler extends StatelessWidget {
                           child: Text(
                             'Ev Mobilya Urunleri',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Renkler.kahverengi),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -418,16 +434,17 @@ class Katagoriler extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 8,
-                                    spreadRadius: 1,
-                                    offset: Offset(1, 1)),
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
                               ],
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/ofiskatagori.png',
+                              child: Image.asset(
+                                'assets/ofiskatagori.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -437,17 +454,18 @@ class Katagoriler extends StatelessWidget {
                           child: Text(
                             'Ofis Mobilya Urunleri',
                             style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: Renkler.kahverengi),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

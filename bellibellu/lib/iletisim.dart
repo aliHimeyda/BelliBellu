@@ -2,7 +2,6 @@ import 'package:bellibellu/renkler.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class MessageScreen extends StatefulWidget {
   const MessageScreen({super.key});
@@ -248,9 +247,7 @@ class Iletisim extends StatelessWidget {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(60),
-                                child: Image.network(
-                                  'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/aliresmi.png',
-                                ),
+                                child: Image.asset('assets/aliresmi.png'),
                               ),
                             ),
                           ),
@@ -401,9 +398,7 @@ class Iletisim extends StatelessWidget {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(60),
-                                child: Image.network(
-                                  'https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/anonimresmi.png',
-                                ),
+                                child: Image.asset('assets/anonimresmi.png'),
                               ),
                             ),
                           ),
