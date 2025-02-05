@@ -1,8 +1,9 @@
-
+import 'package:bellibellu/kaydedilenler.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Logosayfasi extends StatefulWidget {
   const Logosayfasi({super.key});
@@ -14,8 +15,7 @@ class Logosayfasi extends StatefulWidget {
 class _LogosayfasiState extends State<Logosayfasi> {
   @override
   void initState() {
-    Urunler.urunleritanima();
-    
+    dataal();
 
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
@@ -31,6 +31,13 @@ class _LogosayfasiState extends State<Logosayfasi> {
       );
     });
     super.initState();
+  }
+
+  void dataal() async {
+    if (Urunler.urunler.isEmpty) {
+      await Urunler.urunleritanima();
+    }
+   
   }
 
   @override

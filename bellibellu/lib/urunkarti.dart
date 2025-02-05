@@ -1,22 +1,42 @@
+import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:grock/grock.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
-class Urunkarti extends StatelessWidget {
+class Urunkarti extends StatefulWidget {
   String resimYolu;
   double urunfiyati;
   String urunAdi;
   String urunAciklamasi;
   int begenisayisi;
-  final int urunKartiGenisligi = 150;
+  String materyali;
+  String turu;
+  String ortami;
+  String agirligi;
+  bool begenilmismi;
+
   Urunkarti(
     this.resimYolu,
     this.urunAdi,
     this.urunfiyati,
     this.urunAciklamasi,
-    this.begenisayisi, {
+    this.begenisayisi,
+    this.materyali,
+    this.turu,
+    this.ortami,
+    this.agirligi,
+    this.begenilmismi, {
     super.key,
   });
+
+  @override
+  State<Urunkarti> createState() => _UrunkartiState();
+}
+
+class _UrunkartiState extends State<Urunkarti> {
+  int urunKartiGenisligi = 150;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +73,7 @@ class Urunkarti extends StatelessWidget {
                 child: Stack(
                   children: [
                     Image.network(
-                      resimYolu,
+                      widget.resimYolu,
                       width: urunKartiGenisligi - 2,
                       height: urunKartiGenisligi * 1.2,
                       fit: BoxFit.cover,
@@ -73,11 +93,26 @@ class Urunkarti extends StatelessWidget {
                           child: IconButton(
                             padding: const EdgeInsets.all(0),
                             onPressed: () {
-                              debugPrint('$urunAdi tiklandi');
+                              debugPrint('${widget.urunAdi} tiklandi');
+                              widget.begenilmismi
+                                  ? widget.begenilmismi = false
+                                  : widget.begenilmismi = true;
+                              setState(() {
+                                if (widget.begenilmismi) {
+                                  widget.colored(color: Renkler.kirmizi);
+                                  begenilenekaydet(widget.urunAdi);
+                                } else {
+                                  widget.colored(color: Colors.white);
+                                  begenilendensil(widget.urunAdi);
+                                }
+                              });
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.favorite,
-                              color: Colors.white,
+                              color:
+                                  widget.begenilmismi
+                                      ? Renkler.kirmizi
+                                      : Colors.white,
                               size: 15,
                             ),
                           ),
@@ -88,14 +123,14 @@ class Urunkarti extends StatelessWidget {
                 ),
               ),
               Text(
-                urunAdi,
+                widget.urunAdi,
                 style: const TextStyle(
                   color: Renkler.kahverengi,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                '$urunfiyati TL   ❤$begenisayisi',
+                '${widget.urunfiyati} TL   ❤${widget.begenisayisi}',
                 style: const TextStyle(color: Renkler.kahverengi),
               ),
             ],
@@ -103,5 +138,48 @@ class Urunkarti extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+void begenilenekaydet(String urunadi) async {
+  final pref = await SharedPreferences.getInstance();
+  List<String>? begenilen = await pref.getStringList('begenilenurunler');
+  for (int i = 0; i < Urunler.urunler.length; i++) {
+    if (Urunler.urunler[i].urunAdi == urunadi) {
+      Urunler.urunler[i].begenilmismi = true;
+
+      if (begenilen.isEmpty) {
+        await pref.setStringList('begenilenurunler', [
+          Urunler.urunler[i].urunAdi,
+        ]);
+        
+      } else {
+        begenilen!.add(Urunler.urunler[i].urunAdi);
+        await pref.setStringList('begenilenurunler', begenilen);
+        debugPrint('keydedildi: $begenilen');
+        break;
+      }
+    }
+  }
+}
+
+void begenilendensil(String urunadi) async {
+  final pref = await SharedPreferences.getInstance();
+  List<String>? begenilen = await pref.getStringList('begenilenurunler');
+  for (int i = 0; i < Urunler.urunler.length; i++) {
+    if (Urunler.urunler[i].urunAdi == urunadi) {
+      Urunler.urunler[i].begenilmismi = false;
+
+      if (begenilen.isEmpty) {
+        await pref.setStringList('begenilenurunler', [
+          Urunler.urunler[i].urunAdi,
+        ]);
+      } else {
+        begenilen!.remove(Urunler.urunler[i].urunAdi);
+        await pref.setStringList('begenilenurunler', begenilen);
+        debugPrint('keydedildi: $begenilen');
+        break;
+      }
+    }
   }
 }

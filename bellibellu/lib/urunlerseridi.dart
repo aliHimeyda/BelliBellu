@@ -45,29 +45,34 @@ class Serid extends StatelessWidget {
               Text(
                 vasif,
                 textAlign: TextAlign.left,
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               GestureDetector(
                 onTap: () {
                   debugPrint('tiklandi');
                 },
-                child: const Row(children: [
-                  Text(
-                    'Tum Urunler',
-                    textAlign: TextAlign.right,
-                    style: TextStyle(
+                child: const Row(
+                  children: [
+                    Text(
+                      'Tum Urunler',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Renkler.kahverengi),
-                  ),
-                  Icon(
-                    Icons.chevron_right,
-                    size: 15,
-                    color: Renkler.kahverengi,
-                  ),
-                ]),
-              )
+                        color: Renkler.kahverengi,
+                      ),
+                    ),
+                    Icon(
+                      Icons.chevron_right,
+                      size: 15,
+                      color: Renkler.kahverengi,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -78,15 +83,23 @@ class Serid extends StatelessWidget {
             child: Wrap(
               spacing: 10,
               children: [
-                for (int i = random.nextInt(9);
-                    i < Urunler.urunler.length;
-                    i += arttirma)
+                for (
+                  int i = random.nextInt(9);
+                  i < Urunler.urunler.length;
+                  i += arttirma
+                )
                   Urunkarti(
-                      Urunler.urunler[i].resimYolu,
-                      Urunler.urunler[i].urunAdi,
-                      Urunler.urunler[i].urunfiyati,
-                      Urunler.urunler[i].urunAciklamasi,
-                      Urunler.urunler[i].begenisayisi),
+                    Urunler.urunler[i].resimYolu,
+                    Urunler.urunler[i].urunAdi,
+                    Urunler.urunler[i].urunfiyati,
+                    Urunler.urunler[i].urunAciklamasi,
+                    Urunler.urunler[i].begenisayisi,
+                    Urunler.urunler[i].materyali,
+                    Urunler.urunler[i].turu,
+                    Urunler.urunler[i].ortami,
+                    Urunler.urunler[i].agirligi,
+                    Urunler.urunler[i].begenilmismi,
+                  ),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -107,7 +120,7 @@ class Serid extends StatelessWidget {
                           blurRadius: 10,
                           spreadRadius: 3,
                           offset: Offset(2, 5),
-                        )
+                        ),
                       ],
                     ),
                     child: GestureDetector(
@@ -117,10 +130,12 @@ class Serid extends StatelessWidget {
                       child: Center(
                         // 📌 Ana container içindeki her şeyi ortalamak için
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment
-                              .center, // 📌 Dikey eksende ortala
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center, // 📌 Yatay eksende ortala
+                          mainAxisAlignment:
+                              MainAxisAlignment
+                                  .center, // 📌 Dikey eksende ortala
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .center, // 📌 Yatay eksende ortala
                           children: [
                             const Text(
                               'Tüm Urunler',
@@ -131,8 +146,8 @@ class Serid extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(
-                                height:
-                                    10), // 📌 Metin ile ikon arasına boşluk ekledik
+                              height: 10,
+                            ), // 📌 Metin ile ikon arasına boşluk ekledik
                             Container(
                               width: 45,
                               height: 45,
@@ -140,8 +155,9 @@ class Serid extends StatelessWidget {
                                 shape:
                                     BoxShape.circle, // 📌 Yuvarlak çerçeve için
                                 border: Border.all(
-                                    color: Renkler.kahverengi,
-                                    width: 2), // 📌 Çerçeve ekledik
+                                  color: Renkler.kahverengi,
+                                  width: 2,
+                                ), // 📌 Çerçeve ekledik
                               ),
                               child: const Center(
                                 child: Icon(
@@ -150,17 +166,17 @@ class Serid extends StatelessWidget {
                                   color: Renkler.kahverengi,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }

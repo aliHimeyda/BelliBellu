@@ -20,44 +20,55 @@ class Paths {
 
 // ignore: non_constant_identifier_names
 final router = GoRouter(
-    navigatorKey: _routerkey,
-    initialLocation: Paths.anasayfa,
-    routes: [
-      StatefulShellRoute.indexedStack(
-        builder: (context, state, navigationShell) => Anasayfa(
-          navigationShell: navigationShell,
-        ),
-        branches: [
-          StatefulShellBranch(routes: [
+  navigatorKey: _routerkey,
+  initialLocation: Paths.anasayfa,
+  routes: [
+    StatefulShellRoute.indexedStack(
+      builder:
+          (context, state, navigationShell) =>
+              Anasayfa(navigationShell: navigationShell),
+      branches: [
+        StatefulShellBranch(
+          routes: [
             GoRoute(
               path: Paths.anasayfa,
               builder: (context, state) => const Anasayfaicerigi(),
-            )
-          ]),
-          StatefulShellBranch(routes: [
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
             GoRoute(
               path: Paths.katagoriler,
-              builder: (context, state) =>const Katagoriler(),
-            )
-          ]),
-          StatefulShellBranch(routes: [
+              builder: (context, state) => const Katagoriler(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
             GoRoute(
               path: Paths.kaydedilenler,
-              builder: (context, state) =>const Kaydedilenler(),
-            )
-          ]),
-          StatefulShellBranch(routes: [
+              builder: (context, state) => const Kaydedilenler(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
             GoRoute(
               path: Paths.iletisim,
               builder: (context, state) => const Iletisim(),
-            )
-          ]),
-          StatefulShellBranch(routes: [
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
             GoRoute(
               path: Paths.menu,
-              builder: (context, state) =>const Menu(),
-            )
-          ]),
-        ],
-      )
-    ]);
+              builder: (context, state) => const Menu(),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ],
+);
