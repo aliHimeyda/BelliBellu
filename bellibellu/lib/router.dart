@@ -6,7 +6,6 @@ import 'package:bellibellu/kaydedilenler.dart';
 import 'package:bellibellu/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 final _routerkey = GlobalKey<NavigatorState>();
 
 class Paths {
@@ -20,6 +19,7 @@ class Paths {
 
 // ignore: non_constant_identifier_names
 final router = GoRouter(
+  refreshListenable: KaydedilenUrunler(),  // Değişiklikleri dinle
   navigatorKey: _routerkey,
   initialLocation: Paths.anasayfa,
   routes: [
@@ -48,7 +48,7 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Paths.kaydedilenler,
-              builder: (context, state) => const Kaydedilenler(),
+              builder: (context, state) =>  Kaydedilenler(),
             ),
           ],
         ),

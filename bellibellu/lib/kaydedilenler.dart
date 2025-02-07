@@ -1,7 +1,47 @@
+import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+class KaydedilenUrunler extends ChangeNotifier {
+  static List<Urunkarti> begenilenUrunwidgeti = [];
+
+  static Future<List<Urunkarti>> dataguncelle() async {
+    final pref = await SharedPreferences.getInstance();
+    debugPrint('Kaydedilenler giriliyor');
+
+    List<String>? urunadlari = await pref.getStringList('begenilenurunler');
+
+    debugPrint('setstate calisiyor...');
+
+    if (urunadlari != null && urunadlari.isNotEmpty) {
+      begenilenUrunwidgeti.clear();
+      for (int i = 0; i < urunadlari.length; i++) {
+        for (int j = 0; j < Urunler.urunler.length; j++) {
+          if (Urunler.urunler[j].urunAdi == urunadlari[i]) {
+            Urunkarti kart = Urunkarti(
+              Urunler.urunler[j].resimYolu,
+              Urunler.urunler[j].urunAdi,
+              Urunler.urunler[j].urunfiyati,
+              Urunler.urunler[j].urunAciklamasi,
+              Urunler.urunler[j].begenisayisi,
+              Urunler.urunler[j].materyali,
+              Urunler.urunler[j].turu,
+              Urunler.urunler[j].ortami,
+              Urunler.urunler[j].agirligi,
+              Urunler.urunler[j].begenilmismi,
+            );
+            begenilenUrunwidgeti.add(kart);
+          }
+        }
+      }
+    }
+
+    debugPrint('kaydedilen urunlerin sayisi ${begenilenUrunwidgeti.length}');
+    return begenilenUrunwidgeti;
+  }
+}
 
 class Kaydedilenler extends StatefulWidget {
   const Kaydedilenler({super.key});
@@ -10,84 +50,78 @@ class Kaydedilenler extends StatefulWidget {
   State<Kaydedilenler> createState() => _KaydedilenlerState();
 }
 
-class _KaydedilenlerState extends State<Kaydedilenler>
-    with AutomaticKeepAliveClientMixin {
-  List<Urunler> begenilenurunler = [];
+class _KaydedilenlerState extends State<Kaydedilenler> {
+  List<Urunkarti> begenilenurunler = [];
+
   @override
   void initState() {
-    dataguncelle();
     super.initState();
+    guncelle();
   }
 
-  void dataguncelle() async {
-    final pref = await SharedPreferences.getInstance();
-    debugPrint('Kaydedilenler giriliyor');
+  void guncelle() async {
+    List<Urunkarti> yeniliste = await KaydedilenUrunler.dataguncelle();
+    debugPrint(
+      'setstate calisiyor .... yeniliste boyutu : ${yeniliste.length}',
+    );
 
-    List<String>? urunadlari = await pref.getStringList('begenilenurunler');
-
-    if (urunadlari != null && urunadlari.isNotEmpty) {
-      List<Urunler> yeniListe = [];
-      for (int i = 0; i < urunadlari.length; i++) {
-        for (int j = 0; j < Urunler.urunler.length; j++) {
-          if (Urunler.urunler[j].urunAdi == urunadlari[i]) {
-            begenilenurunler.add(Urunler.urunler[j]);
-          }
-        }
-      }
-      setState(() {
-        begenilenurunler = yeniListe; // UI'yi yenile
-      });
-    }
+    setState(() {
+      begenilenurunler = yeniliste;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // setState(() {
-    //   build(context);
-    // });
-
-    debugPrint('kaydedilenler build edildi ');
-    super.build(context); // Mixin'in sağladığı "keepAlive" durumu
     return Scaffold(
-      body: ListView(
-        padding: EdgeInsets.only(top: 50, bottom: 20),
-
+      backgroundColor: Renkler.kuyubeyaz,
+      body: Stack(
         children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child:
-                  begenilenurunler.isNotEmpty
-                      ? Wrap(
-                        spacing: 20,
-                        children: [
-                          for (Urunler urun in begenilenurunler)
-                            Urunkarti(
-                              urun.resimYolu,
-                              urun.urunAdi,
-                              urun.urunfiyati,
-                              urun.urunAciklamasi,
-                              urun.begenisayisi,
-                              urun.materyali,
-                              urun.turu,
-                              urun.ortami,
-                              urun.agirligi,
-                              urun.begenilmismi,
-                            ),
-                        ],
-                      )
-                      : Text('begenilen urun listesi bos !!'),
+          ListView(
+            padding: EdgeInsets.only(top: 50, bottom: 20),
+
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child:
+                      begenilenurunler.isNotEmpty
+                          ? Wrap(
+                            spacing: 20,
+                            children: [
+                              for (Urunkarti urun in begenilenurunler) urun,
+                            ],
+                          )
+                          : Text('begenilen urun listesi bos !!'),
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            bottom: 10,
+            right: 20,
+
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: guncelle,
+
+                child: Center(
+                  child: Icon(
+                    Icons.refresh,
+                    size: 20,
+                    color: Renkler.kahverengi,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Renkler.krem,
+                  padding: EdgeInsets.zero, // Varsayılan padding'i kaldır),
+                ),
+              ),
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: dataguncelle, // Listeyi yenile
-        child: Icon(Icons.refresh),
-      ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => false; // İçeriği bellekte tutma, her seferinde yeniden build et
 }

@@ -13,6 +13,14 @@ class Anasayfaicerigi extends StatefulWidget {
 }
 
 class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
+  List<String> aramaonerileri = [
+    'masa',
+    'sandalye',
+    'ev mobilyasi',
+    'ofis mobilyasi',
+    'metal masa',
+    'metal sandalye',
+  ];
   @override
   void initState() {
     _bellekguncelle;
@@ -210,8 +218,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                       height: 35,
                       child: TextField(
                         cursorColor: Renkler.bordo,
-                        onChanged: (value) {
+                        onChanged: (value) async {
                           // Arama işlemleri burada yazılacak
+                          debugPrint(value);
                         },
                         decoration: InputDecoration(
                           prefixIcon: IconButton(
@@ -237,7 +246,6 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    
                     debugPrint('tiklandi');
                   },
                   icon: const Icon(Icons.email, color: Renkler.kuyubeyaz),

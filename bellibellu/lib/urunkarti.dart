@@ -1,8 +1,10 @@
+import 'package:bellibellu/kaydedilenler.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:grock/grock.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class Urunkarti extends StatefulWidget {
@@ -152,7 +154,6 @@ void begenilenekaydet(String urunadi) async {
         await pref.setStringList('begenilenurunler', [
           Urunler.urunler[i].urunAdi,
         ]);
-        
       } else {
         begenilen!.add(Urunler.urunler[i].urunAdi);
         await pref.setStringList('begenilenurunler', begenilen);
@@ -161,6 +162,7 @@ void begenilenekaydet(String urunadi) async {
       }
     }
   }
+  
 }
 
 void begenilendensil(String urunadi) async {
@@ -182,4 +184,5 @@ void begenilendensil(String urunadi) async {
       }
     }
   }
+  
 }
