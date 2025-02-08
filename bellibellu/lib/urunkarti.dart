@@ -1,37 +1,27 @@
 import 'package:bellibellu/kaydedilenler.dart';
+import 'package:bellibellu/urunkartiicerigi.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class Urunkarti extends StatefulWidget {
-  String resimYolu;
-  double urunfiyati;
-  String urunAdi;
-  String urunAciklamasi;
-  int begenisayisi;
-  String materyali;
-  String turu;
-  String ortami;
-  String agirligi;
-  bool begenilmismi;
-
-  Urunkarti(
-    this.resimYolu,
-    this.urunAdi,
-    this.urunfiyati,
-    this.urunAciklamasi,
-    this.begenisayisi,
-    this.materyali,
-    this.turu,
-    this.ortami,
-    this.agirligi,
-    this.begenilmismi, {
-    super.key,
-  });
+  // String resimYolu;
+  // double urunfiyati;
+  // String urunAdi;
+  // String urunAciklamasi;
+  // int begenisayisi;
+  // String materyali;
+  // String turu;
+  // String ortami;
+  // String agirligi;
+  // bool begenilmismi;
+  final Urunler urun;
+  Urunkarti({super.key, required this.urun});
 
   @override
   State<Urunkarti> createState() => _UrunkartiState();
@@ -40,11 +30,18 @@ class Urunkarti extends StatefulWidget {
 class _UrunkartiState extends State<Urunkarti> {
   int urunKartiGenisligi = 150;
 
+  get urun => this.urun;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         debugPrint('tiklandi');
+
+        context.push(
+          '/urundetaylari',
+          extra: widget.urun,
+        ); // Sayfaya nesneyi geçir)
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -75,7 +72,7 @@ class _UrunkartiState extends State<Urunkarti> {
                 child: Stack(
                   children: [
                     Image.network(
-                      widget.resimYolu,
+                      widget.urun.resimYolu,
                       width: urunKartiGenisligi - 2,
                       height: urunKartiGenisligi * 1.2,
                       fit: BoxFit.cover,
@@ -95,24 +92,24 @@ class _UrunkartiState extends State<Urunkarti> {
                           child: IconButton(
                             padding: const EdgeInsets.all(0),
                             onPressed: () {
-                              debugPrint('${widget.urunAdi} tiklandi');
-                              widget.begenilmismi
-                                  ? widget.begenilmismi = false
-                                  : widget.begenilmismi = true;
+                              debugPrint('${urun.urunAdi} tiklandi');
+                              widget.urun.begenilmismi
+                                  ? widget.urun.begenilmismi = false
+                                  : widget.urun.begenilmismi = true;
                               setState(() {
-                                if (widget.begenilmismi) {
+                                if (urun.begenilmismi) {
                                   widget.colored(color: Renkler.kirmizi);
-                                  begenilenekaydet(widget.urunAdi);
+                                  begenilenekaydet(widget.urun.urunAdi);
                                 } else {
                                   widget.colored(color: Colors.white);
-                                  begenilendensil(widget.urunAdi);
+                                  begenilendensil(widget.urun.urunAdi);
                                 }
                               });
                             },
                             icon: Icon(
                               Icons.favorite,
                               color:
-                                  widget.begenilmismi
+                                  widget.urun.begenilmismi
                                       ? Renkler.kirmizi
                                       : Colors.white,
                               size: 15,
@@ -125,14 +122,14 @@ class _UrunkartiState extends State<Urunkarti> {
                 ),
               ),
               Text(
-                widget.urunAdi,
+                widget.urun.urunAdi,
                 style: const TextStyle(
                   color: Renkler.kahverengi,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                '${widget.urunfiyati} TL   ❤${widget.begenisayisi}',
+                '${widget.urun.urunfiyati} TL   ❤${widget.urun.begenisayisi}',
                 style: const TextStyle(color: Renkler.kahverengi),
               ),
             ],
@@ -162,7 +159,6 @@ void begenilenekaydet(String urunadi) async {
       }
     }
   }
-  
 }
 
 void begenilendensil(String urunadi) async {
@@ -184,5 +180,4 @@ void begenilendensil(String urunadi) async {
       }
     }
   }
-  
 }

@@ -88,18 +88,7 @@ class Serid extends StatelessWidget {
                   i < Urunler.urunler.length;
                   i += arttirma
                 )
-                  Urunkarti(
-                    Urunler.urunler[i].resimYolu,
-                    Urunler.urunler[i].urunAdi,
-                    Urunler.urunler[i].urunfiyati,
-                    Urunler.urunler[i].urunAciklamasi,
-                    Urunler.urunler[i].begenisayisi,
-                    Urunler.urunler[i].materyali,
-                    Urunler.urunler[i].turu,
-                    Urunler.urunler[i].ortami,
-                    Urunler.urunler[i].agirligi,
-                    Urunler.urunler[i].begenilmismi,
-                  ),
+                  Urunkarti(urun: Urunler.urunler[i]),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(

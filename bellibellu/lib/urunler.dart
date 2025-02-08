@@ -1,5 +1,6 @@
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Urunler {
   late String resimYolu;
@@ -24,6 +25,7 @@ class Urunler {
     turu = "";
     ortami = "";
     agirligi = "";
+
     begenilmismi = false;
   }
   static Future<void> urunleritanima() async {
@@ -48,6 +50,10 @@ class Urunler {
     } catch (e) {
       throw Exception("🚨 Hata: $e");
     }
+    final pref = await SharedPreferences.getInstance();
+    final List<String>? begenilenler = await pref.getStringList(
+      'begenilenurunler',
+    );
 
     for (int i = 0; i < (satirlar.length); i += 9) {
       Urunler u = Urunler();
@@ -60,7 +66,14 @@ class Urunler {
       u.turu = satirlar[i + 6];
       u.ortami = satirlar[i + 7];
       u.agirligi = satirlar[i + 8];
-      u.begenilmismi = false;
+      if (begenilenler!=null) {
+        for (int i = 0; i < begenilenler.length; i++) {
+          if (begenilenler[i] == u.urunAdi) {
+            u.begenilmismi = true;
+            break;
+          }
+        }
+      }
       // �� Ürünleri listeye ekle
       urunler.add(u);
     }

@@ -10,6 +10,7 @@ class Anasayfa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _bottumngoster = true;
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
@@ -58,6 +59,7 @@ class Anasayfa extends StatelessWidget {
           ),
         ),
         child: NavigationBar(
+          
           backgroundColor: Renkler.kuyubeyaz,
           height: 60,
           selectedIndex: navigationShell.currentIndex,

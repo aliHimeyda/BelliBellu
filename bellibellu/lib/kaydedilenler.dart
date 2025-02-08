@@ -21,16 +21,7 @@ class KaydedilenUrunler extends ChangeNotifier {
         for (int j = 0; j < Urunler.urunler.length; j++) {
           if (Urunler.urunler[j].urunAdi == urunadlari[i]) {
             Urunkarti kart = Urunkarti(
-              Urunler.urunler[j].resimYolu,
-              Urunler.urunler[j].urunAdi,
-              Urunler.urunler[j].urunfiyati,
-              Urunler.urunler[j].urunAciklamasi,
-              Urunler.urunler[j].begenisayisi,
-              Urunler.urunler[j].materyali,
-              Urunler.urunler[j].turu,
-              Urunler.urunler[j].ortami,
-              Urunler.urunler[j].agirligi,
-              Urunler.urunler[j].begenilmismi,
+              urun: Urunler.urunler[j],
             );
             begenilenUrunwidgeti.add(kart);
           }
