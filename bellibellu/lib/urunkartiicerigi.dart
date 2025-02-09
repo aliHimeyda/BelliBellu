@@ -199,110 +199,136 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
             child: ListView(
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width - 10,
-                  height: 350,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Renkler.kahverengi, width: 3),
-                    ),
-                  ),
-                  child: Image.network(
-                    widget.urun.resimYolu,
-                    fit: BoxFit.fitHeight,
-                  ),
-                ),
-                SizedBox(height: 15),
-                Container(
-                  child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 25,
-                        right: 25,
-                        top: 0,
-                        bottom: 5,
-                      ),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              widget.urun.urunAdi,
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            widget.urun.urunAciklamasi,
-                            style: TextStyle(fontSize: 11),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: 20),
-                KisacaOzellikler(),
-                Container(
-                  height: 30,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Renkler.kahverengi, width: 0.5),
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: 30),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    'Sık Sorulanlar',
-                    style: TextStyle(
-                      color: Renkler.kahverengi,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                sorucevaplar(context),
-                Container(
-                  height: 30,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Renkler.kahverengi, width: 0.5),
-                    ),
-                  ),
-                ),
-
-                Serid('Begenebilecegin Urunler', 5),
-                Container(
-                  height: 30,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Renkler.kahverengi, width: 0.5),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: Text(
-                    'Urun Ozellikleri',
-                    style: TextStyle(
-                      color: Renkler.kahverengi,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 30),
-                Container(
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Column(
                       children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width - 10,
+                          height: 350,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Renkler.kahverengi,
+                                width: 3,
+                              ),
+                            ),
+                          ),
+                          child: Image.network(
+                            widget.urun.resimYolu,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        Container(
+                          child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                left: 25,
+                                right: 25,
+                                top: 0,
+                                bottom: 5,
+                              ),
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      widget.urun.urunAdi,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.urun.urunAciklamasi,
+                                    style: TextStyle(fontSize: 11),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+                        KisacaOzellikler(),
+                        Container(
+                          height: 30,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Renkler.kahverengi,
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 30),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Text(
+                            'Sık Sorulanlar',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        sorucevaplar(context),
+                        Container(
+                          height: 30,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Renkler.kahverengi,
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 15),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Text(
+                            'Katagoriler',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+
+                        katagorilerseridi(context),
+
+                        Container(
+                          height: 30,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Renkler.kahverengi,
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Text(
+                            'Urun Ozellikleri',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 30),
                         KisacaOzellikler(),
                         SizedBox(height: 10),
                         Row(
@@ -352,11 +378,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                         GestureDetector(
                           onTap: () {
                             debugPrint('tiklandi');
-
-                            context.push(
-                              '/urunozellikleri',
-                              extra: widget.urun,
-                            ); // Sayfaya nesneyi geçir)
+                            popup();
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,
@@ -370,19 +392,60 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                             ),
                           ),
                         ),
+                        Container(
+                          height: 30,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Renkler.kahverengi,
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        ozelkapakliserid(context, 'Begenebilecegin Urunler'),
+                        Container(
+                          height: 10,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Renkler.kahverengi,
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Serid('Yeni Urunlere Goz At', 9),
+                        Container(
+                          height: 10,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Renkler.kahverengi,
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Serid('2025 Uretimi', 9),
+                        Container(
+                          height: 10,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Renkler.kahverengi,
+                                width: 0.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20),
                       ],
                     ),
                   ),
                 ),
-                Container(
-                  height: 10,
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Renkler.kahverengi, width: 0.5),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
               ],
             ),
           ),
@@ -392,6 +455,925 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
       ),
     );
   }
+
+  Center ozelkapakliserid(BuildContext context, String vasif) {
+    return Center(
+      child: Container(
+        width: MediaQuery.of(context).size.width - 5,
+        height: 360,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 182, 205, 162),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Serid(vasif, 9),
+      ),
+    );
+  }
+
+  SingleChildScrollView katagorilerseridi(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 40),
+        child: Column(
+          children: [
+            Row(
+              spacing: 0,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    debugPrint('tiklandi');
+                  },
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width / 3) - 10,
+                    height: (MediaQuery.of(context).size.width / 3) - 10,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            width: (MediaQuery.of(context).size.width / 3) - 50,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            height:
+                                (MediaQuery.of(context).size.width / 3) - 50,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/ozelkatagori.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text(
+                            'Ozel Urunler',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    debugPrint('tiklandi');
+                  },
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width / 3) - 10,
+                    height: (MediaQuery.of(context).size.width / 3) - 10,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            width: (MediaQuery.of(context).size.width / 3) - 50,
+                            height:
+                                (MediaQuery.of(context).size.width / 3) - 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/yenikatagori.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text(
+                            '2025 Yen Urunler',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    debugPrint('tiklandi');
+                  },
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width / 3) - 10,
+                    height: (MediaQuery.of(context).size.width / 3) - 10,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            width: (MediaQuery.of(context).size.width / 3) - 50,
+                            height:
+                                (MediaQuery.of(context).size.width / 3) - 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/ensevilenkatagori.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text(
+                            'En Begenilen Urunler',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    debugPrint('tiklandi');
+                  },
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width / 3) - 10,
+                    height: (MediaQuery.of(context).size.width / 3) - 10,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            width: (MediaQuery.of(context).size.width / 3) - 50,
+                            height:
+                                (MediaQuery.of(context).size.width / 3) - 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/metalkatagori.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text(
+                            'Metal Urunleri',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    debugPrint('tiklandi');
+                  },
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width / 3) - 10,
+                    height: (MediaQuery.of(context).size.width / 3) - 10,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            width: (MediaQuery.of(context).size.width / 3) - 50,
+                            height:
+                                (MediaQuery.of(context).size.width / 3) - 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/ahsapkatagori.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text(
+                            'Ahsap Urunler',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    debugPrint('tiklandi');
+                  },
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width / 3) - 10,
+                    height: (MediaQuery.of(context).size.width / 3) - 10,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            width: (MediaQuery.of(context).size.width / 3) - 50,
+                            height:
+                                (MediaQuery.of(context).size.width / 3) - 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/masakatagori.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text(
+                            'Masalar',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    debugPrint('tiklandi');
+                  },
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width / 3) - 10,
+                    height: (MediaQuery.of(context).size.width / 3) - 10,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            width: (MediaQuery.of(context).size.width / 3) - 50,
+                            height:
+                                (MediaQuery.of(context).size.width / 3) - 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/sandalyekatagori.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text(
+                            'Sandalyeler',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    debugPrint('tiklandi');
+                  },
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width / 3) - 10,
+                    height: (MediaQuery.of(context).size.width / 3) - 10,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            width: (MediaQuery.of(context).size.width / 3) - 50,
+                            height:
+                                (MediaQuery.of(context).size.width / 3) - 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/evkatagori.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text(
+                            'Ev Mobilya Urunleri',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    debugPrint('tiklandi');
+                  },
+                  child: SizedBox(
+                    width: (MediaQuery.of(context).size.width / 3) - 10,
+                    height: (MediaQuery.of(context).size.width / 3) - 10,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            width: (MediaQuery.of(context).size.width / 3) - 50,
+                            height:
+                                (MediaQuery.of(context).size.width / 3) - 50,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Renkler.kahverengi),
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black,
+                                  blurRadius: 8,
+                                  spreadRadius: 1,
+                                  offset: Offset(1, 1),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.asset(
+                                'assets/ofiskatagori.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Center(
+                          child: Text(
+                            'Ofis Mobilya Urunleri',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future popup() => showDialog(
+    context: context,
+
+    builder:
+        (context) => AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(color: Renkler.kahverengi, width: 1),
+          ),
+          backgroundColor: Renkler.krem,
+          shadowColor: Renkler.kahverengi,
+          titlePadding: EdgeInsets.only(top: 0),
+
+          // title: Text(
+          //   'Urun Ozellikleri',
+          //   style: TextStyle(
+          //     color: Renkler.kahverengi,
+          //     fontSize: 18,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          content: SizedBox(
+            height: 380,
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 45),
+                  child: ListView(
+                    children: [
+                      Wrap(
+                        runSpacing: 10,
+                        spacing: 10,
+                        children: [
+                          Container(
+                            width: 60,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color.fromRGBO(245, 241, 241, 1),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'agirlik',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${widget.urun.agirligi}',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 60,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color.fromRGBO(245, 241, 241, 1),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Materyal',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${widget.urun.materyali}',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 60,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color.fromRGBO(245, 241, 241, 1),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Ortam',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${widget.urun.ortami}',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 60,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color.fromRGBO(245, 241, 241, 1),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Tur',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${widget.urun.turu}',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          Container(
+                            width: 60,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: const Color.fromRGBO(245, 241, 241, 1),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Ad',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    '${widget.urun.urunAdi}',
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            color: Renkler.kahverengi,
+                            size: 6,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            'bu urun turkiyede uretilmistir',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            color: Renkler.kahverengi,
+                            size: 6,
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            'urnlerin garanti suresi 1 yildir',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(width: 5),
+                      Text(
+                        widget.urun.urunAciklamasi,
+                        style: TextStyle(
+                          color: Renkler.kahverengi,
+                          fontSize: 12,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'URUN ADI :',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            widget.urun.urunAdi,
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 5),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'AGIRLIGI :',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            widget.urun.agirligi,
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 5),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'MATERYALI :',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            widget.urun.materyali,
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 5),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'ORTAMI :',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            widget.urun.ortami,
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 5),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'TURU :',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            widget.urun.turu,
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: 5),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'GARANTI SURESI :',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            '1 YIL',
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 5,
+                  right: 3,
+                  child: Container(
+                    width: 27,
+                    height: 27,
+                    decoration: BoxDecoration(
+                      color: Renkler.krem,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Renkler.kahverengi),
+                    ),
+                    child: Center(
+                      child: IconButton(
+                        padding: const EdgeInsets.all(0),
+                        onPressed: () {
+                          debugPrint('${widget.urun.urunAdi} tiklandi');
+                          widget.urun.begenilmismi
+                              ? widget.urun.begenilmismi = false
+                              : widget.urun.begenilmismi = true;
+                          setState(() {
+                            if (widget.urun.begenilmismi) {
+                              widget.colored(color: Renkler.kirmizi);
+                              begenilenekaydet(widget.urun.urunAdi);
+                            } else {
+                              widget.colored(color: Colors.white);
+                              begenilendensil(widget.urun.urunAdi);
+                            }
+                          });
+                        },
+                        icon: Icon(
+                          Icons.favorite,
+                          color:
+                              widget.urun.begenilmismi
+                                  ? Renkler.kirmizi
+                                  : Colors.white,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 5,
+                  left: 3,
+                  child: Container(
+                    width: 27,
+                    height: 27,
+                    decoration: BoxDecoration(
+                      color: Renkler.krem,
+                      borderRadius: BorderRadius.circular(15),
+                      border: Border.all(color: Renkler.kahverengi),
+                    ),
+                    child: Center(
+                      child: IconButton(
+                        padding: const EdgeInsets.all(0),
+                        onPressed: () {
+                          Navigator.pop(context); // Popup'ı kapatır
+                        },
+                        icon: Icon(
+                          Icons.close,
+                          color: Renkler.kahverengi,
+                          size: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+  );
 
   SingleChildScrollView sorucevaplar(BuildContext context) {
     return SingleChildScrollView(
@@ -406,6 +1388,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 width: MediaQuery.of(context).size.width / 1.2,
                 height: 180,
                 decoration: BoxDecoration(
+                  border: Border.all(width: 0.6, color: Renkler.kahverengi),
                   color: const Color.fromARGB(255, 198, 211, 187),
                   borderRadius: BorderRadius.circular(10),
                 ),

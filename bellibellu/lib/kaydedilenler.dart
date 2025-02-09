@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class KaydedilenUrunler extends ChangeNotifier {
-  static List<Urunkarti> begenilenUrunwidgeti = [];
+  static List<Ozelurunkarti> begenilenUrunwidgeti = [];
 
-  static Future<List<Urunkarti>> dataguncelle() async {
+  static Future<List<Ozelurunkarti>> dataguncelle() async {
     final pref = await SharedPreferences.getInstance();
     debugPrint('Kaydedilenler giriliyor');
 
@@ -20,9 +20,7 @@ class KaydedilenUrunler extends ChangeNotifier {
       for (int i = 0; i < urunadlari.length; i++) {
         for (int j = 0; j < Urunler.urunler.length; j++) {
           if (Urunler.urunler[j].urunAdi == urunadlari[i]) {
-            Urunkarti kart = Urunkarti(
-              urun: Urunler.urunler[j],
-            );
+            Ozelurunkarti kart = Ozelurunkarti(urun: Urunler.urunler[j]);
             begenilenUrunwidgeti.add(kart);
           }
         }
@@ -42,7 +40,7 @@ class Kaydedilenler extends StatefulWidget {
 }
 
 class _KaydedilenlerState extends State<Kaydedilenler> {
-  List<Urunkarti> begenilenurunler = [];
+  List<Ozelurunkarti> begenilenurunler = [];
 
   @override
   void initState() {
@@ -51,7 +49,7 @@ class _KaydedilenlerState extends State<Kaydedilenler> {
   }
 
   void guncelle() async {
-    List<Urunkarti> yeniliste = await KaydedilenUrunler.dataguncelle();
+    List<Ozelurunkarti> yeniliste = await KaydedilenUrunler.dataguncelle();
     debugPrint(
       'setstate calisiyor .... yeniliste boyutu : ${yeniliste.length}',
     );
@@ -77,9 +75,10 @@ class _KaydedilenlerState extends State<Kaydedilenler> {
                   child:
                       begenilenurunler.isNotEmpty
                           ? Wrap(
+                            runSpacing: 20,
                             spacing: 20,
                             children: [
-                              for (Urunkarti urun in begenilenurunler) urun,
+                              for (Ozelurunkarti urun in begenilenurunler) urun,
                             ],
                           )
                           : Text('begenilen urun listesi bos !!'),

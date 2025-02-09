@@ -2,23 +2,27 @@ import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
 
 // ignore: must_be_immutable
-class Serid extends StatelessWidget {
+class Serid extends StatefulWidget {
   String vasif;
   int sayi;
   Serid(this.vasif, this.sayi, {super.key});
 
-  // final Future<void> _urunlerFuture =
-  //     Urunler.urunleritanima(); // 🔥 `Future` sadece bir kere çalışacak
+  @override
+  State<Serid> createState() => _SeridState();
+}
 
+class _SeridState extends State<Serid> {
+  // final Future<void> _urunlerFuture =
   @override
   Widget build(BuildContext context) {
     const int urunKartiGenisligi = 150;
-    int arttirma = Urunler.urunler.length ~/ sayi;
+    int arttirma = Urunler.urunler.length ~/ widget.sayi;
     debugPrint(arttirma.toString());
-    debugPrint('$vasif olusturuldu');
+    debugPrint('${widget.vasif} olusturuldu');
 
     // return FutureBuilder<void>(
     //     // future: _urunlerFuture, // Dosya okuma işlemini başlat
@@ -43,7 +47,7 @@ class Serid extends StatelessWidget {
             // Yatayda yan yana düzenlemeyi aktif et
             children: [
               Text(
-                vasif,
+                widget.vasif,
                 textAlign: TextAlign.left,
                 style: const TextStyle(
                   fontSize: 15,
@@ -114,7 +118,8 @@ class Serid extends StatelessWidget {
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        // Ürün detay sayfasına yönlendirme işlemi
+                        debugPrint('tiklandi');
+                        context.push('/tumurunler'); // Sayfaya nesneyi geçir)
                       },
                       child: Center(
                         // 📌 Ana container içindeki her şeyi ortalamak için

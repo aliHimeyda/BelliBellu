@@ -92,12 +92,12 @@ class _UrunkartiState extends State<Urunkarti> {
                           child: IconButton(
                             padding: const EdgeInsets.all(0),
                             onPressed: () {
-                              debugPrint('${urun.urunAdi} tiklandi');
+                              debugPrint('${widget.urun.urunAdi} tiklandi');
                               widget.urun.begenilmismi
                                   ? widget.urun.begenilmismi = false
                                   : widget.urun.begenilmismi = true;
                               setState(() {
-                                if (urun.begenilmismi) {
+                                if (widget.urun.begenilmismi) {
                                   widget.colored(color: Renkler.kirmizi);
                                   begenilenekaydet(widget.urun.urunAdi);
                                 } else {
@@ -131,6 +131,135 @@ class _UrunkartiState extends State<Urunkarti> {
               Text(
                 '${widget.urun.urunfiyati} TL   ❤${widget.urun.begenisayisi}',
                 style: const TextStyle(color: Renkler.kahverengi),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Ozelurunkarti extends StatefulWidget {
+  final Urunler urun;
+  Ozelurunkarti({super.key, required this.urun});
+  @override
+  State<Ozelurunkarti> createState() => _OzelurunkartiState();
+}
+
+class _OzelurunkartiState extends State<Ozelurunkarti> {
+  int urunKartiGenisligi = 150;
+
+  get urun => this.urun;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        debugPrint('tiklandi');
+
+        context.push(
+          '/urundetaylari',
+          extra: widget.urun,
+        ); // Sayfaya nesneyi geçir)
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Container(
+          width: MediaQuery.of(context).size.width - 10,
+          height: urunKartiGenisligi * 1.1,
+          decoration: BoxDecoration(
+            color: Renkler.krem,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Renkler.kahverengi),
+            boxShadow: const [
+              BoxShadow(
+                color: Renkler.gri,
+                blurRadius: 10,
+                spreadRadius: 3,
+                offset: Offset(2, 5),
+              ),
+            ],
+          ),
+          child: Stack(
+            children: [
+              Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.horizontal(
+                      left: Radius.circular(10),
+                    ),
+                    child: Image.network(
+                      widget.urun.resimYolu,
+                      width:
+                          ((MediaQuery.of(context).size.width / 3) * 1.7) - 10,
+                      height: urunKartiGenisligi * 1.1,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  Container(
+                    width: ((MediaQuery.of(context).size.width / 3) * 1.3) - 10,
+                    height: urunKartiGenisligi * 1.1,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            widget.urun.urunAdi,
+                            style: const TextStyle(
+                              color: Renkler.kahverengi,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            '❤${widget.urun.begenisayisi}    ${widget.urun.urunfiyati} TL',
+                            style: const TextStyle(color: Renkler.kahverengi),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                top: 5,
+                right: 5,
+                child: Container(
+                  width: 22,
+                  height: 22,
+                  decoration: BoxDecoration(
+                    color: Renkler.krem,
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Renkler.kahverengi),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      padding: const EdgeInsets.all(0),
+                      onPressed: () {
+                        debugPrint('${widget.urun.urunAdi} tiklandi');
+                        widget.urun.begenilmismi
+                            ? widget.urun.begenilmismi = false
+                            : widget.urun.begenilmismi = true;
+                        setState(() {
+                          if (widget.urun.begenilmismi) {
+                            widget.colored(color: Renkler.kirmizi);
+                            begenilenekaydet(widget.urun.urunAdi);
+                          } else {
+                            widget.colored(color: Colors.white);
+                            begenilendensil(widget.urun.urunAdi);
+                          }
+                        });
+                      },
+                      icon: Icon(
+                        Icons.favorite,
+                        color:
+                            widget.urun.begenilmismi
+                                ? Renkler.kirmizi
+                                : Colors.white,
+                        size: 15,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
