@@ -4,8 +4,8 @@ iiNdBa
 Ürün Çelik malzemeden üretilmiş. Uzunluk: 107cm, Genişlik: 191cm.
 284
 Çelik
-Masa
-Kafe
+Sandalye
+Ev
 43.04kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim2.png
 mzNTcs
@@ -14,7 +14,7 @@ mzNTcs
 119
 Ahşap
 Masa
-Ofis
+Ev
 45.84kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim3.png
 rvxfKN
@@ -31,7 +31,7 @@ owiqvd
 Ürün Çelik malzemeden üretilmiş. Uzunluk: 198cm, Genişlik: 158cm.
 967
 Metal
-Sandalye
+Masa
 Ev
 42.52kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim5.png
@@ -48,8 +48,8 @@ Bfwjjd
 2167
 Ürün Metal malzemeden üretilmiş. Uzunluk: 180cm, Genişlik: 157cm.
 283
-Ahşap
-Masa
+Metal
+Sandalye
 Ev
 36.14kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim7.png
@@ -68,16 +68,16 @@ RGtggK
 281
 Çelik
 Masa
-Ev
+Ofis
 41.06kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim9.png
 BCKclo
 1380
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 200cm, Genişlik: 188cm.
 735
-Ahşap
-Sandalye
-Ofis
+Metal
+Masa
+Ev
 30.52kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim10.png
 QSQIZE
@@ -86,16 +86,16 @@ QSQIZE
 438
 Metal
 Masa
-Ev
+Ofis
 49.67kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim11.png
 JeLYSg
 4765
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 150cm, Genişlik: 154cm.
 854
-Çelik
+Ahşap
 Masa
-Ev
+Kafe
 32.45kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim12.png
 BsLcnv
@@ -113,7 +113,7 @@ fIVBCd
 480
 Metal
 Masa
-Kafe
+Ev
 40.76kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim14.png
 XiPyfQ
@@ -129,7 +129,7 @@ pjlYDW
 4028
 Ürün Metal malzemeden üretilmiş. Uzunluk: 113cm, Genişlik: 185cm.
 831
-Ahşap
+Metal
 Sandalye
 Ev
 32.24kg
@@ -140,7 +140,7 @@ mznhwP
 837
 Metal
 Sandalye
-Kafe
+Ev
 28.67kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim17.png
 rpPKxE
@@ -156,9 +156,9 @@ ZUkGOg
 2379
 Ürün Metal malzemeden üretilmiş. Uzunluk: 105cm, Genişlik: 178cm.
 744
-Ahşap
-Sandalye
-Ofis
+Metal
+Masa
+Ev
 38.47kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim19.png
 cmqifH
@@ -166,8 +166,8 @@ cmqifH
 Ürün Metal malzemeden üretilmiş. Uzunluk: 136cm, Genişlik: 168cm.
 607
 Metal
-Sandalye
-Ev
+Masa
+Ofis
 43.86kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim20.png
 jjrUsB
@@ -184,7 +184,7 @@ UcMWpF
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 156cm, Genişlik: 187cm.
 303
 Metal
-Masa
+Sandalye
 Ofis
 26.34kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim22.png
@@ -192,7 +192,7 @@ yMYubH
 3311
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 159cm, Genişlik: 111cm.
 905
-Ahşap
+Çelik
 Masa
 Ev
 8.02kg
@@ -203,7 +203,7 @@ mymrAa
 266
 Metal
 Masa
-Kafe
+Ev
 24.51kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim24.png
 yddXOi
@@ -211,16 +211,16 @@ yddXOi
 Ürün Metal malzemeden üretilmiş. Uzunluk: 166cm, Genişlik: 127cm.
 560
 Metal
-Sandalye
-Ofis
+Masa
+Ev
 41.38kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim25.png
 QKUODW
 3121
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 154cm, Genişlik: 104cm.
 884
-Ahşap
-Sandalye
+Çelik
+Masa
 Ev
 31.46kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim26.png
@@ -237,9 +237,9 @@ hKjXRV
 1239
 Ürün Çelik malzemeden üretilmiş. Uzunluk: 191cm, Genişlik: 141cm.
 223
-Ahşap
+Metal
 Masa
-Ev
+Ofis
 16.68kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim28.png
 CTdGKY
@@ -248,25 +248,25 @@ CTdGKY
 684
 Metal
 Masa
-Ev
+Ofis
 49.64kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim29.png
 hstUJj
 3497
 Ürün Çelik malzemeden üretilmiş. Uzunluk: 127cm, Genişlik: 180cm.
 821
-Ahşap
+Çelik
 Sandalye
-Kafe
+Ev
 17.4kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim30.png
 VGcaiM
 3663
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 112cm, Genişlik: 187cm.
 442
-Metal
+Çelik
 Masa
-Ev
+Kafe
 10.09kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim31.png
 wiQKXC
@@ -284,15 +284,15 @@ VkACvf
 495
 Çelik
 Sandalye
-Kafe
+Ev
 25.22kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim33.png
 FoJfOX
 2760
 Ürün Metal malzemeden üretilmiş. Uzunluk: 198cm, Genişlik: 102cm.
 125
-Ahşap
-Masa
+Metal
+Sandalye
 Ev
 39.24kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim34.png
@@ -301,7 +301,7 @@ XLiXWW
 Ürün Çelik malzemeden üretilmiş. Uzunluk: 197cm, Genişlik: 150cm.
 319
 Çelik
-Sandalye
+Masa
 Ofis
 45.71kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim35.png
@@ -309,9 +309,9 @@ LDYnta
 2804
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 111cm, Genişlik: 156cm.
 977
-Ahşap
-Masa
-Ev
+Metal
+Sandalye
+Kafe
 35.46kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim36.png
 EGaWxz
@@ -329,14 +329,14 @@ yRYjMR
 856
 Çelik
 Sandalye
-Kafe
+Ev
 34.06kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim38.png
 GJSovI
 2186
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 125cm, Genişlik: 172cm.
 763
-Ahşap
+Metal
 Masa
 Ev
 9.4kg
@@ -347,7 +347,7 @@ FsPAHN
 252
 Metal
 Sandalye
-Ofis
+Ev
 34.79kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim40.png
 eRFwon
@@ -355,8 +355,8 @@ eRFwon
 Ürün Çelik malzemeden üretilmiş. Uzunluk: 138cm, Genişlik: 164cm.
 122
 Metal
-Sandalye
-Kafe
+Masa
+Ev
 15.18kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim41.png
 oXSfMJ
@@ -365,25 +365,25 @@ oXSfMJ
 430
 Metal
 Sandalye
-Ofis
+Ev
 32.01kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim42.png
 PSzRLA
 4241
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 112cm, Genişlik: 165cm.
 800
-Ahşap
-Sandalye
-Kafe
+Çelik
+Masa
+Ev
 49.83kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim43.png
 vLsPfw
 1740
 Ürün Çelik malzemeden üretilmiş. Uzunluk: 173cm, Genişlik: 187cm.
 469
-Ahşap
-Sandalye
-Ev
+Metal
+Masa
+Ofis
 21.55kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim44.png
 AQRBfU
@@ -401,7 +401,7 @@ URxobO
 805
 Metal
 Masa
-Kafe
+Ev
 31.96kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim46.png
 KSJFoL
@@ -409,7 +409,7 @@ KSJFoL
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 121cm, Genişlik: 142cm.
 346
 Çelik
-Masa
+Sandalye
 Ev
 28.99kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim47.png
@@ -418,7 +418,7 @@ VGootR
 Ürün Metal malzemeden üretilmiş. Uzunluk: 181cm, Genişlik: 125cm.
 792
 Çelik
-Masa
+Sandalye
 Ofis
 31.88kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim48.png
@@ -426,18 +426,18 @@ sjiBiM
 1161
 Ürün Ahşap malzemeden üretilmiş. Uzunluk: 189cm, Genişlik: 197cm.
 554
-Ahşap
+Metal
 Masa
-Kafe
+Ev
 45.98kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim49.png
 KIPzII
 3054
 Ürün Metal malzemeden üretilmiş. Uzunluk: 123cm, Genişlik: 154cm.
 642
-Ahşap
+Metal
 Sandalye
-Kafe
+Ev
 47.04kg
 https://raw.githubusercontent.com/aliHimeyda/BelliBellu/main/bellibellu/lib/images/resim50.png
 IdqpfR
