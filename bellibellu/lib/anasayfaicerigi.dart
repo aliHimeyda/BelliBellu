@@ -1,8 +1,11 @@
 import 'package:bellibellu/bellekislemleri.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/tumurunler.dart';
+import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Anasayfaicerigi extends StatefulWidget {
@@ -13,14 +16,39 @@ class Anasayfaicerigi extends StatefulWidget {
 }
 
 class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
+  TextEditingController _controller = TextEditingController();
   List<String> aramaonerileri = [
     'masa',
     'sandalye',
-    'ev mobilyasi',
-    'ofis mobilyasi',
+    'ev mobilyası',
+    'ofis mobilyası',
     'metal masa',
     'metal sandalye',
+    'ahşap ürünler',
+    'kafe mobilyası',
   ];
+  List<String> filitrelenenkelimeler = []; // Filtrelenen kelimeler
+
+  ValueNotifier<List<String>> filteredWords = ValueNotifier<List<String>>([]);
+
+  void oneribul(String query) {
+    if (query.isEmpty) {
+      filteredWords.value = [];
+    } else {
+      filteredWords.value =
+          aramaonerileri
+              .where((word) => word.toLowerCase().contains(query.toLowerCase()))
+              .toList();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    filteredWords.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     _bellekguncelle;
@@ -132,6 +160,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
         GestureDetector(
           onTap: () {
             debugPrint('tiklandi');
+            GoRouter.of(context).push('/tumurunler'); // Sayfaya nesneyi geçir)
           },
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -149,7 +178,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
           ),
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
+            await urunlerigetir('masa', context);
             debugPrint('tiklandi');
           },
           child: Container(
@@ -160,7 +190,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
           ),
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
+            await urunlerigetir('sandalye', context);
             debugPrint('tiklandi');
           },
           child: Container(
@@ -171,7 +202,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
           ),
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
+            await urunlerigetir('ofis', context);
             debugPrint('tiklandi');
           },
           child: Container(
@@ -182,7 +214,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
           ),
         ),
         GestureDetector(
-          onTap: () {
+          onTap: () async {
+            await urunlerigetir('ev', context);
             debugPrint('tiklandi');
           },
           child: Container(
@@ -217,11 +250,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                       width: MediaQuery.of(context).size.width / 1.5,
                       height: 35,
                       child: TextField(
+                        controller: _controller,
                         cursorColor: Renkler.bordo,
-                        onChanged: (value) async {
-                          // Arama işlemleri burada yazılacak
-                          debugPrint(value);
-                        },
+                        onChanged: oneribul,
                         decoration: InputDecoration(
                           prefixIcon: IconButton(
                             icon: const Icon(
@@ -229,7 +260,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               color: Renkler.kahverengi,
                               size: 17,
                             ),
-                            onPressed: () {},
+                            onPressed: () async {
+                              await urunlerigetir(_controller.text, context);
+                            },
                           ),
                           hintText: 'Magazada Arayin',
                           focusColor: Renkler.kahverengi,
@@ -271,7 +304,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
             child: Row(
               children: [
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('masa', context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -310,7 +344,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('sandalye', context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -349,7 +384,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('ev', context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -388,7 +424,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('ofis', context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -427,7 +464,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('kafe', context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -468,6 +506,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 GestureDetector(
                   onTap: () {
                     debugPrint('tiklandi');
+                    GoRouter.of(
+                      context,
+                    ).push('/tumurunler'); // Sayfaya nesneyi geçir)
                   },
                   child: Positioned(
                     top: 33,
@@ -507,6 +548,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 GestureDetector(
                   onTap: () {
                     debugPrint('tiklandi');
+                    GoRouter.of(
+                      context,
+                    ).push('/tumurunler'); // Sayfaya nesneyi geçir)
                   },
                   child: Positioned(
                     top: 33,
@@ -546,6 +590,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 GestureDetector(
                   onTap: () {
                     debugPrint('tiklandi');
+                    GoRouter.of(
+                      context,
+                    ).push('/tumurunler'); // Sayfaya nesneyi geçir)
                   },
                   child: Positioned(
                     top: 33,
@@ -586,7 +633,78 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
             ),
           ),
         ),
+
+        Expanded(
+          child: ValueListenableBuilder<List<String>>(
+            valueListenable: filteredWords,
+            builder: (context, suggestions, child) {
+              return suggestions.isNotEmpty
+                  ? ListView.builder(
+                    itemCount: suggestions.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () async {
+                          _controller.text = suggestions[index];
+                          await urunlerigetir(_controller.text, context);
+                          oneribul(''); // Listeyi temizle
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            color: Renkler.kuyubeyaz,
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                          child: Text(
+                            suggestions[index],
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                  : SizedBox();
+            },
+          ),
+        ),
       ],
     );
+  }
+
+  Future<void> urunlerigetir(String aranan, context) async {
+    debugPrint('urunlerigetir metoduna gelen kelime : $aranan');
+
+    List<Urunler> bulunanurunler = [];
+    List<String> kelimeler = aranan.toLowerCase().split(
+      " ",
+    ); // Kullanıcının girdiği kelimeleri parçala.
+
+    for (Urunler urun in Urunler.urunler) {
+      bool tumKelimelerEslesiyor =
+          true; // Tüm kelimeleri içerip içermediğini kontrol edeceğiz.
+
+      for (String kelime in kelimeler) {
+        if (!(urun.urunAdi.toLowerCase().contains(kelime) ||
+            urun.materyali.toLowerCase().contains(kelime) ||
+            urun.ortami.toLowerCase().contains(kelime) ||
+            urun.turu.toLowerCase().contains(kelime))) {
+          tumKelimelerEslesiyor =
+              false; // Eğer bir kelime bile eşleşmezse, ürünü eklemeyiz.
+          break;
+        }
+      }
+
+      if (tumKelimelerEslesiyor) {
+        bulunanurunler.add(urun);
+      }
+    }
+
+    if (bulunanurunler.isNotEmpty) {
+      GoRouter.of(context).push('/ozelurunler', extra: bulunanurunler);
+    } else {
+      debugPrint("Eşleşen ürün bulunamadı.");
+    }
   }
 }

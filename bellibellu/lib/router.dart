@@ -4,7 +4,9 @@ import 'package:bellibellu/iletisim.dart';
 import 'package:bellibellu/katagoriler.dart';
 import 'package:bellibellu/kaydedilenler.dart';
 import 'package:bellibellu/menu.dart';
+import 'package:bellibellu/ozelurunler.dart';
 import 'package:bellibellu/tumurunler.dart';
+import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunkartiicerigi.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ class Paths {
   static const String menu = '/menu';
   static const String urundetaylari = '/urundetaylari';
   static const String tumurunler = '/tumurunler';
+  static const String ozelurunler = '/ozelurunler';
 }
 
 // ignore: non_constant_identifier_names
@@ -80,6 +83,20 @@ final router = GoRouter(
             GoRoute(
               path: Paths.tumurunler,
               builder: (context, state) => const Tumurunler(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.ozelurunler,
+              builder: (context, state) {
+                final urunler =
+                    state.extra as List<Urunler>; // Extra ile gelen veriyi al
+                return Ozelurunler(
+                  gelenurunler: urunler,
+                ); // Sayfaya nesneyi geçir
+              },
             ),
           ],
         ),

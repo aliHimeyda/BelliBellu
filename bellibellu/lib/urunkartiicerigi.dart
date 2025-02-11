@@ -483,6 +483,9 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 GestureDetector(
                   onTap: () {
                     debugPrint('tiklandi');
+                    GoRouter.of(
+                      context,
+                    ).push('/tumurunler'); // Sayfaya nesneyi geçir)
                   },
                   child: SizedBox(
                     width: (MediaQuery.of(context).size.width / 3) - 10,
@@ -533,6 +536,9 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 GestureDetector(
                   onTap: () {
                     debugPrint('tiklandi');
+                    GoRouter.of(
+                      context,
+                    ).push('/tumurunler'); // Sayfaya nesneyi geçir)
                   },
                   child: SizedBox(
                     width: (MediaQuery.of(context).size.width / 3) - 10,
@@ -568,7 +574,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                         ),
                         const Center(
                           child: Text(
-                            '2025 Yen Urunler',
+                            '2025 Yeni Urunler',
                             style: TextStyle(
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
@@ -583,6 +589,9 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 GestureDetector(
                   onTap: () {
                     debugPrint('tiklandi');
+                    GoRouter.of(
+                      context,
+                    ).push('/tumurunler'); // Sayfaya nesneyi geçir)
                   },
                   child: SizedBox(
                     width: (MediaQuery.of(context).size.width / 3) - 10,
@@ -631,7 +640,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('metal', context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -681,7 +691,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('ahşap', context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -731,7 +742,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('masa', context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -781,7 +793,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('sandalye', context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -831,7 +844,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('ev', context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -881,7 +895,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    await urunlerigetir('ofis', context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -1708,5 +1723,40 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
         ),
       ),
     );
+  }
+
+  Future<void> urunlerigetir(String aranan, context) async {
+    debugPrint('urunlerigetir metoduna gelen kelime : $aranan');
+
+    List<Urunler> bulunanurunler = [];
+    List<String> kelimeler = aranan.toLowerCase().split(
+      " ",
+    ); // Kullanıcının girdiği kelimeleri parçala.
+
+    for (Urunler urun in Urunler.urunler) {
+      bool tumKelimelerEslesiyor =
+          true; // Tüm kelimeleri içerip içermediğini kontrol edeceğiz.
+
+      for (String kelime in kelimeler) {
+        if (!(urun.urunAdi.toLowerCase().contains(kelime) ||
+            urun.materyali.toLowerCase().contains(kelime) ||
+            urun.ortami.toLowerCase().contains(kelime) ||
+            urun.turu.toLowerCase().contains(kelime))) {
+          tumKelimelerEslesiyor =
+              false; // Eğer bir kelime bile eşleşmezse, ürünü eklemeyiz.
+          break;
+        }
+      }
+
+      if (tumKelimelerEslesiyor) {
+        bulunanurunler.add(urun);
+      }
+    }
+
+    if (bulunanurunler.isNotEmpty) {
+      GoRouter.of(context).push('/ozelurunler', extra: bulunanurunler);
+    } else {
+      debugPrint("Eşleşen ürün bulunamadı.");
+    }
   }
 }

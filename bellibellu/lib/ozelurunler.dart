@@ -3,33 +3,35 @@ import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 
-class Tumurunler extends StatefulWidget {
-  const Tumurunler({super.key});
+class Ozelurunler extends StatefulWidget {
+  final List<Urunler> gelenurunler;
+  const Ozelurunler({super.key, required this.gelenurunler});
 
   @override
-  State<Tumurunler> createState() => _TumurunlerState();
+  State<Ozelurunler> createState() => _OzelurunlerState();
 }
 
-class _TumurunlerState extends State<Tumurunler> {
+class _OzelurunlerState extends State<Ozelurunler> {
   int urunlersayisi = 0;
   int bulunanurunsayisi = 0;
   List<String> seciliOgeler = [];
   String siralamaolcutu = "";
-   List<Ozelurunkarti> urunler = [];
+  List<Ozelurunkarti> urunler = [];
   Future<void> kartlariolustur() async {
-    for (Urunler urun in Urunler.urunler) {
+    urunler.clear();
+    for (Urunler urun in widget.gelenurunler) {
       Ozelurunkarti kart = await Ozelurunkarti(urun: urun);
       urunler.add(kart);
     }
-    setState(() {
-      urunler;
-    });
   }
 
   @override
   void initState() {
     Future.delayed(Duration.zero, () async {
       await kartlariolustur();
+      debugPrint(
+        'initState calisti gelen verilerin boyutu : ${widget.gelenurunler.length}',
+      );
       setState(() {
         urunler;
       });
