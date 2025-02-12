@@ -17,6 +17,8 @@ class Anasayfaicerigi extends StatefulWidget {
 
 class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
   TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+
   List<String> aramaonerileri = [
     'masa',
     'sandalye',
@@ -45,6 +47,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     filteredWords.dispose();
     super.dispose();
   }
@@ -251,6 +254,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                       height: 35,
                       child: TextField(
                         controller: _controller,
+                        focusNode: _focusNode,
                         cursorColor: Renkler.bordo,
                         onChanged: oneribul,
                         decoration: InputDecoration(
@@ -639,31 +643,41 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
             valueListenable: filteredWords,
             builder: (context, suggestions, child) {
               return suggestions.isNotEmpty
-                  ? ListView.builder(
-                    itemCount: suggestions.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () async {
-                          _controller.text = suggestions[index];
-                          await urunlerigetir(_controller.text, context);
-                          oneribul(''); // Listeyi temizle
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Renkler.kuyubeyaz,
-                            borderRadius: BorderRadius.circular(3),
-                          ),
-                          child: Text(
-                            suggestions[index],
-                            style: TextStyle(
-                              color: Renkler.kahverengi,
-                              fontSize: 18,
+                  ? GestureDetector(
+                    onTap: () {
+                      _controller.text = '';
+                      _focusNode.unfocus();
+                      oneribul(''); // Listeyi temizle
+                    },
+                    child: ListView.builder(
+                      itemCount: suggestions.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () async {
+                            _controller.text = suggestions[index];
+                            await urunlerigetir(_controller.text, context);
+                            _controller.text = '';
+                            _focusNode.unfocus();
+
+                            oneribul(''); // Listeyi temizle
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            child: Text(
+                              suggestions[index],
+                              style: TextStyle(
+                                color: Renkler.kahverengi,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   )
                   : SizedBox();
             },

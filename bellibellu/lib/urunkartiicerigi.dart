@@ -1,10 +1,12 @@
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/router.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
 import 'package:bellibellu/urunkarti.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class Urunkartiicerigi extends StatefulWidget {
@@ -442,6 +444,121 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                           ),
                         ),
                         SizedBox(height: 20),
+
+                        GestureDetector(
+                          onTap: () async {
+                            Navigator.pop(context);
+                            await urunlerigetir(
+                              '${widget.urun.materyali}',
+                              context,
+                            );
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width - 5,
+                            height: 65,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(
+                                width: 0.5,
+                                color: Renkler.kahverengi,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'daha fazla ${widget.urun.materyali} urunler',
+                                  style: TextStyle(
+                                    color: Renkler.kahverengi,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.chevron_right,
+                                  size: 15,
+                                  color: Renkler.kahverengi,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            Navigator.pop(context);
+                            await urunlerigetir(
+                              '${widget.urun.ortami}',
+                              context,
+                            );
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width - 5,
+                            height: 65,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(
+                                width: 0.5,
+                                color: Renkler.kahverengi,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'daha fazla ${widget.urun.ortami} urunler',
+                                  style: TextStyle(
+                                    color: Renkler.kahverengi,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.chevron_right,
+                                  size: 15,
+                                  color: Renkler.kahverengi,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () async {
+                            Navigator.pop(context);
+                            await urunlerigetir('${widget.urun.turu}', context);
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width - 5,
+                            height: 65,
+                            padding: EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Renkler.kuyubeyaz,
+                              border: Border.all(
+                                width: 0.5,
+                                color: Renkler.kahverengi,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'daha fazla ${widget.urun.turu} urunler',
+                                  style: TextStyle(
+                                    color: Renkler.kahverengi,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.chevron_right,
+                                  size: 15,
+                                  color: Renkler.kahverengi,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -481,8 +598,15 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
               spacing: 0,
               children: [
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     debugPrint('tiklandi');
+                    final routeName = GoRouterState.of(context).name;
+                    debugPrint("Şu anki route: $routeName");
+                    debugPrint(
+                      'su anki route urisi : ${GoRouterState.of(context).uri.toString()}',
+                    );
+                    Navigator.pop(context);
+
                     GoRouter.of(
                       context,
                     ).push('/tumurunler'); // Sayfaya nesneyi geçir)
@@ -536,6 +660,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 GestureDetector(
                   onTap: () {
                     debugPrint('tiklandi');
+                    Navigator.pop(context);
                     GoRouter.of(
                       context,
                     ).push('/tumurunler'); // Sayfaya nesneyi geçir)
@@ -589,6 +714,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 GestureDetector(
                   onTap: () {
                     debugPrint('tiklandi');
+                    Navigator.pop(context);
                     GoRouter.of(
                       context,
                     ).push('/tumurunler'); // Sayfaya nesneyi geçir)
@@ -641,6 +767,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
+                    Navigator.pop(context);
                     await urunlerigetir('metal', context);
                     debugPrint('tiklandi');
                   },
@@ -692,6 +819,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
+                    Navigator.pop(context);
                     await urunlerigetir('ahşap', context);
                     debugPrint('tiklandi');
                   },
@@ -743,6 +871,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
+                    Navigator.pop(context);
                     await urunlerigetir('masa', context);
                     debugPrint('tiklandi');
                   },
@@ -794,6 +923,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
+                    Navigator.pop(context);
                     await urunlerigetir('sandalye', context);
                     debugPrint('tiklandi');
                   },
@@ -845,6 +975,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
+                    Navigator.pop(context);
                     await urunlerigetir('ev', context);
                     debugPrint('tiklandi');
                   },
@@ -896,6 +1027,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
+                    Navigator.pop(context);
                     await urunlerigetir('ofis', context);
                     debugPrint('tiklandi');
                   },
@@ -1694,7 +1826,9 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
                 ],
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () async {
+                  await sendSMS();
+                },
                 child: Container(
                   width: 150,
                   height: 50,
@@ -1757,6 +1891,20 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
       GoRouter.of(context).push('/ozelurunler', extra: bulunanurunler);
     } else {
       debugPrint("Eşleşen ürün bulunamadı.");
+    }
+  }
+
+  Future<void> sendSMS() async {
+    final Uri whatsappUri = Uri.parse(
+      "whatsapp://send?phone=905372943871&text=",
+    );
+
+    try {
+      await launchUrl(whatsappUri, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("WhatsApp açılamadı! Hata: $e")));
     }
   }
 }

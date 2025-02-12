@@ -56,7 +56,18 @@ class _SeridState extends State<Serid> {
               ),
               GestureDetector(
                 onTap: () {
-                  debugPrint('tiklandi');
+                  final routeName = GoRouterState.of(context).name;
+                  final index = GoRouterState.of(context).uri.toString();
+                  if (routeName == null && index == '/urundetaylari') {
+                    Navigator.pop(context);
+
+                    GoRouter.of(
+                      context,
+                    ).push('/tumurunler'); // Sayfaya nesneyi geçir)
+                  } else {
+                    debugPrint('tiklandi');
+                    context.push('/tumurunler'); // Sayfaya nesneyi geçir)
+                  }
                 },
                 child: const Row(
                   children: [
@@ -118,8 +129,18 @@ class _SeridState extends State<Serid> {
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        debugPrint('tiklandi');
-                        context.push('/tumurunler'); // Sayfaya nesneyi geçir)
+                        final routeName = GoRouterState.of(context).name;
+                        final index = GoRouterState.of(context).uri.toString();
+                        if (routeName == null && index == '/urundetaylari') {
+                          Navigator.pop(context);
+
+                          GoRouter.of(
+                            context,
+                          ).push('/tumurunler'); // Sayfaya nesneyi geçir)
+                        } else {
+                          debugPrint('tiklandi');
+                          context.push('/tumurunler'); // Sayfaya nesneyi geçir)
+                        }
                       },
                       child: Center(
                         // 📌 Ana container içindeki her şeyi ortalamak için
