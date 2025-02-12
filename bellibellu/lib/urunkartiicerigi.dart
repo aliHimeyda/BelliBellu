@@ -1896,7 +1896,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi> {
 
   Future<void> sendSMS() async {
     final Uri whatsappUri = Uri.parse(
-      "whatsapp://send?phone=905372943871&text=",
+      "whatsapp://send?phone=905372943871&text=*${widget.urun.urunAdi}* kodlu *${widget.urun.materyali}* *${widget.urun.turu}* hakkinda soru sormak istiyordum",
     );
 
     try {

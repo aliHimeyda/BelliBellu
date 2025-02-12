@@ -12,7 +12,7 @@ import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-final _routerkey = GlobalKey<NavigatorState>();
+ final  routerkey = GlobalKey<NavigatorState>();
 
 class Paths {
   Paths._();
@@ -29,7 +29,7 @@ class Paths {
 // ignore: non_constant_identifier_names
 final router = GoRouter(
   refreshListenable: KaydedilenUrunler(), // Değişiklikleri dinle
-  navigatorKey: _routerkey,
+  navigatorKey: routerkey,
 
   initialLocation: Paths.anasayfa,
   routes: [

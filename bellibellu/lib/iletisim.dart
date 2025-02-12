@@ -4,7 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MessageScreen extends StatefulWidget {
-  const MessageScreen({super.key});
+  final int numara;
+  const MessageScreen({super.key, required this.numara});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -14,7 +15,7 @@ class MessageScreen extends StatefulWidget {
 class _MessageScreenState extends State<MessageScreen> {
   Future<void> _sendSMS() async {
     final Uri whatsappUri = Uri.parse(
-      "whatsapp://send?phone=905372943871&text=",
+      "whatsapp://send?phone=${widget.numara}&text=",
     );
 
     try {
@@ -355,7 +356,7 @@ class Iletisim extends StatelessWidget {
                             ),
                           ),
 
-                          const MessageScreen(),
+                          const MessageScreen(numara: 905372943871),
                           //iletisim screeeeeeeeeeeeeen
                         ],
                       ),
@@ -506,7 +507,7 @@ class Iletisim extends StatelessWidget {
                             ),
                           ),
 
-                          const MessageScreen(),
+                          const MessageScreen(numara: 905380166105),
                           //iletisim screeeeeeeeeeeeeen
                         ],
                       ),
