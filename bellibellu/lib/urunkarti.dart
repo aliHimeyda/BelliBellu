@@ -1,3 +1,4 @@
+import 'package:bellibellu/costumloading.dart';
 import 'package:bellibellu/kaydedilenler.dart';
 import 'package:bellibellu/urunkartiicerigi.dart';
 import 'package:bellibellu/urunler.dart';
@@ -37,11 +38,12 @@ class _UrunkartiState extends State<Urunkarti> {
     return GestureDetector(
       onTap: () {
         debugPrint('tiklandi');
+          LoadingDialog.instance.show(context: context);
 
-        context.push(
-          '/urundetaylari',
-          extra: widget.urun,
-        ); // Sayfaya nesneyi geçir)
+        context.push('/urundetaylari', extra: widget.urun).then((value) {
+          
+          LoadingDialog.instance.hide();
+        });
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
