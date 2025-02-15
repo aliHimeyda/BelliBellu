@@ -1,9 +1,10 @@
-import 'package:bellibellu/kaydedilenler.dart';
+import 'package:bellibellu/dildestegiProvaider.dart';
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class Logosayfasi extends StatefulWidget {
   const Logosayfasi({super.key});
@@ -24,6 +25,14 @@ class _LogosayfasiState extends State<Logosayfasi> {
         MaterialPageRoute(
           builder:
               (context) => MaterialApp.router(
+                localizationsDelegates: [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                locale: Dildestegiprovaider.current,
                 routerConfig: router,
                 debugShowCheckedModeBanner: false,
               ),

@@ -1,9 +1,9 @@
+import 'package:bellibellu/ceviri.dart';
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:bellibellu/anasayfaicerigi.dart';
-
 class Katagoriler extends StatelessWidget {
   const Katagoriler({super.key});
 
@@ -56,9 +56,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Center(
+                          Center(
                           child: Text(
-                            'Ozel Urunler',
+                            S.of(context).ozelurunler,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -109,9 +109,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Center(
+                          Center(
                           child: Text(
-                            '2025 Yen Urunler',
+                            S.of(context).urunSerisi2025,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -162,9 +162,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Center(
+                          Center(
                           child: Text(
-                            'En Begenilen Urunler',
+                            S.of(context).enCokBegenilenler,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -178,7 +178,7 @@ class Katagoriler extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('metal', context);
+                    await urunlerigetir(S.of(context).metal, context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -213,9 +213,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Center(
+                          Center(
                           child: Text(
-                            'Metal Urunleri',
+                            S.of(context).metal,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -229,7 +229,7 @@ class Katagoriler extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('ahşap', context);
+                    await urunlerigetir(S.of(context).ahsap, context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -264,9 +264,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Center(
+                          Center(
                           child: Text(
-                            'Ahsap Urunler',
+                             S.of(context).ahsap,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -280,7 +280,7 @@ class Katagoriler extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('masa', context);
+                    await urunlerigetir(S.of(context).masa, context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -315,9 +315,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Center(
+                          Center(
                           child: Text(
-                            'Masalar',
+                            S.of(context).masa,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -331,7 +331,7 @@ class Katagoriler extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('sandalye', context);
+                    await urunlerigetir(S.of(context).sandalye, context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -366,9 +366,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Center(
+                          Center(
                           child: Text(
-                            'Sandalyeler',
+                            S.of(context).sandalye,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -382,7 +382,7 @@ class Katagoriler extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('ev', context);
+                    await urunlerigetir(S.of(context).ev, context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -417,9 +417,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Center(
+                         Center(
                           child: Text(
-                            'Ev Mobilya Urunleri',
+                            S.of(context).ev,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -433,7 +433,7 @@ class Katagoriler extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('ofis', context);
+                    await urunlerigetir(S.of(context).ofis, context);
                     debugPrint('tiklandi');
                   },
                   child: SizedBox(
@@ -468,9 +468,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Center(
+                          Center(
                           child: Text(
-                            'Ofis Mobilya Urunleri',
+                             S.of(context).ofis,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -504,9 +504,9 @@ class Katagoriler extends StatelessWidget {
 
       for (String kelime in kelimeler) {
         if (!(urun.urunAdi.toLowerCase().contains(kelime) ||
-            urun.materyali.toLowerCase().contains(kelime) ||
-            urun.ortami.toLowerCase().contains(kelime) ||
-            urun.turu.toLowerCase().contains(kelime))) {
+            Cevirici.malzemeCevir(context, urun.materyali).toLowerCase().contains(kelime) ||
+            Cevirici.ortamCevir(context, urun.ortami).toLowerCase().contains(kelime) ||
+            Cevirici.turCevir(context, urun.turu).toLowerCase().contains(kelime))) {
           tumKelimelerEslesiyor =
               false; // Eğer bir kelime bile eşleşmezse, ürünü eklemeyiz.
           break;

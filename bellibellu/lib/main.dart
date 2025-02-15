@@ -1,19 +1,30 @@
+import 'package:bellibellu/dildestegiProvaider.dart';
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/logosayfasi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await S.load(const Locale('tr')); // 🔥 Burada ilk dili yükleyin
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.brown, // 🔥 Burayı değiştirebilirsin
+      statusBarIconBrightness:
+          Brightness.light, // 🔥 İkonları beyaz yapmak için
+    ),
+  );
 
-
-
-
-void main() {
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.brown, // 🔥 Burayı değiştirebilirsin
-    statusBarIconBrightness: Brightness.light, // 🔥 İkonları beyaz yapmak için
-  ));
-
-  runApp(const Program());
- 
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Dildestegiprovaider()),
+      ],
+      child: const Program(),
+    ),
+  );
 }
 
 class Program extends StatelessWidget {
@@ -21,9 +32,20 @@ class Program extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Logosayfasi(),
+    return Consumer<Dildestegiprovaider>(
+      builder:
+          (context, value, child) => MaterialApp(
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            locale: Dildestegiprovaider.current,
+            debugShowCheckedModeBanner: false,
+            home: Logosayfasi(),
+          ),
     );
   }
 }

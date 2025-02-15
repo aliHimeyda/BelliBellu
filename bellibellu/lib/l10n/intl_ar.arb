@@ -1,0 +1,300 @@
+{
+  "@@locale": "ar",
+
+  "@masaonerisi": { "description": "توصية الطاولة" },
+  "masaonerisi": "طاولة",
+
+  "@sandalyeonerisi": { "description": "توصية الكرسي" },
+  "sandalyeonerisi": "كرسي",
+
+  "@evMobilyaUrunlerionerisi": { "description": "توصية أثاث المنزل" },
+  "evMobilyaUrunlerionerisi": "أثاث منزل",
+
+  "@ofisMobilyalarionerisi": { "description": "توصية أثاث المكتب" },
+  "ofisMobilyalarionerisi": "أثاث مكتب",
+
+  "@metalmasaonerisi": { "description": "توصية الطاولة المعدنية" },
+  "metalmasaonerisi": "طاولة معدن",
+
+  "@metalsandalyeonerisi": { "description": "توصية الكرسي المعدني" },
+  "metalsandalyeonerisi": "كرسي معدن",
+
+  "@ahsapUrunleronerisi": { "description": "توصية المنتجات الخشبية" },
+  "ahsapUrunleronerisi": "منتجات خشب",
+
+  "@kafeurunlerionerisi": { "description": "توصية أثاث المقاهي" },
+  "kafeurunlerionerisi": "أثاث مقهى",
+
+  "@celik": { "description": "الفولاذ" },
+  "celik": "فولاذ",
+
+  "@ahsap": { "description": "الخشب" },
+  "ahsap": "خشب",
+
+  "@metal": { "description": "المعدن" },
+  "metal": "معدن",
+
+  "@ev": { "description": "المنزل" },
+  "ev": "منزل",
+
+  "@ofis": { "description": "المكتب" },
+  "ofis": "مكتب",
+
+  "@kafe": { "description": "المقهى" },
+  "kafe": "مقهى",
+
+  "@masa": { "description": "طاولة" },
+  "masa": "طاولة",
+
+  "@sandalye": { "description": "كرسي" },
+  "sandalye": "كرسي",
+
+  "@uygulamaBasligi": { "description": "عنوان التطبيق" },
+  "uygulamaBasligi": "تطبيق متعدد اللغات",
+
+  "@aramaIpucu": { "description": "نص تلميح مربع البحث" },
+  "aramaIpucu": "ابحث في المتجر",
+
+  "@onerilerBaslik": { "description": "عنوان التوصيات" },
+  "onerilerBaslik": "اقتراحات البحث",
+
+  "@urunSerisi2025": { "description": "عنوان منتجات 2025" },
+  "urunSerisi2025": "منتجات 2025",
+
+  "@enCokFavori": { "description": "الأكثر تفضيلاً" },
+  "enCokFavori": "الأكثر تفضيلاً",
+
+  "@ofisMobilyalari": { "description": "أثاث المكاتب" },
+  "ofisMobilyalari": "أثاث المكاتب",
+
+  "@evUrunleri": { "description": "منتجات المنزل" },
+  "evUrunleri": "منتجات المنزل",
+
+  "@yildizliKategoriler": { "description": "الفئات المميزة" },
+  "yildizliKategoriler": "الفئات المميزة",
+
+  "@enCokBegenilenler": { "description": "الأكثر إعجابًا" },
+  "enCokBegenilenler": "الأكثر إعجابًا",
+
+  "@efsaneUrunler": { "description": "منتجات أسطورية" },
+  "efsaneUrunler": "منتجات أسطورية",
+
+  "@alisveriseBasla": { "description": "ابدأ التسوق" },
+  "alisveriseBasla": "ابدأ التسوق",
+
+  "@urunBulunamadi": { "description": "لم يتم العثور على منتجات مطابقة." },
+  "urunBulunamadi": "لم يتم العثور على منتجات مطابقة.",
+
+  "@tiklandiMesaji": { "description": "تم النقر!" },
+  "tiklandiMesaji": "تم النقر!",
+
+  "@tumurunler": { "description": "كل المنتجات" },
+  "tumurunler": "كل المنتجات",
+
+  "@anasayfa": { "description": "الصفحة الرئيسية" },
+  "anasayfa": "الصفحة الرئيسية",
+
+  "@kategoriler": { "description": "الفئات" },
+  "kategoriler": "الفئات",
+
+  "@favorilerim": { "description": "المفضلة" },
+  "favorilerim": "المفضلة",
+
+  "@iletisim": { "description": "الاتصال" },
+  "iletisim": "الاتصال",
+
+  "@menu": { "description": "القائمة" },
+  "menu": "القائمة",
+
+  "@uygulamaAdi": { "description": "اسم التطبيق (BelliBellu)" },
+  "uygulamaAdi": "BelliBellu",
+
+  "@whatsapp": { "description": "واتساب" },
+  "whatsapp": "واتساب",
+
+  "@gmail": { "description": "جيميل" },
+  "gmail": "جيميل",
+
+  "@whatsappAciklamasi": { "description": "لا يمكن فتح واتساب! خطأ: {error}" },
+  "whatsappAciklamasi": "لا يمكن فتح واتساب! خطأ: {error}",
+
+  "@epostaUygulamasiYok": { "description": "لم يتم العثور على تطبيق بريد إلكتروني! سيتم فتح جيميل في المتصفح..." },
+  "epostaUygulamasiYok": "لم يتم العثور على تطبيق بريد إلكتروني! سيتم فتح جيميل في المتصفح...",
+
+  "@iletisimBasligi": { "description": "الاتصال:" },
+  "iletisimBasligi": "الاتصال:",
+
+  "@telefon": { "description": "الهاتف:" },
+  "telefon": "الهاتف:",
+
+  "@eposta": { "description": "البريد الإلكتروني:" },
+  "eposta": "البريد الإلكتروني:",
+
+  "@sirala": { "description": "ترتيب" },
+  "sirala": "ترتيب",
+
+  "@filtrele": { "description": "تصفية" },
+  "filtrele": "تصفية",
+
+  "@uygula": { "description": "تطبيق" },
+  "uygula": "تطبيق",
+  "@yeniurunler": { "description": "تسمية زر تصفح المنتجات الجديدة" },
+"yeniurunler": "تصفح المنتجات الجديدة",
+
+"@begenebilecegin": { "description": "تسمية زر المنتجات الموصى بها" },
+"begenebilecegin": "المنتجات الموصى بها",
+  "@urunler": {
+    "description": "وصف المنتجات"
+  },
+
+  "urun1": "مصنوع من الفولاذ المقاوم للصدأ. الطول: 107 سم، العرض: 191 سم.",
+  "urun2": "مصنوع من الخشب الطبيعي. الطول: 143 سم، العرض: 177 سم.",
+  "urun3": "هيكل معدني، متين وأنيق. الطول: 160 سم، العرض: 105 سم.",
+  "urun4": "طلاء بلاستيكي، خفيف وسهل الاستخدام. الطول: 198 سم، العرض: 158 سم.",
+  "urun5": "مصنوع من الخيزران الطبيعي. الطول: 130 سم، العرض: 191 سم.",
+  "urun6": "سطح زجاجي غير قابل للكسر، تصميم أنيق. الطول: 115 سم، العرض: 175 سم.",
+  "urun7": "إطار من الألمنيوم، مقاوم للماء. الطول: 142 سم، العرض: 160 سم.",
+  "urun8": "هيكل معدني مقاوم للماء. الطول: 180 سم، العرض: 140 سم.",
+  "urun9": "طبقة سطحية مضادة للبكتيريا. الطول: 120 سم، العرض: 150 سم.",
+  "urun10": "خفيف الوزن وسهل الحمل. الطول: 110 سم، العرض: 180 سم.",
+  "urun11": "تصميم أنيق وحديث. الطول: 145 سم، العرض: 195 سم.",
+  "urun12": "خشب البلوط الطبيعي. الطول: 155 سم، العرض: 180 سم.",
+  "urun13": "إطار معدني مزدوج الطبقات. الطول: 165 سم، العرض: 185 سم.",
+  "urun14": "بلاستيك عالي المتانة. الطول: 140 سم، العرض: 190 سم.",
+  "urun15": "تفاصيل خشبية مصنوعة يدويًا. الطول: 175 سم، العرض: 200 سم.",
+  "urun16": "سطح زجاجي مقوى. الطول: 160 سم، العرض: 170 سم.",
+  "urun17": "طلاء ألمنيوم، مظهر عصري. الطول: 155 سم، العرض: 165 سم.",
+  "urun18": "طلاء مقاوم للماء. الطول: 135 سم، العرض: 180 سم.",
+  "urun19": "سطح مقاوم للبكتيريا. الطول: 150 سم، العرض: 160 سم.",
+  "urun20": "تصميم خفيف الوزن وسهل الحمل. الطول: 145 سم، العرض: 185 سم.",
+  "urun21": "مواد بلاستيكية عالية الجودة. الطول: 110 سم، العرض: 170 سم.",
+  "urun22": "سطح مقاوم للخدش. الطول: 120 سم، العرض: 180 سم.",
+  "urun23": "قاعدة غير قابلة للانزلاق. الطول: 140 سم، العرض: 190 سم.",
+  "urun24": "طلاء بنقش خشبي أنيق. الطول: 160 سم، العرض: 200 سم.",
+  "urun25": "مقاوم للأشعة فوق البنفسجية. الطول: 150 سم، العرض: 190 سم.",
+  "urun26": "طلاء سطحي حجري خاص. الطول: 130 سم، العرض: 170 سم.",
+  "urun27": "استخدام متعدد الوظائف. الطول: 125 سم، العرض: 175 سم.",
+  "urun28": "خاصية امتصاص الصدمات. الطول: 145 سم، العرض: 180 سم.",
+  "urun29": "إنتاج صديق للبيئة. الطول: 135 سم، العرض: 165 سم.",
+  "urun30": "مقاومة متقدمة للصدمات. الطول: 155 سم، العرض: 185 سم.",
+  "urun31": "سطح من ألياف الكربون المقوى. الطول: 140 سم، العرض: 175 سم.",
+  "urun32": "طلاء يمتص الصوت. الطول: 170 سم، العرض: 190 سم.",
+  "urun33": "هيكل سهل التنظيف. الطول: 160 سم، العرض: 180 سم.",
+  "urun34": "مقاوم للماء والغبار. الطول: 155 سم، العرض: 195 سم.",
+  "urun35": "إطار من الفولاذ المقاوم للصدأ. الطول: 180 سم، العرض: 200 سم.",
+  "urun36": "طلاء ذو ​​خصائص مضادة للكهرباء الساكنة. الطول: 145 سم، العرض: 175 سم.",
+  "urun37": "طلاء عازل للصوت. الطول: 135 سم، العرض: 160 سم.",
+  "urun38": "نسيج مضاد للبكتيريا. الطول: 120 سم، العرض: 150 سم.",
+  "urun39": "سطح سفلي مدعوم بالمطاط. الطول: 125 سم، العرض: 185 سم.",
+  "urun40": "لمسة نهائية غير لامعة فاخرة. الطول: 165 سم، العرض: 190 سم.",
+  "urun41": "شكل متين للغاية. الطول: 110 سم، العرض: 175 سم.",
+  "urun42": "مجموعة واسعة من التطبيقات. الطول: 150 سم، العرض: 180 سم.",
+  "urun43": "مقاومة عالية لدرجات الحرارة. الطول: 175 سم، العرض: 200 سم.",
+  "urun44": "ميزة التنظيف الذاتي. الطول: 155 سم، العرض: 180 سم.",
+  "urun45": "هيكل كربوني خفيف للغاية. الطول: 130 سم، العرض: 170 سم.",
+  "urun46": "مقاومة عالية للصدمات. الطول: 165 سم، العرض: 195 سم.",
+  "urun47": "طلاء بوليمر متين. الطول: 145 سم، العرض: 175 سم.",
+  "urun48": "اتصالات لولبية معززة. الطول: 125 سم، العرض: 160 سم.",
+  "urun49": "آلية قفل مغناطيسي. الطول: 135 سم، العرض: 185 سم.",
+  "urun50": "تصميم خاص لامتصاص الاهتزازات. الطول: 180 سم، العرض: 200 سم.",
+  "@agirlik": { "description": "تسمية وزن المنتج" },
+  "agirlik": "الوزن",
+
+  "@materyal": { "description": "تسمية مادة المنتج" },
+  "materyal": "المادة",
+
+  "@ad": { "description": "تسمية اسم المنتج" },
+  "ad": "الاسم",
+
+  "@tur": { "description": "تسمية نوع المنتج" },
+  "tur": "النوع",
+
+  "@ortam": { "description": "تسمية بيئة المنتج" },
+  "ortam": "البيئة",
+  
+  "@iletisim": { "description": "ملصق الاتصال" },
+  "iletisim": "الاتصال",
+  "@ozelurunler": { "description": "ملصق المنتجات الخاصة" },
+  "ozelurunler": "المنتجات الخاصة",
+   "@garanti_suresi": { "description": "ملصق فترة الضمان" },
+  "garanti_suresi": "فترة الضمان :",
+    "@urunlerin_garanti_suresi": { "description": "معلومات فترة ضمان المنتجات" },
+  "urunlerin_garanti_suresi": "فترة الضمان للمنتجات هي سنة واحدة.",
+
+  "@bu_urun_turkiyede_uretilmistir": { "description": "معلومات مكان تصنيع المنتج" },
+  "bu_urun_turkiyede_uretilmistir": "هذا المنتج مصنوع في تركيا.",
+   "@tum_ozellikler": { "description": "زر لعرض جميع الميزات" },
+  "tum_ozellikler": "جميع الميزات",
+  "@urun_ozellikleri": { "description": "عنوان ميزات المنتج" },
+  "urun_ozellikleri": "مميزات المنتج",
+   "@sik_sorulanlar": { "description": "عنوان الأسئلة الشائعة" },
+  "sik_sorulanlar": "الأسئلة الشائعة",
+   "@daha_fazla_tur": { "description": "المزيد من المنتجات من النوع المحدد" },
+  "daha_fazla_tur": "المزيد من منتجات {tur}",
+
+  "@daha_fazla_ortam": { "description": "المزيد من المنتجات للبيئة المحددة" },
+  "daha_fazla_ortam": "المزيد من منتجات {ortam}",
+
+  "@daha_fazla_materyal": { "description": "المزيد من المنتجات من المادة المحددة" },
+  "daha_fazla_materyal": "المزيد من منتجات {materyal}",
+   "@haritada": { "description": "تسمية زر الفتح في الخريطة" },
+  "haritada": "على الخريطة",
+   "@uygulamadaki_urunlerin_ureticisidir": { "description": "تسمية لمصنع المنتجات في التطبيق" },
+  "uygulamadaki_urunlerin_ureticisidir": "الشركة المصنعة للمنتجات في التطبيق",
+
+  "@bu_uygulamanin_gelistiricisidir": { "description": "تسمية لمطور التطبيق" },
+  "bu_uygulamanin_gelistiricisidir": "مطور هذا التطبيق",
+   "@begenilen_urun_listesi_bos": { "description": "الرسالة عند كون قائمة المنتجات المفضلة فارغة" },
+  "begenilen_urun_listesi_bos": "قائمة المنتجات المفضلة فارغة !!",
+   "@sirala": { "description": "عنوان الفرز" },
+  "sirala": "فرز",
+
+  "@onerilen": { "description": "الخيار الموصى به للفرز" },
+  "onerilen": "موصى به",
+
+  "@en_dusuk_fiyat": { "description": "خيار السعر الأقل" },
+  "en_dusuk_fiyat": "أقل سعر",
+
+  "@en_yuksek_fiyat": { "description": "خيار السعر الأعلى" },
+  "en_yuksek_fiyat": "أعلى سعر",
+
+  "@en_cok_begenilen": { "description": "خيار المنتجات الأكثر إعجابًا" },
+  "en_cok_begenilen": "الأكثر إعجابًا",
+
+  "@en_yeni_urunler": { "description": "خيار المنتجات الأحدث" },
+  "en_yeni_urunler": "أحدث المنتجات",
+
+  "@uygula": { "description": "زر تطبيق" },
+  "uygula": "تطبيق",
+   "@temizle": { "description": "زر التنظيف" },
+  "temizle": "مسح",
+
+  "@urunleri_getir": { "description": "زر جلب المنتجات" },
+  "urunleri_getir": "إحضار المنتجات",
+
+  "@fiyat": { "description": "تسمية السعر" },
+  "fiyat": "السعر",
+   "@ture_gore": { "description": "تسمية التصفية حسب النوع" },
+  "ture_gore": "حسب النوع :",
+
+  "@ortama_gore": { "description": "تسمية التصفية حسب البيئة" },
+  "ortama_gore": "حسب البيئة :",
+
+  "@materyale_gore": { "description": "تسمية التصفية حسب المادة" },
+  "materyale_gore": "حسب المادة :",
+
+  "@fiyata_gore": { "description": "تسمية التصفية حسب السعر" },
+  "fiyata_gore": "حسب السعر :",
+   "@tema": { "description": "تسمية إعدادات السمة" },
+  "tema": "السمة",
+
+  "@urunler": { "description": "تسمية المنتجات" },
+  "urunler": "المنتجات",
+
+  "@dil_ayarlari": { "description": "تسمية إعدادات اللغة" },
+  "dil_ayarlari": "إعدادات اللغة",
+
+  "@gecmis": { "description": "تسمية السجل" },
+  "gecmis": "السجل"
+
+}

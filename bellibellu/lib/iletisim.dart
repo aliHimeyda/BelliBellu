@@ -1,3 +1,4 @@
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,9 +22,9 @@ class _MessageScreenState extends State<MessageScreen> {
     try {
       await launchUrl(whatsappUri, mode: LaunchMode.externalApplication);
     } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("WhatsApp açılamadı! Hata: $e")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(S.of(context).whatsappAciklamasi(e))),
+      );
     }
   }
 
@@ -70,9 +71,9 @@ class _MessageScreenState extends State<MessageScreen> {
                 color: Renkler.krem,
                 border: Border.all(color: Renkler.kahverengi, width: 2),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  "Watsapp",
+                  S.of(context).whatsapp,
                   style: TextStyle(
                     color: Renkler.kahverengi,
                     fontWeight: FontWeight.bold,
@@ -91,9 +92,9 @@ class _MessageScreenState extends State<MessageScreen> {
                 color: Renkler.krem,
                 border: Border.all(color: Renkler.kahverengi, width: 2),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  "Gmail",
+                  S.of(context).gmail,
                   style: TextStyle(
                     color: Renkler.kahverengi,
                     fontWeight: FontWeight.bold,
@@ -183,9 +184,9 @@ class MapLauncherScreen extends StatelessWidget {
               color: Renkler.krem,
               border: Border.all(color: Renkler.kahverengi, width: 1.5),
             ),
-            child: const Center(
+            child: Center(
               child: Text(
-                'HARITADA',
+                S.of(context).haritada,
                 style: TextStyle(
                   color: Renkler.kahverengi,
                   fontSize: 12,
@@ -273,10 +274,10 @@ class Iletisim extends StatelessWidget {
                               ),
                             ),
                             width: 222,
-                            child: const Column(
+                            child: Column(
                               children: [
                                 Text(
-                                  'Bu Uygulamanin Gelistiricisidir',
+                                  S.of(context).bu_uygulamanin_gelistiricisidir,
                                   style: TextStyle(
                                     color: Renkler.kahverengi,
                                     fontSize: 15,
@@ -289,7 +290,7 @@ class Iletisim extends StatelessWidget {
                                   alignment:
                                       Alignment.centerLeft, // Sola hizala
                                   child: Text(
-                                    'Iletisim :',
+                                    S.of(context).iletisimBasligi,
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 15,
@@ -424,10 +425,12 @@ class Iletisim extends StatelessWidget {
                               ),
                             ),
                             width: 250,
-                            child: const Column(
+                            child: Column(
                               children: [
                                 Text(
-                                  'Uygulamadaki Urunlerin Ureticisidir',
+                                  S
+                                      .of(context)
+                                      .uygulamadaki_urunlerin_ureticisidir,
                                   style: TextStyle(
                                     color: Renkler.kahverengi,
                                     fontSize: 15,
@@ -440,7 +443,7 @@ class Iletisim extends StatelessWidget {
                                   alignment:
                                       Alignment.centerLeft, // Sola hizala
                                   child: Text(
-                                    'Iletisim :',
+                                    S.of(context).iletisimBasligi,
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 15,

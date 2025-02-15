@@ -1,3 +1,4 @@
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
@@ -69,10 +70,10 @@ class _SeridState extends State<Serid> {
                     context.push('/tumurunler'); // Sayfaya nesneyi geçir)
                   }
                 },
-                child: const Row(
+                child:  Row(
                   children: [
                     Text(
-                      'Tum Urunler',
+                      S.of(context).tumurunler,
                       textAlign: TextAlign.right,
                       style: TextStyle(
                         fontSize: 15,
@@ -152,8 +153,8 @@ class _SeridState extends State<Serid> {
                               CrossAxisAlignment
                                   .center, // 📌 Yatay eksende ortala
                           children: [
-                            const Text(
-                              'Tüm Urunler',
+                             Text(
+                              S.of(context).tumurunler,
                               style: TextStyle(
                                 color: Renkler.kahverengi,
                                 fontWeight: FontWeight.bold,

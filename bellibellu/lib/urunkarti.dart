@@ -1,13 +1,10 @@
-import 'package:bellibellu/costumloading.dart';
-import 'package:bellibellu/kaydedilenler.dart';
-import 'package:bellibellu/urunkartiicerigi.dart';
 import 'package:bellibellu/urunler.dart';
+import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class Urunkarti extends StatefulWidget {
@@ -36,14 +33,13 @@ class _UrunkartiState extends State<Urunkarti> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        debugPrint('tiklandi');
-          LoadingDialog.instance.show(context: context);
-
-        context.push('/urundetaylari', extra: widget.urun).then((value) {
-          
-          LoadingDialog.instance.hide();
-        });
+      onTap: () async {
+        List<Serid> seridler = await seridlerigetir(context);
+        // Sayfa açıldığında dinleyici ekleyerek kapat
+        context.push(
+          '/urundetaylari',
+          extra: {'urun': widget.urun, 'seridler': seridler},
+        );
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -156,13 +152,13 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        debugPrint('tiklandi');
-
+      onTap: () async {
+        List<Serid> seridler = await seridlerigetir(context);
+        // Sayfa açıldığında dinleyici ekleyerek kapat
         context.push(
           '/urundetaylari',
-          extra: widget.urun,
-        ); // Sayfaya nesneyi geçir)
+          extra: {'urun': widget.urun, 'seridler': seridler},
+        );
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -290,6 +286,16 @@ void begenilenekaydet(String urunadi) async {
       }
     }
   }
+}
+
+Future<List<Serid>> seridlerigetir(context) async {
+  final List<Serid> seridler = [
+    Serid('Yeni Urunlere Goz At', 9),
+    Serid('2025 Uretimi', 9),
+    Serid('Begenebilecegin Urunler', 9),
+  ];
+
+  return seridler;
 }
 
 void begenilendensil(String urunadi) async {

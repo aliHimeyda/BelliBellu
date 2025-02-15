@@ -1,0 +1,302 @@
+{
+  "@@locale": "tr",
+
+  "@masaonerisi": { "description": "Masa önerisi" },
+  "masaonerisi": "Masa",
+
+  "@sandalyeonerisi": { "description": "Sandalye önerisi" },
+  "sandalyeonerisi": "Sandalye",
+
+  "@evMobilyaUrunlerionerisi": { "description": "Ev mobilyası önerisi" },
+  "evMobilyaUrunlerionerisi": "Ev mobilyası",
+
+  "@ofisMobilyalarionerisi": { "description": "Ofis mobilyası önerisi" },
+  "ofisMobilyalarionerisi": "Ofis mobilyası",
+
+  "@metalmasaonerisi": { "description": "Metal masa önerisi" },
+  "metalmasaonerisi": "Metal masa",
+
+  "@metalsandalyeonerisi": { "description": "Metal sandalye önerisi" },
+  "metalsandalyeonerisi": "Metal sandalye",
+
+  "@ahsapUrunleronerisi": { "description": "Ahşap ürün önerisi" },
+  "ahsapUrunleronerisi": "Ahşap ürünler",
+
+  "@kafeurunlerionerisi": { "description": "Kafe mobilyası önerisi" },
+  "kafeurunlerionerisi": "Kafe mobilyası",
+
+  "@celik": { "description": "Çelik" },
+  "celik": "Çelik",
+
+  "@ahsap": { "description": "Ahşap" },
+  "ahsap": "Ahşap",
+
+  "@metal": { "description": "Metal" },
+  "metal": "Metal",
+
+  "@ev": { "description": "Ev" },
+  "ev": "Ev",
+
+  "@ofis": { "description": "Ofis" },
+  "ofis": "Ofis",
+
+  "@kafe": { "description": "Kafe" },
+  "kafe": "Kafe",
+
+  "@masa": { "description": "Masa" },
+  "masa": "Masa",
+
+  "@sandalye": { "description": "Sandalye" },
+  "sandalye": "Sandalye",
+
+  "@uygulamaBasligi": { "description": "Uygulama başlığı" },
+  "uygulamaBasligi": "Çoklu Dil Destekli Uygulama",
+
+  "@aramaIpucu": { "description": "Arama kutusu ipucu metni" },
+  "aramaIpucu": "Mağazada arayın",
+
+  "@onerilerBaslik": { "description": "Öneriler başlığı" },
+  "onerilerBaslik": "Arama Önerileri",
+
+  "@urunSerisi2025": { "description": "2025 Ürünleri başlığı" },
+  "urunSerisi2025": "2025 Ürünleri",
+
+  "@enCokFavori": { "description": "En çok favorilenen ürünler başlığı" },
+  "enCokFavori": "En Çok Favorilenen",
+
+  "@ofisMobilyalari": { "description": "Ofis mobilyaları başlığı" },
+  "ofisMobilyalari": "Ofis Mobilyaları",
+
+  "@evUrunleri": { "description": "Ev ürünleri başlığı" },
+  "evUrunleri": "Ev Ürünleri",
+
+  "@yildizliKategoriler": { "description": "Yıldızlı kategoriler başlığı" },
+  "yildizliKategoriler": "Yıldızlı Kategoriler",
+
+  "@enCokBegenilenler": { "description": "En çok beğenilenler etiketi" },
+  "enCokBegenilenler": "En Çok Beğenilenler",
+
+  "@efsaneUrunler": { "description": "Efsane ürünler etiketi" },
+  "efsaneUrunler": "Efsane Ürünler",
+
+  "@alisveriseBasla": { "description": "Alışverişe başla butonu" },
+  "alisveriseBasla": "Alışverişe Başla",
+
+  "@urunBulunamadi": { "description": "Ürün bulunamadı mesajı" },
+  "urunBulunamadi": "Eşleşen ürün bulunamadı.",
+
+  "@tiklandiMesaji": { "description": "Tıklama mesajı" },
+  "tiklandiMesaji": "Tıklandı!",
+
+  "@tumurunler": { "description": "Tüm ürünler başlığı" },
+  "tumurunler": "Tüm Ürünler",
+
+  "@anasayfa": { "description": "Ana sayfa etiketi" },
+  "anasayfa": "Anasayfa",
+
+  "@kategoriler": { "description": "Kategoriler etiketi" },
+  "kategoriler": "Kategoriler",
+
+  "@favorilerim": { "description": "Favorilerim etiketi" },
+  "favorilerim": "Favorilerim",
+
+  "@iletisim": { "description": "İletişim etiketi" },
+  "iletisim": "İletişim",
+
+  "@menu": { "description": "Menü etiketi" },
+  "menu": "Menü",
+
+  "@uygulamaAdi": { "description": "Uygulama adı (BelliBellu)" },
+  "uygulamaAdi": "BelliBellu",
+
+  "@whatsapp": { "description": "WhatsApp butonu etiketi" },
+  "whatsapp": "WhatsApp",
+
+  "@gmail": { "description": "Gmail butonu etiketi" },
+  "gmail": "Gmail",
+
+  "@whatsappAciklamasi": { "description": "WhatsApp hata mesajı" },
+  "whatsappAciklamasi": "WhatsApp açılamadı! Hata: {error}",
+
+  "@epostaUygulamasiYok": { "description": "E-posta uygulaması bulunamadı mesajı" },
+  "epostaUygulamasiYok": "E-posta uygulaması bulunamadı! Gmail tarayıcıda açılıyor...",
+
+  "@iletisimBasligi": { "description": "İletişim başlığı" },
+  "iletisimBasligi": "İletişim:",
+
+  "@telefon": { "description": "Telefon etiketi" },
+  "telefon": "Telefon:",
+
+  "@eposta": { "description": "E-posta etiketi" },
+  "eposta": "E-posta:",
+
+  "@sirala": { "description": "Sıralama butonu etiketi" },
+  "sirala": "Sırala",
+
+  "@filtrele": { "description": "Filtreleme butonu etiketi" },
+  "filtrele": "Filtrele",
+
+  "@uygula": { "description": "Uygula butonu etiketi" },
+  "uygula": "Uygula",
+
+ "@yeniurunler": { "description": "Yeni ürünlere göz at butonu etiketi" },
+"yeniurunler": "Yeni Ürünlere Göz At",
+
+"@begenebilecegin": { "description": "Beğenebileceğin ürünler butonu etiketi" },
+"begenebilecegin": "Beğenebileceğin Ürünler",
+ "@urunler": {
+    "description": "Ürün açıklamaları listesi"
+  },
+  
+  "urun1": "Paslanmaz çelikten üretilmiştir. Uzunluk: 107 cm, Genişlik: 191 cm.",
+  "urun2": "Ahşap malzemeden yapılmıştır. Uzunluk: 143 cm, Genişlik: 177 cm.",
+  "urun3": "Metal gövde, dayanıklı ve şık. Uzunluk: 160 cm, Genişlik: 105 cm.",
+  "urun4": "Plastik kaplama, hafif ve kullanışlı. Uzunluk: 198 cm, Genişlik: 158 cm.",
+  "urun5": "Doğal bambu kullanılmıştır. Uzunluk: 130 cm, Genişlik: 191 cm.",
+  "urun6": "Kırılmaz cam yüzey, şık tasarım. Uzunluk: 115 cm, Genişlik: 175 cm.",
+  "urun7": "Alüminyum çerçeve, suya dayanıklı. Uzunluk: 142 cm, Genişlik: 160 cm.",
+  "urun8": "Su geçirmez metal yapı. Uzunluk: 180 cm, Genişlik: 140 cm.",
+  "urun9": "Antibakteriyel yüzey kaplaması. Uzunluk: 120 cm, Genişlik: 150 cm.",
+  "urun10": "Hafif ve taşınabilir. Uzunluk: 110 cm, Genişlik: 180 cm.",
+  "urun11": "Şık ve modern tasarım. Uzunluk: 145 cm, Genişlik: 195 cm.",
+  "urun12": "Doğal meşe ahşap. Uzunluk: 155 cm, Genişlik: 180 cm.",
+  "urun13": "Çift katmanlı metal çerçeve. Uzunluk: 165 cm, Genişlik: 185 cm.",
+  "urun14": "Yüksek dayanıklılığa sahip plastik. Uzunluk: 140 cm, Genişlik: 190 cm.",
+  "urun15": "Elde işlenmiş ahşap detaylar. Uzunluk: 175 cm, Genişlik: 200 cm.",
+  "urun16": "Güçlendirilmiş cam yüzey. Uzunluk: 160 cm, Genişlik: 170 cm.",
+  "urun17": "Alüminyum kaplama, modern görünüm. Uzunluk: 155 cm, Genişlik: 165 cm.",
+  "urun18": "Su geçirmez özel kaplama. Uzunluk: 135 cm, Genişlik: 180 cm.",
+  "urun19": "Bakteri oluşumunu engelleyen yüzey. Uzunluk: 150 cm, Genişlik: 160 cm.",
+  "urun20": "Kolay taşınabilir hafif tasarım. Uzunluk: 145 cm, Genişlik: 185 cm.",
+  "urun21": "Yüksek kaliteli plastik malzeme. Uzunluk: 110 cm, Genişlik: 170 cm.",
+  "urun22": "Çizilmeye dayanıklı yüzey. Uzunluk: 120 cm, Genişlik: 180 cm.",
+  "urun23": "Kaymaz taban yapısı. Uzunluk: 140 cm, Genişlik: 190 cm.",
+  "urun24": "Şık ahşap desenli kaplama. Uzunluk: 160 cm, Genişlik: 200 cm.",
+  "urun25": "UV ışınlarına karşı dayanıklı. Uzunluk: 150 cm, Genişlik: 190 cm.",
+  "urun26": "Özel taş yüzey kaplaması. Uzunluk: 130 cm, Genişlik: 170 cm.",
+  "urun27": "Çok yönlü kullanım. Uzunluk: 125 cm, Genişlik: 175 cm.",
+  "urun28": "Şok emici özellik. Uzunluk: 145 cm, Genişlik: 180 cm.",
+  "urun29": "Çevre dostu üretim. Uzunluk: 135 cm, Genişlik: 165 cm.",
+  "urun30": "İleri seviye darbe dayanımı. Uzunluk: 155 cm, Genişlik: 185 cm.",
+  "urun31": "Güçlendirilmiş karbon fiber yüzey. Uzunluk: 140 cm, Genişlik: 175 cm.",
+  "urun32": "Ses emici kaplama. Uzunluk: 170 cm, Genişlik: 190 cm.",
+  "urun33": "Kolay temizlenebilir yapı. Uzunluk: 160 cm, Genişlik: 180 cm.",
+  "urun34": "Suya ve toza dayanıklı. Uzunluk: 155 cm, Genişlik: 195 cm.",
+  "urun35": "Paslanmaz çelik çerçeve. Uzunluk: 180 cm, Genişlik: 200 cm.",
+  "urun36": "Antistatik özellikli kaplama. Uzunluk: 145 cm, Genişlik: 175 cm.",
+  "urun37": "Ses geçirmez kaplama. Uzunluk: 135 cm, Genişlik: 160 cm.",
+  "urun38": "Bakteri tutmayan doku. Uzunluk: 120 cm, Genişlik: 150 cm.",
+  "urun39": "Kauçuk destekli alt yüzey. Uzunluk: 125 cm, Genişlik: 185 cm.",
+  "urun40": "Lüks mat yüzey. Uzunluk: 165 cm, Genişlik: 190 cm.",
+  "urun41": "Ekstra dayanıklı form. Uzunluk: 110 cm, Genişlik: 175 cm.",
+  "urun42": "Geniş kullanım alanına sahip. Uzunluk: 150 cm, Genişlik: 180 cm.",
+  "urun43": "Yüksek sıcaklığa dayanıklı. Uzunluk: 175 cm, Genişlik: 200 cm.",
+  "urun44": "Kendi kendini temizleme özelliği. Uzunluk: 155 cm, Genişlik: 180 cm.",
+  "urun45": "Ultra hafif karbon gövde. Uzunluk: 130 cm, Genişlik: 170 cm.",
+  "urun46": "Darbeye karşı yüksek mukavemet. Uzunluk: 165 cm, Genişlik: 195 cm.",
+  "urun47": "Dayanıklı polimer kaplama. Uzunluk: 145 cm, Genişlik: 175 cm.",
+  "urun48": "Güçlendirilmiş vidalı bağlantılar. Uzunluk: 125 cm, Genişlik: 160 cm.",
+  "urun49": "Mıknatıslı kilit mekanizması. Uzunluk: 135 cm, Genişlik: 185 cm.",
+  "urun50": "Titreşimi emen özel tasarım. Uzunluk: 180 cm, Genişlik: 200 cm.",
+  "@agirlik": { "description": "Ürün ağırlık etiketi" },
+  "agirlik": "Ağırlık",
+
+  "@materyal": { "description": "Ürün materyali etiketi" },
+  "materyal": "Materyal",
+
+  "@ad": { "description": "Ürün adı etiketi" },
+  "ad": "Ad",
+
+  "@tur": { "description": "Ürün türü etiketi" },
+  "tur": "Tür",
+
+  "@ortam": { "description": "Ürün ortamı etiketi" },
+  "ortam": "Ortam",
+  
+  "@iletisim": { "description": "İletişim etiketi" },
+  "iletisim": "İLETİŞİM",
+   "@ozelurunler": { "description": "Özel Ürünler etiketi" },
+  "ozelurunler": "ÖZEL ÜRÜNLER",
+   "@garanti_suresi": { "description": "Garanti Süresi etiketi" },
+  "garanti_suresi": "GARANTİ SÜRESİ :",
+   "@urunlerin_garanti_suresi": { "description": "Ürünlerin garanti süresi bilgisi" },
+  "urunlerin_garanti_suresi": "Ürünlerin garanti süresi 1 yıldır.",
+
+  "@bu_urun_turkiyede_uretilmistir": { "description": "Ürünün üretildiği yer bilgisi" },
+  "bu_urun_turkiyede_uretilmistir": "Bu ürün Türkiye'de üretilmiştir.",
+    "@tum_ozellikler": { "description": "Tüm özellikleri gösterme butonu" },
+  "tum_ozellikler": "TÜM ÖZELLİKLER",
+    "@urun_ozellikleri": { "description": "Ürün özellikleri başlığı" },
+  "urun_ozellikleri": "ÜRÜN ÖZELLİKLERİ",
+   "@sik_sorulanlar": { "description": "Sık Sorulanlar başlığı" },
+  "sik_sorulanlar": "SIK SORULANLAR",
+   "@daha_fazla_tur": { "description": "Daha fazla ürün türü için mesaj" },
+  "daha_fazla_tur": "DAHA FAZLA {tur} ÜRÜNLER",
+
+  "@daha_fazla_ortam": { "description": "Daha fazla ürün ortamı için mesaj" },
+  "daha_fazla_ortam": "DAHA FAZLA {ortam} ÜRÜNLER",
+
+  "@daha_fazla_materyal": { "description": "Daha fazla ürün materyali için mesaj" },
+  "daha_fazla_materyal": "DAHA FAZLA {materyal} ÜRÜNLER",
+   "@haritada": { "description": "Haritada aç butonu etiketi" },
+  "haritada": "Haritada",
+   "@uygulamadaki_urunlerin_ureticisidir": { "description": "Uygulamadaki ürünlerin üreticisini belirten etiket" },
+  "uygulamadaki_urunlerin_ureticisidir": "Uygulamadaki ürünlerin üreticisidir",
+
+  "@bu_uygulamanin_gelistiricisidir": { "description": "Uygulamanın geliştiricisini belirten etiket" },
+  "bu_uygulamanin_gelistiricisidir": "Bu uygulamanın geliştiricisidir",
+   "@begenilen_urun_listesi_bos": { "description": "Beğenilen ürün listesi boş olduğunda gösterilen mesaj" },
+  "begenilen_urun_listesi_bos": "Beğenilen ürün listesi boş !!",
+   "@sirala": { "description": "Sıralama başlığı" },
+  "sirala": "Sırala",
+
+  "@onerilen": { "description": "Önerilen sıralama" },
+  "onerilen": "Önerilen",
+
+  "@en_dusuk_fiyat": { "description": "En düşük fiyat" },
+  "en_dusuk_fiyat": "En Düşük Fiyat",
+
+  "@en_yuksek_fiyat": { "description": "En yüksek fiyat" },
+  "en_yuksek_fiyat": "En Yüksek Fiyat",
+
+  "@en_cok_begenilen": { "description": "En çok beğenilen ürünler" },
+  "en_cok_begenilen": "En Çok Beğenilen",
+
+  "@en_yeni_urunler": { "description": "En yeni ürünler" },
+  "en_yeni_urunler": "En Yeni Ürünler",
+
+  "@uygula": { "description": "Uygula butonu" },
+  "uygula": "Uygula",
+   "@temizle": { "description": "Temizleme butonu etiketi" },
+  "temizle": "Temizle",
+
+  "@urunleri_getir": { "description": "Ürünleri getirme butonu etiketi" },
+  "urunleri_getir": "Ürünleri Getir",
+
+  "@fiyat": { "description": "Fiyat etiketi" },
+  "fiyat": "Fiyat",
+   "@ture_gore": { "description": "Türe göre sıralama etiketi" },
+  "ture_gore": "Tür'e Göre :",
+
+  "@ortama_gore": { "description": "Ortama göre sıralama etiketi" },
+  "ortama_gore": "Ortama Göre :",
+
+  "@materyale_gore": { "description": "Materyale göre sıralama etiketi" },
+  "materyale_gore": "Materyale Göre :",
+
+  "@fiyata_gore": { "description": "Fiyata göre sıralama etiketi" },
+  "fiyata_gore": "Fiyata Göre :",
+   "@tema": { "description": "Tema ayarları etiketi" },
+  "tema": "Tema",
+
+  "@urunler": { "description": "Ürünler etiketi" },
+  "urunler": "Ürünler",
+
+  "@dil_ayarlari": { "description": "Dil ayarları etiketi" },
+  "dil_ayarlari": "Dil Ayarları",
+
+  "@gecmis": { "description": "Geçmiş etiketi" },
+  "gecmis": "Geçmiş"
+
+
+}

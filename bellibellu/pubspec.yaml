@@ -30,6 +30,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl_utils: ^2.8.10
   url_launcher: ^6.2.1 #chroma yonlendirmek icin gereklidir
   google_fonts: ^6.2.1 # En güncel sürümü kontrol edebilirsin
   flutter_email_sender: ^6.0.0 # E-posta göndermek için

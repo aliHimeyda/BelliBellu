@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_unnecessary_containers
 
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +12,11 @@ class Anasayfa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _bottumngoster = true;
+    // Mevcut sayfanın yolunu al (Yeni yöntem)
+    final String currentPath = GoRouterState.of(context).uri.toString();
+
+    // Eğer Ozelurunler sayfasındaysak, BottomNavigationBar'ı gösterme
+    bool showBottomNavBar = currentPath != Paths.urundetaylari;
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
@@ -49,46 +55,49 @@ class Anasayfa extends StatelessWidget {
       //     ),
       //   ],
       // ),
-      bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
-          labelTextStyle: WidgetStateProperty.all(
-            const TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-                color: Renkler.kahverengi),
-          ),
-        ),
-        child: NavigationBar(
-          
-          backgroundColor: Renkler.kuyubeyaz,
-          height: 60,
-          selectedIndex: navigationShell.currentIndex,
-          indicatorColor: Renkler.krem,
-          onDestinationSelected: navigationShell.goBranch,
-          destinations: const [
-            NavigationDestination(
-              icon: Icon(Icons.home, color: Renkler.kahverengi),
-              label: 'Anasayfa',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.category, color: Renkler.kahverengi),
-              label: 'Katagoriler',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.favorite, color: Renkler.kahverengi),
-              label: 'Favorilerim',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.contact_mail, color: Renkler.kahverengi),
-              label: 'Iletisim',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.menu, color: Renkler.kahverengi),
-              label: 'Menu',
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar:
+          showBottomNavBar
+              ? NavigationBarTheme(
+                data: NavigationBarThemeData(
+                  labelTextStyle: WidgetStateProperty.all(
+                    const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: Renkler.kahverengi,
+                    ),
+                  ),
+                ),
+                child: NavigationBar(
+                  backgroundColor: Renkler.kuyubeyaz,
+                  height: 60,
+                  selectedIndex: navigationShell.currentIndex,
+                  indicatorColor: Renkler.krem,
+                  onDestinationSelected: navigationShell.goBranch,
+                  destinations: [
+                    NavigationDestination(
+                      icon: Icon(Icons.home, color: Renkler.kahverengi),
+                      label: S.of(context).anasayfa,
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.category, color: Renkler.kahverengi),
+                      label: S.of(context).kategoriler,
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.favorite, color: Renkler.kahverengi),
+                      label: S.of(context).favorilerim,
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.contact_mail, color: Renkler.kahverengi),
+                      label: S.of(context).iletisim,
+                    ),
+                    NavigationDestination(
+                      icon: Icon(Icons.menu, color: Renkler.kahverengi),
+                      label: S.of(context).menu,
+                    ),
+                  ],
+                ),
+              )
+              : null, // Eğer BottomNavigationBar gösterilmeyecekse, null döndür
       body: navigationShell,
       backgroundColor: Renkler.kuyubeyaz,
     );

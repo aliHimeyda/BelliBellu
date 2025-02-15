@@ -6,13 +6,13 @@ import 'package:bellibellu/kaydedilenler.dart';
 import 'package:bellibellu/menu.dart';
 import 'package:bellibellu/ozelurunler.dart';
 import 'package:bellibellu/tumurunler.dart';
-import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunkartiicerigi.dart';
 import 'package:bellibellu/urunler.dart';
+import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
- final  routerkey = GlobalKey<NavigatorState>();
+final routerkey = GlobalKey<NavigatorState>();
 
 class Paths {
   Paths._();
@@ -39,6 +39,8 @@ final router = GoRouter(
               Anasayfa(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
+          navigatorKey:
+              GlobalKey<NavigatorState>(), // Alt navigator için yeni key
           routes: [
             GoRoute(
               path: Paths.anasayfa,
@@ -100,14 +102,26 @@ final router = GoRouter(
             ),
           ],
         ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.urundetaylari,
+              builder: (context, state) {
+                final data =
+                    state.extra
+                        as Map<String, Object>; // Extra ile gelen veriyi al
+                final urun = data['urun'] as Urunler; // Urun nesnesini al
+                final seridler = data['seridler'] as List<Serid>;
+
+                return Urunkartiicerigi(
+                  urun: urun,
+                  seridler: seridler,
+                ); // Sayfaya nesneyi geçir
+              },
+            ),
+          ],
+        ),
       ],
-    ),
-    GoRoute(
-      path: Paths.urundetaylari,
-      builder: (context, state) {
-        final urun = state.extra as Urunler; // Extra ile gelen veriyi al
-        return Urunkartiicerigi(urun: urun); // Sayfaya nesneyi geçir
-      },
     ),
   ],
 );

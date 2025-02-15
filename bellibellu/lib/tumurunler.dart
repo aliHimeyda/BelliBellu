@@ -1,3 +1,4 @@
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
@@ -15,7 +16,7 @@ class _TumurunlerState extends State<Tumurunler> {
   int bulunanurunsayisi = 0;
   List<String> seciliOgeler = [];
   String siralamaolcutu = "";
-   List<Ozelurunkarti> urunler = [];
+  List<Ozelurunkarti> urunler = [];
   Future<void> kartlariolustur() async {
     for (Urunler urun in Urunler.urunler) {
       Ozelurunkarti kart = await Ozelurunkarti(urun: urun);
@@ -97,7 +98,7 @@ class _TumurunlerState extends State<Tumurunler> {
                       children: [
                         Icon(Icons.sort, color: Renkler.kahverengi, size: 18),
                         Text(
-                          'SIRALA',
+                          S.of(context).sirala,
                           style: TextStyle(
                             color: Renkler.kahverengi,
                             fontSize: 18,
@@ -129,7 +130,7 @@ class _TumurunlerState extends State<Tumurunler> {
                           size: 18,
                         ),
                         Text(
-                          'FILITRE',
+                          S.of(context).filtrele,
                           style: TextStyle(
                             color: Renkler.kahverengi,
                             fontSize: 18,
@@ -156,7 +157,7 @@ class _TumurunlerState extends State<Tumurunler> {
           builder: (context, setState) {
             return AlertDialog(
               title: Text(
-                "SIRALAMA ",
+                S.of(context).sirala,
                 style: TextStyle(
                   color: Renkler.kahverengi,
                   fontSize: 17,
@@ -173,10 +174,10 @@ class _TumurunlerState extends State<Tumurunler> {
                   RadioListTile<String>(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "Önerilen",
+                      S.of(context).onerilen,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: "Önerilen",
+                    value: S.of(context).onerilen,
                     groupValue: siralamaolcutu, // ✅ Doğru kullanım
                     onChanged: (String? value) {
                       setState(() {
@@ -188,10 +189,10 @@ class _TumurunlerState extends State<Tumurunler> {
                   RadioListTile<String>(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "En Düşük Fiyat",
+                      S.of(context).en_dusuk_fiyat,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: "En Düşük Fiyat",
+                    value: S.of(context).en_dusuk_fiyat,
                     groupValue: siralamaolcutu,
                     onChanged: (String? value) {
                       setState(() {
@@ -203,10 +204,10 @@ class _TumurunlerState extends State<Tumurunler> {
                   RadioListTile<String>(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "En Yüksek Fiyat",
+                      S.of(context).en_yuksek_fiyat,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: "En Yüksek Fiyat",
+                    value: S.of(context).en_yuksek_fiyat,
                     groupValue: siralamaolcutu,
                     onChanged: (String? value) {
                       setState(() {
@@ -218,10 +219,10 @@ class _TumurunlerState extends State<Tumurunler> {
                   RadioListTile<String>(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "En Çok Beğenilen",
+                      S.of(context).en_cok_begenilen,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: "En Çok Beğenilen",
+                    value: S.of(context).en_cok_begenilen,
                     groupValue: siralamaolcutu,
                     onChanged: (String? value) {
                       setState(() {
@@ -233,10 +234,10 @@ class _TumurunlerState extends State<Tumurunler> {
                   RadioListTile<String>(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "En Yeni Ürünler",
+                      S.of(context).en_yeni_urunler,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: "En Yeni Ürünler",
+                    value: S.of(context).en_yeni_urunler,
                     groupValue: siralamaolcutu,
                     onChanged: (String? value) {
                       setState(() {
@@ -256,7 +257,7 @@ class _TumurunlerState extends State<Tumurunler> {
                       Navigator.pop(context);
                     },
                     child: Text(
-                      "Uygula",
+                      S.of(context).uygula,
                       style: TextStyle(
                         color: Colors.brown,
                         fontSize: 15,
@@ -277,12 +278,12 @@ class _TumurunlerState extends State<Tumurunler> {
     List<Ozelurunkarti> yeniliste = List.from(
       urunler,
     ); // Yeni bir kopya oluştur
-    if (siralamaolcutu == "Önerilen") {
+    if (siralamaolcutu == S.of(context).onerilen) {
       setState(() {
         debugPrint('onerilen');
         urunler = yeniliste.reversed.toList();
       });
-    } else if (siralamaolcutu == "En Düşük Fiyat") {
+    } else if (siralamaolcutu == S.of(context).en_dusuk_fiyat) {
       yeniliste.sort(
         (a, b) => a.urun.urunfiyati.compareTo(b.urun.urunfiyati),
       ); // Küçükten büyüğe sırala
@@ -291,7 +292,7 @@ class _TumurunlerState extends State<Tumurunler> {
 
         urunler = yeniliste;
       });
-    } else if (siralamaolcutu == "En Yüksek Fiyat") {
+    } else if (siralamaolcutu == S.of(context).en_yuksek_fiyat) {
       yeniliste.sort(
         (a, b) => b.urun.urunfiyati.compareTo(a.urun.urunfiyati),
       ); // Büyükten küçüğe sırala
@@ -300,7 +301,7 @@ class _TumurunlerState extends State<Tumurunler> {
 
         urunler = yeniliste;
       });
-    } else if (siralamaolcutu == "En Çok Beğenilen") {
+    } else if (siralamaolcutu == S.of(context).en_cok_begenilen) {
       yeniliste.sort(
         (a, b) => b.urun.begenisayisi.compareTo(a.urun.begenisayisi),
       ); // Büyükten küçüğe sırala
@@ -309,7 +310,7 @@ class _TumurunlerState extends State<Tumurunler> {
 
         urunler = yeniliste;
       });
-    } else if (siralamaolcutu == "En Yeni Ürünler") {
+    } else if (siralamaolcutu == S.of(context).en_yeni_urunler) {
       setState(() {
         debugPrint('en yeni');
 
@@ -335,7 +336,7 @@ class _TumurunlerState extends State<Tumurunler> {
               shadowColor: Renkler.kahverengi,
 
               title: Text(
-                "FILITRELE",
+                S.of(context).filtrele,
                 style: TextStyle(
                   color: Renkler.kahverengi,
                   fontSize: 17,
@@ -359,7 +360,7 @@ class _TumurunlerState extends State<Tumurunler> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Materyal',
+                              S.of(context).materyal,
                               style: TextStyle(
                                 color: Renkler.kahverengi,
                                 fontWeight: FontWeight.bold,
@@ -390,7 +391,7 @@ class _TumurunlerState extends State<Tumurunler> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Ortam',
+                              S.of(context).ortam,
                               style: TextStyle(
                                 color: Renkler.kahverengi,
                                 fontWeight: FontWeight.bold,
@@ -421,7 +422,7 @@ class _TumurunlerState extends State<Tumurunler> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Tur',
+                              S.of(context).tur,
                               style: TextStyle(
                                 color: Renkler.kahverengi,
                                 fontWeight: FontWeight.bold,
@@ -452,7 +453,7 @@ class _TumurunlerState extends State<Tumurunler> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Fiyat',
+                              S.of(context).fiyat,
                               style: TextStyle(
                                 color: Renkler.kahverengi,
                                 fontWeight: FontWeight.bold,
@@ -478,7 +479,7 @@ class _TumurunlerState extends State<Tumurunler> {
                     TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: Text(
-                        "Urunleri Getir",
+                        S.of(context).urunleri_getir,
                         style: TextStyle(
                           color: Renkler.kahverengi,
                           fontSize: 18,
@@ -494,7 +495,7 @@ class _TumurunlerState extends State<Tumurunler> {
                         Navigator.pop(context);
                       },
                       child: Text(
-                        "Temizle",
+                        S.of(context).temizle,
                         style: TextStyle(
                           color: Renkler.kahverengi,
                           fontSize: 18,
@@ -523,7 +524,7 @@ class _TumurunlerState extends State<Tumurunler> {
               shadowColor: Renkler.kahverengi,
 
               title: Text(
-                "Fiyata Gore :",
+                S.of(context).fiyata_gore,
                 style: TextStyle(
                   color: Renkler.kahverengi,
                   fontSize: 17,
@@ -624,7 +625,7 @@ class _TumurunlerState extends State<Tumurunler> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "Uygula",
+                    S.of(context).uygula,
                     style: TextStyle(
                       color: Renkler.kahverengi,
                       fontSize: 17,
@@ -694,7 +695,7 @@ class _TumurunlerState extends State<Tumurunler> {
               shadowColor: Renkler.kahverengi,
 
               title: Text(
-                "Materyala Gore :",
+                S.of(context).materyale_gore,
                 style: TextStyle(
                   color: Renkler.kahverengi,
                   fontSize: 17,
@@ -707,57 +708,57 @@ class _TumurunlerState extends State<Tumurunler> {
                   CheckboxListTile(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "Çelik",
+                      S.of(context).celik,
                       style: TextStyle(
                         color: Renkler.kahverengi,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("Çelik"),
+                    value: seciliOgeler.contains(S.of(context).celik),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("Çelik")
-                            : seciliOgeler.remove("Çelik");
+                            ? seciliOgeler.add(S.of(context).celik)
+                            : seciliOgeler.remove(S.of(context).celik);
                       });
                     },
                   ),
                   CheckboxListTile(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "Ahşap",
+                      S.of(context).ahsap,
                       style: TextStyle(
                         color: Renkler.kahverengi,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("Ahşap"),
+                    value: seciliOgeler.contains(S.of(context).ahsap),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("Ahşap")
-                            : seciliOgeler.remove("Ahşap");
+                            ? seciliOgeler.add(S.of(context).ahsap)
+                            : seciliOgeler.remove(S.of(context).ahsap);
                       });
                     },
                   ),
                   CheckboxListTile(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "Metal",
+                      S.of(context).metal,
                       style: TextStyle(
                         color: Renkler.kahverengi,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("Metal"),
+                    value: seciliOgeler.contains(S.of(context).metal),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("Metal")
-                            : seciliOgeler.remove("Metal");
+                            ? seciliOgeler.add(S.of(context).metal)
+                            : seciliOgeler.remove(S.of(context).metal);
                       });
                     },
                   ),
@@ -767,15 +768,15 @@ class _TumurunlerState extends State<Tumurunler> {
                 TextButton(
                   onPressed: () async {
                     debugPrint('$seciliOgeler');
-                    if (seciliOgeler.contains('Metal') ||
-                        seciliOgeler.contains('Ahşap') ||
-                        seciliOgeler.contains('Çelik')) {
+                    if (seciliOgeler.contains(S.of(context).metal) ||
+                        seciliOgeler.contains(S.of(context).ahsap) ||
+                        seciliOgeler.contains(S.of(context).celik)) {
                       await materyalfilitresi(seciliOgeler);
                     }
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "Uygula",
+                    S.of(context).uygula,
                     style: TextStyle(
                       color: Renkler.kahverengi,
                       fontSize: 17,
@@ -794,23 +795,23 @@ class _TumurunlerState extends State<Tumurunler> {
   Future<void> materyalfilitresi(List<String> secimler) async {
     List<Ozelurunkarti> yeniliste = [];
     // Fiyat filtresi işlemleri burada yapılabilir.
-    if (secimler.contains('Çelik')) {
+    if (secimler.contains(S.of(context).celik)) {
       for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.materyali == 'Çelik') {
+        if (urunler[i].urun.materyali == S.of(context).celik) {
           yeniliste.add(urunler[i]);
         }
       }
     }
-    if (secimler.contains('Ahşap')) {
+    if (secimler.contains(S.of(context).ahsap)) {
       for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.materyali == 'Ahşap') {
+        if (urunler[i].urun.materyali == S.of(context).ahsap) {
           yeniliste.add(urunler[i]);
         }
       }
     }
-    if (secimler.contains('Metal')) {
+    if (secimler.contains(S.of(context).metal)) {
       for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.materyali == 'Metal') {
+        if (urunler[i].urun.materyali == S.of(context).metal) {
           yeniliste.add(urunler[i]);
         }
       }
@@ -833,7 +834,7 @@ class _TumurunlerState extends State<Tumurunler> {
               shadowColor: Renkler.kahverengi,
 
               title: Text(
-                "Ortama Gore :",
+                S.of(context).ortama_gore,
                 style: TextStyle(
                   color: Renkler.kahverengi,
                   fontSize: 17,
@@ -846,57 +847,57 @@ class _TumurunlerState extends State<Tumurunler> {
                   CheckboxListTile(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "Kafe",
+                      S.of(context).kafe,
                       style: TextStyle(
                         color: Renkler.kahverengi,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("Kafe"),
+                    value: seciliOgeler.contains(S.of(context).kafe),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("Kafe")
-                            : seciliOgeler.remove("Kafe");
+                            ? seciliOgeler.add(S.of(context).kafe)
+                            : seciliOgeler.remove(S.of(context).kafe);
                       });
                     },
                   ),
                   CheckboxListTile(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "Ofis",
+                      S.of(context).ofis,
                       style: TextStyle(
                         color: Renkler.kahverengi,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("Ofis"),
+                    value: seciliOgeler.contains(S.of(context).ofis),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("Ofis")
-                            : seciliOgeler.remove("Ofis");
+                            ? seciliOgeler.add(S.of(context).ofis)
+                            : seciliOgeler.remove(S.of(context).ofis);
                       });
                     },
                   ),
                   CheckboxListTile(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "Ev",
+                      S.of(context).ev,
                       style: TextStyle(
                         color: Renkler.kahverengi,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("Ev"),
+                    value: seciliOgeler.contains(S.of(context).ev),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("Ev")
-                            : seciliOgeler.remove("Ev");
+                            ? seciliOgeler.add(S.of(context).ev)
+                            : seciliOgeler.remove(S.of(context).ev);
                       });
                     },
                   ),
@@ -906,15 +907,15 @@ class _TumurunlerState extends State<Tumurunler> {
                 TextButton(
                   onPressed: () async {
                     debugPrint('$seciliOgeler');
-                    if (seciliOgeler.contains('Ofis') ||
-                        seciliOgeler.contains('Ev') ||
-                        seciliOgeler.contains('Kafe')) {
+                    if (seciliOgeler.contains(S.of(context).ev) ||
+                        seciliOgeler.contains(S.of(context).kafe) ||
+                        seciliOgeler.contains(S.of(context).ofis)) {
                       await ortamfilitresi(seciliOgeler);
                     }
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "Uygula",
+                    S.of(context).uygula,
                     style: TextStyle(
                       color: Renkler.kahverengi,
                       fontSize: 17,
@@ -933,23 +934,23 @@ class _TumurunlerState extends State<Tumurunler> {
   Future<void> ortamfilitresi(List<String> secimler) async {
     List<Ozelurunkarti> yeniliste = [];
     // Fiyat filtresi işlemleri burada yapılabilir.
-    if (secimler.contains('Kafe')) {
+    if (secimler.contains(S.of(context).kafe)) {
       for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.ortami == 'Kafe') {
+        if (urunler[i].urun.ortami == S.of(context).kafe) {
           yeniliste.add(urunler[i]);
         }
       }
     }
-    if (secimler.contains('Ofis')) {
+    if (secimler.contains(S.of(context).ofis)) {
       for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.ortami == 'Ofis') {
+        if (urunler[i].urun.ortami == S.of(context).ofis) {
           yeniliste.add(urunler[i]);
         }
       }
     }
-    if (secimler.contains('Ev')) {
+    if (secimler.contains(S.of(context).ev)) {
       for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.ortami == 'Ev') {
+        if (urunler[i].urun.ortami == S.of(context).ev) {
           yeniliste.add(urunler[i]);
         }
       }
@@ -973,7 +974,7 @@ class _TumurunlerState extends State<Tumurunler> {
               shadowColor: Renkler.kahverengi,
 
               title: Text(
-                "Tür'a Gore :",
+                S.of(context).ture_gore,
                 style: TextStyle(
                   color: Renkler.kahverengi,
                   fontSize: 17,
@@ -986,38 +987,38 @@ class _TumurunlerState extends State<Tumurunler> {
                   CheckboxListTile(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "Masa",
+                      S.of(context).masa,
                       style: TextStyle(
                         color: Renkler.kahverengi,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("Masa"),
+                    value: seciliOgeler.contains(S.of(context).masa),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("Masa")
-                            : seciliOgeler.remove("Masa");
+                            ? seciliOgeler.add(S.of(context).masa)
+                            : seciliOgeler.remove(S.of(context).masa);
                       });
                     },
                   ),
                   CheckboxListTile(
                     activeColor: Renkler.koyuYesil,
                     title: Text(
-                      "Sandalye",
+                      S.of(context).sandalye,
                       style: TextStyle(
                         color: Renkler.kahverengi,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("Sandalye"),
+                    value: seciliOgeler.contains(S.of(context).sandalye),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("Sandalye")
-                            : seciliOgeler.remove("Sandalye");
+                            ? seciliOgeler.add(S.of(context).sandalye)
+                            : seciliOgeler.remove(S.of(context).sandalye);
                       });
                     },
                   ),
@@ -1027,12 +1028,14 @@ class _TumurunlerState extends State<Tumurunler> {
                 TextButton(
                   onPressed: () async {
                     debugPrint('$seciliOgeler');
-                    if (seciliOgeler.contains('Masa') ||
-                        seciliOgeler.contains('Sandalye')) {}
+                    if (seciliOgeler.contains(S.of(context).masa) ||
+                        seciliOgeler.contains(S.of(context).sandalye)) {
+                      await turfilitresi(seciliOgeler);
+                    }
                     Navigator.pop(context);
                   },
                   child: Text(
-                    "Uygula",
+                    S.of(context).uygula,
                     style: TextStyle(
                       color: Renkler.kahverengi,
                       fontSize: 17,
@@ -1051,16 +1054,16 @@ class _TumurunlerState extends State<Tumurunler> {
   Future<void> turfilitresi(List<String> secimler) async {
     List<Ozelurunkarti> yeniliste = [];
     // Fiyat filtresi işlemleri burada yapılabilir.
-    if (secimler.contains('Masa')) {
+    if (secimler.contains(S.of(context).masa)) {
       for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.turu == 'Masa') {
+        if (urunler[i].urun.turu == S.of(context).masa) {
           yeniliste.add(urunler[i]);
         }
       }
     }
-    if (secimler.contains('Sandalye')) {
+    if (secimler.contains(S.of(context).sandalye)) {
       for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.turu == 'Sandalye') {
+        if (urunler[i].urun.turu == S.of(context).sandalye) {
           yeniliste.add(urunler[i]);
         }
       }

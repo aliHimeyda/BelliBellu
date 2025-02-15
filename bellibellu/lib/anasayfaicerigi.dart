@@ -1,12 +1,12 @@
 import 'package:bellibellu/bellekislemleri.dart';
+import 'package:bellibellu/ceviri.dart';
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
-import 'package:bellibellu/tumurunler.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Anasayfaicerigi extends StatefulWidget {
   const Anasayfaicerigi({super.key});
@@ -20,14 +20,14 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
   final FocusNode _focusNode = FocusNode();
 
   List<String> aramaonerileri = [
-    'masa',
-    'sandalye',
-    'ev mobilyası',
-    'ofis mobilyası',
-    'metal masa',
-    'metal sandalye',
-    'ahşap ürünler',
-    'kafe mobilyası',
+    S.current.masaonerisi,
+    S.current.sandalyeonerisi,
+    S.current.metalmasaonerisi,
+    S.current.metalsandalyeonerisi,
+    S.current.ofisMobilyalarionerisi,
+    S.current.evMobilyaUrunlerionerisi,
+    S.current.kafeurunlerionerisi,
+    S.current.kafeurunlerionerisi,
   ];
   List<String> filitrelenenkelimeler = []; // Filtrelenen kelimeler
 
@@ -141,10 +141,10 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 ),
                 Column(
                   children: [
-                    Serid('2025 Urunlari', 15),
-                    Serid('En Cok Favorilenen', 20),
-                    Serid('Ofis Mobilya Urunleri', 10),
-                    Serid('Ev Urunleri', 9),
+                    Serid(S.of(context).urunSerisi2025, 15),
+                    Serid(S.of(context).efsaneUrunler, 20),
+                    Serid(S.of(context).ofisMobilyalari, 10),
+                    Serid(S.of(context).evUrunleri, 9),
                     yildizlikatagoriler(context),
                   ],
                 ),
@@ -268,7 +268,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               await urunlerigetir(_controller.text, context);
                             },
                           ),
-                          hintText: 'Magazada Arayin',
+                          hintText: S.of(context).aramaIpucu,
                           focusColor: Renkler.kahverengi,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(7),
@@ -309,7 +309,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('masa', context);
+                    await urunlerigetir(S.of(context).masa, context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -331,9 +331,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               border: Border.all(color: Renkler.kahverengi),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'masa',
+                                S.of(context).masa,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Renkler.kahverengi,
@@ -349,7 +349,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('sandalye', context);
+                    await urunlerigetir(S.of(context).sandalye, context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -371,9 +371,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               border: Border.all(color: Renkler.kahverengi),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'sandalye',
+                                S.of(context).sandalye,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Renkler.kahverengi,
@@ -389,7 +389,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('ev', context);
+                    await urunlerigetir(S.of(context).ev, context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -411,9 +411,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               border: Border.all(color: Renkler.kahverengi),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'ev',
+                                S.of(context).ev,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Renkler.kahverengi,
@@ -429,7 +429,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('ofis', context);
+                    await urunlerigetir(S.of(context).ofis, context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -451,9 +451,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               border: Border.all(color: Renkler.kahverengi),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'ofis',
+                                S.of(context).ofis,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Renkler.kahverengi,
@@ -469,7 +469,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await urunlerigetir('kafe', context);
+                    await urunlerigetir(S.of(context).kafe, context);
                     debugPrint('tiklandi');
                   },
                   child: Positioned(
@@ -491,9 +491,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               border: Border.all(color: Renkler.kahverengi),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'kafe',
+                                S.of(context).kafe,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Renkler.kahverengi,
@@ -533,9 +533,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               border: Border.all(color: Renkler.kahverengi),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'en cok begenilenler',
+                                S.of(context).enCokBegenilenler,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Renkler.kahverengi,
@@ -575,9 +575,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               border: Border.all(color: Renkler.kahverengi),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                '2025 uretimi',
+                                S.of(context).urunSerisi2025,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Renkler.kahverengi,
@@ -617,9 +617,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                               border: Border.all(color: Renkler.kahverengi),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                'efsane urunler',
+                                S.of(context).efsaneUrunler,
                                 style: TextStyle(
                                   fontSize: 10,
                                   color: Renkler.kahverengi,
@@ -701,9 +701,9 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
 
       for (String kelime in kelimeler) {
         if (!(urun.urunAdi.toLowerCase().contains(kelime) ||
-            urun.materyali.toLowerCase().contains(kelime) ||
-            urun.ortami.toLowerCase().contains(kelime) ||
-            urun.turu.toLowerCase().contains(kelime))) {
+            Cevirici.malzemeCevir(context, urun.materyali).toLowerCase().contains(kelime) ||
+            Cevirici.ortamCevir(context, urun.ortami).toLowerCase().contains(kelime) ||
+            Cevirici.turCevir(context, urun.turu).toLowerCase().contains(kelime))) {
           tumKelimelerEslesiyor =
               false; // Eğer bir kelime bile eşleşmezse, ürünü eklemeyiz.
           break;

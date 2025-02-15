@@ -1,0 +1,302 @@
+{
+  "@@locale": "en",
+
+  "@masaonerisi": { "description": "Table suggestion" },
+  "masaonerisi": "Table",
+
+  "@sandalyeonerisi": { "description": "Chair suggestion" },
+  "sandalyeonerisi": "Chair",
+
+  "@evMobilyaUrunlerionerisi": { "description": "Home furniture suggestion" },
+  "evMobilyaUrunlerionerisi": "Home furniture",
+
+  "@ofisMobilyalarionerisi": { "description": "Office furniture suggestion" },
+  "ofisMobilyalarionerisi": "Office furniture",
+
+  "@metalmasaonerisi": { "description": "Metal table suggestion" },
+  "metalmasaonerisi": "Metal table",
+
+  "@metalsandalyeonerisi": { "description": "Metal chair suggestion" },
+  "metalsandalyeonerisi": "Metal chair",
+
+  "@ahsapUrunleronerisi": { "description": "Wooden product suggestion" },
+  "ahsapUrunleronerisi": "Wooden products",
+
+  "@kafeurunlerionerisi": { "description": "Cafe furniture suggestion" },
+  "kafeurunlerionerisi": "Cafe furniture",
+
+  "@celik": { "description": "Steel material" },
+  "celik": "Steel",
+
+  "@ahsap": { "description": "Wood material" },
+  "ahsap": "Wood",
+
+  "@metal": { "description": "Metal material" },
+  "metal": "Metal",
+
+  "@ev": { "description": "Home environment" },
+  "ev": "Home",
+
+  "@ofis": { "description": "Office environment" },
+  "ofis": "Office",
+
+  "@kafe": { "description": "Cafe environment" },
+  "kafe": "Cafe",
+
+  "@masa": { "description": "Table category" },
+  "masa": "Table",
+
+  "@sandalye": { "description": "Chair category" },
+  "sandalye": "Chair",
+
+  "@uygulamaBasligi": { "description": "Application title" },
+  "uygulamaBasligi": "Multi-language Supported App",
+
+  "@aramaIpucu": { "description": "Search box hint text" },
+  "aramaIpucu": "Search in the store",
+
+  "@onerilerBaslik": { "description": "Suggestions title" },
+  "onerilerBaslik": "Search Suggestions",
+
+  "@urunSerisi2025": { "description": "2025 Products title" },
+  "urunSerisi2025": "2025 Products",
+
+  "@enCokFavori": { "description": "Most favorited products title" },
+  "enCokFavori": "Most Favorited",
+
+  "@ofisMobilyalari": { "description": "Office furniture title" },
+  "ofisMobilyalari": "Office Furniture",
+
+  "@evUrunleri": { "description": "Home products title" },
+  "evUrunleri": "Home Products",
+
+  "@yildizliKategoriler": { "description": "Featured categories title" },
+  "yildizliKategoriler": "Featured Categories",
+
+  "@enCokBegenilenler": { "description": "Most liked label" },
+  "enCokBegenilenler": "Most Liked",
+
+  "@efsaneUrunler": { "description": "Legendary products label" },
+  "efsaneUrunler": "Legendary Products",
+
+  "@alisveriseBasla": { "description": "Start shopping button" },
+  "alisveriseBasla": "Start Shopping",
+
+  "@urunBulunamadi": { "description": "No matching product message" },
+  "urunBulunamadi": "No matching products found.",
+
+  "@tiklandiMesaji": { "description": "Click debug message" },
+  "tiklandiMesaji": "Clicked!",
+
+  "@tumurunler": { "description": "All products title" },
+  "tumurunler": "All Products",
+
+  "@anasayfa": { "description": "Homepage label" },
+  "anasayfa": "Homepage",
+
+  "@kategoriler": { "description": "Categories label" },
+  "kategoriler": "Categories",
+
+  "@favorilerim": { "description": "Favorites label" },
+  "favorilerim": "Favorites",
+
+  "@iletisim": { "description": "Contact label" },
+  "iletisim": "Contact",
+
+  "@menu": { "description": "Menu label" },
+  "menu": "Menu",
+
+  "@uygulamaAdi": { "description": "Application name (BelliBellu)" },
+  "uygulamaAdi": "BelliBellu",
+
+  "@whatsapp": { "description": "WhatsApp button label" },
+  "whatsapp": "WhatsApp",
+
+  "@gmail": { "description": "Gmail button label" },
+  "gmail": "Gmail",
+
+  "@whatsappAciklamasi": { "description": "WhatsApp error message" },
+  "whatsappAciklamasi": "WhatsApp could not be opened! Error: {error}",
+
+  "@epostaUygulamasiYok": { "description": "No email app found message" },
+  "epostaUygulamasiYok": "No email app found! Gmail is opening in the browser...",
+
+  "@iletisimBasligi": { "description": "Contact title" },
+  "iletisimBasligi": "Contact:",
+
+  "@telefon": { "description": "Phone label" },
+  "telefon": "Phone:",
+
+  "@eposta": { "description": "Email label" },
+  "eposta": "Email:",
+
+  "@sirala": { "description": "Sort button label" },
+  "sirala": "Sort",
+
+  "@filtrele": { "description": "Filter button label" },
+  "filtrele": "Filter",
+
+  "@uygula": { "description": "Apply button label" },
+  "uygula": "Apply",
+
+  "@yeniurunler": { "description": "Button label for browsing new products" },
+"yeniurunler": "Browse New Products",
+
+"@begenebilecegin": { "description": "Button label for recommended products" },
+"begenebilecegin": "Recommended Products",
+   "@urunler": {
+    "description": "Product descriptions"
+  },
+
+  "urun1": "Made of stainless steel. Length: 107 cm, Width: 191 cm.",
+  "urun2": "Made of wooden material. Length: 143 cm, Width: 177 cm.",
+  "urun3": "Metal body, durable and stylish. Length: 160 cm, Width: 105 cm.",
+  "urun4": "Plastic coating, lightweight and practical. Length: 198 cm, Width: 158 cm.",
+  "urun5": "Made from natural bamboo. Length: 130 cm, Width: 191 cm.",
+  "urun6": "Unbreakable glass surface, elegant design. Length: 115 cm, Width: 175 cm.",
+  "urun7": "Aluminum frame, water-resistant. Length: 142 cm, Width: 160 cm.",
+  "urun8": "Waterproof metal construction. Length: 180 cm, Width: 140 cm.",
+  "urun9": "Antibacterial surface coating. Length: 120 cm, Width: 150 cm.",
+  "urun10": "Lightweight and portable. Length: 110 cm, Width: 180 cm.",
+  "urun11": "Stylish and modern design. Length: 145 cm, Width: 195 cm.",
+  "urun12": "Natural oak wood. Length: 155 cm, Width: 180 cm.",
+  "urun13": "Double-layered metal frame. Length: 165 cm, Width: 185 cm.",
+  "urun14": "Highly durable plastic. Length: 140 cm, Width: 190 cm.",
+  "urun15": "Handcrafted wooden details. Length: 175 cm, Width: 200 cm.",
+  "urun16": "Reinforced glass surface. Length: 160 cm, Width: 170 cm.",
+  "urun17": "Aluminum coating, modern look. Length: 155 cm, Width: 165 cm.",
+  "urun18": "Waterproof special coating. Length: 135 cm, Width: 180 cm.",
+  "urun19": "Bacteria-resistant surface. Length: 150 cm, Width: 160 cm.",
+  "urun20": "Easy-to-carry lightweight design. Length: 145 cm, Width: 185 cm.",
+  "urun21": "High-quality plastic material. Length: 110 cm, Width: 170 cm.",
+  "urun22": "Scratch-resistant surface. Length: 120 cm, Width: 180 cm.",
+  "urun23": "Non-slip base structure. Length: 140 cm, Width: 190 cm.",
+  "urun24": "Elegant wood-patterned coating. Length: 160 cm, Width: 200 cm.",
+  "urun25": "UV-resistant material. Length: 150 cm, Width: 190 cm.",
+  "urun26": "Special stone surface coating. Length: 130 cm, Width: 170 cm.",
+  "urun27": "Multi-purpose use. Length: 125 cm, Width: 175 cm.",
+  "urun28": "Shock-absorbing feature. Length: 145 cm, Width: 180 cm.",
+  "urun29": "Eco-friendly production. Length: 135 cm, Width: 165 cm.",
+  "urun30": "Advanced impact resistance. Length: 155 cm, Width: 185 cm.",
+  "urun31": "Reinforced carbon fiber surface. Length: 140 cm, Width: 175 cm.",
+  "urun32": "Sound-absorbing coating. Length: 170 cm, Width: 190 cm.",
+  "urun33": "Easy-to-clean structure. Length: 160 cm, Width: 180 cm.",
+  "urun34": "Water and dust resistant. Length: 155 cm, Width: 195 cm.",
+  "urun35": "Stainless steel frame. Length: 180 cm, Width: 200 cm.",
+  "urun36": "Antistatic coated surface. Length: 145 cm, Width: 175 cm.",
+  "urun37": "Soundproof coating. Length: 135 cm, Width: 160 cm.",
+  "urun38": "Bacteria-free texture. Length: 120 cm, Width: 150 cm.",
+  "urun39": "Rubber-backed bottom surface. Length: 125 cm, Width: 185 cm.",
+  "urun40": "Luxury matte finish. Length: 165 cm, Width: 190 cm.",
+  "urun41": "Extra durable form. Length: 110 cm, Width: 175 cm.",
+  "urun42": "Wide range of applications. Length: 150 cm, Width: 180 cm.",
+  "urun43": "High-temperature resistance. Length: 175 cm, Width: 200 cm.",
+  "urun44": "Self-cleaning feature. Length: 155 cm, Width: 180 cm.",
+  "urun45": "Ultra-light carbon body. Length: 130 cm, Width: 170 cm.",
+  "urun46": "High resistance to impacts. Length: 165 cm, Width: 195 cm.",
+  "urun47": "Durable polymer coating. Length: 145 cm, Width: 175 cm.",
+  "urun48": "Reinforced screw connections. Length: 125 cm, Width: 160 cm.",
+  "urun49": "Magnetic lock mechanism. Length: 135 cm, Width: 185 cm.",
+  "urun50": "Special vibration-absorbing design. Length: 180 cm, Width: 200 cm.",
+   "@agirlik": { "description": "Product weight label" },
+  "agirlik": "Weight",
+
+  "@materyal": { "description": "Product material label" },
+  "materyal": "Material",
+
+  "@ad": { "description": "Product name label" },
+  "ad": "Name",
+
+  "@tur": { "description": "Product type label" },
+  "tur": "Type",
+
+  "@ortam": { "description": "Product environment label" },
+  "ortam": "Environment",
+  
+  "@iletisim": { "description": "Contact label" },
+  "iletisim": "CONTACT",
+   "@ozelurunler": { "description": "Special Products label" },
+  "ozelurunler": "SPECIAL PRODUCTS",
+   "@garanti_suresi": { "description": "Warranty Period label" },
+  "garanti_suresi": "WARRANTY PERIOD :",
+  "@urunlerin_garanti_suresi": { "description": "Product warranty period information" },
+  "urunlerin_garanti_suresi": "The warranty period of the products is 1 year.",
+
+  "@bu_urun_turkiyede_uretilmistir": { "description": "Product manufacturing location information" },
+  "bu_urun_turkiyede_uretilmistir": "This product is manufactured in Turkey.",
+   "@tum_ozellikler": { "description": "Button to show all features" },
+  "tum_ozellikler": "ALL FEATURES",
+  "@urun_ozellikleri": { "description": "Product features title" },
+  "urun_ozellikleri": "PRODUCT FEATURES",
+   "@sik_sorulanlar": { "description": "Frequently Asked Questions title" },
+  "sik_sorulanlar": "FREQUENTLY ASKED QUESTIONS",
+    "@daha_fazla_tur": { "description": "More products of the specified type" },
+  "daha_fazla_tur": "MORE {tur} PRODUCTS",
+
+  "@daha_fazla_ortam": { "description": "More products for the specified environment" },
+  "daha_fazla_ortam": "MORE {ortam} PRODUCTS",
+
+  "@daha_fazla_materyal": { "description": "More products of the specified material" },
+  "daha_fazla_materyal": "MORE {materyal} PRODUCTS",
+  "@haritada": { "description": "Open in map button label" },
+  "haritada": "On map",
+   "@uygulamadaki_urunlerin_ureticisidir": { "description": "Label for the manufacturer of products in the application" },
+  "uygulamadaki_urunlerin_ureticisidir": "The manufacturer of the products in the application",
+
+  "@bu_uygulamanin_gelistiricisidir": { "description": "Label for the developer of the application" },
+  "bu_uygulamanin_gelistiricisidir": "The developer of this application",
+   "@begenilen_urun_listesi_bos": { "description": "Message when the favorite product list is empty" },
+  "begenilen_urun_listesi_bos": "Favorite product list is empty !!",
+  "@sirala": { "description": "Sorting title" },
+  "sirala": "Sort",
+
+  "@onerilen": { "description": "Recommended sorting option" },
+  "onerilen": "Recommended",
+
+  "@en_dusuk_fiyat": { "description": "Lowest price option" },
+  "en_dusuk_fiyat": "Lowest Price",
+
+  "@en_yuksek_fiyat": { "description": "Highest price option" },
+  "en_yuksek_fiyat": "Highest Price",
+
+  "@en_cok_begenilen": { "description": "Most liked products option" },
+  "en_cok_begenilen": "Most Liked",
+
+  "@en_yeni_urunler": { "description": "Newest products option" },
+  "en_yeni_urunler": "Newest Products",
+
+  "@uygula": { "description": "Apply button" },
+  "uygula": "Apply",
+   "@temizle": { "description": "Clear button label" },
+  "temizle": "Clear",
+
+  "@urunleri_getir": { "description": "Get products button label" },
+  "urunleri_getir": "Get Products",
+
+  "@fiyat": { "description": "Price label" },
+  "fiyat": "Price",
+   "@ture_gore": { "description": "Sort by type label" },
+  "ture_gore": "By Type :",
+
+  "@ortama_gore": { "description": "Sort by environment label" },
+  "ortama_gore": "By Environment :",
+
+  "@materyale_gore": { "description": "Sort by material label" },
+  "materyale_gore": "By Material :",
+
+  "@fiyata_gore": { "description": "Sort by price label" },
+  "fiyata_gore": "By Price :",
+   "@tema": { "description": "Theme settings label" },
+  "tema": "Theme",
+
+  "@urunler": { "description": "Products label" },
+  "urunler": "Products",
+
+  "@dil_ayarlari": { "description": "Language settings label" },
+  "dil_ayarlari": "Language Settings",
+
+  "@gecmis": { "description": "History label" },
+  "gecmis": "History"
+
+
+}

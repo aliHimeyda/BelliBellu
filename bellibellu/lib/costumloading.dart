@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:bellibellu/renkler.dart';
 
 class LoadingDialog {
   LoadingDialog._private();
@@ -9,7 +8,10 @@ class LoadingDialog {
   OverlayEntry? _overlayEntry;
   StreamController<String>? _textController;
 
-  void show({required BuildContext context, String text = "Yukleniyor.."}) {
+  Future<void> show({
+    required BuildContext context,
+    String text = "Yukleniyor..",
+  }) async {
     if (_overlayEntry != null) {
       _textController?.add(text);
       return;
@@ -60,7 +62,7 @@ class LoadingDialog {
     Overlay.of(context).insert(_overlayEntry!);
   }
 
-  void hide() {
+  Future<void> hide() async {
     _overlayEntry?.remove();
     _overlayEntry = null;
     _textController?.close();
