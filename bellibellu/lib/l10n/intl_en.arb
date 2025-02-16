@@ -144,60 +144,7 @@
 
 "@begenebilecegin": { "description": "Button label for recommended products" },
 "begenebilecegin": "Recommended Products",
-   "@urunler": {
-    "description": "Product descriptions"
-  },
-
-  "urun1": "Made of stainless steel. Length: 107 cm, Width: 191 cm.",
-  "urun2": "Made of wooden material. Length: 143 cm, Width: 177 cm.",
-  "urun3": "Metal body, durable and stylish. Length: 160 cm, Width: 105 cm.",
-  "urun4": "Plastic coating, lightweight and practical. Length: 198 cm, Width: 158 cm.",
-  "urun5": "Made from natural bamboo. Length: 130 cm, Width: 191 cm.",
-  "urun6": "Unbreakable glass surface, elegant design. Length: 115 cm, Width: 175 cm.",
-  "urun7": "Aluminum frame, water-resistant. Length: 142 cm, Width: 160 cm.",
-  "urun8": "Waterproof metal construction. Length: 180 cm, Width: 140 cm.",
-  "urun9": "Antibacterial surface coating. Length: 120 cm, Width: 150 cm.",
-  "urun10": "Lightweight and portable. Length: 110 cm, Width: 180 cm.",
-  "urun11": "Stylish and modern design. Length: 145 cm, Width: 195 cm.",
-  "urun12": "Natural oak wood. Length: 155 cm, Width: 180 cm.",
-  "urun13": "Double-layered metal frame. Length: 165 cm, Width: 185 cm.",
-  "urun14": "Highly durable plastic. Length: 140 cm, Width: 190 cm.",
-  "urun15": "Handcrafted wooden details. Length: 175 cm, Width: 200 cm.",
-  "urun16": "Reinforced glass surface. Length: 160 cm, Width: 170 cm.",
-  "urun17": "Aluminum coating, modern look. Length: 155 cm, Width: 165 cm.",
-  "urun18": "Waterproof special coating. Length: 135 cm, Width: 180 cm.",
-  "urun19": "Bacteria-resistant surface. Length: 150 cm, Width: 160 cm.",
-  "urun20": "Easy-to-carry lightweight design. Length: 145 cm, Width: 185 cm.",
-  "urun21": "High-quality plastic material. Length: 110 cm, Width: 170 cm.",
-  "urun22": "Scratch-resistant surface. Length: 120 cm, Width: 180 cm.",
-  "urun23": "Non-slip base structure. Length: 140 cm, Width: 190 cm.",
-  "urun24": "Elegant wood-patterned coating. Length: 160 cm, Width: 200 cm.",
-  "urun25": "UV-resistant material. Length: 150 cm, Width: 190 cm.",
-  "urun26": "Special stone surface coating. Length: 130 cm, Width: 170 cm.",
-  "urun27": "Multi-purpose use. Length: 125 cm, Width: 175 cm.",
-  "urun28": "Shock-absorbing feature. Length: 145 cm, Width: 180 cm.",
-  "urun29": "Eco-friendly production. Length: 135 cm, Width: 165 cm.",
-  "urun30": "Advanced impact resistance. Length: 155 cm, Width: 185 cm.",
-  "urun31": "Reinforced carbon fiber surface. Length: 140 cm, Width: 175 cm.",
-  "urun32": "Sound-absorbing coating. Length: 170 cm, Width: 190 cm.",
-  "urun33": "Easy-to-clean structure. Length: 160 cm, Width: 180 cm.",
-  "urun34": "Water and dust resistant. Length: 155 cm, Width: 195 cm.",
-  "urun35": "Stainless steel frame. Length: 180 cm, Width: 200 cm.",
-  "urun36": "Antistatic coated surface. Length: 145 cm, Width: 175 cm.",
-  "urun37": "Soundproof coating. Length: 135 cm, Width: 160 cm.",
-  "urun38": "Bacteria-free texture. Length: 120 cm, Width: 150 cm.",
-  "urun39": "Rubber-backed bottom surface. Length: 125 cm, Width: 185 cm.",
-  "urun40": "Luxury matte finish. Length: 165 cm, Width: 190 cm.",
-  "urun41": "Extra durable form. Length: 110 cm, Width: 175 cm.",
-  "urun42": "Wide range of applications. Length: 150 cm, Width: 180 cm.",
-  "urun43": "High-temperature resistance. Length: 175 cm, Width: 200 cm.",
-  "urun44": "Self-cleaning feature. Length: 155 cm, Width: 180 cm.",
-  "urun45": "Ultra-light carbon body. Length: 130 cm, Width: 170 cm.",
-  "urun46": "High resistance to impacts. Length: 165 cm, Width: 195 cm.",
-  "urun47": "Durable polymer coating. Length: 145 cm, Width: 175 cm.",
-  "urun48": "Reinforced screw connections. Length: 125 cm, Width: 160 cm.",
-  "urun49": "Magnetic lock mechanism. Length: 135 cm, Width: 185 cm.",
-  "urun50": "Special vibration-absorbing design. Length: 180 cm, Width: 200 cm.",
+  
    "@agirlik": { "description": "Product weight label" },
   "agirlik": "Weight",
 
@@ -296,7 +243,36 @@
   "dil_ayarlari": "Language Settings",
 
   "@gecmis": { "description": "History label" },
-  "gecmis": "History"
+  "gecmis": "History",
+   "@turkce": { "description": "Turkish language label" },
+  "turkce": "Turkish",
+
+  "@ingilizce": { "description": "English language label" },
+  "ingilizce": "English",
+
+  "@arapca": { "description": "Arabic language label" },
+  "arapca": "Arabic",
+   "@dil_ayarlari": { "description": "Language settings label" },
+  "dil_ayarlari": "Language Settings",
+   "@uyari": { "description": "Warning label" },
+  "uyari": "WARNING !",
+
+  "@daha_verimli_sonuc": { "description": "For better results, please close and reopen the application" },
+  "daha_verimli_sonuc": "For better results, please close and reopen the application.",
+  "@anladim": { "description": "I understand button label" },
+  "anladim": "I Understand",
+   "@urun_aciklamasi": {
+    "description": "Product description template"
+  },
+  "urun_aciklamasi": "Our product with code {kod} is handcrafted and made from {materyal}. It is a suitable {tur} for the {ortam} environment. Length: {uzunluk} cm, Width: {genislik} cm.",
+  "@begenilen_urun_listesi_bos": {
+  "description": "Favorite product list is empty message"
+},
+"begenilen_urun_listesi_bos": "Favorite product list is empty !!",
+"@cevrimici_asistanlik": {
+  "description": "Online assistant service announcement"
+},
+"cevrimici_asistanlik": "We will provide our online assistant service soon 😊"
 
 
 }

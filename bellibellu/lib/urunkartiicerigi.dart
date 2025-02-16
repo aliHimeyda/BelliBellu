@@ -208,6 +208,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
 
   @override
   Widget build(BuildContext context) {
+    int uzunluk = 100 + random.nextInt(201);
+    int genislik = 50 + random.nextInt(151);
     super.build(context); // Bu satır önemli
     return Scaffold(
       backgroundColor: const Color.fromRGBO(245, 241, 241, 1),
@@ -261,7 +263,25 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    widget.urun.urunAciklamasi,
+                                    S
+                                        .of(context)
+                                        .urun_aciklamasi(
+                                          widget.urun.urunAdi,
+                                          Cevirici.malzemeCevir(
+                                            context,
+                                            widget.urun.materyali,
+                                          ),
+                                          Cevirici.turCevir(
+                                            context,
+                                            widget.urun.turu,
+                                          ),
+                                          Cevirici.ortamCevir(
+                                            context,
+                                            widget.urun.ortami,
+                                          ),
+                                          uzunluk,
+                                          genislik,
+                                        ),
                                     style: TextStyle(fontSize: 11),
                                   ),
                                 ],
@@ -387,7 +407,16 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
 
                         SizedBox(width: 5),
                         Text(
-                          widget.urun.urunAciklamasi,
+                          S
+                              .of(context)
+                              .urun_aciklamasi(
+                                widget.urun.urunAdi,
+                                widget.urun.materyali,
+                                widget.urun.turu,
+                                widget.urun.ortami,
+                                uzunluk,
+                                genislik,
+                              ),
                           style: TextStyle(
                             color: Renkler.kahverengi,
                             fontSize: 12,
@@ -397,7 +426,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                         GestureDetector(
                           onTap: () {
                             debugPrint('tiklandi');
-                            popup();
+                            popup(uzunluk, genislik);
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,
@@ -1131,7 +1160,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
     );
   }
 
-  Future popup() => showDialog(
+  Future popup(uzunluk, genislik) => showDialog(
     context: context,
 
     builder:
@@ -1153,7 +1182,9 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
           //   ),
           // ),
           content: SizedBox(
+            width: MediaQuery.of(context).size.width,
             height: 380,
+
             child: Stack(
               children: [
                 Padding(
@@ -1318,44 +1349,35 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                         ],
                       ),
                       SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.circle,
-                            color: Renkler.kahverengi,
-                            size: 6,
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            S.of(context).bu_urun_turkiyede_uretilmistir,
-                            style: TextStyle(
-                              color: Renkler.kahverengi,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
+
+                      Text(
+                        '_${S.of(context).bu_urun_turkiyede_uretilmistir}',
+                        style: TextStyle(
+                          color: Renkler.kahverengi,
+                          fontSize: 12,
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.circle,
-                            color: Renkler.kahverengi,
-                            size: 6,
-                          ),
-                          SizedBox(width: 5),
-                          Text(
-                            S.of(context).urunlerin_garanti_suresi,
-                            style: TextStyle(
-                              color: Renkler.kahverengi,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
+
+                      Text(
+                        '_${S.of(context).urunlerin_garanti_suresi}',
+                        style: TextStyle(
+                          color: Renkler.kahverengi,
+                          fontSize: 12,
+                        ),
                       ),
 
                       SizedBox(width: 5),
                       Text(
-                        widget.urun.urunAciklamasi,
+                        S
+                            .of(context)
+                            .urun_aciklamasi(
+                              widget.urun.urunAdi,
+                              widget.urun.materyali,
+                              widget.urun.turu,
+                              widget.urun.ortami,
+                              uzunluk,
+                              genislik,
+                            ),
                         style: TextStyle(
                           color: Renkler.kahverengi,
                           fontSize: 12,

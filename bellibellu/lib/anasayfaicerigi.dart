@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bellibellu/bellekislemleri.dart';
 import 'package:bellibellu/ceviri.dart';
 import 'package:bellibellu/generated/l10n.dart';
@@ -6,7 +8,10 @@ import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Anasayfaicerigi extends StatefulWidget {
   const Anasayfaicerigi({super.key});
@@ -283,7 +288,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    debugPrint('tiklandi');
+                    popup();
                   },
                   icon: const Icon(Icons.email, color: Renkler.kuyubeyaz),
                 ),
@@ -701,9 +706,18 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
 
       for (String kelime in kelimeler) {
         if (!(urun.urunAdi.toLowerCase().contains(kelime) ||
-            Cevirici.malzemeCevir(context, urun.materyali).toLowerCase().contains(kelime) ||
-            Cevirici.ortamCevir(context, urun.ortami).toLowerCase().contains(kelime) ||
-            Cevirici.turCevir(context, urun.turu).toLowerCase().contains(kelime))) {
+            Cevirici.malzemeCevir(
+              context,
+              urun.materyali,
+            ).toLowerCase().contains(kelime) ||
+            Cevirici.ortamCevir(
+              context,
+              urun.ortami,
+            ).toLowerCase().contains(kelime) ||
+            Cevirici.turCevir(
+              context,
+              urun.turu,
+            ).toLowerCase().contains(kelime))) {
           tumKelimelerEslesiyor =
               false; // Eğer bir kelime bile eşleşmezse, ürünü eklemeyiz.
           break;
@@ -721,4 +735,43 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
       debugPrint("Eşleşen ürün bulunamadı.");
     }
   }
+
+  Future popup() => showDialog(
+    context: context,
+
+    builder:
+        (context) => AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(color: Renkler.kahverengi, width: 1),
+          ),
+          backgroundColor: Renkler.krem,
+          shadowColor: Renkler.kahverengi,
+          titlePadding: EdgeInsets.only(top: 0),
+
+          // title: Text(
+          //   'Urun Ozellikleri',
+          //   style: TextStyle(
+          //     color: Renkler.kahverengi,
+          //     fontSize: 18,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 380,
+
+            child: Center(
+              child: Text(
+                S.of(context).cevrimici_asistanlik,
+                style: TextStyle(
+                  color: Renkler.kahverengi,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+  );
 }

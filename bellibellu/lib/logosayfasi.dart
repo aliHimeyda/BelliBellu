@@ -46,6 +46,9 @@ class _LogosayfasiState extends State<Logosayfasi> {
   void dataal() async {
     if (Urunler.urunler.isEmpty) {
       await Urunler.urunleritanima();
+      if (Urunler.urunler.isEmpty) {
+        await Urunler.urunleritanima();
+      }
     }
   }
 

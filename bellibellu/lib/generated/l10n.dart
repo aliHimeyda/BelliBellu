@@ -520,506 +520,6 @@ class S {
     );
   }
 
-  /// `Made of stainless steel. Length: 107 cm, Width: 191 cm.`
-  String get urun1 {
-    return Intl.message(
-      'Made of stainless steel. Length: 107 cm, Width: 191 cm.',
-      name: 'urun1',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Made of wooden material. Length: 143 cm, Width: 177 cm.`
-  String get urun2 {
-    return Intl.message(
-      'Made of wooden material. Length: 143 cm, Width: 177 cm.',
-      name: 'urun2',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Metal body, durable and stylish. Length: 160 cm, Width: 105 cm.`
-  String get urun3 {
-    return Intl.message(
-      'Metal body, durable and stylish. Length: 160 cm, Width: 105 cm.',
-      name: 'urun3',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Plastic coating, lightweight and practical. Length: 198 cm, Width: 158 cm.`
-  String get urun4 {
-    return Intl.message(
-      'Plastic coating, lightweight and practical. Length: 198 cm, Width: 158 cm.',
-      name: 'urun4',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Made from natural bamboo. Length: 130 cm, Width: 191 cm.`
-  String get urun5 {
-    return Intl.message(
-      'Made from natural bamboo. Length: 130 cm, Width: 191 cm.',
-      name: 'urun5',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Unbreakable glass surface, elegant design. Length: 115 cm, Width: 175 cm.`
-  String get urun6 {
-    return Intl.message(
-      'Unbreakable glass surface, elegant design. Length: 115 cm, Width: 175 cm.',
-      name: 'urun6',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Aluminum frame, water-resistant. Length: 142 cm, Width: 160 cm.`
-  String get urun7 {
-    return Intl.message(
-      'Aluminum frame, water-resistant. Length: 142 cm, Width: 160 cm.',
-      name: 'urun7',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Waterproof metal construction. Length: 180 cm, Width: 140 cm.`
-  String get urun8 {
-    return Intl.message(
-      'Waterproof metal construction. Length: 180 cm, Width: 140 cm.',
-      name: 'urun8',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Antibacterial surface coating. Length: 120 cm, Width: 150 cm.`
-  String get urun9 {
-    return Intl.message(
-      'Antibacterial surface coating. Length: 120 cm, Width: 150 cm.',
-      name: 'urun9',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Lightweight and portable. Length: 110 cm, Width: 180 cm.`
-  String get urun10 {
-    return Intl.message(
-      'Lightweight and portable. Length: 110 cm, Width: 180 cm.',
-      name: 'urun10',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Stylish and modern design. Length: 145 cm, Width: 195 cm.`
-  String get urun11 {
-    return Intl.message(
-      'Stylish and modern design. Length: 145 cm, Width: 195 cm.',
-      name: 'urun11',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Natural oak wood. Length: 155 cm, Width: 180 cm.`
-  String get urun12 {
-    return Intl.message(
-      'Natural oak wood. Length: 155 cm, Width: 180 cm.',
-      name: 'urun12',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Double-layered metal frame. Length: 165 cm, Width: 185 cm.`
-  String get urun13 {
-    return Intl.message(
-      'Double-layered metal frame. Length: 165 cm, Width: 185 cm.',
-      name: 'urun13',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Highly durable plastic. Length: 140 cm, Width: 190 cm.`
-  String get urun14 {
-    return Intl.message(
-      'Highly durable plastic. Length: 140 cm, Width: 190 cm.',
-      name: 'urun14',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Handcrafted wooden details. Length: 175 cm, Width: 200 cm.`
-  String get urun15 {
-    return Intl.message(
-      'Handcrafted wooden details. Length: 175 cm, Width: 200 cm.',
-      name: 'urun15',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reinforced glass surface. Length: 160 cm, Width: 170 cm.`
-  String get urun16 {
-    return Intl.message(
-      'Reinforced glass surface. Length: 160 cm, Width: 170 cm.',
-      name: 'urun16',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Aluminum coating, modern look. Length: 155 cm, Width: 165 cm.`
-  String get urun17 {
-    return Intl.message(
-      'Aluminum coating, modern look. Length: 155 cm, Width: 165 cm.',
-      name: 'urun17',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Waterproof special coating. Length: 135 cm, Width: 180 cm.`
-  String get urun18 {
-    return Intl.message(
-      'Waterproof special coating. Length: 135 cm, Width: 180 cm.',
-      name: 'urun18',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Bacteria-resistant surface. Length: 150 cm, Width: 160 cm.`
-  String get urun19 {
-    return Intl.message(
-      'Bacteria-resistant surface. Length: 150 cm, Width: 160 cm.',
-      name: 'urun19',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Easy-to-carry lightweight design. Length: 145 cm, Width: 185 cm.`
-  String get urun20 {
-    return Intl.message(
-      'Easy-to-carry lightweight design. Length: 145 cm, Width: 185 cm.',
-      name: 'urun20',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `High-quality plastic material. Length: 110 cm, Width: 170 cm.`
-  String get urun21 {
-    return Intl.message(
-      'High-quality plastic material. Length: 110 cm, Width: 170 cm.',
-      name: 'urun21',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Scratch-resistant surface. Length: 120 cm, Width: 180 cm.`
-  String get urun22 {
-    return Intl.message(
-      'Scratch-resistant surface. Length: 120 cm, Width: 180 cm.',
-      name: 'urun22',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Non-slip base structure. Length: 140 cm, Width: 190 cm.`
-  String get urun23 {
-    return Intl.message(
-      'Non-slip base structure. Length: 140 cm, Width: 190 cm.',
-      name: 'urun23',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Elegant wood-patterned coating. Length: 160 cm, Width: 200 cm.`
-  String get urun24 {
-    return Intl.message(
-      'Elegant wood-patterned coating. Length: 160 cm, Width: 200 cm.',
-      name: 'urun24',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `UV-resistant material. Length: 150 cm, Width: 190 cm.`
-  String get urun25 {
-    return Intl.message(
-      'UV-resistant material. Length: 150 cm, Width: 190 cm.',
-      name: 'urun25',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Special stone surface coating. Length: 130 cm, Width: 170 cm.`
-  String get urun26 {
-    return Intl.message(
-      'Special stone surface coating. Length: 130 cm, Width: 170 cm.',
-      name: 'urun26',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Multi-purpose use. Length: 125 cm, Width: 175 cm.`
-  String get urun27 {
-    return Intl.message(
-      'Multi-purpose use. Length: 125 cm, Width: 175 cm.',
-      name: 'urun27',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Shock-absorbing feature. Length: 145 cm, Width: 180 cm.`
-  String get urun28 {
-    return Intl.message(
-      'Shock-absorbing feature. Length: 145 cm, Width: 180 cm.',
-      name: 'urun28',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Eco-friendly production. Length: 135 cm, Width: 165 cm.`
-  String get urun29 {
-    return Intl.message(
-      'Eco-friendly production. Length: 135 cm, Width: 165 cm.',
-      name: 'urun29',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Advanced impact resistance. Length: 155 cm, Width: 185 cm.`
-  String get urun30 {
-    return Intl.message(
-      'Advanced impact resistance. Length: 155 cm, Width: 185 cm.',
-      name: 'urun30',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reinforced carbon fiber surface. Length: 140 cm, Width: 175 cm.`
-  String get urun31 {
-    return Intl.message(
-      'Reinforced carbon fiber surface. Length: 140 cm, Width: 175 cm.',
-      name: 'urun31',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sound-absorbing coating. Length: 170 cm, Width: 190 cm.`
-  String get urun32 {
-    return Intl.message(
-      'Sound-absorbing coating. Length: 170 cm, Width: 190 cm.',
-      name: 'urun32',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Easy-to-clean structure. Length: 160 cm, Width: 180 cm.`
-  String get urun33 {
-    return Intl.message(
-      'Easy-to-clean structure. Length: 160 cm, Width: 180 cm.',
-      name: 'urun33',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Water and dust resistant. Length: 155 cm, Width: 195 cm.`
-  String get urun34 {
-    return Intl.message(
-      'Water and dust resistant. Length: 155 cm, Width: 195 cm.',
-      name: 'urun34',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Stainless steel frame. Length: 180 cm, Width: 200 cm.`
-  String get urun35 {
-    return Intl.message(
-      'Stainless steel frame. Length: 180 cm, Width: 200 cm.',
-      name: 'urun35',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Antistatic coated surface. Length: 145 cm, Width: 175 cm.`
-  String get urun36 {
-    return Intl.message(
-      'Antistatic coated surface. Length: 145 cm, Width: 175 cm.',
-      name: 'urun36',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Soundproof coating. Length: 135 cm, Width: 160 cm.`
-  String get urun37 {
-    return Intl.message(
-      'Soundproof coating. Length: 135 cm, Width: 160 cm.',
-      name: 'urun37',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Bacteria-free texture. Length: 120 cm, Width: 150 cm.`
-  String get urun38 {
-    return Intl.message(
-      'Bacteria-free texture. Length: 120 cm, Width: 150 cm.',
-      name: 'urun38',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Rubber-backed bottom surface. Length: 125 cm, Width: 185 cm.`
-  String get urun39 {
-    return Intl.message(
-      'Rubber-backed bottom surface. Length: 125 cm, Width: 185 cm.',
-      name: 'urun39',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Luxury matte finish. Length: 165 cm, Width: 190 cm.`
-  String get urun40 {
-    return Intl.message(
-      'Luxury matte finish. Length: 165 cm, Width: 190 cm.',
-      name: 'urun40',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Extra durable form. Length: 110 cm, Width: 175 cm.`
-  String get urun41 {
-    return Intl.message(
-      'Extra durable form. Length: 110 cm, Width: 175 cm.',
-      name: 'urun41',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Wide range of applications. Length: 150 cm, Width: 180 cm.`
-  String get urun42 {
-    return Intl.message(
-      'Wide range of applications. Length: 150 cm, Width: 180 cm.',
-      name: 'urun42',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `High-temperature resistance. Length: 175 cm, Width: 200 cm.`
-  String get urun43 {
-    return Intl.message(
-      'High-temperature resistance. Length: 175 cm, Width: 200 cm.',
-      name: 'urun43',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Self-cleaning feature. Length: 155 cm, Width: 180 cm.`
-  String get urun44 {
-    return Intl.message(
-      'Self-cleaning feature. Length: 155 cm, Width: 180 cm.',
-      name: 'urun44',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ultra-light carbon body. Length: 130 cm, Width: 170 cm.`
-  String get urun45 {
-    return Intl.message(
-      'Ultra-light carbon body. Length: 130 cm, Width: 170 cm.',
-      name: 'urun45',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `High resistance to impacts. Length: 165 cm, Width: 195 cm.`
-  String get urun46 {
-    return Intl.message(
-      'High resistance to impacts. Length: 165 cm, Width: 195 cm.',
-      name: 'urun46',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Durable polymer coating. Length: 145 cm, Width: 175 cm.`
-  String get urun47 {
-    return Intl.message(
-      'Durable polymer coating. Length: 145 cm, Width: 175 cm.',
-      name: 'urun47',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reinforced screw connections. Length: 125 cm, Width: 160 cm.`
-  String get urun48 {
-    return Intl.message(
-      'Reinforced screw connections. Length: 125 cm, Width: 160 cm.',
-      name: 'urun48',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Magnetic lock mechanism. Length: 135 cm, Width: 185 cm.`
-  String get urun49 {
-    return Intl.message(
-      'Magnetic lock mechanism. Length: 135 cm, Width: 185 cm.',
-      name: 'urun49',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Special vibration-absorbing design. Length: 180 cm, Width: 200 cm.`
-  String get urun50 {
-    return Intl.message(
-      'Special vibration-absorbing design. Length: 180 cm, Width: 200 cm.',
-      name: 'urun50',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Weight`
   String get agirlik {
     return Intl.message(
@@ -1205,7 +705,7 @@ class S {
     return Intl.message(
       'Favorite product list is empty !!',
       name: 'begenilen_urun_listesi_bos',
-      desc: 'Message when the favorite product list is empty',
+      desc: 'Favorite product list is empty message',
       args: [],
     );
   }
@@ -1361,6 +861,93 @@ class S {
       'History',
       name: 'gecmis',
       desc: 'History label',
+      args: [],
+    );
+  }
+
+  /// `Turkish`
+  String get turkce {
+    return Intl.message(
+      'Turkish',
+      name: 'turkce',
+      desc: 'Turkish language label',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get ingilizce {
+    return Intl.message(
+      'English',
+      name: 'ingilizce',
+      desc: 'English language label',
+      args: [],
+    );
+  }
+
+  /// `Arabic`
+  String get arapca {
+    return Intl.message(
+      'Arabic',
+      name: 'arapca',
+      desc: 'Arabic language label',
+      args: [],
+    );
+  }
+
+  /// `WARNING !`
+  String get uyari {
+    return Intl.message(
+      'WARNING !',
+      name: 'uyari',
+      desc: 'Warning label',
+      args: [],
+    );
+  }
+
+  /// `For better results, please close and reopen the application.`
+  String get daha_verimli_sonuc {
+    return Intl.message(
+      'For better results, please close and reopen the application.',
+      name: 'daha_verimli_sonuc',
+      desc: 'For better results, please close and reopen the application',
+      args: [],
+    );
+  }
+
+  /// `I Understand`
+  String get anladim {
+    return Intl.message(
+      'I Understand',
+      name: 'anladim',
+      desc: 'I understand button label',
+      args: [],
+    );
+  }
+
+  /// `Our product with code {kod} is handcrafted and made from {materyal}. It is a suitable {tur} for the {ortam} environment. Length: {uzunluk} cm, Width: {genislik} cm.`
+  String urun_aciklamasi(
+    Object kod,
+    Object materyal,
+    Object tur,
+    Object ortam,
+    Object uzunluk,
+    Object genislik,
+  ) {
+    return Intl.message(
+      'Our product with code $kod is handcrafted and made from $materyal. It is a suitable $tur for the $ortam environment. Length: $uzunluk cm, Width: $genislik cm.',
+      name: 'urun_aciklamasi',
+      desc: 'Product description template',
+      args: [kod, materyal, tur, ortam, uzunluk, genislik],
+    );
+  }
+
+  /// `We will provide our online assistant service soon 😊`
+  String get cevrimici_asistanlik {
+    return Intl.message(
+      'We will provide our online assistant service soon 😊',
+      name: 'cevrimici_asistanlik',
+      desc: 'Online assistant service announcement',
       args: [],
     );
   }

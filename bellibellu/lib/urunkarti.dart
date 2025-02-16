@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
@@ -270,10 +271,15 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
 void begenilenekaydet(String urunadi) async {
   final pref = await SharedPreferences.getInstance();
   List<String>? begenilen = await pref.getStringList('begenilenurunler');
+  
+
+
+
   for (int i = 0; i < Urunler.urunler.length; i++) {
     if (Urunler.urunler[i].urunAdi == urunadi) {
       Urunler.urunler[i].begenilmismi = true;
-
+      Urunler.urunler[i].begenisayisi++;
+      
       if (begenilen.isEmpty) {
         await pref.setStringList('begenilenurunler', [
           Urunler.urunler[i].urunAdi,

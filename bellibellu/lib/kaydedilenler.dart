@@ -1,3 +1,4 @@
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
@@ -81,7 +82,14 @@ class _KaydedilenlerState extends State<Kaydedilenler> {
                               for (Ozelurunkarti urun in begenilenurunler) urun,
                             ],
                           )
-                          : Text('begenilen urun listesi bos !!'),
+                          : Text(
+                            S.of(context).begenilen_urun_listesi_bos,
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                 ),
               ),
             ],

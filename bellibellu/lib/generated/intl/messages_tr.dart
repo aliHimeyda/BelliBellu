@@ -26,7 +26,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(tur) => "DAHA FAZLA ${tur} ÜRÜNLER";
 
-  static String m3(error) => "WhatsApp açılamadı! Hata: ${error}";
+  static String m3(kod, materyal, tur, ortam, uzunluk, genislik) =>
+      "${kod}lu ürünümüz elle işlenmiş ve ${materyal}\'dan üretilmiştir. ${ortam} ortamı için uygun bir ${tur}\'dir. Uzunluk: ${uzunluk} cm, Genişlik: ${genislik} cm.";
+
+  static String m4(error) => "WhatsApp açılamadı! Hata: ${error}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,7 +41,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "alisveriseBasla": MessageLookupByLibrary.simpleMessage("Alışverişe Başla"),
     "anasayfa": MessageLookupByLibrary.simpleMessage("Anasayfa"),
+    "anladim": MessageLookupByLibrary.simpleMessage("Anladım"),
     "aramaIpucu": MessageLookupByLibrary.simpleMessage("Mağazada arayın"),
+    "arapca": MessageLookupByLibrary.simpleMessage("Arapça"),
     "begenebilecegin": MessageLookupByLibrary.simpleMessage(
       "Beğenebileceğin Ürünler",
     ),
@@ -52,9 +57,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "Bu uygulamanın geliştiricisidir",
     ),
     "celik": MessageLookupByLibrary.simpleMessage("Çelik"),
+    "cevrimici_asistanlik": MessageLookupByLibrary.simpleMessage(
+      "Çevrimiçi Asistanlık Hizmetimizi Yakında Sağlayacağız 😊",
+    ),
     "daha_fazla_materyal": m0,
     "daha_fazla_ortam": m1,
     "daha_fazla_tur": m2,
+    "daha_verimli_sonuc": MessageLookupByLibrary.simpleMessage(
+      "Daha verimli sonuç için uygulamayı kapatıp tekrar açınız.",
+    ),
     "dil_ayarlari": MessageLookupByLibrary.simpleMessage("Dil Ayarları"),
     "efsaneUrunler": MessageLookupByLibrary.simpleMessage("Efsane Ürünler"),
     "enCokBegenilenler": MessageLookupByLibrary.simpleMessage(
@@ -86,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "haritada": MessageLookupByLibrary.simpleMessage("Haritada"),
     "iletisim": MessageLookupByLibrary.simpleMessage("İLETİŞİM"),
     "iletisimBasligi": MessageLookupByLibrary.simpleMessage("İletişim:"),
+    "ingilizce": MessageLookupByLibrary.simpleMessage("İngilizce"),
     "kafe": MessageLookupByLibrary.simpleMessage("Kafe"),
     "kafeurunlerionerisi": MessageLookupByLibrary.simpleMessage(
       "Kafe mobilyası",
@@ -123,160 +135,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "tumurunler": MessageLookupByLibrary.simpleMessage("Tüm Ürünler"),
     "tur": MessageLookupByLibrary.simpleMessage("Tür"),
     "ture_gore": MessageLookupByLibrary.simpleMessage("Tür\'e Göre :"),
-    "urun1": MessageLookupByLibrary.simpleMessage(
-      "Paslanmaz çelikten üretilmiştir. Uzunluk: 107 cm, Genişlik: 191 cm.",
-    ),
-    "urun10": MessageLookupByLibrary.simpleMessage(
-      "Hafif ve taşınabilir. Uzunluk: 110 cm, Genişlik: 180 cm.",
-    ),
-    "urun11": MessageLookupByLibrary.simpleMessage(
-      "Şık ve modern tasarım. Uzunluk: 145 cm, Genişlik: 195 cm.",
-    ),
-    "urun12": MessageLookupByLibrary.simpleMessage(
-      "Doğal meşe ahşap. Uzunluk: 155 cm, Genişlik: 180 cm.",
-    ),
-    "urun13": MessageLookupByLibrary.simpleMessage(
-      "Çift katmanlı metal çerçeve. Uzunluk: 165 cm, Genişlik: 185 cm.",
-    ),
-    "urun14": MessageLookupByLibrary.simpleMessage(
-      "Yüksek dayanıklılığa sahip plastik. Uzunluk: 140 cm, Genişlik: 190 cm.",
-    ),
-    "urun15": MessageLookupByLibrary.simpleMessage(
-      "Elde işlenmiş ahşap detaylar. Uzunluk: 175 cm, Genişlik: 200 cm.",
-    ),
-    "urun16": MessageLookupByLibrary.simpleMessage(
-      "Güçlendirilmiş cam yüzey. Uzunluk: 160 cm, Genişlik: 170 cm.",
-    ),
-    "urun17": MessageLookupByLibrary.simpleMessage(
-      "Alüminyum kaplama, modern görünüm. Uzunluk: 155 cm, Genişlik: 165 cm.",
-    ),
-    "urun18": MessageLookupByLibrary.simpleMessage(
-      "Su geçirmez özel kaplama. Uzunluk: 135 cm, Genişlik: 180 cm.",
-    ),
-    "urun19": MessageLookupByLibrary.simpleMessage(
-      "Bakteri oluşumunu engelleyen yüzey. Uzunluk: 150 cm, Genişlik: 160 cm.",
-    ),
-    "urun2": MessageLookupByLibrary.simpleMessage(
-      "Ahşap malzemeden yapılmıştır. Uzunluk: 143 cm, Genişlik: 177 cm.",
-    ),
-    "urun20": MessageLookupByLibrary.simpleMessage(
-      "Kolay taşınabilir hafif tasarım. Uzunluk: 145 cm, Genişlik: 185 cm.",
-    ),
-    "urun21": MessageLookupByLibrary.simpleMessage(
-      "Yüksek kaliteli plastik malzeme. Uzunluk: 110 cm, Genişlik: 170 cm.",
-    ),
-    "urun22": MessageLookupByLibrary.simpleMessage(
-      "Çizilmeye dayanıklı yüzey. Uzunluk: 120 cm, Genişlik: 180 cm.",
-    ),
-    "urun23": MessageLookupByLibrary.simpleMessage(
-      "Kaymaz taban yapısı. Uzunluk: 140 cm, Genişlik: 190 cm.",
-    ),
-    "urun24": MessageLookupByLibrary.simpleMessage(
-      "Şık ahşap desenli kaplama. Uzunluk: 160 cm, Genişlik: 200 cm.",
-    ),
-    "urun25": MessageLookupByLibrary.simpleMessage(
-      "UV ışınlarına karşı dayanıklı. Uzunluk: 150 cm, Genişlik: 190 cm.",
-    ),
-    "urun26": MessageLookupByLibrary.simpleMessage(
-      "Özel taş yüzey kaplaması. Uzunluk: 130 cm, Genişlik: 170 cm.",
-    ),
-    "urun27": MessageLookupByLibrary.simpleMessage(
-      "Çok yönlü kullanım. Uzunluk: 125 cm, Genişlik: 175 cm.",
-    ),
-    "urun28": MessageLookupByLibrary.simpleMessage(
-      "Şok emici özellik. Uzunluk: 145 cm, Genişlik: 180 cm.",
-    ),
-    "urun29": MessageLookupByLibrary.simpleMessage(
-      "Çevre dostu üretim. Uzunluk: 135 cm, Genişlik: 165 cm.",
-    ),
-    "urun3": MessageLookupByLibrary.simpleMessage(
-      "Metal gövde, dayanıklı ve şık. Uzunluk: 160 cm, Genişlik: 105 cm.",
-    ),
-    "urun30": MessageLookupByLibrary.simpleMessage(
-      "İleri seviye darbe dayanımı. Uzunluk: 155 cm, Genişlik: 185 cm.",
-    ),
-    "urun31": MessageLookupByLibrary.simpleMessage(
-      "Güçlendirilmiş karbon fiber yüzey. Uzunluk: 140 cm, Genişlik: 175 cm.",
-    ),
-    "urun32": MessageLookupByLibrary.simpleMessage(
-      "Ses emici kaplama. Uzunluk: 170 cm, Genişlik: 190 cm.",
-    ),
-    "urun33": MessageLookupByLibrary.simpleMessage(
-      "Kolay temizlenebilir yapı. Uzunluk: 160 cm, Genişlik: 180 cm.",
-    ),
-    "urun34": MessageLookupByLibrary.simpleMessage(
-      "Suya ve toza dayanıklı. Uzunluk: 155 cm, Genişlik: 195 cm.",
-    ),
-    "urun35": MessageLookupByLibrary.simpleMessage(
-      "Paslanmaz çelik çerçeve. Uzunluk: 180 cm, Genişlik: 200 cm.",
-    ),
-    "urun36": MessageLookupByLibrary.simpleMessage(
-      "Antistatik özellikli kaplama. Uzunluk: 145 cm, Genişlik: 175 cm.",
-    ),
-    "urun37": MessageLookupByLibrary.simpleMessage(
-      "Ses geçirmez kaplama. Uzunluk: 135 cm, Genişlik: 160 cm.",
-    ),
-    "urun38": MessageLookupByLibrary.simpleMessage(
-      "Bakteri tutmayan doku. Uzunluk: 120 cm, Genişlik: 150 cm.",
-    ),
-    "urun39": MessageLookupByLibrary.simpleMessage(
-      "Kauçuk destekli alt yüzey. Uzunluk: 125 cm, Genişlik: 185 cm.",
-    ),
-    "urun4": MessageLookupByLibrary.simpleMessage(
-      "Plastik kaplama, hafif ve kullanışlı. Uzunluk: 198 cm, Genişlik: 158 cm.",
-    ),
-    "urun40": MessageLookupByLibrary.simpleMessage(
-      "Lüks mat yüzey. Uzunluk: 165 cm, Genişlik: 190 cm.",
-    ),
-    "urun41": MessageLookupByLibrary.simpleMessage(
-      "Ekstra dayanıklı form. Uzunluk: 110 cm, Genişlik: 175 cm.",
-    ),
-    "urun42": MessageLookupByLibrary.simpleMessage(
-      "Geniş kullanım alanına sahip. Uzunluk: 150 cm, Genişlik: 180 cm.",
-    ),
-    "urun43": MessageLookupByLibrary.simpleMessage(
-      "Yüksek sıcaklığa dayanıklı. Uzunluk: 175 cm, Genişlik: 200 cm.",
-    ),
-    "urun44": MessageLookupByLibrary.simpleMessage(
-      "Kendi kendini temizleme özelliği. Uzunluk: 155 cm, Genişlik: 180 cm.",
-    ),
-    "urun45": MessageLookupByLibrary.simpleMessage(
-      "Ultra hafif karbon gövde. Uzunluk: 130 cm, Genişlik: 170 cm.",
-    ),
-    "urun46": MessageLookupByLibrary.simpleMessage(
-      "Darbeye karşı yüksek mukavemet. Uzunluk: 165 cm, Genişlik: 195 cm.",
-    ),
-    "urun47": MessageLookupByLibrary.simpleMessage(
-      "Dayanıklı polimer kaplama. Uzunluk: 145 cm, Genişlik: 175 cm.",
-    ),
-    "urun48": MessageLookupByLibrary.simpleMessage(
-      "Güçlendirilmiş vidalı bağlantılar. Uzunluk: 125 cm, Genişlik: 160 cm.",
-    ),
-    "urun49": MessageLookupByLibrary.simpleMessage(
-      "Mıknatıslı kilit mekanizması. Uzunluk: 135 cm, Genişlik: 185 cm.",
-    ),
-    "urun5": MessageLookupByLibrary.simpleMessage(
-      "Doğal bambu kullanılmıştır. Uzunluk: 130 cm, Genişlik: 191 cm.",
-    ),
-    "urun50": MessageLookupByLibrary.simpleMessage(
-      "Titreşimi emen özel tasarım. Uzunluk: 180 cm, Genişlik: 200 cm.",
-    ),
-    "urun6": MessageLookupByLibrary.simpleMessage(
-      "Kırılmaz cam yüzey, şık tasarım. Uzunluk: 115 cm, Genişlik: 175 cm.",
-    ),
-    "urun7": MessageLookupByLibrary.simpleMessage(
-      "Alüminyum çerçeve, suya dayanıklı. Uzunluk: 142 cm, Genişlik: 160 cm.",
-    ),
-    "urun8": MessageLookupByLibrary.simpleMessage(
-      "Su geçirmez metal yapı. Uzunluk: 180 cm, Genişlik: 140 cm.",
-    ),
-    "urun9": MessageLookupByLibrary.simpleMessage(
-      "Antibakteriyel yüzey kaplaması. Uzunluk: 120 cm, Genişlik: 150 cm.",
-    ),
+    "turkce": MessageLookupByLibrary.simpleMessage("Türkçe"),
     "urunBulunamadi": MessageLookupByLibrary.simpleMessage(
       "Eşleşen ürün bulunamadı.",
     ),
     "urunSerisi2025": MessageLookupByLibrary.simpleMessage("2025 Ürünleri"),
+    "urun_aciklamasi": m3,
     "urun_ozellikleri": MessageLookupByLibrary.simpleMessage(
       "ÜRÜN ÖZELLİKLERİ",
     ),
@@ -285,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "urunlerin_garanti_suresi": MessageLookupByLibrary.simpleMessage(
       "Ürünlerin garanti süresi 1 yıldır.",
     ),
+    "uyari": MessageLookupByLibrary.simpleMessage("UYARI !"),
     "uygula": MessageLookupByLibrary.simpleMessage("Uygula"),
     "uygulamaAdi": MessageLookupByLibrary.simpleMessage("BelliBellu"),
     "uygulamaBasligi": MessageLookupByLibrary.simpleMessage(
@@ -294,7 +159,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Uygulamadaki ürünlerin üreticisidir",
     ),
     "whatsapp": MessageLookupByLibrary.simpleMessage("WhatsApp"),
-    "whatsappAciklamasi": m3,
+    "whatsappAciklamasi": m4,
     "yeniurunler": MessageLookupByLibrary.simpleMessage("Yeni Ürünlere Göz At"),
     "yildizliKategoriler": MessageLookupByLibrary.simpleMessage(
       "Yıldızlı Kategoriler",

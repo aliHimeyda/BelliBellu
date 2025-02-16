@@ -216,7 +216,7 @@ class Iletisim extends StatelessWidget {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width - 30,
-                  height: 400,
+                  height: 420,
                   decoration: BoxDecoration(
                     color: Renkler.krem,
                     borderRadius: BorderRadius.circular(10),
@@ -367,7 +367,7 @@ class Iletisim extends StatelessWidget {
                 const SizedBox(height: 10),
                 Container(
                   width: MediaQuery.of(context).size.width - 30,
-                  height: 400,
+                  height: 420,
                   decoration: BoxDecoration(
                     color: Renkler.krem,
                     borderRadius: BorderRadius.circular(10),

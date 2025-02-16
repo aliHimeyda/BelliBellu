@@ -144,60 +144,9 @@
 
 "@begenebilecegin": { "description": "Beğenebileceğin ürünler butonu etiketi" },
 "begenebilecegin": "Beğenebileceğin Ürünler",
- "@urunler": {
-    "description": "Ürün açıklamaları listesi"
-  },
+
   
-  "urun1": "Paslanmaz çelikten üretilmiştir. Uzunluk: 107 cm, Genişlik: 191 cm.",
-  "urun2": "Ahşap malzemeden yapılmıştır. Uzunluk: 143 cm, Genişlik: 177 cm.",
-  "urun3": "Metal gövde, dayanıklı ve şık. Uzunluk: 160 cm, Genişlik: 105 cm.",
-  "urun4": "Plastik kaplama, hafif ve kullanışlı. Uzunluk: 198 cm, Genişlik: 158 cm.",
-  "urun5": "Doğal bambu kullanılmıştır. Uzunluk: 130 cm, Genişlik: 191 cm.",
-  "urun6": "Kırılmaz cam yüzey, şık tasarım. Uzunluk: 115 cm, Genişlik: 175 cm.",
-  "urun7": "Alüminyum çerçeve, suya dayanıklı. Uzunluk: 142 cm, Genişlik: 160 cm.",
-  "urun8": "Su geçirmez metal yapı. Uzunluk: 180 cm, Genişlik: 140 cm.",
-  "urun9": "Antibakteriyel yüzey kaplaması. Uzunluk: 120 cm, Genişlik: 150 cm.",
-  "urun10": "Hafif ve taşınabilir. Uzunluk: 110 cm, Genişlik: 180 cm.",
-  "urun11": "Şık ve modern tasarım. Uzunluk: 145 cm, Genişlik: 195 cm.",
-  "urun12": "Doğal meşe ahşap. Uzunluk: 155 cm, Genişlik: 180 cm.",
-  "urun13": "Çift katmanlı metal çerçeve. Uzunluk: 165 cm, Genişlik: 185 cm.",
-  "urun14": "Yüksek dayanıklılığa sahip plastik. Uzunluk: 140 cm, Genişlik: 190 cm.",
-  "urun15": "Elde işlenmiş ahşap detaylar. Uzunluk: 175 cm, Genişlik: 200 cm.",
-  "urun16": "Güçlendirilmiş cam yüzey. Uzunluk: 160 cm, Genişlik: 170 cm.",
-  "urun17": "Alüminyum kaplama, modern görünüm. Uzunluk: 155 cm, Genişlik: 165 cm.",
-  "urun18": "Su geçirmez özel kaplama. Uzunluk: 135 cm, Genişlik: 180 cm.",
-  "urun19": "Bakteri oluşumunu engelleyen yüzey. Uzunluk: 150 cm, Genişlik: 160 cm.",
-  "urun20": "Kolay taşınabilir hafif tasarım. Uzunluk: 145 cm, Genişlik: 185 cm.",
-  "urun21": "Yüksek kaliteli plastik malzeme. Uzunluk: 110 cm, Genişlik: 170 cm.",
-  "urun22": "Çizilmeye dayanıklı yüzey. Uzunluk: 120 cm, Genişlik: 180 cm.",
-  "urun23": "Kaymaz taban yapısı. Uzunluk: 140 cm, Genişlik: 190 cm.",
-  "urun24": "Şık ahşap desenli kaplama. Uzunluk: 160 cm, Genişlik: 200 cm.",
-  "urun25": "UV ışınlarına karşı dayanıklı. Uzunluk: 150 cm, Genişlik: 190 cm.",
-  "urun26": "Özel taş yüzey kaplaması. Uzunluk: 130 cm, Genişlik: 170 cm.",
-  "urun27": "Çok yönlü kullanım. Uzunluk: 125 cm, Genişlik: 175 cm.",
-  "urun28": "Şok emici özellik. Uzunluk: 145 cm, Genişlik: 180 cm.",
-  "urun29": "Çevre dostu üretim. Uzunluk: 135 cm, Genişlik: 165 cm.",
-  "urun30": "İleri seviye darbe dayanımı. Uzunluk: 155 cm, Genişlik: 185 cm.",
-  "urun31": "Güçlendirilmiş karbon fiber yüzey. Uzunluk: 140 cm, Genişlik: 175 cm.",
-  "urun32": "Ses emici kaplama. Uzunluk: 170 cm, Genişlik: 190 cm.",
-  "urun33": "Kolay temizlenebilir yapı. Uzunluk: 160 cm, Genişlik: 180 cm.",
-  "urun34": "Suya ve toza dayanıklı. Uzunluk: 155 cm, Genişlik: 195 cm.",
-  "urun35": "Paslanmaz çelik çerçeve. Uzunluk: 180 cm, Genişlik: 200 cm.",
-  "urun36": "Antistatik özellikli kaplama. Uzunluk: 145 cm, Genişlik: 175 cm.",
-  "urun37": "Ses geçirmez kaplama. Uzunluk: 135 cm, Genişlik: 160 cm.",
-  "urun38": "Bakteri tutmayan doku. Uzunluk: 120 cm, Genişlik: 150 cm.",
-  "urun39": "Kauçuk destekli alt yüzey. Uzunluk: 125 cm, Genişlik: 185 cm.",
-  "urun40": "Lüks mat yüzey. Uzunluk: 165 cm, Genişlik: 190 cm.",
-  "urun41": "Ekstra dayanıklı form. Uzunluk: 110 cm, Genişlik: 175 cm.",
-  "urun42": "Geniş kullanım alanına sahip. Uzunluk: 150 cm, Genişlik: 180 cm.",
-  "urun43": "Yüksek sıcaklığa dayanıklı. Uzunluk: 175 cm, Genişlik: 200 cm.",
-  "urun44": "Kendi kendini temizleme özelliği. Uzunluk: 155 cm, Genişlik: 180 cm.",
-  "urun45": "Ultra hafif karbon gövde. Uzunluk: 130 cm, Genişlik: 170 cm.",
-  "urun46": "Darbeye karşı yüksek mukavemet. Uzunluk: 165 cm, Genişlik: 195 cm.",
-  "urun47": "Dayanıklı polimer kaplama. Uzunluk: 145 cm, Genişlik: 175 cm.",
-  "urun48": "Güçlendirilmiş vidalı bağlantılar. Uzunluk: 125 cm, Genişlik: 160 cm.",
-  "urun49": "Mıknatıslı kilit mekanizması. Uzunluk: 135 cm, Genişlik: 185 cm.",
-  "urun50": "Titreşimi emen özel tasarım. Uzunluk: 180 cm, Genişlik: 200 cm.",
+  
   "@agirlik": { "description": "Ürün ağırlık etiketi" },
   "agirlik": "Ağırlık",
 
@@ -296,7 +245,36 @@
   "dil_ayarlari": "Dil Ayarları",
 
   "@gecmis": { "description": "Geçmiş etiketi" },
-  "gecmis": "Geçmiş"
+  "gecmis": "Geçmiş",
+    "@turkce": { "description": "Türkçe dili etiketi" },
+  "turkce": "Türkçe",
+
+  "@ingilizce": { "description": "İngilizce dili etiketi" },
+  "ingilizce": "İngilizce",
+
+  "@arapca": { "description": "Arapça dili etiketi" },
+  "arapca": "Arapça",
+  "@dil_ayarlari": { "description": "Dil ayarları etiketi" },
+  "dil_ayarlari": "Dil Ayarları",
+   "@uyari": { "description": "Uyarı etiketi" },
+  "uyari": "UYARI !",
+
+  "@daha_verimli_sonuc": { "description": "Daha verimli sonuç için uygulamayı kapatıp tekrar açınız" },
+  "daha_verimli_sonuc": "Daha verimli sonuç için uygulamayı kapatıp tekrar açınız.",
+    "@anladim": { "description": "Anladım butonu etiketi" },
+  "anladim": "Anladım",
+   "@urun_aciklamasi": {
+    "description": "Ürün açıklaması şablonu"
+  },
+  "urun_aciklamasi": "{kod}lu ürünümüz elle işlenmiş ve {materyal}'dan üretilmiştir. {ortam} ortamı için uygun bir {tur}'dir. Uzunluk: {uzunluk} cm, Genişlik: {genislik} cm.",
+  "@begenilen_urun_listesi_bos": {
+  "description": "Beğenilen ürün listesi boş mesajı"
+},
+"begenilen_urun_listesi_bos": "Beğenilen ürün listesi boş !!",
+"@cevrimici_asistanlik": {
+  "description": "Çevrimiçi asistanlık hizmeti duyurusu"
+},
+"cevrimici_asistanlik": "Çevrimiçi Asistanlık Hizmetimizi Yakında Sağlayacağız 😊"
 
 
 }
