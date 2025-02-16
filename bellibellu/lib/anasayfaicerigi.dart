@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bellibellu/bellekislemleri.dart';
 import 'package:bellibellu/ceviri.dart';
 import 'package:bellibellu/generated/l10n.dart';
@@ -8,10 +6,7 @@ import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Anasayfaicerigi extends StatefulWidget {
   const Anasayfaicerigi({super.key});
