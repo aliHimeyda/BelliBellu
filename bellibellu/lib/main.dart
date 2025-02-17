@@ -16,7 +16,6 @@ void main() async {
           Brightness.light, // 🔥 İkonları beyaz yapmak için
     ),
   );
-
   runApp(
     MultiProvider(
       providers: [

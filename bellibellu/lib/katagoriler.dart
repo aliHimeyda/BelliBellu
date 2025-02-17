@@ -4,6 +4,7 @@ import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 class Katagoriler extends StatelessWidget {
   const Katagoriler({super.key});
 
@@ -56,7 +57,7 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                          Center(
+                        Center(
                           child: Text(
                             S.of(context).ozelurunler,
                             style: TextStyle(
@@ -109,7 +110,7 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                          Center(
+                        Center(
                           child: Text(
                             S.of(context).urunSerisi2025,
                             style: TextStyle(
@@ -162,7 +163,7 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                          Center(
+                        Center(
                           child: Text(
                             S.of(context).enCokBegenilenler,
                             style: TextStyle(
@@ -213,7 +214,7 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                          Center(
+                        Center(
                           child: Text(
                             S.of(context).metal,
                             style: TextStyle(
@@ -264,9 +265,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                          Center(
+                        Center(
                           child: Text(
-                             S.of(context).ahsap,
+                            S.of(context).ahsap,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -315,7 +316,7 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                          Center(
+                        Center(
                           child: Text(
                             S.of(context).masa,
                             style: TextStyle(
@@ -366,7 +367,7 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                          Center(
+                        Center(
                           child: Text(
                             S.of(context).sandalye,
                             style: TextStyle(
@@ -417,7 +418,7 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                         Center(
+                        Center(
                           child: Text(
                             S.of(context).ev,
                             style: TextStyle(
@@ -468,9 +469,9 @@ class Katagoriler extends StatelessWidget {
                             ),
                           ),
                         ),
-                          Center(
+                        Center(
                           child: Text(
-                             S.of(context).ofis,
+                            S.of(context).ofis,
                             style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -504,9 +505,18 @@ class Katagoriler extends StatelessWidget {
 
       for (String kelime in kelimeler) {
         if (!(urun.urunAdi.toLowerCase().contains(kelime) ||
-            Cevirici.malzemeCevir(context, urun.materyali).toLowerCase().contains(kelime) ||
-            Cevirici.ortamCevir(context, urun.ortami).toLowerCase().contains(kelime) ||
-            Cevirici.turCevir(context, urun.turu).toLowerCase().contains(kelime))) {
+            Cevirici.malzemeCevir(
+              context,
+              urun.materyali,
+            ).toLowerCase().contains(kelime) ||
+            Cevirici.ortamCevir(
+              context,
+              urun.ortami,
+            ).toLowerCase().contains(kelime) ||
+            Cevirici.turCevir(
+              context,
+              urun.turu,
+            ).toLowerCase().contains(kelime))) {
           tumKelimelerEslesiyor =
               false; // Eğer bir kelime bile eşleşmezse, ürünü eklemeyiz.
           break;
