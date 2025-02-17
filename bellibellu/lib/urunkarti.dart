@@ -35,6 +35,8 @@ class _UrunkartiState extends State<Urunkarti> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        await ensongezilenekaydet(widget.urun.urunAdi);
+
         List<Serid> seridler = await seridlerigetir(context);
         // Sayfa açıldığında dinleyici ekleyerek kapat
         context.push(
@@ -154,6 +156,7 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        await ensongezilenekaydet(widget.urun.urunAdi);
         List<Serid> seridler = await seridlerigetir(context);
         // Sayfa açıldığında dinleyici ekleyerek kapat
         context.push(
@@ -271,15 +274,12 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
 void begenilenekaydet(String urunadi) async {
   final pref = await SharedPreferences.getInstance();
   List<String>? begenilen = await pref.getStringList('begenilenurunler');
-  
-
-
 
   for (int i = 0; i < Urunler.urunler.length; i++) {
     if (Urunler.urunler[i].urunAdi == urunadi) {
       Urunler.urunler[i].begenilmismi = true;
       Urunler.urunler[i].begenisayisi++;
-      
+
       if (begenilen.isEmpty) {
         await pref.setStringList('begenilenurunler', [
           Urunler.urunler[i].urunAdi,
@@ -289,6 +289,27 @@ void begenilenekaydet(String urunadi) async {
         await pref.setStringList('begenilenurunler', begenilen);
         debugPrint('keydedildi: $begenilen');
         break;
+      }
+    }
+  }
+}
+
+Future<void> ensongezilenekaydet(String urunadi) async {
+  final pref = await SharedPreferences.getInstance();
+  List<String>? ensongezilen = await pref.getStringList('ensongezilenurunler');
+  for (int i = 0; i < Urunler.urunler.length; i++) {
+    if (Urunler.urunler[i].urunAdi == urunadi) {
+      if (ensongezilen.isEmpty) {
+        await pref.setStringList('ensongezilenurunler', [
+          Urunler.urunler[i].urunAdi,
+        ]);
+      } else {
+        if (!(ensongezilen!.contains(Urunler.urunler[i].urunAdi))) {
+          ensongezilen.add(Urunler.urunler[i].urunAdi);
+          await pref.setStringList('ensongezilenurunler', ensongezilen);
+          debugPrint('keydedildi: $ensongezilen');
+          break;
+        }
       }
     }
   }

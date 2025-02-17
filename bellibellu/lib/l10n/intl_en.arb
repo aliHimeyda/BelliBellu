@@ -272,7 +272,11 @@
 "@cevrimici_asistanlik": {
   "description": "Online assistant service announcement"
 },
-"cevrimici_asistanlik": "We will provide our online assistant service soon 😊"
+"cevrimici_asistanlik": "We will provide our online assistant service soon 😊",
+ "@en_son_gezdigin_urunler": {
+    "description": "Displays the products recently viewed by the user."
+  },
+  "en_son_gezdigin_urunler": "Recently viewed products"
 
 
 }

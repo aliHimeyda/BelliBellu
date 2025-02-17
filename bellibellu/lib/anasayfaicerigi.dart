@@ -34,6 +34,16 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
   ValueNotifier<List<String>> filteredWords = ValueNotifier<List<String>>([]);
 
   void oneribul(String query) {
+    List<String> aramaonerileri = [
+      S.current.masaonerisi,
+      S.current.sandalyeonerisi,
+      S.current.metalmasaonerisi,
+      S.current.metalsandalyeonerisi,
+      S.current.ofisMobilyalarionerisi,
+      S.current.evMobilyaUrunlerionerisi,
+      S.current.kafeurunlerionerisi,
+      S.current.kafeurunlerionerisi,
+    ];
     if (query.isEmpty) {
       filteredWords.value = [];
     } else {
@@ -55,6 +65,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
   @override
   void initState() {
     _bellekguncelle;
+
     super.initState();
   }
 
@@ -90,7 +101,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                           width: MediaQuery.of(context).size.width - 10,
                           height: 190,
                           decoration: BoxDecoration(
-                            color: Renkler.kuyubeyaz,
+                            color: const Color(0xFF2e5d36),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: ClipRRect(
@@ -103,7 +114,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Renkler.kuyubeyaz,
+                            color: const Color(0xFF2e5d36),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           width:
@@ -121,7 +132,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Renkler.kuyubeyaz,
+                            color: const Color(0xFF2e5d36),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           width: MediaQuery.of(context).size.width - 10,
@@ -166,6 +177,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
             GoRouter.of(context).push('/tumurunler'); // Sayfaya nesneyi geçir)
           },
           child: Container(
+            color: Renkler.krem,
             width: MediaQuery.of(context).size.width,
             height: 145,
             margin: const EdgeInsets.only(
@@ -177,6 +189,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
             child: Image.asset(
               'assets/yildizliurunlerresmi.png',
               fit: BoxFit.contain,
+              alignment: Alignment.centerLeft,
             ),
           ),
         ),
@@ -186,10 +199,15 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
             debugPrint('tiklandi');
           },
           child: Container(
+            color: const Color(0xFF2e5d36),
             width: MediaQuery.of(context).size.width,
             height: 145,
             margin: const EdgeInsets.only(top: 1, left: 5, right: 5, bottom: 1),
-            child: Image.asset('assets/masalarresmi.png', fit: BoxFit.contain),
+            child: Image.asset(
+              'assets/masalarresmi.png',
+              fit: BoxFit.contain,
+              alignment: Alignment.centerLeft,
+            ),
           ),
         ),
         GestureDetector(
@@ -198,10 +216,15 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
             debugPrint('tiklandi');
           },
           child: Container(
+            color: const Color.fromARGB(255, 128, 70, 3),
             width: MediaQuery.of(context).size.width,
             height: 145,
             margin: const EdgeInsets.only(top: 1, left: 5, right: 5, bottom: 1),
-            child: Image.asset('assets/sandalyeresmi.png', fit: BoxFit.contain),
+            child: Image.asset(
+              'assets/sandalyeresmi.png',
+              fit: BoxFit.contain,
+              alignment: Alignment.centerLeft,
+            ),
           ),
         ),
         GestureDetector(
@@ -210,10 +233,15 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
             debugPrint('tiklandi');
           },
           child: Container(
+            color: Renkler.koyuMavi,
             width: MediaQuery.of(context).size.width,
             height: 145,
             margin: const EdgeInsets.only(top: 1, left: 5, right: 5, bottom: 1),
-            child: Image.asset('assets/ofisresmi.png', fit: BoxFit.contain),
+            child: Image.asset(
+              'assets/ofisresmi.png',
+              fit: BoxFit.contain,
+              alignment: Alignment.centerLeft,
+            ),
           ),
         ),
         GestureDetector(
@@ -222,10 +250,15 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
             debugPrint('tiklandi');
           },
           child: Container(
+            color: Renkler.bordo,
             width: MediaQuery.of(context).size.width,
             height: 145,
             margin: const EdgeInsets.only(top: 1, left: 5, right: 5, bottom: 1),
-            child: Image.asset('assets/evresmi.png', fit: BoxFit.contain),
+            child: Image.asset(
+              'assets/evresmi.png',
+              fit: BoxFit.contain,
+              alignment: Alignment.centerLeft,
+            ),
           ),
         ),
       ],
@@ -239,6 +272,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
           child: Container(
             color: Renkler.kahverengi,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Positioned(
                   top: 0,

@@ -951,6 +951,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Recently viewed products`
+  String get en_son_gezdigin_urunler {
+    return Intl.message(
+      'Recently viewed products',
+      name: 'en_son_gezdigin_urunler',
+      desc: 'Displays the products recently viewed by the user.',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

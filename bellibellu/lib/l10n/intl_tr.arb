@@ -274,7 +274,11 @@
 "@cevrimici_asistanlik": {
   "description": "Çevrimiçi asistanlık hizmeti duyurusu"
 },
-"cevrimici_asistanlik": "Çevrimiçi Asistanlık Hizmetimizi Yakında Sağlayacağız 😊"
+"cevrimici_asistanlik": "Çevrimiçi Asistanlık Hizmetimizi Yakında Sağlayacağız 😊",
+ "@en_son_gezdigin_urunler": {
+    "description": "Kullanıcının en son gezdiği ürünleri gösterir."
+  },
+  "en_son_gezdigin_urunler": "En son gezdiğin ürünler"
 
 
 }

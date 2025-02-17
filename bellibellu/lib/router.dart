@@ -1,5 +1,6 @@
 import 'package:bellibellu/anasayfa.dart';
 import 'package:bellibellu/anasayfaicerigi.dart';
+import 'package:bellibellu/ensongezilenler.dart';
 import 'package:bellibellu/iletisim.dart';
 import 'package:bellibellu/katagoriler.dart';
 import 'package:bellibellu/kaydedilenler.dart';
@@ -24,6 +25,7 @@ class Paths {
   static const String urundetaylari = '/urundetaylari';
   static const String tumurunler = '/tumurunler';
   static const String ozelurunler = '/ozelurunler';
+  static const String ensongezilenler = '/ensongezilenler';
 }
 
 // ignore: non_constant_identifier_names
@@ -118,6 +120,14 @@ final router = GoRouter(
                   seridler: seridler,
                 ); // Sayfaya nesneyi geçir
               },
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.ensongezilenler,
+              builder: (context, state) => Ensongezilenler(),
             ),
           ],
         ),

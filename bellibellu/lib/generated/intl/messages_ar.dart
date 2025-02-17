@@ -70,6 +70,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "enCokFavori": MessageLookupByLibrary.simpleMessage("الأكثر تفضيلاً"),
     "en_cok_begenilen": MessageLookupByLibrary.simpleMessage("الأكثر إعجابًا"),
     "en_dusuk_fiyat": MessageLookupByLibrary.simpleMessage("أقل سعر"),
+    "en_son_gezdigin_urunler": MessageLookupByLibrary.simpleMessage(
+      "المنتجات التي زرتها مؤخرًا",
+    ),
     "en_yeni_urunler": MessageLookupByLibrary.simpleMessage("أحدث المنتجات"),
     "en_yuksek_fiyat": MessageLookupByLibrary.simpleMessage("أعلى سعر"),
     "eposta": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني:"),

@@ -72,6 +72,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "enCokFavori": MessageLookupByLibrary.simpleMessage("Most Favorited"),
     "en_cok_begenilen": MessageLookupByLibrary.simpleMessage("Most Liked"),
     "en_dusuk_fiyat": MessageLookupByLibrary.simpleMessage("Lowest Price"),
+    "en_son_gezdigin_urunler": MessageLookupByLibrary.simpleMessage(
+      "Recently viewed products",
+    ),
     "en_yeni_urunler": MessageLookupByLibrary.simpleMessage("Newest Products"),
     "en_yuksek_fiyat": MessageLookupByLibrary.simpleMessage("Highest Price"),
     "eposta": MessageLookupByLibrary.simpleMessage("Email:"),

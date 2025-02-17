@@ -76,6 +76,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "En Çok Beğenilen",
     ),
     "en_dusuk_fiyat": MessageLookupByLibrary.simpleMessage("En Düşük Fiyat"),
+    "en_son_gezdigin_urunler": MessageLookupByLibrary.simpleMessage(
+      "En son gezdiğin ürünler",
+    ),
     "en_yeni_urunler": MessageLookupByLibrary.simpleMessage("En Yeni Ürünler"),
     "en_yuksek_fiyat": MessageLookupByLibrary.simpleMessage("En Yüksek Fiyat"),
     "eposta": MessageLookupByLibrary.simpleMessage("E-posta:"),
