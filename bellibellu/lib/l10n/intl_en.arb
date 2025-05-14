@@ -267,16 +267,48 @@
   "urun_aciklamasi": "Our product with code {kod} is handcrafted and made from {materyal}. It is a suitable {tur} for the {ortam} environment. Length: {uzunluk} cm, Width: {genislik} cm.",
   "@begenilen_urun_listesi_bos": {
   "description": "Favorite product list is empty message"
-},
-"begenilen_urun_listesi_bos": "Favorite product list is empty !!",
-"@cevrimici_asistanlik": {
-  "description": "Online assistant service announcement"
-},
-"cevrimici_asistanlik": "We will provide our online assistant service soon 😊",
- "@en_son_gezdigin_urunler": {
-    "description": "Displays the products recently viewed by the user."
   },
-  "en_son_gezdigin_urunler": "Recently viewed products"
-
-
+  "begenilen_urun_listesi_bos": "Favorite product list is empty !!",
+  "@cevrimici_asistanlik": {
+    "description": "Online assistant service announcement"
+  },
+  "cevrimici_asistanlik": "We will provide our online assistant service soon 😊",
+  "@en_son_gezdigin_urunler": {
+      "description": "Displays the products recently viewed by the user."
+    },
+  "en_son_gezdigin_urunler": "Recently viewed products",
+  "baslikDegerlendirme": "Product Reviews",
+  "tumunuGorButonu": "See All ({adet})",
+  "puanYorumMetni": "{puan} Points | {yorumSayisi} Reviews",
+  "saticiMetni": "Seller: {satici}",
+  "puan_yorum": "{puan} points & {yorumSayisi} reviews",
+  "onerilen_siralama": "Recommended Order",
+  "yeniden_eskiye": "Newest to Oldest",
+  "eskiden_yeniye": "Oldest to Newest",
+  "azalan_puan": "Highest Rating",
+  "artan_puan": "Lowest Rating",
+  "satici_bilgisi": "Seller: {satici}",
+   "soru_cevap": "Q&A ({adet})",
+  "sepete_ekle": "Add to Cart",
+  "soru_sor": "Ask a Question",
+   "sepetim": "My Cart",
+    "adet": "Quantity",
+  "toplam": "Total",
+  "sepeti_onayla": "Confirm Cart",
+  "sepetim_baslik": "My Cart - {urunSayisi} items",
+  "sepetteki_urun": "{urun} x{adet}",
+  "sepet_detayi": "Cart Details",
+  "ara_toplam": "Subtotal",
+  "kargo": "Shipping",
+  "indirim": "Discount",
+  "toplam_fiyat": "Total: {fiyat} TL",
+   "merhaba_kullanici": "Hello, {kullanici}",
+  "siparisler": "Orders",
+  "tekrar_satin_al": "Buy Again",
+  "hesap": "Account",
+  "listeler": "Lists",
+  "ayarlar": "Settings",
+  "bildirimler": "Notifications",
+  "dil_secimi": "Language",
+  "turkce_kodu": "EN"
 }

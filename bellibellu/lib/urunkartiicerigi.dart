@@ -1,6 +1,7 @@
 import 'package:bellibellu/ceviri.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/router.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
@@ -307,13 +308,30 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                         SizedBox(height: 30),
                         Padding(
                           padding: const EdgeInsets.only(left: 8),
-                          child: Text(
-                            S.of(context).sik_sorulanlar,
-                            style: TextStyle(
-                              color: Renkler.kahverengi,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          child: Row(
+                            children: [
+                              Text(
+                                S.of(context).sik_sorulanlar,
+                                style: TextStyle(
+                                  color: Renkler.kahverengi,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const Spacer(),
+                              TextButton(
+                                onPressed: () {
+                                  context.push(Paths.sorularsayfasi);
+                                },
+                                style: TextButton.styleFrom(
+                                  foregroundColor:
+                                      Renkler.kahverengi, // Yazı rengi
+                                ),
+                                child: Text(
+                                  S.of(context).tumunuGorButonu('adet'),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         sorucevaplar(context),
@@ -442,6 +460,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                         ),
+
                         Container(
                           height: 30,
                           decoration: BoxDecoration(
@@ -454,6 +473,82 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                           ),
                         ),
                         SizedBox(height: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Başlık ve Puan
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                                vertical: 8.0,
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    S.of(context).baslikDegerlendirme,
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  TextButton(
+                                    onPressed: () {
+                                      context.push(Paths.yorumlarsayfasi);
+                                    },
+                                    style: TextButton.styleFrom(
+                                      foregroundColor:
+                                          Renkler.kahverengi, // Yazı rengi
+                                    ),
+                                    child: Text(
+                                      S.of(context).tumunuGorButonu('adet'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            // Puan Göstergesi
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0,
+                              ),
+                              child: Text(
+                                S.of(context).puanYorumMetni('12', '3'),
+                                style: TextStyle(color: Renkler.kahverengi),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            // Yorumlar - kaydırılabilir
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: List.generate(
+                                  5,
+                                  (index) => yorumKarti(
+                                    isim: "M** P**",
+                                    tarih: "22 Eylül 2024",
+                                    yorum:
+                                        "Öncelikle çok güzel ve özenle paketlenmişti. Kargo da zamanında geldi. Saat gayet güzel ve çok hoş.",
+                                    satici: "Art Saatçilik",
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Renkler.kahverengi,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 20),
                         ozelkapakliserid(
                           context,
                           S.of(context).begenebilecegin,
@@ -1887,40 +1982,38 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Row(
-                children: [
-                  Icon(Icons.favorite, color: Renkler.kahverengi, size: 20),
-                  Text(
-                    '${widget.urun.begenisayisi}',
-                    style: TextStyle(fontSize: 15, color: Renkler.kahverengi),
+              SizedBox(
+                width: 100,
+                child: OutlinedButton(
+                  onPressed: () async {
+                    await sendSMS();
+                  },
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: Renkler.kahverengi),
+                    foregroundColor: Renkler.kahverengi,
                   ),
-                ],
-              ),
-              GestureDetector(
-                onTap: () async {
-                  await sendSMS();
-                },
-                child: Container(
-                  width: 150,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Renkler.kahverengi,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Text(
-                      S.of(context).iletisim,
-                      style: TextStyle(
-                        color: Renkler.krem,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                  child: Text(
+                    S.of(context).iletisim,
+                    style: TextStyle(fontSize: 11),
                   ),
                 ),
               ),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Sepete ekle işlemi
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Renkler.kahverengi,
+                  ),
+
+                  child: Text(S.of(context).sepete_ekle),
+                ),
+              ),
               Text(
-                '${widget.urun.urunfiyati}TL',
+                '(${widget.urun.urunfiyati})TL',
                 style: TextStyle(fontSize: 15, color: Renkler.kahverengi),
               ),
             ],
@@ -1986,5 +2079,50 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
         context,
       ).showSnackBar(SnackBar(content: Text("WhatsApp açılamadı! Hata: $e")));
     }
+  }
+
+  Widget yorumKarti({
+    required String isim,
+    required String tarih,
+    required String yorum,
+    required String satici,
+  }) {
+    return Container(
+      width: 280,
+      margin: const EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 198, 211, 187),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Renkler.kahverengi),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // İsim ve Tarih
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(isim, style: const TextStyle(fontWeight: FontWeight.bold)),
+              Text(
+                tarih,
+                style: const TextStyle(fontSize: 12, color: Renkler.kahverengi),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Yıldızlar
+          const SizedBox(height: 8),
+          // Yorum
+          Text(yorum, maxLines: 4, overflow: TextOverflow.ellipsis),
+          const SizedBox(height: 8),
+          Text(
+            "Satıcı: $satici",
+            style: const TextStyle(fontSize: 12, color: Renkler.kahverengi),
+          ),
+        ],
+      ),
+    );
   }
 }

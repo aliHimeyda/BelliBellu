@@ -6,10 +6,13 @@ import 'package:bellibellu/katagoriler.dart';
 import 'package:bellibellu/kaydedilenler.dart';
 import 'package:bellibellu/menu.dart';
 import 'package:bellibellu/ozelurunler.dart';
+import 'package:bellibellu/sepetsayfasi.dart';
+import 'package:bellibellu/sorularsayfasi.dart';
 import 'package:bellibellu/tumurunler.dart';
 import 'package:bellibellu/urunkartiicerigi.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
+import 'package:bellibellu/yorumlarsayfasi.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,6 +29,9 @@ class Paths {
   static const String tumurunler = '/tumurunler';
   static const String ozelurunler = '/ozelurunler';
   static const String ensongezilenler = '/ensongezilenler';
+  static const String yorumlarsayfasi = '/yorumlarsayfasi';
+  static const String sorularsayfasi = '/sorularsayfasi';
+  static const String sepetsayfasi = '/sepetsayfasi';
 }
 
 // ignore: non_constant_identifier_names
@@ -69,8 +75,8 @@ final router = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Paths.iletisim,
-              builder: (context, state) => const Iletisim(),
+              path: Paths.sepetsayfasi,
+              builder: (context, state) => SepetSayfasi(),
             ),
           ],
         ),
@@ -82,6 +88,15 @@ final router = GoRouter(
             ),
           ],
         ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.iletisim,
+              builder: (context, state) => const Iletisim(),
+            ),
+          ],
+        ),
+
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -128,6 +143,22 @@ final router = GoRouter(
             GoRoute(
               path: Paths.ensongezilenler,
               builder: (context, state) => Ensongezilenler(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.yorumlarsayfasi,
+              builder: (context, state) => YorumlarSayfasi(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.sorularsayfasi,
+              builder: (context, state) => Sorularsayfasi(),
             ),
           ],
         ),

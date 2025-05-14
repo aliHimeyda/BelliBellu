@@ -16,7 +16,10 @@ class Anasayfa extends StatelessWidget {
     final String currentPath = GoRouterState.of(context).uri.toString();
 
     // Eğer Ozelurunler sayfasındaysak, BottomNavigationBar'ı gösterme
-    bool showBottomNavBar = currentPath != Paths.urundetaylari;
+    bool showBottomNavBar =
+        currentPath != Paths.urundetaylari &&
+        currentPath != Paths.yorumlarsayfasi &&
+        currentPath != Paths.sorularsayfasi;
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
@@ -57,44 +60,53 @@ class Anasayfa extends StatelessWidget {
       // ),
       bottomNavigationBar:
           showBottomNavBar
-              ? NavigationBarTheme(
-                data: NavigationBarThemeData(
-                  labelTextStyle: WidgetStateProperty.all(
-                    const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
-                      color: Renkler.kahverengi,
+              ? Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: NavigationBarTheme(
+                  data: NavigationBarThemeData(
+                    labelTextStyle: WidgetStateProperty.all(
+                      const TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        color: Renkler.kahverengi,
+                      ),
                     ),
                   ),
-                ),
-                child: NavigationBar(
-                  backgroundColor: Renkler.kuyubeyaz,
-                  height: 60,
-                  selectedIndex: navigationShell.currentIndex,
-                  indicatorColor: Renkler.krem,
-                  onDestinationSelected: navigationShell.goBranch,
-                  destinations: [
-                    NavigationDestination(
-                      icon: Icon(Icons.home, color: Renkler.kahverengi),
-                      label: S.of(context).anasayfa,
-                    ),
-                    NavigationDestination(
-                      icon: Icon(Icons.category, color: Renkler.kahverengi),
-                      label: S.of(context).kategoriler,
-                    ),
-                    NavigationDestination(
-                      icon: Icon(Icons.favorite, color: Renkler.kahverengi),
-                      label: S.of(context).favorilerim,
-                    ),
-                    NavigationDestination(
-                      icon: Icon(Icons.contact_mail, color: Renkler.kahverengi),
-                      label: S.of(context).iletisim,
-                    ),
-                    NavigationDestination(
-                      icon: Icon(Icons.menu, color: Renkler.kahverengi),
-                      label: S.of(context).menu,
-                    ),
-                  ],
+                  child: NavigationBar(
+                    backgroundColor: Renkler.kuyubeyaz,
+                    height: 60,
+                    selectedIndex: navigationShell.currentIndex,
+                    indicatorColor: Renkler.krem,
+                    onDestinationSelected: navigationShell.goBranch,
+                    destinations: [
+                      NavigationDestination(
+                        icon: Icon(Icons.home, color: Renkler.kahverengi),
+                        label: S.of(context).anasayfa,
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.category, color: Renkler.kahverengi),
+                        label: S.of(context).kategoriler,
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Icons.favorite, color: Renkler.kahverengi),
+                        label: S.of(context).favorilerim,
+                      ),
+                      NavigationDestination(
+                        icon: Icon(
+                          Icons.shopping_cart,
+                          color: Renkler.kahverengi,
+                        ),
+                        label: S.of(context).sepetim,
+                      ),
+                      NavigationDestination(
+                        icon: Icon(
+                          Icons.person_outlined,
+                          color: Renkler.kahverengi,
+                        ),
+                        label: S.of(context).menu,
+                      ),
+                    ],
+                  ),
                 ),
               )
               : null, // Eğer BottomNavigationBar gösterilmeyecekse, null döndür

@@ -961,6 +961,276 @@ class S {
       args: [],
     );
   }
+
+  /// `Product Reviews`
+  String get baslikDegerlendirme {
+    return Intl.message(
+      'Product Reviews',
+      name: 'baslikDegerlendirme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See All ({adet})`
+  String tumunuGorButonu(Object adet) {
+    return Intl.message(
+      'See All ($adet)',
+      name: 'tumunuGorButonu',
+      desc: '',
+      args: [adet],
+    );
+  }
+
+  /// `{puan} Points | {yorumSayisi} Reviews`
+  String puanYorumMetni(Object puan, Object yorumSayisi) {
+    return Intl.message(
+      '$puan Points | $yorumSayisi Reviews',
+      name: 'puanYorumMetni',
+      desc: '',
+      args: [puan, yorumSayisi],
+    );
+  }
+
+  /// `Seller: {satici}`
+  String saticiMetni(Object satici) {
+    return Intl.message(
+      'Seller: $satici',
+      name: 'saticiMetni',
+      desc: '',
+      args: [satici],
+    );
+  }
+
+  /// `{puan} points & {yorumSayisi} reviews`
+  String puan_yorum(Object puan, Object yorumSayisi) {
+    return Intl.message(
+      '$puan points & $yorumSayisi reviews',
+      name: 'puan_yorum',
+      desc: '',
+      args: [puan, yorumSayisi],
+    );
+  }
+
+  /// `Recommended Order`
+  String get onerilen_siralama {
+    return Intl.message(
+      'Recommended Order',
+      name: 'onerilen_siralama',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Newest to Oldest`
+  String get yeniden_eskiye {
+    return Intl.message(
+      'Newest to Oldest',
+      name: 'yeniden_eskiye',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Oldest to Newest`
+  String get eskiden_yeniye {
+    return Intl.message(
+      'Oldest to Newest',
+      name: 'eskiden_yeniye',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Highest Rating`
+  String get azalan_puan {
+    return Intl.message(
+      'Highest Rating',
+      name: 'azalan_puan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lowest Rating`
+  String get artan_puan {
+    return Intl.message(
+      'Lowest Rating',
+      name: 'artan_puan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seller: {satici}`
+  String satici_bilgisi(Object satici) {
+    return Intl.message(
+      'Seller: $satici',
+      name: 'satici_bilgisi',
+      desc: '',
+      args: [satici],
+    );
+  }
+
+  /// `Q&A ({adet})`
+  String soru_cevap(Object adet) {
+    return Intl.message(
+      'Q&A ($adet)',
+      name: 'soru_cevap',
+      desc: '',
+      args: [adet],
+    );
+  }
+
+  /// `Add to Cart`
+  String get sepete_ekle {
+    return Intl.message('Add to Cart', name: 'sepete_ekle', desc: '', args: []);
+  }
+
+  /// `Ask a Question`
+  String get soru_sor {
+    return Intl.message('Ask a Question', name: 'soru_sor', desc: '', args: []);
+  }
+
+  /// `My Cart`
+  String get sepetim {
+    return Intl.message('My Cart', name: 'sepetim', desc: '', args: []);
+  }
+
+  /// `Quantity`
+  String get adet {
+    return Intl.message('Quantity', name: 'adet', desc: '', args: []);
+  }
+
+  /// `Total`
+  String get toplam {
+    return Intl.message('Total', name: 'toplam', desc: '', args: []);
+  }
+
+  /// `Confirm Cart`
+  String get sepeti_onayla {
+    return Intl.message(
+      'Confirm Cart',
+      name: 'sepeti_onayla',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Cart - {urunSayisi} items`
+  String sepetim_baslik(Object urunSayisi) {
+    return Intl.message(
+      'My Cart - $urunSayisi items',
+      name: 'sepetim_baslik',
+      desc: '',
+      args: [urunSayisi],
+    );
+  }
+
+  /// `{urun} x{adet}`
+  String sepetteki_urun(Object urun, Object adet) {
+    return Intl.message(
+      '$urun x$adet',
+      name: 'sepetteki_urun',
+      desc: '',
+      args: [urun, adet],
+    );
+  }
+
+  /// `Cart Details`
+  String get sepet_detayi {
+    return Intl.message(
+      'Cart Details',
+      name: 'sepet_detayi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subtotal`
+  String get ara_toplam {
+    return Intl.message('Subtotal', name: 'ara_toplam', desc: '', args: []);
+  }
+
+  /// `Shipping`
+  String get kargo {
+    return Intl.message('Shipping', name: 'kargo', desc: '', args: []);
+  }
+
+  /// `Discount`
+  String get indirim {
+    return Intl.message('Discount', name: 'indirim', desc: '', args: []);
+  }
+
+  /// `Total: {fiyat} TL`
+  String toplam_fiyat(Object fiyat) {
+    return Intl.message(
+      'Total: $fiyat TL',
+      name: 'toplam_fiyat',
+      desc: '',
+      args: [fiyat],
+    );
+  }
+
+  /// `Hello, {kullanici}`
+  String merhaba_kullanici(Object kullanici) {
+    return Intl.message(
+      'Hello, $kullanici',
+      name: 'merhaba_kullanici',
+      desc: '',
+      args: [kullanici],
+    );
+  }
+
+  /// `Orders`
+  String get siparisler {
+    return Intl.message('Orders', name: 'siparisler', desc: '', args: []);
+  }
+
+  /// `Buy Again`
+  String get tekrar_satin_al {
+    return Intl.message(
+      'Buy Again',
+      name: 'tekrar_satin_al',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get hesap {
+    return Intl.message('Account', name: 'hesap', desc: '', args: []);
+  }
+
+  /// `Lists`
+  String get listeler {
+    return Intl.message('Lists', name: 'listeler', desc: '', args: []);
+  }
+
+  /// `Settings`
+  String get ayarlar {
+    return Intl.message('Settings', name: 'ayarlar', desc: '', args: []);
+  }
+
+  /// `Notifications`
+  String get bildirimler {
+    return Intl.message(
+      'Notifications',
+      name: 'bildirimler',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get dil_secimi {
+    return Intl.message('Language', name: 'dil_secimi', desc: '', args: []);
+  }
+
+  /// `EN`
+  String get turkce_kodu {
+    return Intl.message('EN', name: 'turkce_kodu', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

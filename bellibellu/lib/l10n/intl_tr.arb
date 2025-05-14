@@ -278,7 +278,41 @@
  "@en_son_gezdigin_urunler": {
     "description": "Kullanıcının en son gezdiği ürünleri gösterir."
   },
-  "en_son_gezdigin_urunler": "En son gezdiğin ürünler"
+  "en_son_gezdigin_urunler": "En son gezdiğin ürünler",
 
-
+  
+  "baslikDegerlendirme": "Ürün Değerlendirmeleri",
+  "tumunuGorButonu": "Tümü ({adet})",
+  "puanYorumMetni": "{puan} Puan | {yorumSayisi} Yorum",
+  "saticiMetni": "Satıcı: {satici}",
+  "puan_yorum": "{puan} puan & {yorumSayisi} yorum",
+  "onerilen_siralama": "Önerilen Sıralama",
+  "yeniden_eskiye": "Yeniden Eskiye",
+  "eskiden_yeniye": "Eskiden Yeniye",
+  "azalan_puan": "Azalan Puan",
+  "artan_puan": "Artan Puan",
+  "satici_bilgisi": "Satıcı: {satici}",
+   "soru_cevap": "Soru & Cevap ({adet})",
+  "sepete_ekle": "Sepete Ekle",
+   "soru_sor": "Soru Sor",
+   "sepetim": "Sepetim",
+    "adet": "Adet",
+  "toplam": "Toplam",
+  "sepeti_onayla": "Sepeti Onayla",
+  "sepetim_baslik": "Sepetim - {urunSayisi} ürün",
+  "sepetteki_urun": "{urun} x{adet}",
+  "sepet_detayi": "Sepet Detayı",
+  "ara_toplam": "Ara Toplam",
+  "kargo": "Kargo",
+  "indirim": "İndirim",
+  "toplam_fiyat": "Toplam: {fiyat} TL",
+   "merhaba_kullanici": "Merhaba, {kullanici}",
+  "siparisler": "Siparişler",
+  "tekrar_satin_al": "Tekrar Satın Alın",
+  "hesap": "Hesap",
+  "listeler": "Listeler",
+  "ayarlar": "Ayarlar",
+  "bildirimler": "Bildirimler",
+  "dil_secimi": "Dil",
+  "turkce_kodu": "TR"
 }
