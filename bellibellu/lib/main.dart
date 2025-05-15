@@ -1,5 +1,6 @@
 import 'package:bellibellu/dildestegiProvaider.dart';
 import 'package:bellibellu/generated/l10n.dart';
+import 'package:bellibellu/loginsayfasi.dart';
 import 'package:bellibellu/logosayfasi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

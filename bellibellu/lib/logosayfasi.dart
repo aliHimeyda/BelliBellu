@@ -5,6 +5,16 @@ import 'package:bellibellu/router.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class Cihazbellegi {
+  static bool? girisyapildimi;
+  static Future<bool?> giriskontrolu() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? repeat = prefs.getBool('girisbilgisi');
+    return repeat;
+  }
+}
 
 class Logosayfasi extends StatefulWidget {
   const Logosayfasi({super.key});
@@ -16,6 +26,7 @@ class Logosayfasi extends StatefulWidget {
 class _LogosayfasiState extends State<Logosayfasi> {
   @override
   void initState() {
+    giriskontrolu();
     dataal();
 
     Future.delayed(const Duration(seconds: 3), () {
@@ -41,6 +52,11 @@ class _LogosayfasiState extends State<Logosayfasi> {
     });
 
     super.initState();
+  }
+
+  void giriskontrolu() async {
+    Cihazbellegi.girisyapildimi = await Cihazbellegi.giriskontrolu();
+    debugPrint('giris bilgisi: ${Cihazbellegi.girisyapildimi}');
   }
 
   void dataal() async {

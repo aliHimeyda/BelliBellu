@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "ad": MessageLookupByLibrary.simpleMessage("Name"),
+    "ad_soyad": MessageLookupByLibrary.simpleMessage("Your Name and Surname"),
     "adet": MessageLookupByLibrary.simpleMessage("Quantity"),
     "agirlik": MessageLookupByLibrary.simpleMessage("Weight"),
     "ahsap": MessageLookupByLibrary.simpleMessage("Wood"),
@@ -97,9 +98,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "daha_verimli_sonuc": MessageLookupByLibrary.simpleMessage(
       "For better results, please close and reopen the application.",
     ),
+    "devam_google": MessageLookupByLibrary.simpleMessage(
+      "Continue with Google",
+    ),
     "dil_ayarlari": MessageLookupByLibrary.simpleMessage("Language Settings"),
     "dil_secimi": MessageLookupByLibrary.simpleMessage("Language"),
+    "dogum_tarihi": MessageLookupByLibrary.simpleMessage("Date of Birth"),
     "efsaneUrunler": MessageLookupByLibrary.simpleMessage("Legendary Products"),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
     "enCokBegenilenler": MessageLookupByLibrary.simpleMessage("Most Liked"),
     "enCokFavori": MessageLookupByLibrary.simpleMessage("Most Favorited"),
     "en_cok_begenilen": MessageLookupByLibrary.simpleMessage("Most Liked"),
@@ -125,19 +131,30 @@ class MessageLookup extends MessageLookupByLibrary {
     "fiyata_gore": MessageLookupByLibrary.simpleMessage("By Price :"),
     "garanti_suresi": MessageLookupByLibrary.simpleMessage("WARRANTY PERIOD :"),
     "gecmis": MessageLookupByLibrary.simpleMessage("History"),
+    "giris_yap": MessageLookupByLibrary.simpleMessage("Login"),
     "gmail": MessageLookupByLibrary.simpleMessage("Gmail"),
     "haritada": MessageLookupByLibrary.simpleMessage("On map"),
     "hesap": MessageLookupByLibrary.simpleMessage("Account"),
+    "hosgeldiniz": MessageLookupByLibrary.simpleMessage("Welcome!"),
+    "id_numarasi": MessageLookupByLibrary.simpleMessage("ID Number (optional)"),
     "iletisim": MessageLookupByLibrary.simpleMessage("CONTACT"),
     "iletisimBasligi": MessageLookupByLibrary.simpleMessage("Contact:"),
     "indirim": MessageLookupByLibrary.simpleMessage("Discount"),
     "ingilizce": MessageLookupByLibrary.simpleMessage("English"),
+    "kabul_ettiniz": MessageLookupByLibrary.simpleMessage("."),
     "kafe": MessageLookupByLibrary.simpleMessage("Cafe"),
     "kafeurunlerionerisi": MessageLookupByLibrary.simpleMessage(
       "Cafe furniture",
     ),
     "kargo": MessageLookupByLibrary.simpleMessage("Shipping"),
     "kategoriler": MessageLookupByLibrary.simpleMessage("Categories"),
+    "kayit_ol": MessageLookupByLibrary.simpleMessage("Sign Up"),
+    "kvkk": MessageLookupByLibrary.simpleMessage(
+      "Personal Data Protection Law",
+    ),
+    "kvkk_onay": MessageLookupByLibrary.simpleMessage(
+      "By clicking Sign Up, you accept the ",
+    ),
     "listeler": MessageLookupByLibrary.simpleMessage("Lists"),
     "masa": MessageLookupByLibrary.simpleMessage("Table"),
     "masaonerisi": MessageLookupByLibrary.simpleMessage("Table"),
@@ -148,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "metal": MessageLookupByLibrary.simpleMessage("Metal"),
     "metalmasaonerisi": MessageLookupByLibrary.simpleMessage("Metal table"),
     "metalsandalyeonerisi": MessageLookupByLibrary.simpleMessage("Metal chair"),
+    "musteri": MessageLookupByLibrary.simpleMessage("Customer"),
     "ofis": MessageLookupByLibrary.simpleMessage("Office"),
     "ofisMobilyalari": MessageLookupByLibrary.simpleMessage("Office Furniture"),
     "ofisMobilyalarionerisi": MessageLookupByLibrary.simpleMessage(
@@ -167,6 +185,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "puan_yorum": m5,
     "sandalye": MessageLookupByLibrary.simpleMessage("Chair"),
     "sandalyeonerisi": MessageLookupByLibrary.simpleMessage("Chair"),
+    "satici": MessageLookupByLibrary.simpleMessage("Seller"),
     "saticiMetni": m6,
     "satici_bilgisi": m7,
     "sepet_detayi": MessageLookupByLibrary.simpleMessage("Cart Details"),
@@ -175,6 +194,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sepetim": MessageLookupByLibrary.simpleMessage("My Cart"),
     "sepetim_baslik": m8,
     "sepetteki_urun": m9,
+    "sifre": MessageLookupByLibrary.simpleMessage("Enter your Password"),
     "sik_sorulanlar": MessageLookupByLibrary.simpleMessage(
       "FREQUENTLY ASKED QUESTIONS",
     ),
@@ -182,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sirala": MessageLookupByLibrary.simpleMessage("Sort"),
     "soru_cevap": m10,
     "soru_sor": MessageLookupByLibrary.simpleMessage("Ask a Question"),
+    "tekrar_hosgeldiniz": MessageLookupByLibrary.simpleMessage("Welcome Back!"),
     "tekrar_satin_al": MessageLookupByLibrary.simpleMessage("Buy Again"),
     "telefon": MessageLookupByLibrary.simpleMessage("Phone:"),
     "tema": MessageLookupByLibrary.simpleMessage("Theme"),
@@ -210,6 +231,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "The warranty period of the products is 1 year.",
     ),
     "uyari": MessageLookupByLibrary.simpleMessage("WARNING !"),
+    "uyelik_sozlesmesi": MessageLookupByLibrary.simpleMessage(
+      "Membership Agreement",
+    ),
     "uygula": MessageLookupByLibrary.simpleMessage("Apply"),
     "uygulamaAdi": MessageLookupByLibrary.simpleMessage("BelliBellu"),
     "uygulamaBasligi": MessageLookupByLibrary.simpleMessage(
@@ -218,6 +242,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "uygulamadaki_urunlerin_ureticisidir": MessageLookupByLibrary.simpleMessage(
       "The manufacturer of the products in the application",
     ),
+    "ve": MessageLookupByLibrary.simpleMessage(" and the "),
+    "veya": MessageLookupByLibrary.simpleMessage("or"),
     "whatsapp": MessageLookupByLibrary.simpleMessage("WhatsApp"),
     "whatsappAciklamasi": m14,
     "yeniden_eskiye": MessageLookupByLibrary.simpleMessage("Newest to Oldest"),

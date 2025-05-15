@@ -310,6 +310,24 @@
   "ayarlar": "الإعدادات",
   "bildirimler": "الإشعارات",
   "dil_secimi": "اللغة",
-  "turkce_kodu": "AR"
+  "turkce_kodu": "AR",
+  "satici": "البائع",
+  "musteri": "العميل",
+  "giris_yap": "تسجيل الدخول",
+  "kayit_ol": "إنشاء حساب",
+  "tekrar_hosgeldiniz": "مرحبًا بعودتك!",
+  "hosgeldiniz": "أهلاً بك!",
+  "ad_soyad": "الاسم الكامل",
+  "id_numarasi": "رقم المعرف (اختياري)",
+  "email": "البريد الإلكتروني",
+  "sifre": "أدخل كلمة المرور",
+  "devam_google": "المتابعة عبر Google",
+  "veya": "أو",
+  "kvkk_onay": "بالضغط على زر التسجيل، أنت توافق على ",
+  "kvkk": "قانون حماية البيانات الشخصية",
+  "ve": " و ",
+  "uyelik_sozlesmesi": "اتفاقية العضوية",
+  "kabul_ettiniz": ".",
+   "dogum_tarihi": "تاريخ الميلاد"
 }
 

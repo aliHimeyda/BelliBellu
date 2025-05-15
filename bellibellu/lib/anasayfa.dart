@@ -19,7 +19,8 @@ class Anasayfa extends StatelessWidget {
     bool showBottomNavBar =
         currentPath != Paths.urundetaylari &&
         currentPath != Paths.yorumlarsayfasi &&
-        currentPath != Paths.sorularsayfasi;
+        currentPath != Paths.sorularsayfasi &&
+        currentPath != Paths.loginsayfasi;
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,

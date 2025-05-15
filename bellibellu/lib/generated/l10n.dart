@@ -1231,6 +1231,141 @@ class S {
   String get turkce_kodu {
     return Intl.message('EN', name: 'turkce_kodu', desc: '', args: []);
   }
+
+  /// `Seller`
+  String get satici {
+    return Intl.message('Seller', name: 'satici', desc: '', args: []);
+  }
+
+  /// `Customer`
+  String get musteri {
+    return Intl.message('Customer', name: 'musteri', desc: '', args: []);
+  }
+
+  /// `Login`
+  String get giris_yap {
+    return Intl.message('Login', name: 'giris_yap', desc: '', args: []);
+  }
+
+  /// `Sign Up`
+  String get kayit_ol {
+    return Intl.message('Sign Up', name: 'kayit_ol', desc: '', args: []);
+  }
+
+  /// `Welcome Back!`
+  String get tekrar_hosgeldiniz {
+    return Intl.message(
+      'Welcome Back!',
+      name: 'tekrar_hosgeldiniz',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome!`
+  String get hosgeldiniz {
+    return Intl.message('Welcome!', name: 'hosgeldiniz', desc: '', args: []);
+  }
+
+  /// `Your Name and Surname`
+  String get ad_soyad {
+    return Intl.message(
+      'Your Name and Surname',
+      name: 'ad_soyad',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID Number (optional)`
+  String get id_numarasi {
+    return Intl.message(
+      'ID Number (optional)',
+      name: 'id_numarasi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message('Email', name: 'email', desc: '', args: []);
+  }
+
+  /// `Enter your Password`
+  String get sifre {
+    return Intl.message(
+      'Enter your Password',
+      name: 'sifre',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Google`
+  String get devam_google {
+    return Intl.message(
+      'Continue with Google',
+      name: 'devam_google',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or`
+  String get veya {
+    return Intl.message('or', name: 'veya', desc: '', args: []);
+  }
+
+  /// `By clicking Sign Up, you accept the `
+  String get kvkk_onay {
+    return Intl.message(
+      'By clicking Sign Up, you accept the ',
+      name: 'kvkk_onay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Personal Data Protection Law`
+  String get kvkk {
+    return Intl.message(
+      'Personal Data Protection Law',
+      name: 'kvkk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` and the `
+  String get ve {
+    return Intl.message(' and the ', name: 've', desc: '', args: []);
+  }
+
+  /// `Membership Agreement`
+  String get uyelik_sozlesmesi {
+    return Intl.message(
+      'Membership Agreement',
+      name: 'uyelik_sozlesmesi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `.`
+  String get kabul_ettiniz {
+    return Intl.message('.', name: 'kabul_ettiniz', desc: '', args: []);
+  }
+
+  /// `Date of Birth`
+  String get dogum_tarihi {
+    return Intl.message(
+      'Date of Birth',
+      name: 'dogum_tarihi',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

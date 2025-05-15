@@ -54,6 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "ad": MessageLookupByLibrary.simpleMessage("Ad"),
+    "ad_soyad": MessageLookupByLibrary.simpleMessage("Adınız ve Soyadınız"),
     "adet": MessageLookupByLibrary.simpleMessage("Adet"),
     "agirlik": MessageLookupByLibrary.simpleMessage("Ağırlık"),
     "ahsap": MessageLookupByLibrary.simpleMessage("Ahşap"),
@@ -95,9 +96,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "daha_verimli_sonuc": MessageLookupByLibrary.simpleMessage(
       "Daha verimli sonuç için uygulamayı kapatıp tekrar açınız.",
     ),
+    "devam_google": MessageLookupByLibrary.simpleMessage("Google ile devam et"),
     "dil_ayarlari": MessageLookupByLibrary.simpleMessage("Dil Ayarları"),
     "dil_secimi": MessageLookupByLibrary.simpleMessage("Dil"),
+    "dogum_tarihi": MessageLookupByLibrary.simpleMessage("Doğum Tarihi"),
     "efsaneUrunler": MessageLookupByLibrary.simpleMessage("Efsane Ürünler"),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
     "enCokBegenilenler": MessageLookupByLibrary.simpleMessage(
       "En Çok Beğenilenler",
     ),
@@ -127,19 +131,34 @@ class MessageLookup extends MessageLookupByLibrary {
     "fiyata_gore": MessageLookupByLibrary.simpleMessage("Fiyata Göre :"),
     "garanti_suresi": MessageLookupByLibrary.simpleMessage("GARANTİ SÜRESİ :"),
     "gecmis": MessageLookupByLibrary.simpleMessage("Geçmiş"),
+    "giris_yap": MessageLookupByLibrary.simpleMessage("Giriş Yap"),
     "gmail": MessageLookupByLibrary.simpleMessage("Gmail"),
     "haritada": MessageLookupByLibrary.simpleMessage("Haritada"),
     "hesap": MessageLookupByLibrary.simpleMessage("Hesap"),
+    "hosgeldiniz": MessageLookupByLibrary.simpleMessage("Hoş Geldiniz!"),
+    "id_numarasi": MessageLookupByLibrary.simpleMessage(
+      "ID numarası (isteğe bağlı)",
+    ),
     "iletisim": MessageLookupByLibrary.simpleMessage("İLETİŞİM"),
     "iletisimBasligi": MessageLookupByLibrary.simpleMessage("İletişim:"),
     "indirim": MessageLookupByLibrary.simpleMessage("İndirim"),
     "ingilizce": MessageLookupByLibrary.simpleMessage("İngilizce"),
+    "kabul_ettiniz": MessageLookupByLibrary.simpleMessage(
+      " kabul etmiş sayılırsınız.",
+    ),
     "kafe": MessageLookupByLibrary.simpleMessage("Kafe"),
     "kafeurunlerionerisi": MessageLookupByLibrary.simpleMessage(
       "Kafe mobilyası",
     ),
     "kargo": MessageLookupByLibrary.simpleMessage("Kargo"),
     "kategoriler": MessageLookupByLibrary.simpleMessage("Kategoriler"),
+    "kayit_ol": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
+    "kvkk": MessageLookupByLibrary.simpleMessage(
+      "Kişisel Verilerin Korunması Kanunu",
+    ),
+    "kvkk_onay": MessageLookupByLibrary.simpleMessage(
+      "Kayıtlı butonuna basarak ",
+    ),
     "listeler": MessageLookupByLibrary.simpleMessage("Listeler"),
     "masa": MessageLookupByLibrary.simpleMessage("Masa"),
     "masaonerisi": MessageLookupByLibrary.simpleMessage("Masa"),
@@ -152,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "metalsandalyeonerisi": MessageLookupByLibrary.simpleMessage(
       "Metal sandalye",
     ),
+    "musteri": MessageLookupByLibrary.simpleMessage("Müşteri"),
     "ofis": MessageLookupByLibrary.simpleMessage("Ofis"),
     "ofisMobilyalari": MessageLookupByLibrary.simpleMessage("Ofis Mobilyaları"),
     "ofisMobilyalarionerisi": MessageLookupByLibrary.simpleMessage(
@@ -169,6 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "puan_yorum": m5,
     "sandalye": MessageLookupByLibrary.simpleMessage("Sandalye"),
     "sandalyeonerisi": MessageLookupByLibrary.simpleMessage("Sandalye"),
+    "satici": MessageLookupByLibrary.simpleMessage("Satıcı"),
     "saticiMetni": m6,
     "satici_bilgisi": m7,
     "sepet_detayi": MessageLookupByLibrary.simpleMessage("Sepet Detayı"),
@@ -177,11 +198,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "sepetim": MessageLookupByLibrary.simpleMessage("Sepetim"),
     "sepetim_baslik": m8,
     "sepetteki_urun": m9,
+    "sifre": MessageLookupByLibrary.simpleMessage("Şifrenizi Girin"),
     "sik_sorulanlar": MessageLookupByLibrary.simpleMessage("SIK SORULANLAR"),
     "siparisler": MessageLookupByLibrary.simpleMessage("Siparişler"),
     "sirala": MessageLookupByLibrary.simpleMessage("Sırala"),
     "soru_cevap": m10,
     "soru_sor": MessageLookupByLibrary.simpleMessage("Soru Sor"),
+    "tekrar_hosgeldiniz": MessageLookupByLibrary.simpleMessage(
+      "Tekrar Hoş Geldiniz!",
+    ),
     "tekrar_satin_al": MessageLookupByLibrary.simpleMessage(
       "Tekrar Satın Alın",
     ),
@@ -212,6 +237,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Ürünlerin garanti süresi 1 yıldır.",
     ),
     "uyari": MessageLookupByLibrary.simpleMessage("UYARI !"),
+    "uyelik_sozlesmesi": MessageLookupByLibrary.simpleMessage(
+      "Üyelik Sözleşmesi’ni",
+    ),
     "uygula": MessageLookupByLibrary.simpleMessage("Uygula"),
     "uygulamaAdi": MessageLookupByLibrary.simpleMessage("BelliBellu"),
     "uygulamaBasligi": MessageLookupByLibrary.simpleMessage(
@@ -220,6 +248,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "uygulamadaki_urunlerin_ureticisidir": MessageLookupByLibrary.simpleMessage(
       "Uygulamadaki ürünlerin üreticisidir",
     ),
+    "ve": MessageLookupByLibrary.simpleMessage("’nu ve "),
+    "veya": MessageLookupByLibrary.simpleMessage("veya"),
     "whatsapp": MessageLookupByLibrary.simpleMessage("WhatsApp"),
     "whatsappAciklamasi": m14,
     "yeniden_eskiye": MessageLookupByLibrary.simpleMessage("Yeniden Eskiye"),

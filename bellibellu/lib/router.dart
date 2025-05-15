@@ -4,6 +4,8 @@ import 'package:bellibellu/ensongezilenler.dart';
 import 'package:bellibellu/iletisim.dart';
 import 'package:bellibellu/katagoriler.dart';
 import 'package:bellibellu/kaydedilenler.dart';
+import 'package:bellibellu/loginsayfasi.dart';
+import 'package:bellibellu/logosayfasi.dart';
 import 'package:bellibellu/menu.dart';
 import 'package:bellibellu/ozelurunler.dart';
 import 'package:bellibellu/sepetsayfasi.dart';
@@ -32,6 +34,7 @@ class Paths {
   static const String yorumlarsayfasi = '/yorumlarsayfasi';
   static const String sorularsayfasi = '/sorularsayfasi';
   static const String sepetsayfasi = '/sepetsayfasi';
+  static const String loginsayfasi = '/loginsayfasi';
 }
 
 // ignore: non_constant_identifier_names
@@ -39,7 +42,11 @@ final router = GoRouter(
   refreshListenable: KaydedilenUrunler(), // Değişiklikleri dinle
   navigatorKey: routerkey,
 
-  initialLocation: Paths.anasayfa,
+  initialLocation:
+      Cihazbellegi.girisyapildimi == null ||
+              Cihazbellegi.girisyapildimi == false
+          ? Paths.loginsayfasi
+          : Paths.anasayfa,
   routes: [
     StatefulShellRoute.indexedStack(
       builder:
@@ -159,6 +166,14 @@ final router = GoRouter(
             GoRoute(
               path: Paths.sorularsayfasi,
               builder: (context, state) => Sorularsayfasi(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.loginsayfasi,
+              builder: (context, state) => Loginpage(),
             ),
           ],
         ),
