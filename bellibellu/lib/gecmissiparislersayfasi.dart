@@ -151,11 +151,11 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.check, color: Colors.green),
+                      Icon(Icons.check, color: Colors.green, size: 10),
                       SizedBox(width: 8),
                       Text(
                         S.of(context).teslim_edildi,
-                        style: TextStyle(color: Colors.green),
+                        style: TextStyle(color: Colors.green, fontSize: 10),
                       ),
                     ],
                   ),
@@ -256,9 +256,10 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
             Row(
               children: [
                 Chip(
+                  padding: EdgeInsets.all(0),
                   label: Text(
                     S.of(context).teslim_edildi,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontSize: 10),
                   ),
                   backgroundColor: Renkler.acikyesil,
                 ),
@@ -269,7 +270,7 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
                   },
                   child: Text(
                     S.of(context).detaylar,
-                    style: TextStyle(color: Renkler.kahverengi),
+                    style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                   ),
                 ),
                 ElevatedButton(
@@ -278,7 +279,7 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
                   },
                   child: Text(
                     S.of(context).degerlendir,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white, fontSize: 13),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Renkler.kahverengi,

@@ -2,6 +2,7 @@ import 'package:bellibellu/bellekislemleri.dart';
 import 'package:bellibellu/ceviri.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/router.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
@@ -265,7 +266,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
     );
   }
 
-  Column aramaMetodu(context) {
+  Column aramaMetodu(BuildContext context) {
     return Column(
       children: [
         SafeArea(
@@ -316,8 +317,8 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () async {
-                    popup();
+                  onPressed: () {
+                    context.push(Paths.sohbetlersayfasi);
                   },
                   icon: const Icon(Icons.email, color: Renkler.kuyubeyaz),
                 ),
@@ -764,43 +765,4 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
       debugPrint("Eşleşen ürün bulunamadı.");
     }
   }
-
-  Future popup() => showDialog(
-    context: context,
-
-    builder:
-        (context) => AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-            side: BorderSide(color: Renkler.kahverengi, width: 1),
-          ),
-          backgroundColor: Renkler.krem,
-          shadowColor: Renkler.kahverengi,
-          titlePadding: EdgeInsets.only(top: 0),
-
-          // title: Text(
-          //   'Urun Ozellikleri',
-          //   style: TextStyle(
-          //     color: Renkler.kahverengi,
-          //     fontSize: 18,
-          //     fontWeight: FontWeight.bold,
-          //   ),
-          // ),
-          content: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: 380,
-
-            child: Center(
-              child: Text(
-                S.of(context).cevrimici_asistanlik,
-                style: TextStyle(
-                  color: Renkler.kahverengi,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-        ),
-  );
 }

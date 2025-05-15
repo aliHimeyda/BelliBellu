@@ -96,6 +96,7 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
           style: TextStyle(
             color: Renkler.kahverengi,
             fontWeight: FontWeight.bold,
+            fontSize: 18,
           ),
         ),
         actions: [
@@ -115,7 +116,7 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
             child: Row(
               children: [
                 Text(
-                  S.of(context).puanYorumMetni('puan', 'yorumSayisi'),
+                  S.of(context).puanYorumMetni('12', '34'),
                   style: TextStyle(color: Renkler.kahverengi),
                 ),
                 const Spacer(),

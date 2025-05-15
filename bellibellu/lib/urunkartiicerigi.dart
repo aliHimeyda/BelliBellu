@@ -328,7 +328,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                       Renkler.kahverengi, // Yazı rengi
                                 ),
                                 child: Text(
-                                  S.of(context).tumunuGorButonu('adet'),
+                                  S.of(context).tumunuGorButonu('12'),
                                 ),
                               ),
                             ],
@@ -1977,46 +1977,49 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 100,
-        decoration: BoxDecoration(color: Renkler.kuyubeyaz),
+        decoration: BoxDecoration(color: Renkler.krem),
         child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SizedBox(
-                width: 100,
-                child: OutlinedButton(
-                  onPressed: () async {
-                    await sendSMS();
-                  },
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Renkler.kahverengi),
-                    foregroundColor: Renkler.kahverengi,
-                  ),
-                  child: Text(
-                    S.of(context).iletisim,
-                    style: TextStyle(fontSize: 11),
+          child: Padding(
+            padding: const EdgeInsets.all(5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 90,
+                  child: OutlinedButton(
+                    onPressed: () async {
+                      await sendSMS();
+                    },
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Renkler.kahverengi),
+                      foregroundColor: Renkler.kahverengi,
+                    ),
+                    child: Text(
+                      S.of(context).iletisim,
+                      style: TextStyle(fontSize: 9),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 200,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Sepete ekle işlemi
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Renkler.kahverengi,
-                  ),
+                SizedBox(
+                  width: 150,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Sepete ekle işlemi
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Renkler.kahverengi,
+                    ),
 
-                  child: Text(S.of(context).sepete_ekle),
+                    child: Text(S.of(context).sepete_ekle),
+                  ),
                 ),
-              ),
-              Text(
-                '(${widget.urun.urunfiyati})TL',
-                style: TextStyle(fontSize: 15, color: Renkler.kahverengi),
-              ),
-            ],
+                Text(
+                  '(${widget.urun.urunfiyati})TL',
+                  style: TextStyle(fontSize: 15, color: Renkler.kahverengi),
+                ),
+              ],
+            ),
           ),
         ),
       ),
