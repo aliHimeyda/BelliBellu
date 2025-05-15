@@ -159,8 +159,11 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Renkler.krem,
-        title: Text(S.of(context).sepetim_baslik('10')),
+        backgroundColor: Renkler.kahverengi,
+        title: Text(
+          S.of(context).sepetim_baslik('10'),
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: ListView(
         children: [

@@ -233,13 +233,6 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        actions: [
-          GestureDetector(
-            onTap: () {},
-            child: Icon(Icons.favorite_border, color: Renkler.kahverengi),
-          ),
-          SizedBox(width: 10),
-        ],
       ),
       body: Column(
         children: [
@@ -365,6 +358,73 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
     );
   }
 
+  void _telefonPopup(BuildContext context) {
+    final TextEditingController _telefonController = TextEditingController();
+    showModalBottomSheet(
+      backgroundColor: Renkler.kuyubeyaz,
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+            top: 24,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 4,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Renkler.kahverengi,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                S.of(context).soru_sor,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _telefonController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  labelText: S.of(context).soru_sor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Renkler.kahverengi, // Buton rengi
+                  ),
+                  onPressed: () async {},
+                  child: Text(
+                    S.of(context).gonder,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 100),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Widget altButonlar(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
@@ -375,7 +435,7 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
           Expanded(
             child: OutlinedButton(
               onPressed: () {
-                // Soru & Cevap sayfasına git
+                _telefonPopup(context);
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Renkler.kahverengi),

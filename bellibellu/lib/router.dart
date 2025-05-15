@@ -1,6 +1,8 @@
 import 'package:bellibellu/anasayfa.dart';
 import 'package:bellibellu/anasayfaicerigi.dart';
 import 'package:bellibellu/ensongezilenler.dart';
+import 'package:bellibellu/gecmissiparisdetaysayfasi.dart';
+import 'package:bellibellu/gecmissiparislersayfasi.dart';
 import 'package:bellibellu/iletisim.dart';
 import 'package:bellibellu/katagoriler.dart';
 import 'package:bellibellu/kaydedilenler.dart';
@@ -8,7 +10,10 @@ import 'package:bellibellu/loginsayfasi.dart';
 import 'package:bellibellu/logosayfasi.dart';
 import 'package:bellibellu/menu.dart';
 import 'package:bellibellu/ozelurunler.dart';
+import 'package:bellibellu/profilsayfasi.dart';
 import 'package:bellibellu/sepetsayfasi.dart';
+import 'package:bellibellu/sohbeticerigisayfasi.dart';
+import 'package:bellibellu/sohbetlersayfasi.dart';
 import 'package:bellibellu/sorularsayfasi.dart';
 import 'package:bellibellu/tumurunler.dart';
 import 'package:bellibellu/urunkartiicerigi.dart';
@@ -35,6 +40,11 @@ class Paths {
   static const String sorularsayfasi = '/sorularsayfasi';
   static const String sepetsayfasi = '/sepetsayfasi';
   static const String loginsayfasi = '/loginsayfasi';
+  static const String profilsayfasi = '/profilsayfasi';
+  static const String gecmissiparisler = '/gecmissiparisler';
+  static const String gecmissiparisdetaylari = '/gecmissiparisdetaylari';
+  static const String sohbetlersayfasi = '/sohbetlersayfasi';
+  static const String sohbeticerigisayfasi = '/sohbeticerigisayfasi';
 }
 
 // ignore: non_constant_identifier_names
@@ -174,6 +184,46 @@ final router = GoRouter(
             GoRoute(
               path: Paths.loginsayfasi,
               builder: (context, state) => Loginpage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.profilsayfasi,
+              builder: (context, state) => ProfilSayfasi(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.gecmissiparisler,
+              builder: (context, state) => Gecmissiparislersayfasi(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.gecmissiparisdetaylari,
+              builder: (context, state) => Gecmissiparisdetaysayfasi(),
+            ),
+          ],
+        ),
+         StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.sohbetlersayfasi,
+              builder: (context, state) => SaticiMesajlarimPage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.sohbeticerigisayfasi,
+              builder: (context, state) => SohbetIcerigiSayfasi(),
             ),
           ],
         ),

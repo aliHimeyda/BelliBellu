@@ -34,14 +34,20 @@ class _MenuState extends State<Menu> {
                 const CircleAvatar(
                   radius: 16,
                   backgroundColor: Renkler.kahverengi,
+
                   child: Icon(Icons.person, color: Colors.white, size: 16),
                 ),
                 const SizedBox(width: 8),
-                Text(
-                  S.of(context).merhaba_kullanici('ali'),
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Renkler.kahverengi,
+                GestureDetector(
+                  onTap: () {
+                    context.push(Paths.profilsayfasi);
+                  },
+                  child: Text(
+                    S.of(context).merhaba_kullanici('ali'),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Renkler.kahverengi,
+                    ),
                   ),
                 ),
                 const Icon(
@@ -54,9 +60,16 @@ class _MenuState extends State<Menu> {
             // Sağ taraf: ayar ikonları
             Row(
               children: [
-                Icon(Icons.settings, color: Renkler.kahverengi),
                 SizedBox(width: 16),
-                Icon(Icons.notifications_none, color: Renkler.kahverengi),
+                GestureDetector(
+                  onTap: () {
+                    context.push(Paths.sohbetlersayfasi);
+                  },
+                  child: Icon(
+                    Icons.notifications_none,
+                    color: Renkler.kahverengi,
+                  ),
+                ),
                 SizedBox(width: 16),
                 GestureDetector(
                   onTap: () {
@@ -100,9 +113,7 @@ class _MenuState extends State<Menu> {
                         physics: NeverScrollableScrollPhysics(),
                         children: [
                           buton(S.of(context).siparisler, Icons.shopping_bag),
-                          buton(S.of(context).tekrar_satin_al, Icons.refresh),
                           buton(S.of(context).hesap, Icons.person_outline),
-                          buton(S.of(context).listeler, Icons.list_alt),
                         ],
                       ),
                     ],
@@ -457,9 +468,11 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  Widget buton(String metin, IconData ikon) {
+  Widget buton(String metin, IconData ikon , ) {
     return OutlinedButton.icon(
-      onPressed: () {},
+      onPressed: () {
+        context.push(Paths.gecmissiparisler);
+      },
       icon: Icon(ikon, color: Renkler.kahverengi),
       label: Text(metin, style: const TextStyle(color: Renkler.kahverengi)),
       style: OutlinedButton.styleFrom(

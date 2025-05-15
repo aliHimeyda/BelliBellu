@@ -40,16 +40,20 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m9(urun, adet) => "${urun} × ${adet}";
 
-  static String m10(adet) => "الأسئلة والأجوبة (${adet})";
+  static String m10(kart) => "**** **** ${kart} - دفعة واحدة";
 
-  static String m11(fiyat) => "الإجمالي: ${fiyat} ليرة";
+  static String m11(adet) => "الأسئلة والأجوبة (${adet})";
 
-  static String m12(adet) => "عرض الكل (${adet})";
+  static String m12(adet, tarih) => "تم توصيل ${adet} منتج في يوم ${tarih}.";
 
-  static String m13(kod, materyal, tur, ortam, uzunluk, genislik) =>
+  static String m13(fiyat) => "الإجمالي: ${fiyat} ليرة";
+
+  static String m14(adet) => "عرض الكل (${adet})";
+
+  static String m15(kod, materyal, tur, ortam, uzunluk, genislik) =>
       "منتجنا برمز ${kod} مصنوع يدويًا ومصنوع من ${materyal}. إنه ${tur} مناسب لبيئة ${ortam}. الطول: ${uzunluk} سم، العرض: ${genislik} سم.";
 
-  static String m14(error) => "لا يمكن فتح واتساب! خطأ: ${error}";
+  static String m16(error) => "لا يمكن فتح واتساب! خطأ: ${error}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -59,11 +63,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "agirlik": MessageLookupByLibrary.simpleMessage("الوزن"),
     "ahsap": MessageLookupByLibrary.simpleMessage("خشب"),
     "ahsapUrunleronerisi": MessageLookupByLibrary.simpleMessage("منتجات خشب"),
+    "alici": MessageLookupByLibrary.simpleMessage("المستلم"),
     "alisveriseBasla": MessageLookupByLibrary.simpleMessage("ابدأ التسوق"),
+    "alisverise_devam_et": MessageLookupByLibrary.simpleMessage("تابع التسوق"),
     "anasayfa": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
     "anladim": MessageLookupByLibrary.simpleMessage("فهمت"),
     "ara_toplam": MessageLookupByLibrary.simpleMessage("المجموع الفرعي"),
     "aramaIpucu": MessageLookupByLibrary.simpleMessage("ابحث في المتجر"),
+    "arama_ipucu": MessageLookupByLibrary.simpleMessage(
+      "ابحث عن منتج أو علامة تجارية",
+    ),
     "arapca": MessageLookupByLibrary.simpleMessage("العربية"),
     "artan_puan": MessageLookupByLibrary.simpleMessage("الأقل تقييماً"),
     "ayarlar": MessageLookupByLibrary.simpleMessage("الإعدادات"),
@@ -71,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "baslikDegerlendirme": MessageLookupByLibrary.simpleMessage(
       "تقييمات المنتج",
     ),
+    "baslik_siparislerim": MessageLookupByLibrary.simpleMessage("طلباتي"),
     "begenebilecegin": MessageLookupByLibrary.simpleMessage(
       "المنتجات الموصى بها",
     ),
@@ -94,6 +104,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "daha_verimli_sonuc": MessageLookupByLibrary.simpleMessage(
       "للحصول على نتيجة أفضل، يرجى إغلاق التطبيق وإعادة فتحه.",
     ),
+    "degerlendir": MessageLookupByLibrary.simpleMessage("تقييم"),
+    "detaylar": MessageLookupByLibrary.simpleMessage("تفاصيل"),
     "devam_google": MessageLookupByLibrary.simpleMessage("المتابعة عبر Google"),
     "dil_ayarlari": MessageLookupByLibrary.simpleMessage("إعدادات اللغة"),
     "dil_secimi": MessageLookupByLibrary.simpleMessage("اللغة"),
@@ -121,7 +133,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "أثاث منزل",
     ),
     "evUrunleri": MessageLookupByLibrary.simpleMessage("منتجات المنزل"),
+    "fatura_goruntule": MessageLookupByLibrary.simpleMessage("عرض الفاتورة"),
     "favorilerim": MessageLookupByLibrary.simpleMessage("المفضلة"),
+    "filtre_bu_ay": MessageLookupByLibrary.simpleMessage("هذا الشهر"),
+    "filtre_gecen_ay": MessageLookupByLibrary.simpleMessage("الشهر الماضي"),
+    "filtre_tumu": MessageLookupByLibrary.simpleMessage("الكل"),
     "filtrele": MessageLookupByLibrary.simpleMessage("تصفية"),
     "fiyat": MessageLookupByLibrary.simpleMessage("السعر"),
     "fiyata_gore": MessageLookupByLibrary.simpleMessage("حسب السعر :"),
@@ -129,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gecmis": MessageLookupByLibrary.simpleMessage("السجل"),
     "giris_yap": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "gmail": MessageLookupByLibrary.simpleMessage("جيميل"),
+    "gonder": MessageLookupByLibrary.simpleMessage("إرسال"),
     "haritada": MessageLookupByLibrary.simpleMessage("على الخريطة"),
     "hesap": MessageLookupByLibrary.simpleMessage("الحساب"),
     "hosgeldiniz": MessageLookupByLibrary.simpleMessage("أهلاً بك!"),
@@ -141,8 +158,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "kafe": MessageLookupByLibrary.simpleMessage("مقهى"),
     "kafeurunlerionerisi": MessageLookupByLibrary.simpleMessage("أثاث مقهى"),
     "kargo": MessageLookupByLibrary.simpleMessage("الشحن"),
+    "kargo_bedava": MessageLookupByLibrary.simpleMessage(
+      "شحن مجاني للطلبات فوق 200 ليرة",
+    ),
+    "kargo_firmasi": MessageLookupByLibrary.simpleMessage("شركة الشحن"),
+    "kargo_verilecek": MessageLookupByLibrary.simpleMessage(
+      "سيتم الشحن قريبًا",
+    ),
     "kategoriler": MessageLookupByLibrary.simpleMessage("الفئات"),
     "kayit_ol": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "konu": MessageLookupByLibrary.simpleMessage("الموضوع"),
     "kvkk": MessageLookupByLibrary.simpleMessage(
       "قانون حماية البيانات الشخصية",
     ),
@@ -156,13 +181,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "materyale_gore": MessageLookupByLibrary.simpleMessage("حسب المادة :"),
     "menu": MessageLookupByLibrary.simpleMessage("القائمة"),
     "merhaba_kullanici": m3,
+    "mesaj_yazin": MessageLookupByLibrary.simpleMessage("اكتب رسالتك..."),
     "metal": MessageLookupByLibrary.simpleMessage("معدن"),
     "metalmasaonerisi": MessageLookupByLibrary.simpleMessage("طاولة معدن"),
     "metalsandalyeonerisi": MessageLookupByLibrary.simpleMessage("كرسي معدن"),
     "musteri": MessageLookupByLibrary.simpleMessage("العميل"),
+    "odeme_bilgisi": MessageLookupByLibrary.simpleMessage("معلومات الدفع"),
     "ofis": MessageLookupByLibrary.simpleMessage("مكتب"),
     "ofisMobilyalari": MessageLookupByLibrary.simpleMessage("أثاث المكاتب"),
     "ofisMobilyalarionerisi": MessageLookupByLibrary.simpleMessage("أثاث مكتب"),
+    "okunmamis_mesaj": MessageLookupByLibrary.simpleMessage(
+      "(0 رسالة غير مقروءة)",
+    ),
+    "okunmamis_soru": MessageLookupByLibrary.simpleMessage(
+      "(0 سؤال غير مقروء)",
+    ),
     "onerilen": MessageLookupByLibrary.simpleMessage("موصى به"),
     "onerilen_siralama": MessageLookupByLibrary.simpleMessage(
       "الترتيب المقترح",
@@ -178,6 +211,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "satici": MessageLookupByLibrary.simpleMessage("البائع"),
     "saticiMetni": m6,
     "satici_bilgisi": m7,
+    "satici_degerlendir": MessageLookupByLibrary.simpleMessage("قيّم البائع"),
+    "satici_iletisim": MessageLookupByLibrary.simpleMessage("تواصل مع البائع"),
+    "satici_mesajlarim": MessageLookupByLibrary.simpleMessage("رسائل البائع"),
+    "satici_takip_et": MessageLookupByLibrary.simpleMessage("تابع البائع"),
+    "sayfa_baslik": MessageLookupByLibrary.simpleMessage("تفاصيل الطلب"),
     "sepet_detayi": MessageLookupByLibrary.simpleMessage("تفاصيل السلة"),
     "sepete_ekle": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
     "sepeti_onayla": MessageLookupByLibrary.simpleMessage("تأكيد السلة"),
@@ -186,10 +224,28 @@ class MessageLookup extends MessageLookupByLibrary {
     "sepetteki_urun": m9,
     "sifre": MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور"),
     "sik_sorulanlar": MessageLookupByLibrary.simpleMessage("الأسئلة الشائعة"),
+    "siparis_detayi": MessageLookupByLibrary.simpleMessage("تفاصيل الطلب"),
+    "siparis_no": MessageLookupByLibrary.simpleMessage("رقم الطلب"),
+    "siparis_odeme": m10,
+    "siparis_ozeti": MessageLookupByLibrary.simpleMessage("ملخص الطلب"),
+    "siparis_sorularim": MessageLookupByLibrary.simpleMessage(
+      "أسئلتي عن الطلب",
+    ),
+    "siparis_tarihi": MessageLookupByLibrary.simpleMessage("تاريخ الطلب"),
     "siparisler": MessageLookupByLibrary.simpleMessage("الطلبات"),
     "sirala": MessageLookupByLibrary.simpleMessage("فرز"),
-    "soru_cevap": m10,
+    "soru_bildirim": MessageLookupByLibrary.simpleMessage(
+      "هل سأتلقى إشعارًا عند الشحن؟",
+    ),
+    "soru_cevap": m11,
+    "soru_kargo_ne_zaman": MessageLookupByLibrary.simpleMessage(
+      "متى سيتم شحن طلبي؟ طلبت بالأمس وكان من المفترض أن يتم شحنه اليوم على الأكثر.",
+    ),
     "soru_sor": MessageLookupByLibrary.simpleMessage("اطرح سؤالاً"),
+    "stok_yarin": MessageLookupByLibrary.simpleMessage(
+      "سيتوفر المنتج في المخزون غدًا",
+    ),
+    "tahmini_teslimat": MessageLookupByLibrary.simpleMessage("التوصيل المتوقع"),
     "tekrar_hosgeldiniz": MessageLookupByLibrary.simpleMessage(
       "مرحبًا بعودتك!",
     ),
@@ -197,11 +253,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "telefon": MessageLookupByLibrary.simpleMessage("الهاتف:"),
     "tema": MessageLookupByLibrary.simpleMessage("السمة"),
     "temizle": MessageLookupByLibrary.simpleMessage("مسح"),
+    "teslim_edildi": MessageLookupByLibrary.simpleMessage("تم التوصيل"),
+    "teslimat_adresi": MessageLookupByLibrary.simpleMessage("عنوان التوصيل"),
+    "teslimat_bilgisi": m12,
+    "teslimat_detay": MessageLookupByLibrary.simpleMessage("تفاصيل التوصيل"),
+    "teslimat_durumu": MessageLookupByLibrary.simpleMessage("حالة التوصيل"),
+    "teslimat_no": MessageLookupByLibrary.simpleMessage("رقم التوصيل"),
     "tiklandiMesaji": MessageLookupByLibrary.simpleMessage("تم النقر!"),
     "toplam": MessageLookupByLibrary.simpleMessage("الإجمالي"),
-    "toplam_fiyat": m11,
+    "toplam_fiyat": m13,
     "tum_ozellikler": MessageLookupByLibrary.simpleMessage("جميع الميزات"),
-    "tumunuGorButonu": m12,
+    "tumunuGorButonu": m14,
     "tumurunler": MessageLookupByLibrary.simpleMessage("كل المنتجات"),
     "tur": MessageLookupByLibrary.simpleMessage("النوع"),
     "ture_gore": MessageLookupByLibrary.simpleMessage("حسب النوع :"),
@@ -211,8 +273,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "لم يتم العثور على منتجات مطابقة.",
     ),
     "urunSerisi2025": MessageLookupByLibrary.simpleMessage("منتجات 2025"),
-    "urun_aciklamasi": m13,
+    "urun_aciklamasi": m15,
+    "urun_degerlendir": MessageLookupByLibrary.simpleMessage("قيّم المنتج"),
     "urun_ozellikleri": MessageLookupByLibrary.simpleMessage("مميزات المنتج"),
+    "urun_soru_yok": MessageLookupByLibrary.simpleMessage(
+      "لا توجد أسئلة عن المنتج بعد",
+    ),
+    "urun_sorularim": MessageLookupByLibrary.simpleMessage("أسئلتي عن المنتج"),
     "urunler": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "urunleri_getir": MessageLookupByLibrary.simpleMessage("إحضار المنتجات"),
     "urunlerin_garanti_suresi": MessageLookupByLibrary.simpleMessage(
@@ -233,7 +300,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "ve": MessageLookupByLibrary.simpleMessage(" و "),
     "veya": MessageLookupByLibrary.simpleMessage("أو"),
     "whatsapp": MessageLookupByLibrary.simpleMessage("واتساب"),
-    "whatsappAciklamasi": m14,
+    "whatsappAciklamasi": m16,
+    "yanit_kargo_verilecek": MessageLookupByLibrary.simpleMessage(
+      "سيتم الشحن قريبًا",
+    ),
+    "yanit_sistem_bildirim": MessageLookupByLibrary.simpleMessage(
+      "نعم، النظام يرسل إشعارًا تلقائيًا.",
+    ),
     "yeniden_eskiye": MessageLookupByLibrary.simpleMessage(
       "من الأحدث إلى الأقدم",
     ),

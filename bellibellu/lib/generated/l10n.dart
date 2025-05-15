@@ -1366,6 +1366,406 @@ class S {
       args: [],
     );
   }
+
+  /// `My Orders`
+  String get baslik_siparislerim {
+    return Intl.message(
+      'My Orders',
+      name: 'baslik_siparislerim',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get filtre_tumu {
+    return Intl.message('All', name: 'filtre_tumu', desc: '', args: []);
+  }
+
+  /// `This Month`
+  String get filtre_bu_ay {
+    return Intl.message('This Month', name: 'filtre_bu_ay', desc: '', args: []);
+  }
+
+  /// `Last Month`
+  String get filtre_gecen_ay {
+    return Intl.message(
+      'Last Month',
+      name: 'filtre_gecen_ay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search product or brand`
+  String get arama_ipucu {
+    return Intl.message(
+      'Search product or brand',
+      name: 'arama_ipucu',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivered`
+  String get teslim_edildi {
+    return Intl.message('Delivered', name: 'teslim_edildi', desc: '', args: []);
+  }
+
+  /// `Review`
+  String get degerlendir {
+    return Intl.message('Review', name: 'degerlendir', desc: '', args: []);
+  }
+
+  /// `Details`
+  String get detaylar {
+    return Intl.message('Details', name: 'detaylar', desc: '', args: []);
+  }
+
+  /// `Order Details`
+  String get sayfa_baslik {
+    return Intl.message(
+      'Order Details',
+      name: 'sayfa_baslik',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order No`
+  String get siparis_no {
+    return Intl.message('Order No', name: 'siparis_no', desc: '', args: []);
+  }
+
+  /// `Order Date`
+  String get siparis_tarihi {
+    return Intl.message(
+      'Order Date',
+      name: 'siparis_tarihi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Summary`
+  String get siparis_ozeti {
+    return Intl.message(
+      'Order Summary',
+      name: 'siparis_ozeti',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Detail`
+  String get siparis_detayi {
+    return Intl.message(
+      'Order Detail',
+      name: 'siparis_detayi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Estimated Delivery`
+  String get tahmini_teslimat {
+    return Intl.message(
+      'Estimated Delivery',
+      name: 'tahmini_teslimat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery No`
+  String get teslimat_no {
+    return Intl.message('Delivery No', name: 'teslimat_no', desc: '', args: []);
+  }
+
+  /// `Rate Seller`
+  String get satici_degerlendir {
+    return Intl.message(
+      'Rate Seller',
+      name: 'satici_degerlendir',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Follow Seller`
+  String get satici_takip_et {
+    return Intl.message(
+      'Follow Seller',
+      name: 'satici_takip_et',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The following {adet} item(s) were delivered on {tarih}.`
+  String teslimat_bilgisi(Object adet, Object tarih) {
+    return Intl.message(
+      'The following $adet item(s) were delivered on $tarih.',
+      name: 'teslimat_bilgisi',
+      desc: '',
+      args: [adet, tarih],
+    );
+  }
+
+  /// `Shipping Company`
+  String get kargo_firmasi {
+    return Intl.message(
+      'Shipping Company',
+      name: 'kargo_firmasi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery Details`
+  String get teslimat_detay {
+    return Intl.message(
+      'Delivery Details',
+      name: 'teslimat_detay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rate Product`
+  String get urun_degerlendir {
+    return Intl.message(
+      'Rate Product',
+      name: 'urun_degerlendir',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delivery Address`
+  String get teslimat_adresi {
+    return Intl.message(
+      'Delivery Address',
+      name: 'teslimat_adresi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recipient`
+  String get alici {
+    return Intl.message('Recipient', name: 'alici', desc: '', args: []);
+  }
+
+  /// `**** **** {kart} - Single Payment`
+  String siparis_odeme(Object kart) {
+    return Intl.message(
+      '**** **** $kart - Single Payment',
+      name: 'siparis_odeme',
+      desc: '',
+      args: [kart],
+    );
+  }
+
+  /// `Free shipping for orders above 200 TL`
+  String get kargo_bedava {
+    return Intl.message(
+      'Free shipping for orders above 200 TL',
+      name: 'kargo_bedava',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact Seller`
+  String get satici_iletisim {
+    return Intl.message(
+      'Contact Seller',
+      name: 'satici_iletisim',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Invoice`
+  String get fatura_goruntule {
+    return Intl.message(
+      'View Invoice',
+      name: 'fatura_goruntule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment Information`
+  String get odeme_bilgisi {
+    return Intl.message(
+      'Payment Information',
+      name: 'odeme_bilgisi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Seller Messages`
+  String get satici_mesajlarim {
+    return Intl.message(
+      'My Seller Messages',
+      name: 'satici_mesajlarim',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product Questions`
+  String get urun_sorularim {
+    return Intl.message(
+      'Product Questions',
+      name: 'urun_sorularim',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Questions`
+  String get siparis_sorularim {
+    return Intl.message(
+      'Order Questions',
+      name: 'siparis_sorularim',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(0 Unread Question)`
+  String get okunmamis_soru {
+    return Intl.message(
+      '(0 Unread Question)',
+      name: 'okunmamis_soru',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `(0 Unread Message)`
+  String get okunmamis_mesaj {
+    return Intl.message(
+      '(0 Unread Message)',
+      name: 'okunmamis_mesaj',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have no product questions yet`
+  String get urun_soru_yok {
+    return Intl.message(
+      'You have no product questions yet',
+      name: 'urun_soru_yok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue Shopping`
+  String get alisverise_devam_et {
+    return Intl.message(
+      'Continue Shopping',
+      name: 'alisverise_devam_et',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subject`
+  String get konu {
+    return Intl.message('Subject', name: 'konu', desc: '', args: []);
+  }
+
+  /// `Delivery Status`
+  String get teslimat_durumu {
+    return Intl.message(
+      'Delivery Status',
+      name: 'teslimat_durumu',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Will be shipped shortly`
+  String get kargo_verilecek {
+    return Intl.message(
+      'Will be shipped shortly',
+      name: 'kargo_verilecek',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The product will be in stock tomorrow`
+  String get stok_yarin {
+    return Intl.message(
+      'The product will be in stock tomorrow',
+      name: 'stok_yarin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your message...`
+  String get mesaj_yazin {
+    return Intl.message(
+      'Type your message...',
+      name: 'mesaj_yazin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `When will my order be shipped? I placed it yesterday, and it was supposed to ship by today.`
+  String get soru_kargo_ne_zaman {
+    return Intl.message(
+      'When will my order be shipped? I placed it yesterday, and it was supposed to ship by today.',
+      name: 'soru_kargo_ne_zaman',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Will I get a notification when it is shipped?`
+  String get soru_bildirim {
+    return Intl.message(
+      'Will I get a notification when it is shipped?',
+      name: 'soru_bildirim',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `It will be shipped shortly`
+  String get yanit_kargo_verilecek {
+    return Intl.message(
+      'It will be shipped shortly',
+      name: 'yanit_kargo_verilecek',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes, the system sends a notification automatically.`
+  String get yanit_sistem_bildirim {
+    return Intl.message(
+      'Yes, the system sends a notification automatically.',
+      name: 'yanit_sistem_bildirim',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get gonder {
+    return Intl.message('Send', name: 'gonder', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

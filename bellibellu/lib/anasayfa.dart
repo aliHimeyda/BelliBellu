@@ -20,7 +20,9 @@ class Anasayfa extends StatelessWidget {
         currentPath != Paths.urundetaylari &&
         currentPath != Paths.yorumlarsayfasi &&
         currentPath != Paths.sorularsayfasi &&
-        currentPath != Paths.loginsayfasi;
+        currentPath != Paths.loginsayfasi &&
+        currentPath != Paths.sohbeticerigisayfasi &&
+        currentPath != Paths.profilsayfasi;
     return Scaffold(
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,

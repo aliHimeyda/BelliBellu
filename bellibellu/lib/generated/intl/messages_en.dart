@@ -42,16 +42,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m9(urun, adet) => "${urun} x${adet}";
 
-  static String m10(adet) => "Q&A (${adet})";
+  static String m10(kart) => "**** **** ${kart} - Single Payment";
 
-  static String m11(fiyat) => "Total: ${fiyat} TL";
+  static String m11(adet) => "Q&A (${adet})";
 
-  static String m12(adet) => "See All (${adet})";
+  static String m12(adet, tarih) =>
+      "The following ${adet} item(s) were delivered on ${tarih}.";
 
-  static String m13(kod, materyal, tur, ortam, uzunluk, genislik) =>
+  static String m13(fiyat) => "Total: ${fiyat} TL";
+
+  static String m14(adet) => "See All (${adet})";
+
+  static String m15(kod, materyal, tur, ortam, uzunluk, genislik) =>
       "Our product with code ${kod} is handcrafted and made from ${materyal}. It is a suitable ${tur} for the ${ortam} environment. Length: ${uzunluk} cm, Width: ${genislik} cm.";
 
-  static String m14(error) => "WhatsApp could not be opened! Error: ${error}";
+  static String m16(error) => "WhatsApp could not be opened! Error: ${error}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -63,11 +68,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "ahsapUrunleronerisi": MessageLookupByLibrary.simpleMessage(
       "Wooden products",
     ),
+    "alici": MessageLookupByLibrary.simpleMessage("Recipient"),
     "alisveriseBasla": MessageLookupByLibrary.simpleMessage("Start Shopping"),
+    "alisverise_devam_et": MessageLookupByLibrary.simpleMessage(
+      "Continue Shopping",
+    ),
     "anasayfa": MessageLookupByLibrary.simpleMessage("Homepage"),
     "anladim": MessageLookupByLibrary.simpleMessage("I Understand"),
     "ara_toplam": MessageLookupByLibrary.simpleMessage("Subtotal"),
     "aramaIpucu": MessageLookupByLibrary.simpleMessage("Search in the store"),
+    "arama_ipucu": MessageLookupByLibrary.simpleMessage(
+      "Search product or brand",
+    ),
     "arapca": MessageLookupByLibrary.simpleMessage("Arabic"),
     "artan_puan": MessageLookupByLibrary.simpleMessage("Lowest Rating"),
     "ayarlar": MessageLookupByLibrary.simpleMessage("Settings"),
@@ -75,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "baslikDegerlendirme": MessageLookupByLibrary.simpleMessage(
       "Product Reviews",
     ),
+    "baslik_siparislerim": MessageLookupByLibrary.simpleMessage("My Orders"),
     "begenebilecegin": MessageLookupByLibrary.simpleMessage(
       "Recommended Products",
     ),
@@ -98,6 +111,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "daha_verimli_sonuc": MessageLookupByLibrary.simpleMessage(
       "For better results, please close and reopen the application.",
     ),
+    "degerlendir": MessageLookupByLibrary.simpleMessage("Review"),
+    "detaylar": MessageLookupByLibrary.simpleMessage("Details"),
     "devam_google": MessageLookupByLibrary.simpleMessage(
       "Continue with Google",
     ),
@@ -125,7 +140,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "Home furniture",
     ),
     "evUrunleri": MessageLookupByLibrary.simpleMessage("Home Products"),
+    "fatura_goruntule": MessageLookupByLibrary.simpleMessage("View Invoice"),
     "favorilerim": MessageLookupByLibrary.simpleMessage("Favorites"),
+    "filtre_bu_ay": MessageLookupByLibrary.simpleMessage("This Month"),
+    "filtre_gecen_ay": MessageLookupByLibrary.simpleMessage("Last Month"),
+    "filtre_tumu": MessageLookupByLibrary.simpleMessage("All"),
     "filtrele": MessageLookupByLibrary.simpleMessage("Filter"),
     "fiyat": MessageLookupByLibrary.simpleMessage("Price"),
     "fiyata_gore": MessageLookupByLibrary.simpleMessage("By Price :"),
@@ -133,6 +152,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gecmis": MessageLookupByLibrary.simpleMessage("History"),
     "giris_yap": MessageLookupByLibrary.simpleMessage("Login"),
     "gmail": MessageLookupByLibrary.simpleMessage("Gmail"),
+    "gonder": MessageLookupByLibrary.simpleMessage("Send"),
     "haritada": MessageLookupByLibrary.simpleMessage("On map"),
     "hesap": MessageLookupByLibrary.simpleMessage("Account"),
     "hosgeldiniz": MessageLookupByLibrary.simpleMessage("Welcome!"),
@@ -147,8 +167,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Cafe furniture",
     ),
     "kargo": MessageLookupByLibrary.simpleMessage("Shipping"),
+    "kargo_bedava": MessageLookupByLibrary.simpleMessage(
+      "Free shipping for orders above 200 TL",
+    ),
+    "kargo_firmasi": MessageLookupByLibrary.simpleMessage("Shipping Company"),
+    "kargo_verilecek": MessageLookupByLibrary.simpleMessage(
+      "Will be shipped shortly",
+    ),
     "kategoriler": MessageLookupByLibrary.simpleMessage("Categories"),
     "kayit_ol": MessageLookupByLibrary.simpleMessage("Sign Up"),
+    "konu": MessageLookupByLibrary.simpleMessage("Subject"),
     "kvkk": MessageLookupByLibrary.simpleMessage(
       "Personal Data Protection Law",
     ),
@@ -162,14 +190,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "materyale_gore": MessageLookupByLibrary.simpleMessage("By Material :"),
     "menu": MessageLookupByLibrary.simpleMessage("Menu"),
     "merhaba_kullanici": m3,
+    "mesaj_yazin": MessageLookupByLibrary.simpleMessage("Type your message..."),
     "metal": MessageLookupByLibrary.simpleMessage("Metal"),
     "metalmasaonerisi": MessageLookupByLibrary.simpleMessage("Metal table"),
     "metalsandalyeonerisi": MessageLookupByLibrary.simpleMessage("Metal chair"),
     "musteri": MessageLookupByLibrary.simpleMessage("Customer"),
+    "odeme_bilgisi": MessageLookupByLibrary.simpleMessage(
+      "Payment Information",
+    ),
     "ofis": MessageLookupByLibrary.simpleMessage("Office"),
     "ofisMobilyalari": MessageLookupByLibrary.simpleMessage("Office Furniture"),
     "ofisMobilyalarionerisi": MessageLookupByLibrary.simpleMessage(
       "Office furniture",
+    ),
+    "okunmamis_mesaj": MessageLookupByLibrary.simpleMessage(
+      "(0 Unread Message)",
+    ),
+    "okunmamis_soru": MessageLookupByLibrary.simpleMessage(
+      "(0 Unread Question)",
     ),
     "onerilen": MessageLookupByLibrary.simpleMessage("Recommended"),
     "onerilen_siralama": MessageLookupByLibrary.simpleMessage(
@@ -188,6 +226,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "satici": MessageLookupByLibrary.simpleMessage("Seller"),
     "saticiMetni": m6,
     "satici_bilgisi": m7,
+    "satici_degerlendir": MessageLookupByLibrary.simpleMessage("Rate Seller"),
+    "satici_iletisim": MessageLookupByLibrary.simpleMessage("Contact Seller"),
+    "satici_mesajlarim": MessageLookupByLibrary.simpleMessage(
+      "My Seller Messages",
+    ),
+    "satici_takip_et": MessageLookupByLibrary.simpleMessage("Follow Seller"),
+    "sayfa_baslik": MessageLookupByLibrary.simpleMessage("Order Details"),
     "sepet_detayi": MessageLookupByLibrary.simpleMessage("Cart Details"),
     "sepete_ekle": MessageLookupByLibrary.simpleMessage("Add to Cart"),
     "sepeti_onayla": MessageLookupByLibrary.simpleMessage("Confirm Cart"),
@@ -198,20 +243,46 @@ class MessageLookup extends MessageLookupByLibrary {
     "sik_sorulanlar": MessageLookupByLibrary.simpleMessage(
       "FREQUENTLY ASKED QUESTIONS",
     ),
+    "siparis_detayi": MessageLookupByLibrary.simpleMessage("Order Detail"),
+    "siparis_no": MessageLookupByLibrary.simpleMessage("Order No"),
+    "siparis_odeme": m10,
+    "siparis_ozeti": MessageLookupByLibrary.simpleMessage("Order Summary"),
+    "siparis_sorularim": MessageLookupByLibrary.simpleMessage(
+      "Order Questions",
+    ),
+    "siparis_tarihi": MessageLookupByLibrary.simpleMessage("Order Date"),
     "siparisler": MessageLookupByLibrary.simpleMessage("Orders"),
     "sirala": MessageLookupByLibrary.simpleMessage("Sort"),
-    "soru_cevap": m10,
+    "soru_bildirim": MessageLookupByLibrary.simpleMessage(
+      "Will I get a notification when it is shipped?",
+    ),
+    "soru_cevap": m11,
+    "soru_kargo_ne_zaman": MessageLookupByLibrary.simpleMessage(
+      "When will my order be shipped? I placed it yesterday, and it was supposed to ship by today.",
+    ),
     "soru_sor": MessageLookupByLibrary.simpleMessage("Ask a Question"),
+    "stok_yarin": MessageLookupByLibrary.simpleMessage(
+      "The product will be in stock tomorrow",
+    ),
+    "tahmini_teslimat": MessageLookupByLibrary.simpleMessage(
+      "Estimated Delivery",
+    ),
     "tekrar_hosgeldiniz": MessageLookupByLibrary.simpleMessage("Welcome Back!"),
     "tekrar_satin_al": MessageLookupByLibrary.simpleMessage("Buy Again"),
     "telefon": MessageLookupByLibrary.simpleMessage("Phone:"),
     "tema": MessageLookupByLibrary.simpleMessage("Theme"),
     "temizle": MessageLookupByLibrary.simpleMessage("Clear"),
+    "teslim_edildi": MessageLookupByLibrary.simpleMessage("Delivered"),
+    "teslimat_adresi": MessageLookupByLibrary.simpleMessage("Delivery Address"),
+    "teslimat_bilgisi": m12,
+    "teslimat_detay": MessageLookupByLibrary.simpleMessage("Delivery Details"),
+    "teslimat_durumu": MessageLookupByLibrary.simpleMessage("Delivery Status"),
+    "teslimat_no": MessageLookupByLibrary.simpleMessage("Delivery No"),
     "tiklandiMesaji": MessageLookupByLibrary.simpleMessage("Clicked!"),
     "toplam": MessageLookupByLibrary.simpleMessage("Total"),
-    "toplam_fiyat": m11,
+    "toplam_fiyat": m13,
     "tum_ozellikler": MessageLookupByLibrary.simpleMessage("ALL FEATURES"),
-    "tumunuGorButonu": m12,
+    "tumunuGorButonu": m14,
     "tumurunler": MessageLookupByLibrary.simpleMessage("All Products"),
     "tur": MessageLookupByLibrary.simpleMessage("Type"),
     "ture_gore": MessageLookupByLibrary.simpleMessage("By Type :"),
@@ -221,10 +292,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "No matching products found.",
     ),
     "urunSerisi2025": MessageLookupByLibrary.simpleMessage("2025 Products"),
-    "urun_aciklamasi": m13,
+    "urun_aciklamasi": m15,
+    "urun_degerlendir": MessageLookupByLibrary.simpleMessage("Rate Product"),
     "urun_ozellikleri": MessageLookupByLibrary.simpleMessage(
       "PRODUCT FEATURES",
     ),
+    "urun_soru_yok": MessageLookupByLibrary.simpleMessage(
+      "You have no product questions yet",
+    ),
+    "urun_sorularim": MessageLookupByLibrary.simpleMessage("Product Questions"),
     "urunler": MessageLookupByLibrary.simpleMessage("Products"),
     "urunleri_getir": MessageLookupByLibrary.simpleMessage("Get Products"),
     "urunlerin_garanti_suresi": MessageLookupByLibrary.simpleMessage(
@@ -245,7 +321,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "ve": MessageLookupByLibrary.simpleMessage(" and the "),
     "veya": MessageLookupByLibrary.simpleMessage("or"),
     "whatsapp": MessageLookupByLibrary.simpleMessage("WhatsApp"),
-    "whatsappAciklamasi": m14,
+    "whatsappAciklamasi": m16,
+    "yanit_kargo_verilecek": MessageLookupByLibrary.simpleMessage(
+      "It will be shipped shortly",
+    ),
+    "yanit_sistem_bildirim": MessageLookupByLibrary.simpleMessage(
+      "Yes, the system sends a notification automatically.",
+    ),
     "yeniden_eskiye": MessageLookupByLibrary.simpleMessage("Newest to Oldest"),
     "yeniurunler": MessageLookupByLibrary.simpleMessage("Browse New Products"),
     "yildizliKategoriler": MessageLookupByLibrary.simpleMessage(
