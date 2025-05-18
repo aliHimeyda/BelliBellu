@@ -2,6 +2,7 @@ import 'package:bellibellu/dildestegiProvaider.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,13 @@ class _MenuState extends State<Menu> {
                     context.push(Paths.profilsayfasi);
                   },
                   child: Text(
-                    S.of(context).merhaba_kullanici('ali'),
+                    S
+                        .of(context)
+                        .merhaba_kullanici(
+                          context
+                              .watch<Kullanicilarprovider>()
+                              .currentkullanici['adi'],
+                        ),
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Renkler.kahverengi,
@@ -468,7 +475,7 @@ class _MenuState extends State<Menu> {
     );
   }
 
-  Widget buton(String metin, IconData ikon , ) {
+  Widget buton(String metin, IconData ikon) {
     return OutlinedButton.icon(
       onPressed: () {
         context.push(Paths.gecmissiparisler);

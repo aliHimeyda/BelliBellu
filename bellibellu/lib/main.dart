@@ -2,6 +2,8 @@ import 'package:bellibellu/dildestegiProvaider.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/loginsayfasi.dart';
 import 'package:bellibellu/logosayfasi.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
+import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,6 +23,8 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Dildestegiprovaider()),
+        ChangeNotifierProvider(create: (context) => Kullanicilarprovider()),
+        ChangeNotifierProvider(create: (context) => Urunlerprovider()),
       ],
       child: const Program(),
     ),

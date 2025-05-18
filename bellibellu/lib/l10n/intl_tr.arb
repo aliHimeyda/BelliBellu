@@ -386,5 +386,9 @@
   "soru_bildirim": "Kargoya verildiğinde bilgilendirme alacak mıyım?",
   "yanit_kargo_verilecek": "Birazdan kargoya verilecek",
   "yanit_sistem_bildirim": "Evet, sistem otomatik bildirim gönderir.",
-    "gonder": "Gönder"
+    "gonder": "Gönder",
+  "hataliSifreVeyaMail": "Hatalı şifre veya mail adresi",
+  "duzenle": "Düzenle",
+  "sifreb": "Şifre",
+  "adres": "Adres"
 }

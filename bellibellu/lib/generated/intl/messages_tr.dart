@@ -61,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "ad": MessageLookupByLibrary.simpleMessage("Ad"),
     "ad_soyad": MessageLookupByLibrary.simpleMessage("Adınız ve Soyadınız"),
     "adet": MessageLookupByLibrary.simpleMessage("Adet"),
+    "adres": MessageLookupByLibrary.simpleMessage("Adres"),
     "agirlik": MessageLookupByLibrary.simpleMessage("Ağırlık"),
     "ahsap": MessageLookupByLibrary.simpleMessage("Ahşap"),
     "ahsapUrunleronerisi": MessageLookupByLibrary.simpleMessage(
@@ -113,6 +114,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dil_ayarlari": MessageLookupByLibrary.simpleMessage("Dil Ayarları"),
     "dil_secimi": MessageLookupByLibrary.simpleMessage("Dil"),
     "dogum_tarihi": MessageLookupByLibrary.simpleMessage("Doğum Tarihi"),
+    "duzenle": MessageLookupByLibrary.simpleMessage("Düzenle"),
     "efsaneUrunler": MessageLookupByLibrary.simpleMessage("Efsane Ürünler"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "enCokBegenilenler": MessageLookupByLibrary.simpleMessage(
@@ -154,6 +156,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "gmail": MessageLookupByLibrary.simpleMessage("Gmail"),
     "gonder": MessageLookupByLibrary.simpleMessage("Gönder"),
     "haritada": MessageLookupByLibrary.simpleMessage("Haritada"),
+    "hataliSifreVeyaMail": MessageLookupByLibrary.simpleMessage(
+      "Hatalı şifre veya mail adresi",
+    ),
     "hesap": MessageLookupByLibrary.simpleMessage("Hesap"),
     "hosgeldiniz": MessageLookupByLibrary.simpleMessage("Hoş Geldiniz!"),
     "id_numarasi": MessageLookupByLibrary.simpleMessage(
@@ -250,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sepetim_baslik": m8,
     "sepetteki_urun": m9,
     "sifre": MessageLookupByLibrary.simpleMessage("Şifrenizi Girin"),
+    "sifreb": MessageLookupByLibrary.simpleMessage("Şifre"),
     "sik_sorulanlar": MessageLookupByLibrary.simpleMessage("SIK SORULANLAR"),
     "siparis_detayi": MessageLookupByLibrary.simpleMessage("Sipariş Detayı"),
     "siparis_no": MessageLookupByLibrary.simpleMessage("Sipariş No"),

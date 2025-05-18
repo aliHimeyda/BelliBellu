@@ -382,6 +382,10 @@
   "soru_bildirim": "هل سأتلقى إشعارًا عند الشحن؟",
   "yanit_kargo_verilecek": "سيتم الشحن قريبًا",
   "yanit_sistem_bildirim": "نعم، النظام يرسل إشعارًا تلقائيًا.",
-   "gonder": "إرسال"
+   "gonder": "إرسال",
+     "hataliSifreVeyaMail": "كلمة المرور أو البريد الإلكتروني غير صحيح",
+    "duzenle": "تعديل",
+    "sifreb": "كلمة المرور",
+    "adres": "العنوان"
 }
 

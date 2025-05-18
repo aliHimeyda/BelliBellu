@@ -382,5 +382,9 @@
   "soru_bildirim": "Will I get a notification when it is shipped?",
   "yanit_kargo_verilecek": "It will be shipped shortly",
   "yanit_sistem_bildirim": "Yes, the system sends a notification automatically.",
-   "gonder": "Send"
+   "gonder": "Send",
+     "hataliSifreVeyaMail": "Incorrect password or email address",
+     "duzenle": "Edit",
+     "sifreb": "Password",
+     "adres": "Address"
 }

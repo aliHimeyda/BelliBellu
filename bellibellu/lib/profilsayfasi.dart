@@ -1,8 +1,16 @@
+import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/kullanicilarVT.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:grock/grock.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilSayfasi extends StatefulWidget {
   const ProfilSayfasi({super.key});
@@ -12,9 +20,61 @@ class ProfilSayfasi extends StatefulWidget {
 }
 
 class _ProfilSayfasiState extends State<ProfilSayfasi> {
+  final TextEditingController _adsoyadcontroller = TextEditingController();
+  final TextEditingController _adresController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController currentController = TextEditingController();
+  final TextEditingController newController = TextEditingController();
+  final TextEditingController _telefonController = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
   @override
   void initState() {
     super.initState();
+    if (Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri) {
+      _adresController.text =
+          Provider.of<Kullanicilarprovider>(
+            context,
+            listen: false,
+          ).currentkullanici['adres'] ??
+          '';
+      _dateController.text = DateFormat('dd.MM.yyyy').format(
+        DateTime.parse(
+          Provider.of<Kullanicilarprovider>(
+            context,
+            listen: false,
+          ).currentkullanici['dogumTarihi'],
+        ),
+      );
+    }
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.parse(
+        Provider.of<Kullanicilarprovider>(
+          context,
+          listen: false,
+        ).currentkullanici['dogumTarihi'],
+      ),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null &&
+        picked !=
+            Provider.of<Kullanicilarprovider>(
+              context,
+              listen: false,
+            ).currentkullanici['dogumTarihi']) {
+      setState(() {
+        Provider.of<Kullanicilarprovider>(
+              context,
+              listen: false,
+            ).currentkullanici['dogumTarihi'] =
+            picked;
+        _dateController.text = DateFormat('dd.MM.yyyy').format(picked);
+      });
+    }
   }
 
   @override
@@ -94,7 +154,14 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
                 ],
               ),
               const SizedBox(height: 15),
-              Text('isimsoyisim', style: TextStyle(fontSize: 18)),
+              Text(
+                context.watch<Kullanicilarprovider>().currentkullanici['adi'] +
+                    ' ' +
+                    context
+                        .watch<Kullanicilarprovider>()
+                        .currentkullanici['soyadi'],
+                style: TextStyle(fontSize: 18),
+              ),
             ],
           ),
 
@@ -107,10 +174,18 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
           const SizedBox(height: 20),
           // İsim alanı
           TextField(
+            controller: _adsoyadcontroller,
             cursorColor: Renkler.kahverengi,
             decoration: InputDecoration(
               labelText: "Adınız ve Soyadınız",
-              hintText: 'isimsoyisim',
+              hintText:
+                  context
+                      .watch<Kullanicilarprovider>()
+                      .currentkullanici['adi'] +
+                  ' ' +
+                  context
+                      .watch<Kullanicilarprovider>()
+                      .currentkullanici['soyadi'],
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -123,10 +198,70 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
           const SizedBox(height: 20),
 
           // Kaydet butonu
+          const SizedBox(height: 32),
+
+          // Bilgi kartları
+          _infoTile(
+            context,
+            S.of(context).email,
+            Provider.of<Kullanicilarprovider>(
+              context,
+              listen: false,
+            ).currentkullanici['email'],
+            _emailPopup,
+          ),
+          _infoTile(
+            context,
+            S.of(context).sifreb,
+            '${Provider.of<Kullanicilarprovider>(context, listen: false).currentkullanici['sifre'].substring(0, 2)}********',
+            _sifrePopup,
+          ),
+          !context.watch<Kullanicilarprovider>().ismusteri
+              ? _infoTile(
+                context,
+                S.of(context).telefon,
+                "**********${Provider.of<Kullanicilarprovider>(context, listen: false).currentkullanici['telefonNo'].substring('telefon'.length - 2)}",
+                _telefonPopup,
+              )
+              : Column(
+                children: [
+                  _infoTile(
+                    context,
+                    S.of(context).dogum_tarihi,
+                    "${Provider.of<Kullanicilarprovider>(context, listen: false).currentkullanici['dogumTarihi'].toString().substring(0, 10)}",
+                    _dogumtarihiPopup,
+                  ),
+                  _infoTile(
+                    context,
+                    S.of(context).adres,
+                    "${Provider.of<Kullanicilarprovider>(context, listen: false).currentkullanici['adres'].toString()}",
+                    _adresPopup,
+                  ),
+                ],
+              ),
+          SizedBox(height: 50),
           SizedBox(
             height: 48,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                if (!Provider.of<Kullanicilarprovider>(
+                  context,
+                  listen: false,
+                ).ismusteri) {
+                  Kullanicilarvt.updateSaticiBilgileri(
+                    Provider.of<Kullanicilarprovider>(
+                      context,
+                      listen: false,
+                    ).currentkullanici,
+                  );
+                }
+                Kullanicilarvt.updateMusteriBilgileri(
+                  Provider.of<Kullanicilarprovider>(
+                    context,
+                    listen: false,
+                  ).currentkullanici,
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Renkler.kahverengi,
               ),
@@ -136,27 +271,17 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
               ),
             ),
           ),
-          const SizedBox(height: 32),
-
-          // Bilgi kartları
-          _infoTile(
-            context,
-            "Telefon Numarası",
-            "**********${'telefon'.substring('telefon'.length - 2)}",
-            _telefonPopup,
-          ),
-          _infoTile(context, "E-Mail", 'mail', _emailPopup),
-          _infoTile(
-            context,
-            "Şifre",
-            '${'sifre'.substring(0, 2)}********',
-            _sifrePopup,
-          ),
           SizedBox(height: 50),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
-              onPressed: () async {},
+              onPressed: () async {
+                final SharedPreferences prefs =
+                    await SharedPreferences.getInstance();
+                await prefs.setBool('girisbilgisi', false);
+                await prefs.setString('girisyapanmail', '');
+                context.pushReplacement(Paths.loginsayfasi);
+              },
               icon: const Icon(Icons.logout),
               label: const Text("Çıkış Yap"),
               style: ElevatedButton.styleFrom(
@@ -197,8 +322,8 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
           ),
           InkWell(
             onTap: () => modalFunc(context),
-            child: const Text(
-              "Düzenle",
+            child: Text(
+              S.of(context).duzenle,
               style: TextStyle(
                 decoration: TextDecoration.underline,
                 color: Renkler.kahverengi,
@@ -212,7 +337,6 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
 
   // Telefon Popup
   void _telefonPopup(BuildContext context) {
-    final TextEditingController _telefonController = TextEditingController();
     showModalBottomSheet(
       backgroundColor: Renkler.kuyubeyaz,
       context: context,
@@ -263,7 +387,167 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Renkler.kahverengi, // Buton rengi
                   ),
-                  onPressed: () async {},
+                  onPressed: () async {
+                    Provider.of<Kullanicilarprovider>(
+                          context,
+                          listen: false,
+                        ).currentkullanici['telefon'] =
+                        _telefonController.text;
+                    context.pop();
+                  },
+                  child: const Text(
+                    "Değiştir",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 100),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _dogumtarihiPopup(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Renkler.kuyubeyaz,
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+            top: 24,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 4,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Renkler.kahverengi,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                S.of(context).dogum_tarihi,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _dateController,
+                keyboardType: TextInputType.datetime,
+                decoration: InputDecoration(
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      _selectDate(context);
+                    },
+                    child: Icon(Icons.calendar_month_outlined),
+                  ),
+                  labelText: S.of(context).dogum_tarihi,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Renkler.kahverengi, // Buton rengi
+                  ),
+                  onPressed: () async {
+                    Provider.of<Kullanicilarprovider>(
+                          context,
+                          listen: false,
+                        ).currentkullanici['dogumTarihi'] =
+                        _dateController.text;
+                    context.pop();
+                  },
+                  child: const Text(
+                    "Değiştir",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 100),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _adresPopup(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Renkler.kuyubeyaz,
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+            top: 24,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 4,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Renkler.kahverengi,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                S.of(context).adres,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                maxLines: 5,
+                controller: _adresController,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: S.of(context).adres,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Renkler.kahverengi, // Buton rengi
+                  ),
+                  onPressed: () async {
+                    Provider.of<Kullanicilarprovider>(
+                          context,
+                          listen: false,
+                        ).currentkullanici['adres'] =
+                        _adresController.text;
+                    context.pop();
+                  },
                   child: const Text(
                     "Değiştir",
                     style: TextStyle(color: Colors.white),
@@ -313,6 +597,7 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
               ),
               const SizedBox(height: 16),
               TextField(
+                controller: _emailcontroller,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   labelText: "E-Mail",
@@ -329,7 +614,14 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Renkler.kahverengi, // Buton rengi
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Provider.of<Kullanicilarprovider>(
+                          context,
+                          listen: false,
+                        ).currentkullanici['email'] =
+                        _emailcontroller.text;
+                    context.pop();
+                  },
                   child: const Text(
                     "Değiştir",
                     style: TextStyle(color: Colors.white),
@@ -348,9 +640,6 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
   void _sifrePopup(BuildContext context) {
     bool isCurrentVisible = false;
     bool isNewVisible = false;
-
-    final currentController = TextEditingController();
-    final newController = TextEditingController();
 
     showModalBottomSheet(
       backgroundColor: Renkler.kuyubeyaz,
@@ -437,7 +726,33 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Renkler.kahverengi, // Buton rengi
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (currentController.text ==
+                            Provider.of<Kullanicilarprovider>(
+                              context,
+                              listen: false,
+                            ).currentkullanici['sifre']) {
+                          Provider.of<Kullanicilarprovider>(
+                                context,
+                                listen: false,
+                              ).currentkullanici['sifre'] =
+                              newController.text;
+                          currentController.text = '';
+                          newController.text = '';
+                          context.pop();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                S.of(context).hataliSifreVeyaMail,
+                                style: TextStyle(color: Renkler.kahverengi),
+                              ),
+                              duration: Duration(seconds: 2),
+                              backgroundColor: Renkler.krem,
+                            ),
+                          );
+                        }
+                      },
                       child: const Text(
                         "Değiştir",
                         style: TextStyle(color: Colors.white),

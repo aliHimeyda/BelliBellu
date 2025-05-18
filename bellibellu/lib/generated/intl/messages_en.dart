@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "ad": MessageLookupByLibrary.simpleMessage("Name"),
     "ad_soyad": MessageLookupByLibrary.simpleMessage("Your Name and Surname"),
     "adet": MessageLookupByLibrary.simpleMessage("Quantity"),
+    "adres": MessageLookupByLibrary.simpleMessage("Address"),
     "agirlik": MessageLookupByLibrary.simpleMessage("Weight"),
     "ahsap": MessageLookupByLibrary.simpleMessage("Wood"),
     "ahsapUrunleronerisi": MessageLookupByLibrary.simpleMessage(
@@ -119,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "dil_ayarlari": MessageLookupByLibrary.simpleMessage("Language Settings"),
     "dil_secimi": MessageLookupByLibrary.simpleMessage("Language"),
     "dogum_tarihi": MessageLookupByLibrary.simpleMessage("Date of Birth"),
+    "duzenle": MessageLookupByLibrary.simpleMessage("Edit"),
     "efsaneUrunler": MessageLookupByLibrary.simpleMessage("Legendary Products"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "enCokBegenilenler": MessageLookupByLibrary.simpleMessage("Most Liked"),
@@ -154,6 +156,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "gmail": MessageLookupByLibrary.simpleMessage("Gmail"),
     "gonder": MessageLookupByLibrary.simpleMessage("Send"),
     "haritada": MessageLookupByLibrary.simpleMessage("On map"),
+    "hataliSifreVeyaMail": MessageLookupByLibrary.simpleMessage(
+      "Incorrect password or email address",
+    ),
     "hesap": MessageLookupByLibrary.simpleMessage("Account"),
     "hosgeldiniz": MessageLookupByLibrary.simpleMessage("Welcome!"),
     "id_numarasi": MessageLookupByLibrary.simpleMessage("ID Number (optional)"),
@@ -240,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sepetim_baslik": m8,
     "sepetteki_urun": m9,
     "sifre": MessageLookupByLibrary.simpleMessage("Enter your Password"),
+    "sifreb": MessageLookupByLibrary.simpleMessage("Password"),
     "sik_sorulanlar": MessageLookupByLibrary.simpleMessage(
       "FREQUENTLY ASKED QUESTIONS",
     ),

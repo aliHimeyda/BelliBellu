@@ -211,7 +211,7 @@ final router = GoRouter(
             ),
           ],
         ),
-         StatefulShellBranch(
+        StatefulShellBranch(
           routes: [
             GoRoute(
               path: Paths.sohbetlersayfasi,

@@ -1766,6 +1766,31 @@ class S {
   String get gonder {
     return Intl.message('Send', name: 'gonder', desc: '', args: []);
   }
+
+  /// `Incorrect password or email address`
+  String get hataliSifreVeyaMail {
+    return Intl.message(
+      'Incorrect password or email address',
+      name: 'hataliSifreVeyaMail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get duzenle {
+    return Intl.message('Edit', name: 'duzenle', desc: '', args: []);
+  }
+
+  /// `Password`
+  String get sifreb {
+    return Intl.message('Password', name: 'sifreb', desc: '', args: []);
+  }
+
+  /// `Address`
+  String get adres {
+    return Intl.message('Address', name: 'adres', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

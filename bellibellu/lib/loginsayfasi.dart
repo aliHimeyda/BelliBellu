@@ -2,7 +2,11 @@ import 'package:bellibellu/dildestegiProvaider.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/kullanicilarVT.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
+import 'package:bellibellu/services/veritabani.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +28,7 @@ class _LoginpageState extends State<Loginpage> {
   bool isLogin = true;
   bool isSatici = true;
   bool girisyapildimi = false;
+  String girisyapanmail = '';
   String secilendil = "";
 
   Future<void> _selectDate() async {
@@ -371,7 +376,6 @@ class _LoginpageState extends State<Loginpage> {
                             ),
                           ),
                           onPressed: () async {
-                            cihazagirisbilgisinikaydet();
                             if (!isLogin) {
                               if (isSatici) {
                                 _saticikayitEkle();
@@ -382,7 +386,6 @@ class _LoginpageState extends State<Loginpage> {
                               saticigirisYap(context);
                             }
                             musterigirisYap(context);
-                            context.pushReplacement(Paths.anasayfa);
                           },
                           child: Text(
                             isLogin
@@ -497,14 +500,112 @@ class _LoginpageState extends State<Loginpage> {
     );
   }
 
-  Future<void> saticigirisYap(BuildContext context) async {}
-  Future<void> musterigirisYap(BuildContext context) async {}
+  Future<void> saticigirisYap(BuildContext context) async {
+    bool kontrol = await Kullanicilarvt.saticibilgikontrolu(
+      _mailController.text,
+      _sifreController.text,
+    );
+    if (!kontrol) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S.of(context).hataliSifreVeyaMail,
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    } else {
+      girisyapanmail = _mailController.text;
+      girisyapildimi = true;
+
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici = await Kullanicilarvt.getsaticiBymail(
+        _mailController.text,
+      );
+      Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
+          false;
+      cihazagirisbilgisinikaydet();
+      context.pushReplacement(Paths.anasayfa);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S
+                .of(context)
+                .merhaba_kullanici(
+                  Provider.of<Kullanicilarprovider>(
+                    context,
+                    listen: false,
+                  ).currentkullanici['adi'],
+                ),
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    }
+  }
+
+  Future<void> musterigirisYap(BuildContext context) async {
+    bool kontrol = await Kullanicilarvt.musteribilgikontrolu(
+      _mailController.text,
+      _sifreController.text,
+    );
+    if (!kontrol) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S.of(context).hataliSifreVeyaMail,
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    } else {
+      girisyapanmail = _mailController.text;
+      girisyapildimi = true;
+
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici = await Kullanicilarvt.getmusteriBymail(
+        _mailController.text,
+      );
+      Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
+          false;
+      cihazagirisbilgisinikaydet();
+      context.pushReplacement(Paths.anasayfa);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S
+                .of(context)
+                .merhaba_kullanici(
+                  Provider.of<Kullanicilarprovider>(
+                    context,
+                    listen: false,
+                  ).currentkullanici['adi'],
+                ),
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    }
+  }
 
   Future<void> _saticikayitEkle() async {}
   Future<void> _musterikayitEkle() async {}
   Future<void> cihazagirisbilgisinikaydet() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('girisbilgisi', girisyapildimi);
+    await prefs.setString('girisyapanmail', girisyapanmail);
   }
 
   void dilsecimdialogu(BuildContext context) {

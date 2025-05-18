@@ -2,13 +2,22 @@ import 'package:bellibellu/dildestegiProvaider.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/kullanicilarVT.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Cihazbellegi {
   static bool? girisyapildimi;
+  static Future<String?> girisyapanmail() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? girismaili = prefs.getString('girisyapanmail');
+    return girismaili;
+  }
+
   static Future<bool?> giriskontrolu() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool? repeat = prefs.getBool('girisbilgisi');
@@ -26,7 +35,7 @@ class Logosayfasi extends StatefulWidget {
 class _LogosayfasiState extends State<Logosayfasi> {
   @override
   void initState() {
-    giriskontrolu();
+    giriskontrolu(context);
     dataal();
 
     Future.delayed(const Duration(seconds: 3), () {
@@ -54,8 +63,17 @@ class _LogosayfasiState extends State<Logosayfasi> {
     super.initState();
   }
 
-  void giriskontrolu() async {
+  void giriskontrolu(BuildContext context) async {
     Cihazbellegi.girisyapildimi = await Cihazbellegi.giriskontrolu();
+    if (Cihazbellegi.girisyapildimi == true) {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? mail = prefs.getString('girisyapanmail');
+      debugPrint(mail);
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici = await Kullanicilarvt.getmusteriBymail(mail!);
+    }
     debugPrint('giris bilgisi: ${Cihazbellegi.girisyapildimi}');
   }
 
