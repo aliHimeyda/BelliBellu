@@ -158,4 +158,69 @@ class Kullanicilarvt {
       return false;
     }
   }
+
+  static Future<bool> musteriekle(Map<String, dynamic> musteri) async {
+    try {
+      // Tarihi SQL uyumlu formata çevir (yyyy-MM-dd)
+      String isoTarih = DateFormat(
+        'yyyy-MM-dd',
+      ).format(DateFormat('dd.MM.yyyy').parse(musteri['dogumTarihi']));
+      // Güncellenecek veriler
+      final Map<String, dynamic> yniVeri = {
+        'adi': musteri['adi'],
+        'soyadi': musteri['soyadi'],
+        'email': musteri['email'],
+        'sifre': musteri['sifre'],
+        'dogumTarihi': isoTarih,
+      };
+
+      // HTTP PUT isteği
+      final response = await http.post(
+        Uri.parse('$baseUrl/musteriekle'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(yniVeri),
+      );
+
+      if (response.statusCode == 200) {
+        print('kayit islemi başarılı: ${response.body}');
+        return true;
+      } else {
+        print('Sunucu hatası: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      print('Hata oluştu: $e');
+      return false;
+    }
+  }
+
+  static Future<bool> saticiekle(Map<String, dynamic> satici) async {
+    try {
+      // Güncellenecek veriler
+      final Map<String, dynamic> yniVeri = {
+        'adi': satici['adi'],
+        'soyadi': satici['soyadi'],
+        'email': satici['email'],
+        'sifre': satici['sifre'],
+      };
+
+      // HTTP PUT isteği
+      final response = await http.post(
+        Uri.parse('$baseUrl/saticiekle'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(yniVeri),
+      );
+
+      if (response.statusCode == 200) {
+        print('kayit islemi başarılı: ${response.body}');
+        return true;
+      } else {
+        print('Sunucu hatası: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      print('Hata oluştu: $e');
+      return false;
+    }
+  }
 }

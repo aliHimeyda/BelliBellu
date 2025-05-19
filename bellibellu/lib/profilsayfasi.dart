@@ -1,4 +1,5 @@
 import 'package:bellibellu/generated/l10n.dart';
+import 'package:bellibellu/loginsayfasi.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/kullanicilarVT.dart';
@@ -10,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilSayfasi extends StatefulWidget {
@@ -80,6 +82,7 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: UniqueKey(),
       backgroundColor: Renkler.kuyubeyaz,
       appBar: AppBar(
         surfaceTintColor: Renkler.kahverengi,
@@ -216,7 +219,7 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
             '${Provider.of<Kullanicilarprovider>(context, listen: false).currentkullanici['sifre'].substring(0, 2)}********',
             _sifrePopup,
           ),
-          !context.watch<Kullanicilarprovider>().ismusteri
+          (context.watch<Kullanicilarprovider>().ismusteri == false)
               ? _infoTile(
                 context,
                 S.of(context).telefon,
@@ -280,7 +283,7 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
                     await SharedPreferences.getInstance();
                 await prefs.setBool('girisbilgisi', false);
                 await prefs.setString('girisyapanmail', '');
-                context.pushReplacement(Paths.loginsayfasi);
+                context.go(Paths.loginsayfasi);
               },
               icon: const Icon(Icons.logout),
               label: const Text("Çıkış Yap"),

@@ -315,7 +315,7 @@ class _LoginpageState extends State<Loginpage> {
                           ),
                         ),
                       if (!isLogin) const SizedBox(height: 12),
-                      if (!isLogin)
+                      if (!isLogin && !isSatici)
                         _customField(
                           hint: S.of(context).dogum_tarihi,
                           controller: _dogumtarihiController,
@@ -378,14 +378,17 @@ class _LoginpageState extends State<Loginpage> {
                           onPressed: () async {
                             if (!isLogin) {
                               if (isSatici) {
-                                _saticikayitEkle();
+                                await _saticikayitEkle();
+                              } else {
+                                await _musterikayitEkle();
                               }
-                              _musterikayitEkle();
+                            } else {
+                              if (isSatici) {
+                                await saticigirisYap(context);
+                              } else {
+                                await musterigirisYap(context);
+                              }
                             }
-                            if (isSatici) {
-                              saticigirisYap(context);
-                            }
-                            musterigirisYap(context);
                           },
                           child: Text(
                             isLogin
@@ -528,6 +531,10 @@ class _LoginpageState extends State<Loginpage> {
       );
       Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
           false;
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).degisikliklerikaydet();
       cihazagirisbilgisinikaydet();
       context.pushReplacement(Paths.anasayfa);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -569,7 +576,9 @@ class _LoginpageState extends State<Loginpage> {
     } else {
       girisyapanmail = _mailController.text;
       girisyapildimi = true;
-
+      debugPrint(
+        'ismusteri??? :${Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri.toString()}',
+      );
       Provider.of<Kullanicilarprovider>(
         context,
         listen: false,
@@ -577,7 +586,11 @@ class _LoginpageState extends State<Loginpage> {
         _mailController.text,
       );
       Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
-          false;
+          true;
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).degisikliklerikaydet();
       cihazagirisbilgisinikaydet();
       context.pushReplacement(Paths.anasayfa);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -600,8 +613,99 @@ class _LoginpageState extends State<Loginpage> {
     }
   }
 
-  Future<void> _saticikayitEkle() async {}
-  Future<void> _musterikayitEkle() async {}
+  Future<void> _saticikayitEkle() async {
+    List<String> adParcalari = _adsoyadController.text.trim().split(' ');
+
+    String adi = adParcalari[0]; // 'ahmet'
+    String soyadi = adParcalari.length > 1 ? adParcalari[1] : ''; // 'kaya'
+
+    Map<String, dynamic> yenisatici = {
+      'adi': adi,
+      'soyadi': soyadi,
+      'email': _mailController.text,
+      'sifre': _sifreController.text,
+    };
+    bool basari = await Kullanicilarvt.saticiekle(yenisatici);
+    if (basari == true) {
+      context.pushReplacement(Paths.anasayfa);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S
+                .of(context)
+                .merhaba_kullanici(
+                  Provider.of<Kullanicilarprovider>(
+                    context,
+                    listen: false,
+                  ).currentkullanici['adi'],
+                ),
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S.of(context).hataliSifreVeyaMail,
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    }
+  }
+
+  Future<void> _musterikayitEkle() async {
+    List<String> adParcalari = _adsoyadController.text.trim().split(' ');
+
+    String adi = adParcalari[0]; // 'ahmet'
+    String soyadi = adParcalari.length > 1 ? adParcalari[1] : ''; // 'kaya'
+
+    Map<String, dynamic> yenimusteri = {
+      'adi': adi,
+      'soyadi': soyadi,
+      'email': _mailController.text,
+      'sifre': _sifreController.text,
+      'dogumTarihi': _dogumtarihiController.text,
+    };
+    bool basari = await Kullanicilarvt.musteriekle(yenimusteri);
+    if (basari == true) {
+      context.pushReplacement(Paths.anasayfa);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S
+                .of(context)
+                .merhaba_kullanici(
+                  Provider.of<Kullanicilarprovider>(
+                    context,
+                    listen: false,
+                  ).currentkullanici['adi'],
+                ),
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S.of(context).hataliSifreVeyaMail,
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    }
+  }
+
   Future<void> cihazagirisbilgisinikaydet() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('girisbilgisi', girisyapildimi);
