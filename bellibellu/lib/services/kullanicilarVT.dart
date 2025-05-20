@@ -173,6 +173,7 @@ class Kullanicilarvt {
         'sifre': musteri['sifre'],
         'dogumTarihi': isoTarih,
       };
+      debugPrint('eklenen: ' + musteri['adi'] + musteri['soyadi']);
 
       // HTTP PUT isteği
       final response = await http.post(
@@ -181,7 +182,7 @@ class Kullanicilarvt {
         body: jsonEncode(yniVeri),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         print('kayit islemi başarılı: ${response.body}');
         return true;
       } else {
@@ -211,7 +212,7 @@ class Kullanicilarvt {
         body: jsonEncode(yniVeri),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         print('kayit islemi başarılı: ${response.body}');
         return true;
       } else {

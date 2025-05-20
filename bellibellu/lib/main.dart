@@ -3,6 +3,7 @@ import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/loginsayfasi.dart';
 import 'package:bellibellu/logosayfasi.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
+import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +27,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => Dildestegiprovaider()),
         ChangeNotifierProvider(create: (context) => Kullanicilarprovider()),
         ChangeNotifierProvider(create: (context) => Urunlerprovider()),
+        ChangeNotifierProvider(create: (context) => Loadingprovider()),
       ],
       child: const Program(),
     ),

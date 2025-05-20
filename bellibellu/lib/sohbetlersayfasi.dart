@@ -1,8 +1,10 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SaticiMesajlarimPage extends StatefulWidget {
   @override
@@ -22,37 +24,58 @@ class _SaticiMesajlarimPageState extends State<SaticiMesajlarimPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Renkler.kuyubeyaz,
-      appBar: AppBar(
-        title: Text(
-          S.of(context).satici_mesajlarim,
-          style: TextStyle(
-            color: Renkler.kahverengi,
-            fontWeight: FontWeight.bold,
+    return Column(
+      children: [
+        Scaffold(
+          backgroundColor: Renkler.kuyubeyaz,
+          appBar: AppBar(
+            title: Text(
+              S.of(context).satici_mesajlarim,
+              style: TextStyle(
+                color: Renkler.kahverengi,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            backgroundColor: Renkler.krem,
+            iconTheme: IconThemeData(color: Colors.black),
+            bottom: TabBar(
+              dividerColor: Renkler.kahverengi,
+              indicatorColor: Renkler.kahverengi,
+              controller: _tabController,
+              labelColor: Renkler.kahverengi,
+              unselectedLabelColor: Renkler.kahverengi,
+              tabs: [
+                Tab(text: S.of(context).urun_sorularim),
+                Tab(text: S.of(context).siparis_sorularim),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            controller: _tabController,
+            children: [
+              sohbetVar ? buildSohbetListesi() : buildBosEkran(),
+              sohbetVar ? buildSohbetListesi() : buildBosEkran(),
+            ],
           ),
         ),
-        backgroundColor: Renkler.krem,
-        iconTheme: IconThemeData(color: Colors.black),
-        bottom: TabBar(
-          dividerColor: Renkler.kahverengi,
-          indicatorColor: Renkler.kahverengi,
-          controller: _tabController,
-          labelColor: Renkler.kahverengi,
-          unselectedLabelColor: Renkler.kahverengi,
-          tabs: [
-            Tab(text: S.of(context).urun_sorularim),
-            Tab(text: S.of(context).siparis_sorularim),
-          ],
-        ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          sohbetVar ? buildSohbetListesi() : buildBosEkran(),
-          sohbetVar ? buildSohbetListesi() : buildBosEkran(),
-        ],
-      ),
+         Provider.of<Loadingprovider>(context,listen: false).isloading?
+        Center(
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(83, 138, 103, 32),
+            ),
+            child: Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(color: Renkler.kahverengi),
+              ),
+            ),
+          ),
+        ):SizedBox()
+      ],
     );
   }
 

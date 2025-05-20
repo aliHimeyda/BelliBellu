@@ -1,6 +1,8 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Sorularsayfasi extends StatefulWidget {
   const Sorularsayfasi({super.key});
@@ -221,140 +223,161 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Renkler.kuyubeyaz,
-      appBar: AppBar(
-        surfaceTintColor: Renkler.kuyubeyaz,
-        backgroundColor: Renkler.kuyubeyaz,
-        title: Text(
-          S.of(context).sik_sorulanlar,
-          style: TextStyle(
-            color: Renkler.kahverengi,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 10),
-          // Üst Bilgi ve Sıralama Butonu
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              children: [
-                Text(
-                  S.of(context).soru_cevap('34'),
-                  style: TextStyle(color: Renkler.kahverengi),
-                ),
-                const Spacer(),
-                TextButton.icon(
-                  onPressed: siralamaPopupAc,
-                  icon: const Icon(Icons.sort, color: Renkler.kahverengi),
-                  label: Text(
-                    seciliSiralama,
-                    style: TextStyle(color: Renkler.kahverengi),
-                  ),
-                ),
-              ],
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: Renkler.kuyubeyaz,
+          appBar: AppBar(
+            surfaceTintColor: Renkler.kuyubeyaz,
+            backgroundColor: Renkler.kuyubeyaz,
+            title: Text(
+              S.of(context).sik_sorulanlar,
+              style: TextStyle(
+                color: Renkler.kahverengi,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-
-          const Divider(color: Renkler.kahverengi),
-
-          // Yorum Listesi
-          Expanded(
-            child: ListView.builder(
-              itemCount: soruCevaplar.length,
-              itemBuilder: (context, index) {
-                final s = soruCevaplar[index];
-                return Container(
-                  width: MediaQuery.of(context).size.width / 1.2,
-                  decoration: BoxDecoration(color: Renkler.kuyubeyaz),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          body: Column(
+            children: [
+              SizedBox(height: 10),
+              // Üst Bilgi ve Sıralama Butonu
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  children: [
+                    Text(
+                      S.of(context).soru_cevap('34'),
+                      style: TextStyle(color: Renkler.kahverengi),
+                    ),
+                    const Spacer(),
+                    TextButton.icon(
+                      onPressed: siralamaPopupAc,
+                      icon: const Icon(Icons.sort, color: Renkler.kahverengi),
+                      label: Text(
+                        seciliSiralama,
+                        style: TextStyle(color: Renkler.kahverengi),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+        
+              const Divider(color: Renkler.kahverengi),
+        
+              // Yorum Listesi
+              Expanded(
+                child: ListView.builder(
+                  itemCount: soruCevaplar.length,
+                  itemBuilder: (context, index) {
+                    final s = soruCevaplar[index];
+                    return Container(
+                      width: MediaQuery.of(context).size.width / 1.2,
+                      decoration: BoxDecoration(color: Renkler.kuyubeyaz),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
                           children: [
-                            Text(
-                              s['musteri']!,
-                              style: TextStyle(
-                                color: Renkler.kahverengi,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              s['tarih']!,
-                              style: TextStyle(
-                                color: Renkler.kahverengi,
-                                fontSize: 12,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 12),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            s['soru']!,
-                            style: TextStyle(
-                              color: Renkler.kahverengi,
-                              fontSize: 10,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 30),
-                        Container(
-                          width: MediaQuery.of(context).size.width / 1.2 - 50,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 239, 226, 204),
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              width: 0.6,
-                              color: Renkler.kahverengi,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Column(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Ali HIMEYDA',
-                                    style: TextStyle(
-                                      color: Renkler.kahverengi,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
                                 Text(
-                                  s['cevap']!,
+                                  s['musteri']!,
                                   style: TextStyle(
                                     color: Renkler.kahverengi,
                                     fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  s['tarih']!,
+                                  style: TextStyle(
+                                    color: Renkler.kahverengi,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ],
                             ),
-                          ),
+                            SizedBox(height: 12),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                s['soru']!,
+                                style: TextStyle(
+                                  color: Renkler.kahverengi,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 30),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 1.2 - 50,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 239, 226, 204),
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  width: 0.6,
+                                  color: Renkler.kahverengi,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Ali HIMEYDA',
+                                        style: TextStyle(
+                                          color: Renkler.kahverengi,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      s['cevap']!,
+                                      style: TextStyle(
+                                        color: Renkler.kahverengi,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Divider(color: Renkler.kahverengi),
+                          ],
                         ),
-                        Divider(color: Renkler.kahverengi),
-                      ],
-                    ),
-                  ),
-                );
-              },
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          bottomNavigationBar: altButonlar(context),
+        ),
+         Provider.of<Loadingprovider>(context,listen: false).isloading?
+        Center(
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(83, 138, 103, 32),
+            ),
+            child: Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(color: Renkler.kahverengi),
+              ),
             ),
           ),
-        ],
-      ),
-      bottomNavigationBar: altButonlar(context),
+        ):SizedBox()
+      ],
     );
   }
 

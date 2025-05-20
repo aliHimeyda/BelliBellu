@@ -1,8 +1,10 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Ozelurunler extends StatefulWidget {
   final List<Urunler> gelenurunler;
@@ -61,6 +63,23 @@ class _OzelurunlerState extends State<Ozelurunler> {
         ),
 
         ustsecenekler(context),
+         Provider.of<Loadingprovider>(context,listen: false).isloading?
+        Center(
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(83, 138, 103, 32),
+            ),
+            child: Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(color: Renkler.kahverengi),
+              ),
+            ),
+          ),
+        ):SizedBox()
       ],
     );
   }

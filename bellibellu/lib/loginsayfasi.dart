@@ -4,6 +4,7 @@ import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/kullanicilarVT.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
+import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/veritabani.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -68,442 +69,491 @@ class _LoginpageState extends State<Loginpage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          // 🔹 Background Image
-          Container(
-            height: MediaQuery.of(context).size.height / 2 + 115,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Renkler.kahverengi,
-              image: DecorationImage(
-                alignment: Alignment.topCenter,
-                image: AssetImage('assets/ozelkatagori.png'), // Arka plan resmi
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-
-          // 🔹 Sliding Panel
-          DraggableScrollableSheet(
-            initialChildSize: 0.5,
-            minChildSize: 0.4,
-            maxChildSize: 0.75,
-            builder: (context, scrollController) {
-              return Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 16,
-                ),
+    return Stack(
+      children: [
+        Scaffold(
+          body: Stack(
+            children: [
+              // 🔹 Background Image
+              Container(
+                height: MediaQuery.of(context).size.height / 2 + 115,
+                width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: Renkler.kuyubeyaz,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
+                  color: Renkler.kahverengi,
+                  image: DecorationImage(
+                    alignment: Alignment.topCenter,
+                    image: AssetImage(
+                      'assets/ozelkatagori.png',
+                    ), // Arka plan resmi
+                    fit: BoxFit.contain,
                   ),
                 ),
-                child: SingleChildScrollView(
-                  controller: scrollController,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 🔘 Tabs
-                      SizedBox(height: 15),
-                      Center(
-                        child: Container(
-                          width: 350,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Renkler.krem, // Arka plan rengi (gri ton)
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Row(
-                            children: [
-                              // Giriş Yap
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () => setState(() => isSatici = true),
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    decoration: BoxDecoration(
-                                      color:
-                                          isSatici
-                                              ? Renkler.kahverengi
-                                              : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(30),
-                                      border:
-                                          isSatici
-                                              ? Border.all(
-                                                color: Colors.grey.shade300,
-                                                width: 1,
-                                              )
-                                              : null,
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      S.of(context).satici,
-                                      style: TextStyle(
-                                        color:
-                                            isSatici
-                                                ? Colors.white
-                                                : Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+              ),
 
-                              // Kayıt Ol
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () => setState(() => isSatici = false),
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    decoration: BoxDecoration(
-                                      color:
-                                          !isSatici
-                                              ? Renkler.kahverengi
-                                              : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(30),
-                                      border:
-                                          !isSatici
-                                              ? Border.all(
-                                                color: Colors.grey.shade300,
-                                                width: 1,
-                                              )
-                                              : null,
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      S.of(context).musteri,
-                                      style: TextStyle(
-                                        color:
-                                            !isSatici
-                                                ? Colors.white
-                                                : Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+              // 🔹 Sliding Panel
+              DraggableScrollableSheet(
+                initialChildSize: 0.5,
+                minChildSize: 0.4,
+                maxChildSize: 0.75,
+                builder: (context, scrollController) {
+                  return Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 16,
+                    ),
+                    decoration: const BoxDecoration(
+                      color: Renkler.kuyubeyaz,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
                       ),
-
-                      const SizedBox(height: 20),
-                      Center(
-                        child: Container(
-                          width: 350,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Renkler.krem,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Row(
-                            children: [
-                              // Giriş Yap
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () => setState(() => isLogin = true),
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    decoration: BoxDecoration(
-                                      color:
-                                          isLogin
-                                              ? Renkler.kahverengi
-                                              : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(30),
-                                      border:
-                                          isLogin
-                                              ? Border.all(
-                                                color: Colors.grey.shade300,
-                                                width: 1,
-                                              )
-                                              : null,
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      S.of(context).giris_yap,
-                                      style: TextStyle(
-                                        color:
-                                            isLogin
-                                                ? Colors.white
-                                                : Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              // Kayıt Ol
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () => setState(() => isLogin = false),
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    decoration: BoxDecoration(
-                                      color:
-                                          !isLogin
-                                              ? Renkler.kahverengi
-                                              : Colors.transparent,
-                                      borderRadius: BorderRadius.circular(30),
-                                      border:
-                                          !isLogin
-                                              ? Border.all(
-                                                color: Colors.grey.shade300,
-                                                width: 1,
-                                              )
-                                              : null,
-                                    ),
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      S.of(context).kayit_ol,
-                                      style: TextStyle(
-                                        color:
-                                            !isLogin
-                                                ? Colors.white
-                                                : Colors.black,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        isLogin
-                            ? S.of(context).tekrar_hosgeldiniz
-                            : S.of(context).hosgeldiniz,
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Renkler.kahverengi,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-
-                      if (!isLogin)
-                        TextField(
-                          cursorColor: Renkler.kahverengi,
-
-                          controller: _adsoyadController,
-
-                          decoration: InputDecoration(
-                            focusColor: Renkler.kahverengi,
-                            fillColor: Renkler.kahverengi,
-                            labelText: S.of(context).ad_soyad,
-
-                            border: OutlineInputBorder(),
-                            floatingLabelStyle: TextStyle(
-                              color: Renkler.kahverengi,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Renkler.kahverengi,
-                                width: 2.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      if (!isLogin) const SizedBox(height: 12),
-                      if (!isLogin && !isSatici)
-                        _customField(
-                          hint: S.of(context).dogum_tarihi,
-                          controller: _dogumtarihiController,
-                          icon: Icons.calendar_month_outlined,
-                          onTap: _selectDate,
-                        ),
-                      if (!isLogin) const SizedBox(height: 12),
-
-                      TextField(
-                        cursorColor: Renkler.kahverengi,
-                        controller: _mailController,
-                        decoration: InputDecoration(
-                          labelText: S.of(context).email,
-                          border: OutlineInputBorder(),
-                          floatingLabelStyle: TextStyle(
-                            color: Renkler.kahverengi,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Renkler.kahverengi,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-
-                      TextField(
-                        controller: _sifreController,
-                        cursorColor: Renkler.kahverengi,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          labelText: S.of(context).sifre,
-                          border: OutlineInputBorder(),
-                          floatingLabelStyle: TextStyle(
-                            color: Renkler.kahverengi,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Renkler.kahverengi,
-                              width: 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Renkler.kahverengi,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                12,
-                              ), // köşe yuvarlama
-                            ),
-                          ),
-                          onPressed: () async {
-                            if (!isLogin) {
-                              if (isSatici) {
-                                await _saticikayitEkle();
-                              } else {
-                                await _musterikayitEkle();
-                              }
-                            } else {
-                              if (isSatici) {
-                                await saticigirisYap(context);
-                              } else {
-                                await musterigirisYap(context);
-                              }
-                            }
-                          },
-                          child: Text(
-                            isLogin
-                                ? S.of(context).giris_yap
-                                : S.of(context).kayit_ol,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 16),
-                      Row(
+                    ),
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Expanded(
-                            child: Divider(
-                              thickness: 1,
-                              color: Color(0xFFE0E0E0), // açık gri çizgi rengi
-                              endIndent: 12,
+                          // 🔘 Tabs
+                          SizedBox(height: 15),
+                          Center(
+                            child: Container(
+                              width: 350,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color:
+                                    Renkler.krem, // Arka plan rengi (gri ton)
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Row(
+                                children: [
+                                  // Giriş Yap
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap:
+                                          () => setState(() => isSatici = true),
+                                      child: AnimatedContainer(
+                                        duration: const Duration(
+                                          milliseconds: 200,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color:
+                                              isSatici
+                                                  ? Renkler.kahverengi
+                                                  : Colors.transparent,
+                                          borderRadius: BorderRadius.circular(
+                                            30,
+                                          ),
+                                          border:
+                                              isSatici
+                                                  ? Border.all(
+                                                    color: Colors.grey.shade300,
+                                                    width: 1,
+                                                  )
+                                                  : null,
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          S.of(context).satici,
+                                          style: TextStyle(
+                                            color:
+                                                isSatici
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // Kayıt Ol
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap:
+                                          () =>
+                                              setState(() => isSatici = false),
+                                      child: AnimatedContainer(
+                                        duration: const Duration(
+                                          milliseconds: 200,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color:
+                                              !isSatici
+                                                  ? Renkler.kahverengi
+                                                  : Colors.transparent,
+                                          borderRadius: BorderRadius.circular(
+                                            30,
+                                          ),
+                                          border:
+                                              !isSatici
+                                                  ? Border.all(
+                                                    color: Colors.grey.shade300,
+                                                    width: 1,
+                                                  )
+                                                  : null,
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          S.of(context).musteri,
+                                          style: TextStyle(
+                                            color:
+                                                !isSatici
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
+
+                          const SizedBox(height: 20),
+                          Center(
+                            child: Container(
+                              width: 350,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Renkler.krem,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Row(
+                                children: [
+                                  // Giriş Yap
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap:
+                                          () => setState(() => isLogin = true),
+                                      child: AnimatedContainer(
+                                        duration: const Duration(
+                                          milliseconds: 200,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color:
+                                              isLogin
+                                                  ? Renkler.kahverengi
+                                                  : Colors.transparent,
+                                          borderRadius: BorderRadius.circular(
+                                            30,
+                                          ),
+                                          border:
+                                              isLogin
+                                                  ? Border.all(
+                                                    color: Colors.grey.shade300,
+                                                    width: 1,
+                                                  )
+                                                  : null,
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          S.of(context).giris_yap,
+                                          style: TextStyle(
+                                            color:
+                                                isLogin
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  // Kayıt Ol
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap:
+                                          () => setState(() => isLogin = false),
+                                      child: AnimatedContainer(
+                                        duration: const Duration(
+                                          milliseconds: 200,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color:
+                                              !isLogin
+                                                  ? Renkler.kahverengi
+                                                  : Colors.transparent,
+                                          borderRadius: BorderRadius.circular(
+                                            30,
+                                          ),
+                                          border:
+                                              !isLogin
+                                                  ? Border.all(
+                                                    color: Colors.grey.shade300,
+                                                    width: 1,
+                                                  )
+                                                  : null,
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          S.of(context).kayit_ol,
+                                          style: TextStyle(
+                                            color:
+                                                !isLogin
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
                           Text(
-                            S.of(context).veya,
-                            style: TextStyle(
-                              color: Colors.grey.shade600,
-                              fontSize: 14,
+                            isLogin
+                                ? S.of(context).tekrar_hosgeldiniz
+                                : S.of(context).hosgeldiniz,
+                            style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Renkler.kahverengi,
                             ),
                           ),
-                          const Expanded(
-                            child: Divider(
-                              thickness: 1,
-                              color: Color(0xFFE0E0E0),
-                              indent: 12,
+                          const SizedBox(height: 16),
+
+                          if (!isLogin)
+                            TextField(
+                              cursorColor: Renkler.kahverengi,
+
+                              controller: _adsoyadController,
+
+                              decoration: InputDecoration(
+                                focusColor: Renkler.kahverengi,
+                                fillColor: Renkler.kahverengi,
+                                labelText: S.of(context).ad_soyad,
+
+                                border: OutlineInputBorder(),
+                                floatingLabelStyle: TextStyle(
+                                  color: Renkler.kahverengi,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Renkler.kahverengi,
+                                    width: 2.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          if (!isLogin) const SizedBox(height: 12),
+                          if (!isLogin && !isSatici)
+                            _customField(
+                              hint: S.of(context).dogum_tarihi,
+                              controller: _dogumtarihiController,
+                              icon: Icons.calendar_month_outlined,
+                              onTap: _selectDate,
+                            ),
+                          if (!isLogin) const SizedBox(height: 12),
+
+                          TextField(
+                            cursorColor: Renkler.kahverengi,
+                            controller: _mailController,
+                            decoration: InputDecoration(
+                              labelText: S.of(context).email,
+                              border: OutlineInputBorder(),
+                              floatingLabelStyle: TextStyle(
+                                color: Renkler.kahverengi,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Renkler.kahverengi,
+                                  width: 2.0,
+                                ),
+                              ),
                             ),
                           ),
+                          const SizedBox(height: 12),
+
+                          TextField(
+                            controller: _sifreController,
+                            cursorColor: Renkler.kahverengi,
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              labelText: S.of(context).sifre,
+                              border: OutlineInputBorder(),
+                              floatingLabelStyle: TextStyle(
+                                color: Renkler.kahverengi,
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Renkler.kahverengi,
+                                  width: 2.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Renkler.kahverengi,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                    12,
+                                  ), // köşe yuvarlama
+                                ),
+                              ),
+                              onPressed: () async {
+                                if (!isLogin) {
+                                  if (isSatici) {
+                                    await _saticikayitEkle();
+                                  } else {
+                                    await _musterikayitEkle();
+                                  }
+                                } else {
+                                  if (isSatici) {
+                                    await saticigirisYap(context);
+                                  } else {
+                                    await musterigirisYap(context);
+                                  }
+                                }
+                              },
+                              child: Text(
+                                isLogin
+                                    ? S.of(context).giris_yap
+                                    : S.of(context).kayit_ol,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              const Expanded(
+                                child: Divider(
+                                  thickness: 1,
+                                  color: Color(
+                                    0xFFE0E0E0,
+                                  ), // açık gri çizgi rengi
+                                  endIndent: 12,
+                                ),
+                              ),
+                              Text(
+                                S.of(context).veya,
+                                style: TextStyle(
+                                  color: Colors.grey.shade600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const Expanded(
+                                child: Divider(
+                                  thickness: 1,
+                                  color: Color(0xFFE0E0E0),
+                                  indent: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 16),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: OutlinedButton.icon(
+                              icon: Image.asset('assets/google.png'),
+                              label: Text(
+                                S.of(context).devam_google,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              onPressed: () async {
+                                // final userCredential = await signInWithGoogle();
+                                // if (userCredential != null) {
+                                //   print(
+                                //     'Giriş Başarılı: ${userCredential.user?.displayName}',
+                                //   );
+                                //   context.push(Paths.hareketler);
+                                // } else {
+                                //   print('Giriş iptal edildi veya hata oluştu');
+                                // }
+                              },
+                            ),
+                          ),
+
+                          const SizedBox(height: 16),
+
+                          if (!isLogin)
+                            Text.rich(
+                              TextSpan(
+                                text: S.of(context).kvkk_onay,
+                                children: [
+                                  TextSpan(
+                                    text: S.of(context).kvkk,
+                                    style: TextStyle(color: Renkler.kahverengi),
+                                  ),
+                                  TextSpan(text: S.of(context).ve),
+                                  TextSpan(
+                                    text: S.of(context).uyelik_sozlesmesi,
+                                    style: TextStyle(color: Renkler.kahverengi),
+                                  ),
+                                  TextSpan(text: S.of(context).kabul_ettiniz),
+                                ],
+                              ),
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          SizedBox(height: 50),
                         ],
                       ),
-
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: OutlinedButton.icon(
-                          icon: Image.asset('assets/google.png'),
-                          label: Text(
-                            S.of(context).devam_google,
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          onPressed: () async {
-                            // final userCredential = await signInWithGoogle();
-                            // if (userCredential != null) {
-                            //   print(
-                            //     'Giriş Başarılı: ${userCredential.user?.displayName}',
-                            //   );
-                            //   context.push(Paths.hareketler);
-                            // } else {
-                            //   print('Giriş iptal edildi veya hata oluştu');
-                            // }
-                          },
-                        ),
+                    ),
+                  );
+                },
+              ),
+              Positioned(
+                top: 80,
+                right: 0,
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(color: Renkler.krem),
+                  child: Center(
+                    child: TextButton(
+                      onPressed: () {
+                        dilsecimdialogu(context);
+                      },
+                      child: Text(
+                        S.of(context).turkce_kodu,
+                        style: TextStyle(color: Renkler.kahverengi),
                       ),
-
-                      const SizedBox(height: 16),
-
-                      if (!isLogin)
-                        Text.rich(
-                          TextSpan(
-                            text: S.of(context).kvkk_onay,
-                            children: [
-                              TextSpan(
-                                text: S.of(context).kvkk,
-                                style: TextStyle(color: Renkler.kahverengi),
-                              ),
-                              TextSpan(text: S.of(context).ve),
-                              TextSpan(
-                                text: S.of(context).uyelik_sozlesmesi,
-                                style: TextStyle(color: Renkler.kahverengi),
-                              ),
-                              TextSpan(text: S.of(context).kabul_ettiniz),
-                            ],
-                          ),
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      SizedBox(height: 50),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-          Positioned(
-            top: 80,
-            right: 0,
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(color: Renkler.krem),
-              child: Center(
-                child: TextButton(
-                  onPressed: () {
-                    dilsecimdialogu(context);
-                  },
-                  child: Text(
-                    S.of(context).turkce_kodu,
-                    style: TextStyle(color: Renkler.kahverengi),
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+        Provider.of<Loadingprovider>(context, listen: false).isloading
+            ? Center(
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(83, 138, 103, 32),
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(color: Renkler.kahverengi),
+                  ),
+                ),
+              ),
+            )
+            : SizedBox(),
+      ],
     );
   }
 
   Future<void> saticigirisYap(BuildContext context) async {
+    Provider.of<Loadingprovider>(context, listen: false).changemode();
     bool kontrol = await Kullanicilarvt.saticibilgikontrolu(
       _mailController.text,
       _sifreController.text,
@@ -555,6 +605,7 @@ class _LoginpageState extends State<Loginpage> {
         ),
       );
     }
+    Provider.of<Loadingprovider>(context, listen: false).changemode();
   }
 
   Future<void> musterigirisYap(BuildContext context) async {
@@ -614,6 +665,7 @@ class _LoginpageState extends State<Loginpage> {
   }
 
   Future<void> _saticikayitEkle() async {
+    Provider.of<Loadingprovider>(context, listen: false).changemode();
     List<String> adParcalari = _adsoyadController.text.trim().split(' ');
 
     String adi = adParcalari[0]; // 'ahmet'
@@ -627,6 +679,21 @@ class _LoginpageState extends State<Loginpage> {
     };
     bool basari = await Kullanicilarvt.saticiekle(yenisatici);
     if (basari == true) {
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici = await Kullanicilarvt.getsaticiBymail(
+        _mailController.text,
+      );
+      Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
+          false;
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).degisikliklerikaydet();
+      girisyapanmail = _mailController.text;
+      girisyapildimi = true;
+      cihazagirisbilgisinikaydet();
       context.pushReplacement(Paths.anasayfa);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -657,11 +724,12 @@ class _LoginpageState extends State<Loginpage> {
         ),
       );
     }
+    Provider.of<Loadingprovider>(context, listen: false).changemode();
   }
 
   Future<void> _musterikayitEkle() async {
-    List<String> adParcalari = _adsoyadController.text.trim().split(' ');
-
+    Provider.of<Loadingprovider>(context, listen: false).changemode();
+    List<String> adParcalari = _adsoyadController.text.split(' ');
     String adi = adParcalari[0]; // 'ahmet'
     String soyadi = adParcalari.length > 1 ? adParcalari[1] : ''; // 'kaya'
 
@@ -674,6 +742,21 @@ class _LoginpageState extends State<Loginpage> {
     };
     bool basari = await Kullanicilarvt.musteriekle(yenimusteri);
     if (basari == true) {
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici = await Kullanicilarvt.getmusteriBymail(
+        _mailController.text,
+      );
+      Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
+          true;
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).degisikliklerikaydet();
+      girisyapanmail = _mailController.text;
+      girisyapildimi = true;
+      cihazagirisbilgisinikaydet();
       context.pushReplacement(Paths.anasayfa);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -704,6 +787,7 @@ class _LoginpageState extends State<Loginpage> {
         ),
       );
     }
+    Provider.of<Loadingprovider>(context, listen: false).changemode();
   }
 
   Future<void> cihazagirisbilgisinikaydet() async {

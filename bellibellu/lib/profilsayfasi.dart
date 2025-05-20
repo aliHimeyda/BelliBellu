@@ -223,7 +223,13 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
               ? _infoTile(
                 context,
                 S.of(context).telefon,
-                "**********${Provider.of<Kullanicilarprovider>(context, listen: false).currentkullanici['telefonNo'].substring('telefon'.length - 2)}",
+                Provider.of<Kullanicilarprovider>(
+                          context,
+                          listen: false,
+                        ).currentkullanici['telefonNo'] !=
+                        null
+                    ? "**********${Provider.of<Kullanicilarprovider>(context, listen: false).currentkullanici['telefonNo'].substring('telefon'.length - 2)}"
+                    : ' ',
                 _telefonPopup,
               )
               : Column(

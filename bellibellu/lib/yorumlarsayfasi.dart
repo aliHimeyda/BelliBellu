@@ -1,6 +1,8 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class YorumlarSayfasi extends StatefulWidget {
   const YorumlarSayfasi({super.key});
@@ -86,99 +88,121 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Renkler.kuyubeyaz,
-      appBar: AppBar(
-        surfaceTintColor: Renkler.kuyubeyaz,
-        backgroundColor: Renkler.kuyubeyaz,
-        title: Text(
-          S.of(context).baslikDegerlendirme,
-          style: TextStyle(
-            color: Renkler.kahverengi,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            onTap: () {},
-            child: Icon(Icons.favorite_border, color: Renkler.kahverengi),
-          ),
-          SizedBox(width: 10),
-        ],
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 10),
-          // Üst Bilgi ve Sıralama Butonu
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              children: [
-                Text(
-                  S.of(context).puanYorumMetni('12', '34'),
-                  style: TextStyle(color: Renkler.kahverengi),
-                ),
-                const Spacer(),
-                TextButton.icon(
-                  onPressed: siralamaPopupAc,
-                  icon: const Icon(Icons.sort, color: Renkler.kahverengi),
-                  label: Text(
-                    seciliSiralama,
-                    style: TextStyle(color: Renkler.kahverengi),
-                  ),
-                ),
-              ],
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: Renkler.kuyubeyaz,
+          appBar: AppBar(
+            surfaceTintColor: Renkler.kuyubeyaz,
+            backgroundColor: Renkler.kuyubeyaz,
+            title: Text(
+              S.of(context).baslikDegerlendirme,
+              style: TextStyle(
+                color: Renkler.kahverengi,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
             ),
+            actions: [
+              GestureDetector(
+                onTap: () {},
+                child: Icon(Icons.favorite_border, color: Renkler.kahverengi),
+              ),
+              SizedBox(width: 10),
+            ],
           ),
-
-          const Divider(color: Renkler.kahverengi),
-
-          // Yorum Listesi
-          Expanded(
-            child: ListView.builder(
-              itemCount: yorumlar.length,
-              itemBuilder: (context, index) {
-                final yorum = yorumlar[index];
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          body: Column(
+            children: [
+              SizedBox(height: 10),
+              // Üst Bilgi ve Sıralama Butonu
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
                   children: [
-                    ListTile(
-                      leading: const Icon(Icons.person),
-                      title: Text("${yorum["isim"]} | ${yorum["tarih"]}"),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 8),
-                          Text(yorum["yorum"] ?? ""),
-                          if (yorum["boy"] != null && yorum["kilo"] != null)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 4),
-                              child: Text(
-                                "${yorum["boy"]} • ${yorum["kilo"]}",
-                                style: const TextStyle(color: Colors.grey),
-                              ),
-                            ),
-                          const SizedBox(height: 8),
-                          Text(
-                            "${S.of(context).satici_bilgisi('satici')}",
-                            style: const TextStyle(
-                              color: Renkler.kahverengi,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
+                    Text(
+                      S.of(context).puanYorumMetni('12', '34'),
+                      style: TextStyle(color: Renkler.kahverengi),
+                    ),
+                    const Spacer(),
+                    TextButton.icon(
+                      onPressed: siralamaPopupAc,
+                      icon: const Icon(Icons.sort, color: Renkler.kahverengi),
+                      label: Text(
+                        seciliSiralama,
+                        style: TextStyle(color: Renkler.kahverengi),
                       ),
                     ),
-                    const Divider(color: Renkler.kahverengi),
                   ],
-                );
-              },
-            ),
+                ),
+              ),
+
+              const Divider(color: Renkler.kahverengi),
+
+              // Yorum Listesi
+              Expanded(
+                child: ListView.builder(
+                  itemCount: yorumlar.length,
+                  itemBuilder: (context, index) {
+                    final yorum = yorumlar[index];
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                          leading: const Icon(Icons.person),
+                          title: Text("${yorum["isim"]} | ${yorum["tarih"]}"),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 8),
+                              Text(yorum["yorum"] ?? ""),
+                              if (yorum["boy"] != null && yorum["kilo"] != null)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Text(
+                                    "${yorum["boy"]} • ${yorum["kilo"]}",
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                              const SizedBox(height: 8),
+                              Text(
+                                "${S.of(context).satici_bilgisi('satici')}",
+                                style: const TextStyle(
+                                  color: Renkler.kahverengi,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Divider(color: Renkler.kahverengi),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      bottomNavigationBar: altButonlar(context),
+          bottomNavigationBar: altButonlar(context),
+        ),
+        Provider.of<Loadingprovider>(context, listen: false).isloading
+            ? Center(
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(83, 138, 103, 32),
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(color: Renkler.kahverengi),
+                  ),
+                ),
+              ),
+            )
+            : SizedBox(),
+      ],
     );
   }
 

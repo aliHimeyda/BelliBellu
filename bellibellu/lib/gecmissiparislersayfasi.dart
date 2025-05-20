@@ -1,8 +1,10 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class Gecmissiparislersayfasi extends StatefulWidget {
   @override
@@ -16,114 +18,135 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Renkler.kuyubeyaz,
-      appBar: AppBar(
-        title: Text(
-          S.of(context).baslik_siparislerim,
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Renkler.kahverengi,
-      ),
-      body: Column(
-        children: [
-          SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: TextField(
-              controller: _textcontroller,
-              cursorColor: Renkler.kahverengi,
-              decoration: InputDecoration(
-                hintText: S.of(context).arama_ipucu,
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                floatingLabelStyle: TextStyle(color: Renkler.kahverengi),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Renkler.kahverengi, width: 2.0),
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: Renkler.kuyubeyaz,
+          appBar: AppBar(
+            title: Text(
+              S.of(context).baslik_siparislerim,
+              style: TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Renkler.kahverengi,
+          ),
+          body: Column(
+            children: [
+              SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: TextField(
+                  controller: _textcontroller,
+                  cursorColor: Renkler.kahverengi,
+                  decoration: InputDecoration(
+                    hintText: S.of(context).arama_ipucu,
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    floatingLabelStyle: TextStyle(color: Renkler.kahverengi),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Renkler.kahverengi, width: 2.0),
+                    ),
+                  ),
+                  onChanged: (value) {},
                 ),
               ),
-              onChanged: (value) {},
+              SizedBox(height: 12),
+              // Kategori Butonları
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  spacing: 14,
+                  children: [
+                    FilterChip(
+                      backgroundColor: Renkler.kuyubeyaz,
+                      selectedColor: Renkler.krem,
+                      label: Text(
+                        S.of(context).filtre_tumu,
+                        style: TextStyle(color: Renkler.kahverengi),
+                      ),
+                      selected: selectedlist[0],
+                      onSelected: (_) {
+                        setState(() {
+                          selectedlist = [true, false, false];
+                        });
+                      },
+                    ),
+                    FilterChip(
+                      backgroundColor: Renkler.kuyubeyaz,
+                      selectedColor: Renkler.krem,
+                      label: Text(
+                        S.of(context).filtre_bu_ay,
+                        style: TextStyle(color: Renkler.kahverengi),
+                      ),
+                      selected: selectedlist[1],
+                      onSelected: (_) {
+                        setState(() {
+                          selectedlist = [false, true, false];
+                        });
+                      },
+                    ),
+                    FilterChip(
+                      backgroundColor: Renkler.kuyubeyaz,
+                      selectedColor: Renkler.krem,
+                      label: Text(
+                        S.of(context).filtre_gecen_ay,
+                        style: TextStyle(color: Renkler.kahverengi),
+                      ),
+                      selected: selectedlist[2],
+                      onSelected: (_) {
+                        setState(() {
+                          selectedlist = [false, false, true];
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+        
+              // Arama Kutusu
+              SizedBox(height: 12),
+        
+              // Sipariş Listesi
+              Expanded(
+                child: ListView(
+                  padding: EdgeInsets.all(12),
+                  children: [
+                    buildSiparisCard(
+                      tarih: '24 Mart 2025',
+                      toplam: '1088.91 TL',
+                      urunler: ['📦', '🔌', '📘', '✏️'],
+                    ),
+                    buildSiparisCard(
+                      tarih: '18 Mart 2025',
+                      toplam: '651.90 TL',
+                      urunler: ['✏️', '🧴', '🧴', '☀️'],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+         Provider.of<Loadingprovider>(context,listen: false).isloading?
+        Center(
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(83, 138, 103, 32),
+            ),
+            child: Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(color: Renkler.kahverengi),
+              ),
             ),
           ),
-          SizedBox(height: 12),
-          // Kategori Butonları
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              spacing: 14,
-              children: [
-                FilterChip(
-                  backgroundColor: Renkler.kuyubeyaz,
-                  selectedColor: Renkler.krem,
-                  label: Text(
-                    S.of(context).filtre_tumu,
-                    style: TextStyle(color: Renkler.kahverengi),
-                  ),
-                  selected: selectedlist[0],
-                  onSelected: (_) {
-                    setState(() {
-                      selectedlist = [true, false, false];
-                    });
-                  },
-                ),
-                FilterChip(
-                  backgroundColor: Renkler.kuyubeyaz,
-                  selectedColor: Renkler.krem,
-                  label: Text(
-                    S.of(context).filtre_bu_ay,
-                    style: TextStyle(color: Renkler.kahverengi),
-                  ),
-                  selected: selectedlist[1],
-                  onSelected: (_) {
-                    setState(() {
-                      selectedlist = [false, true, false];
-                    });
-                  },
-                ),
-                FilterChip(
-                  backgroundColor: Renkler.kuyubeyaz,
-                  selectedColor: Renkler.krem,
-                  label: Text(
-                    S.of(context).filtre_gecen_ay,
-                    style: TextStyle(color: Renkler.kahverengi),
-                  ),
-                  selected: selectedlist[2],
-                  onSelected: (_) {
-                    setState(() {
-                      selectedlist = [false, false, true];
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-
-          // Arama Kutusu
-          SizedBox(height: 12),
-
-          // Sipariş Listesi
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.all(12),
-              children: [
-                buildSiparisCard(
-                  tarih: '24 Mart 2025',
-                  toplam: '1088.91 TL',
-                  urunler: ['📦', '🔌', '📘', '✏️'],
-                ),
-                buildSiparisCard(
-                  tarih: '18 Mart 2025',
-                  toplam: '651.90 TL',
-                  urunler: ['✏️', '🧴', '🧴', '☀️'],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        ):SizedBox()
+      ],
     );
   }
 

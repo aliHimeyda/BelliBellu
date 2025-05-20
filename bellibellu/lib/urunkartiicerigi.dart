@@ -2,12 +2,14 @@ import 'package:bellibellu/ceviri.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
 import 'package:bellibellu/urunkarti.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
@@ -212,329 +214,89 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
     int uzunluk = 100 + random.nextInt(201);
     int genislik = 50 + random.nextInt(151);
     super.build(context); // Bu satır önemli
-    return Scaffold(
-      backgroundColor: const Color.fromRGBO(245, 241, 241, 1),
-      body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 100),
-            child: ListView(
-              children: [
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width - 10,
-                          height: 350,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Renkler.kahverengi,
-                                width: 3,
-                              ),
-                            ),
-                          ),
-                          child: Image.network(
-                            widget.urun.resimYolu,
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
-                        SizedBox(height: 15),
-                        Container(
-                          child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                left: 25,
-                                right: 25,
-                                top: 0,
-                                bottom: 5,
-                              ),
-                              child: Column(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      widget.urun.urunAdi,
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    S
-                                        .of(context)
-                                        .urun_aciklamasi(
-                                          widget.urun.urunAdi,
-                                          Cevirici.malzemeCevir(
-                                            context,
-                                            widget.urun.materyali,
-                                          ),
-                                          Cevirici.turCevir(
-                                            context,
-                                            widget.urun.turu,
-                                          ),
-                                          Cevirici.ortamCevir(
-                                            context,
-                                            widget.urun.ortami,
-                                          ),
-                                          uzunluk,
-                                          genislik,
-                                        ),
-                                    style: TextStyle(fontSize: 11),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(height: 20),
-                        KisacaOzellikler(context),
-                        Container(
-                          height: 30,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Renkler.kahverengi,
-                                width: 0.5,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(height: 30),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: Row(
-                            children: [
-                              Text(
-                                S.of(context).sik_sorulanlar,
-                                style: TextStyle(
-                                  color: Renkler.kahverengi,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Spacer(),
-                              TextButton(
-                                onPressed: () {
-                                  context.push(Paths.sorularsayfasi);
-                                },
-                                style: TextButton.styleFrom(
-                                  foregroundColor:
-                                      Renkler.kahverengi, // Yazı rengi
-                                ),
-                                child: Text(
-                                  S.of(context).tumunuGorButonu('12'),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        sorucevaplar(context),
-                        Container(
-                          height: 30,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Renkler.kahverengi,
-                                width: 0.5,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 15),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: Text(
-                            S.of(context).kategoriler,
-                            style: TextStyle(
-                              color: Renkler.kahverengi,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-
-                        katagorilerseridi(context),
-
-                        Container(
-                          height: 30,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Renkler.kahverengi,
-                                width: 0.5,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: Text(
-                            S.of(context).urun_ozellikleri,
-                            style: TextStyle(
-                              color: Renkler.kahverengi,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 30),
-                        KisacaOzellikler(context),
-                        SizedBox(height: 10),
-                        Row(
+    return Stack(
+      children: [
+        Scaffold(
+          backgroundColor: const Color.fromRGBO(245, 241, 241, 1),
+          body: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 100),
+                child: ListView(
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
                           children: [
-                            Icon(
-                              Icons.circle,
-                              color: Renkler.kahverengi,
-                              size: 6,
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              S.of(context).bu_urun_turkiyede_uretilmistir,
-                              style: TextStyle(
-                                color: Renkler.kahverengi,
-                                fontSize: 12,
+                            Container(
+                              width: MediaQuery.of(context).size.width - 10,
+                              height: 350,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Renkler.kahverengi,
+                                    width: 3,
+                                  ),
+                                ),
+                              ),
+                              child: Image.network(
+                                widget.urun.resimYolu,
+                                fit: BoxFit.fitHeight,
                               ),
                             ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.circle,
-                              color: Renkler.kahverengi,
-                              size: 6,
-                            ),
-                            SizedBox(width: 5),
-                            Text(
-                              S.of(context).urunlerin_garanti_suresi,
-                              style: TextStyle(
-                                color: Renkler.kahverengi,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(width: 5),
-                        Text(
-                          S
-                              .of(context)
-                              .urun_aciklamasi(
-                                widget.urun.urunAdi,
-                                widget.urun.materyali,
-                                widget.urun.turu,
-                                widget.urun.ortami,
-                                uzunluk,
-                                genislik,
-                              ),
-                          style: TextStyle(
-                            color: Renkler.kahverengi,
-                            fontSize: 12,
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        GestureDetector(
-                          onTap: () {
-                            debugPrint('tiklandi');
-                            popup(uzunluk, genislik);
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 198, 211, 187),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            SizedBox(height: 15),
+                            Container(
                               child: Center(
-                                child: Text(S.of(context).tum_ozellikler),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        Container(
-                          height: 30,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Renkler.kahverengi,
-                                width: 0.5,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Başlık ve Puan
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0,
-                                vertical: 8.0,
-                              ),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    S.of(context).baslikDegerlendirme,
-                                    style: TextStyle(
-                                      color: Renkler.kahverengi,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    left: 25,
+                                    right: 25,
+                                    top: 0,
+                                    bottom: 5,
                                   ),
-                                  const Spacer(),
-                                  TextButton(
-                                    onPressed: () {
-                                      context.push(Paths.yorumlarsayfasi);
-                                    },
-                                    style: TextButton.styleFrom(
-                                      foregroundColor:
-                                          Renkler.kahverengi, // Yazı rengi
-                                    ),
-                                    child: Text(
-                                      S.of(context).tumunuGorButonu('adet'),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            // Puan Göstergesi
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0,
-                              ),
-                              child: Text(
-                                S.of(context).puanYorumMetni('12', '3'),
-                                style: TextStyle(color: Renkler.kahverengi),
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            // Yorumlar - kaydırılabilir
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: List.generate(
-                                  5,
-                                  (index) => yorumKarti(
-                                    isim: "M** P**",
-                                    tarih: "22 Eylül 2024",
-                                    yorum:
-                                        "Öncelikle çok güzel ve özenle paketlenmişti. Kargo da zamanında geldi. Saat gayet güzel ve çok hoş.",
-                                    satici: "Art Saatçilik",
+                                  child: Column(
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          widget.urun.urunAdi,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        S
+                                            .of(context)
+                                            .urun_aciklamasi(
+                                              widget.urun.urunAdi,
+                                              Cevirici.malzemeCevir(
+                                                context,
+                                                widget.urun.materyali,
+                                              ),
+                                              Cevirici.turCevir(
+                                                context,
+                                                widget.urun.turu,
+                                              ),
+                                              Cevirici.ortamCevir(
+                                                context,
+                                                widget.urun.ortami,
+                                              ),
+                                              uzunluk,
+                                              genislik,
+                                            ),
+                                        style: TextStyle(fontSize: 11),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
+        
+                            SizedBox(height: 20),
+                            KisacaOzellikler(context),
                             Container(
                               height: 30,
                               decoration: BoxDecoration(
@@ -546,200 +308,461 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ),
                             ),
+        
+                            SizedBox(height: 30),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    S.of(context).sik_sorulanlar,
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  TextButton(
+                                    onPressed: () {
+                                      context.push(Paths.sorularsayfasi);
+                                    },
+                                    style: TextButton.styleFrom(
+                                      foregroundColor:
+                                          Renkler.kahverengi, // Yazı rengi
+                                    ),
+                                    child: Text(
+                                      S.of(context).tumunuGorButonu('12'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            sorucevaplar(context),
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Renkler.kahverengi,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 15),
+        
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Text(
+                                S.of(context).kategoriler,
+                                style: TextStyle(
+                                  color: Renkler.kahverengi,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+        
+                            katagorilerseridi(context),
+        
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Renkler.kahverengi,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: Text(
+                                S.of(context).urun_ozellikleri,
+                                style: TextStyle(
+                                  color: Renkler.kahverengi,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 30),
+                            KisacaOzellikler(context),
+                            SizedBox(height: 10),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.circle,
+                                  color: Renkler.kahverengi,
+                                  size: 6,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  S.of(context).bu_urun_turkiyede_uretilmistir,
+                                  style: TextStyle(
+                                    color: Renkler.kahverengi,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.circle,
+                                  color: Renkler.kahverengi,
+                                  size: 6,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  S.of(context).urunlerin_garanti_suresi,
+                                  style: TextStyle(
+                                    color: Renkler.kahverengi,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+        
+                            SizedBox(width: 5),
+                            Text(
+                              S
+                                  .of(context)
+                                  .urun_aciklamasi(
+                                    widget.urun.urunAdi,
+                                    widget.urun.materyali,
+                                    widget.urun.turu,
+                                    widget.urun.ortami,
+                                    uzunluk,
+                                    genislik,
+                                  ),
+                              style: TextStyle(
+                                color: Renkler.kahverengi,
+                                fontSize: 12,
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            GestureDetector(
+                              onTap: () {
+                                debugPrint('tiklandi');
+                                popup(uzunluk, genislik);
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 198, 211, 187),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Center(
+                                    child: Text(S.of(context).tum_ozellikler),
+                                  ),
+                                ),
+                              ),
+                            ),
+        
+                            Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Renkler.kahverengi,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Başlık ve Puan
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0,
+                                    vertical: 8.0,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        S.of(context).baslikDegerlendirme,
+                                        style: TextStyle(
+                                          color: Renkler.kahverengi,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      TextButton(
+                                        onPressed: () {
+                                          context.push(Paths.yorumlarsayfasi);
+                                        },
+                                        style: TextButton.styleFrom(
+                                          foregroundColor:
+                                              Renkler.kahverengi, // Yazı rengi
+                                        ),
+                                        child: Text(
+                                          S.of(context).tumunuGorButonu('adet'),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // Puan Göstergesi
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0,
+                                  ),
+                                  child: Text(
+                                    S.of(context).puanYorumMetni('12', '3'),
+                                    style: TextStyle(color: Renkler.kahverengi),
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                // Yorumlar - kaydırılabilir
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: List.generate(
+                                      5,
+                                      (index) => yorumKarti(
+                                        isim: "M** P**",
+                                        tarih: "22 Eylül 2024",
+                                        yorum:
+                                            "Öncelikle çok güzel ve özenle paketlenmişti. Kargo da zamanında geldi. Saat gayet güzel ve çok hoş.",
+                                        satici: "Art Saatçilik",
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Renkler.kahverengi,
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            ozelkapakliserid(
+                              context,
+                              S.of(context).begenebilecegin,
+                            ),
+                            Container(
+                              height: 10,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Renkler.kahverengi,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ),
+        
+                            seridler[0],
+                            Container(
+                              height: 10,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Renkler.kahverengi,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            seridler[1],
+                            Container(
+                              height: 10,
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Renkler.kahverengi,
+                                    width: 0.5,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 20),
+        
+                            GestureDetector(
+                              onTap: () async {
+                                Navigator.pop(context);
+                                await urunlerigetir(
+                                  '${Cevirici.malzemeCevir(context, widget.urun.materyali)}',
+                                  context,
+                                );
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 5,
+                                height: 65,
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Renkler.kuyubeyaz,
+                                  border: Border.all(
+                                    width: 0.5,
+                                    color: Renkler.kahverengi,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      S
+                                          .of(context)
+                                          .daha_fazla_materyal(
+                                            Cevirici.malzemeCevir(
+                                              context,
+                                              widget.urun.materyali,
+                                            ),
+                                          ),
+                                      style: TextStyle(
+                                        color: Renkler.kahverengi,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.chevron_right,
+                                      size: 15,
+                                      color: Renkler.kahverengi,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                Navigator.pop(context);
+                                await urunlerigetir(
+                                  '${Cevirici.ortamCevir(context, widget.urun.ortami)}',
+                                  context,
+                                );
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 5,
+                                height: 65,
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Renkler.kuyubeyaz,
+                                  border: Border.all(
+                                    width: 0.5,
+                                    color: Renkler.kahverengi,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      S
+                                          .of(context)
+                                          .daha_fazla_materyal(
+                                            Cevirici.ortamCevir(
+                                              context,
+                                              widget.urun.ortami,
+                                            ),
+                                          ),
+                                      style: TextStyle(
+                                        color: Renkler.kahverengi,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.chevron_right,
+                                      size: 15,
+                                      color: Renkler.kahverengi,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                Navigator.pop(context);
+                                await urunlerigetir(
+                                  '${Cevirici.turCevir(context, widget.urun.turu)}',
+                                  context,
+                                );
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width - 5,
+                                height: 65,
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Renkler.kuyubeyaz,
+                                  border: Border.all(
+                                    width: 0.5,
+                                    color: Renkler.kahverengi,
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      S
+                                          .of(context)
+                                          .daha_fazla_materyal(
+                                            Cevirici.turCevir(
+                                              context,
+                                              widget.urun.turu,
+                                            ),
+                                          ),
+                                      style: TextStyle(
+                                        color: Renkler.kahverengi,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.chevron_right,
+                                      size: 15,
+                                      color: Renkler.kahverengi,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                        SizedBox(height: 20),
-                        ozelkapakliserid(
-                          context,
-                          S.of(context).begenebilecegin,
-                        ),
-                        Container(
-                          height: 10,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Renkler.kahverengi,
-                                width: 0.5,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        seridler[0],
-                        Container(
-                          height: 10,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Renkler.kahverengi,
-                                width: 0.5,
-                              ),
-                            ),
-                          ),
-                        ),
-                        seridler[1],
-                        Container(
-                          height: 10,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Renkler.kahverengi,
-                                width: 0.5,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-
-                        GestureDetector(
-                          onTap: () async {
-                            Navigator.pop(context);
-                            await urunlerigetir(
-                              '${Cevirici.malzemeCevir(context, widget.urun.materyali)}',
-                              context,
-                            );
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width - 5,
-                            height: 65,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Renkler.kuyubeyaz,
-                              border: Border.all(
-                                width: 0.5,
-                                color: Renkler.kahverengi,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  S
-                                      .of(context)
-                                      .daha_fazla_materyal(
-                                        Cevirici.malzemeCevir(
-                                          context,
-                                          widget.urun.materyali,
-                                        ),
-                                      ),
-                                  style: TextStyle(
-                                    color: Renkler.kahverengi,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.chevron_right,
-                                  size: 15,
-                                  color: Renkler.kahverengi,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () async {
-                            Navigator.pop(context);
-                            await urunlerigetir(
-                              '${Cevirici.ortamCevir(context, widget.urun.ortami)}',
-                              context,
-                            );
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width - 5,
-                            height: 65,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Renkler.kuyubeyaz,
-                              border: Border.all(
-                                width: 0.5,
-                                color: Renkler.kahverengi,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  S
-                                      .of(context)
-                                      .daha_fazla_materyal(
-                                        Cevirici.ortamCevir(
-                                          context,
-                                          widget.urun.ortami,
-                                        ),
-                                      ),
-                                  style: TextStyle(
-                                    color: Renkler.kahverengi,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.chevron_right,
-                                  size: 15,
-                                  color: Renkler.kahverengi,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () async {
-                            Navigator.pop(context);
-                            await urunlerigetir(
-                              '${Cevirici.turCevir(context, widget.urun.turu)}',
-                              context,
-                            );
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width - 5,
-                            height: 65,
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Renkler.kuyubeyaz,
-                              border: Border.all(
-                                width: 0.5,
-                                color: Renkler.kahverengi,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  S
-                                      .of(context)
-                                      .daha_fazla_materyal(
-                                        Cevirici.turCevir(
-                                          context,
-                                          widget.urun.turu,
-                                        ),
-                                      ),
-                                  style: TextStyle(
-                                    color: Renkler.kahverengi,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Icon(
-                                  Icons.chevron_right,
-                                  size: 15,
-                                  color: Renkler.kahverengi,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
+              favoriteIcon(),
+              bottomnavigation(context),
+            ],
+          ),
+        ),
+         Provider.of<Loadingprovider>(context,listen: false).isloading?
+        Center(
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            height: MediaQuery.sizeOf(context).height,
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(83, 138, 103, 32),
+            ),
+            child: Center(
+              child: SizedBox(
+                width: 50,
+                height: 50,
+                child: CircularProgressIndicator(color: Renkler.kahverengi),
+              ),
             ),
           ),
-          favoriteIcon(),
-          bottomnavigation(context),
-        ],
-      ),
+        ):SizedBox()
+      ],
     );
   }
 
