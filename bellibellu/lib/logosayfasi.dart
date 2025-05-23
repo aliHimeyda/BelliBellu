@@ -4,7 +4,9 @@ import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/kullanicilarVT.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
+import 'package:bellibellu/services/seridlerprovider.dart';
 import 'package:bellibellu/urunler.dart';
+import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +38,6 @@ class _LogosayfasiState extends State<Logosayfasi> {
   @override
   void initState() {
     giriskontrolu(context);
-    dataal();
 
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
@@ -63,6 +64,13 @@ class _LogosayfasiState extends State<Logosayfasi> {
     super.initState();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    seridlerial();
+  }
+
   void giriskontrolu(BuildContext context) async {
     Cihazbellegi.girisyapildimi = await Cihazbellegi.giriskontrolu();
     if (Cihazbellegi.girisyapildimi == true) {
@@ -77,13 +85,32 @@ class _LogosayfasiState extends State<Logosayfasi> {
     debugPrint('giris bilgisi: ${Cihazbellegi.girisyapildimi}');
   }
 
-  void dataal() async {
-    if (Urunler.urunler.isEmpty) {
-      await Urunler.urunleritanima();
-      if (Urunler.urunler.isEmpty) {
-        await Urunler.urunleritanima();
-      }
+  void seridlerial() async {
+    final List<String> vasiflar = [
+      S.of(context).urunSerisi2025,
+      S.of(context).efsaneUrunler,
+      S.of(context).ofisMobilyalari,
+      S.of(context).evUrunleri,
+      S.of(context).enCokBegenilenler,
+    ];
+    final List<Map<String, dynamic>> kategoriler = [
+      {'currentPage': 1, 'tarihegore': "2025"},
+      {'currentPage': 1},
+      {
+        'currentPage': 1,
+        'seciliortamOgeler': ["Ofis"],
+      },
+      {
+        'currentPage': 1,
+        'seciliortamOgeler': ["Ev"],
+      },
+      {'currentPage': 1, 'siralamaolcutu': "encokbegenilen"},
+    ];
+    for (int i = 0; i < 5; i++) {
+      Serid serid = Serid(vasif: vasiflar[i], seridkategorisi: kategoriler[i]);
+      Provider.of<Seridlerprovider>(context).seridler.add(serid);
     }
+    Provider.of<Seridlerprovider>(context).seridleriguncelle();
   }
 
   @override

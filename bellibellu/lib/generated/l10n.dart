@@ -1791,6 +1791,71 @@ class S {
   String get adres {
     return Intl.message('Address', name: 'adres', desc: '', args: []);
   }
+
+  /// `Silver`
+  String get renk_gumus {
+    return Intl.message('Silver', name: 'renk_gumus', desc: '', args: []);
+  }
+
+  /// `Brown`
+  String get renk_kahverengi {
+    return Intl.message('Brown', name: 'renk_kahverengi', desc: '', args: []);
+  }
+
+  /// `Gray`
+  String get renk_gri {
+    return Intl.message('Gray', name: 'renk_gri', desc: '', args: []);
+  }
+
+  /// `Black`
+  String get renk_siyah {
+    return Intl.message('Black', name: 'renk_siyah', desc: '', args: []);
+  }
+
+  /// `Beige`
+  String get renk_bej {
+    return Intl.message('Beige', name: 'renk_bej', desc: '', args: []);
+  }
+
+  /// `Navy`
+  String get renk_lacivert {
+    return Intl.message('Navy', name: 'renk_lacivert', desc: '', args: []);
+  }
+
+  /// `White`
+  String get renk_beyaz {
+    return Intl.message('White', name: 'renk_beyaz', desc: '', args: []);
+  }
+
+  /// `Blue`
+  String get renk_mavi {
+    return Intl.message('Blue', name: 'renk_mavi', desc: '', args: []);
+  }
+
+  /// `Green`
+  String get renk_yesil {
+    return Intl.message('Green', name: 'renk_yesil', desc: '', args: []);
+  }
+
+  /// `Yellow`
+  String get renk_sari {
+    return Intl.message('Yellow', name: 'renk_sari', desc: '', args: []);
+  }
+
+  /// `Maroon`
+  String get renk_bordo {
+    return Intl.message('Maroon', name: 'renk_bordo', desc: '', args: []);
+  }
+
+  /// `Orange`
+  String get renk_turuncu {
+    return Intl.message('Orange', name: 'renk_turuncu', desc: '', args: []);
+  }
+
+  /// `Red`
+  String get renk_kirmizi {
+    return Intl.message('Red', name: 'renk_kirmizi', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

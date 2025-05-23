@@ -21,8 +21,8 @@ class KaydedilenUrunler extends ChangeNotifier {
       for (int i = 0; i < urunadlari.length; i++) {
         for (int j = 0; j < Urunler.urunler.length; j++) {
           if (Urunler.urunler[j].urunAdi == urunadlari[i]) {
-            Ozelurunkarti kart = Ozelurunkarti(urun: Urunler.urunler[j]);
-            begenilenUrunwidgeti.add(kart);
+            // Ozelurunkarti kart = Ozelurunkarti(urun: Urunler.urunler[j]);
+            // begenilenUrunwidgeti.add(kart);
           }
         }
       }

@@ -1,6 +1,8 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
+import 'package:bellibellu/services/urunlerVT.dart';
+import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
@@ -14,30 +16,73 @@ class Tumurunler extends StatefulWidget {
 }
 
 class _TumurunlerState extends State<Tumurunler> {
-  int urunlersayisi = 0;
-  int bulunanurunsayisi = 0;
-  List<String> seciliOgeler = [];
-  String siralamaolcutu = "";
-  List<Ozelurunkarti> urunler = [];
-  Future<void> kartlariolustur() async {
-    for (Urunler urun in Urunler.urunler) {
-      Ozelurunkarti kart = await Ozelurunkarti(urun: urun);
-      urunler.add(kart);
+  late int currentPage =
+      Provider.of<Urunlerprovider>(context, listen: false).currentPage;
+  late List<String> secilimateryalOgeler =
+      Provider.of<Urunlerprovider>(context, listen: false).secilimateryalOgeler;
+  late List<String> seciliortamOgeler =
+      Provider.of<Urunlerprovider>(context, listen: false).seciliortamOgeler;
+  late List<String> seciliturOgeler =
+      Provider.of<Urunlerprovider>(context, listen: false).seciliturOgeler;
+  late List<String> secilirenkOgeler =
+      Provider.of<Urunlerprovider>(context, listen: false).secilirenkOgeler;
+  late List<Map<String, int>> secilifiyatOgeler =
+      Provider.of<Urunlerprovider>(context, listen: false).secilifiyatOgeler;
+  late String urunAdi =
+      Provider.of<Urunlerprovider>(context, listen: false).urunAdi;
+  late String siralamaolcutu =
+      Provider.of<Urunlerprovider>(context, listen: false).siralamaolcutu;
+  late String tarihegore =
+      Provider.of<Urunlerprovider>(context, listen: false).tarihegore;
+  late List<Ozelurunkarti> urunkartlari = [];
+  bool urunlistesisonumu = false;
+  Future<void> kartlariolustur(List<Map<String, dynamic>> yeniurunler) async {
+    for (Map<String, dynamic> urun in yeniurunler) {
+      Ozelurunkarti kart = Ozelurunkarti(urun: urun);
+
+      urunkartlari.add(kart);
     }
     setState(() {
-      urunler;
+      urunkartlari;
     });
   }
 
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
-    Future.delayed(Duration.zero, () async {
-      await kartlariolustur();
-      setState(() {
-        urunler;
-      });
+    getMoreUrunler();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels -
+              _scrollController.position.maxScrollExtent <=
+          200) {
+        if (!urunlistesisonumu) {
+          currentPage++;
+          getMoreUrunler();
+        }
+      }
     });
     super.initState();
+  }
+
+  Future<void> getMoreUrunler() async {
+    final newItems = await Urunlervt.getMoreUrun(
+      currentPage,
+      secilimateryalOgeler,
+      seciliortamOgeler,
+      seciliturOgeler,
+      secilifiyatOgeler,
+      siralamaolcutu,
+      urunAdi,
+      tarihegore,
+    );
+    if (newItems.length < 15) {
+      urunlistesisonumu = true;
+    }
+    kartlariolustur(newItems);
+    Provider.of<Urunlerprovider>(
+      context,
+      listen: false,
+    ).urunler.addAll(newItems);
   }
 
   @override
@@ -48,12 +93,22 @@ class _TumurunlerState extends State<Tumurunler> {
           child: Padding(
             padding: const EdgeInsets.only(top: 60),
             child: ListView.builder(
-              itemCount: urunler.length,
+              itemCount: urunkartlari.length,
+              controller: _scrollController,
               itemBuilder: (context, index) {
-                final Ozelurunkarti urun = urunler[index];
-                debugPrint('$index from ${urunler.length}');
+                debugPrint('$index from ${urunkartlari.length}');
                 return Center(
-                  child: Column(children: [urun, SizedBox(height: 7)]),
+                  child: Column(
+                    children: [
+                      urunkartlari[index],
+                      SizedBox(height: 7),
+                      if (Provider.of<Loadingprovider>(
+                        context,
+                        listen: false,
+                      ).isloading)
+                        CircularProgressIndicator(),
+                    ],
+                  ),
                 );
               },
             ),
@@ -61,23 +116,24 @@ class _TumurunlerState extends State<Tumurunler> {
         ),
 
         ustsecenekler(context),
-         Provider.of<Loadingprovider>(context,listen: false).isloading?
-        Center(
-          child: Container(
-            width: MediaQuery.sizeOf(context).width,
-            height: MediaQuery.sizeOf(context).height,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(83, 138, 103, 32),
-            ),
-            child: Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(color: Renkler.kahverengi),
+        Provider.of<Loadingprovider>(context, listen: false).isloading
+            ? Center(
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(83, 138, 103, 32),
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(color: Renkler.kahverengi),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ):SizedBox()
+            )
+            : SizedBox(),
       ],
     );
   }
@@ -196,12 +252,22 @@ class _TumurunlerState extends State<Tumurunler> {
                       S.of(context).onerilen,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: S.of(context).onerilen,
-                    groupValue: siralamaolcutu, // ✅ Doğru kullanım
+                    value: 'onerilen',
+                    groupValue:
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).siralamaolcutu, // ✅ Doğru kullanım
                     onChanged: (String? value) {
                       setState(() {
-                        siralamaolcutu =
-                            (siralamaolcutu == value) ? "" : value!;
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .siralamaolcutu = (Provider.of<Urunlerprovider>(
+                                      context,
+                                      listen: false,
+                                    ).siralamaolcutu ==
+                                    value)
+                                ? ""
+                                : value!;
                       });
                     },
                   ),
@@ -211,12 +277,22 @@ class _TumurunlerState extends State<Tumurunler> {
                       S.of(context).en_dusuk_fiyat,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: S.of(context).en_dusuk_fiyat,
-                    groupValue: siralamaolcutu,
+                    value: 'endusukfiyat',
+                    groupValue:
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).siralamaolcutu,
                     onChanged: (String? value) {
                       setState(() {
-                        siralamaolcutu =
-                            (siralamaolcutu == value) ? "" : value!;
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .siralamaolcutu = (Provider.of<Urunlerprovider>(
+                                      context,
+                                      listen: false,
+                                    ).siralamaolcutu ==
+                                    value)
+                                ? ""
+                                : value!;
                       });
                     },
                   ),
@@ -226,12 +302,22 @@ class _TumurunlerState extends State<Tumurunler> {
                       S.of(context).en_yuksek_fiyat,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: S.of(context).en_yuksek_fiyat,
-                    groupValue: siralamaolcutu,
+                    value: 'enyuksekfiyat',
+                    groupValue:
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).siralamaolcutu,
                     onChanged: (String? value) {
                       setState(() {
-                        siralamaolcutu =
-                            (siralamaolcutu == value) ? "" : value!;
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .siralamaolcutu = (Provider.of<Urunlerprovider>(
+                                      context,
+                                      listen: false,
+                                    ).siralamaolcutu ==
+                                    value)
+                                ? ""
+                                : value!;
                       });
                     },
                   ),
@@ -241,12 +327,22 @@ class _TumurunlerState extends State<Tumurunler> {
                       S.of(context).en_cok_begenilen,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: S.of(context).en_cok_begenilen,
-                    groupValue: siralamaolcutu,
+                    value: 'encokbegenilen',
+                    groupValue:
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).siralamaolcutu,
                     onChanged: (String? value) {
                       setState(() {
-                        siralamaolcutu =
-                            (siralamaolcutu == value) ? "" : value!;
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .siralamaolcutu = (Provider.of<Urunlerprovider>(
+                                      context,
+                                      listen: false,
+                                    ).siralamaolcutu ==
+                                    value)
+                                ? ""
+                                : value!;
                       });
                     },
                   ),
@@ -256,12 +352,22 @@ class _TumurunlerState extends State<Tumurunler> {
                       S.of(context).en_yeni_urunler,
                       style: TextStyle(color: Renkler.kahverengi, fontSize: 14),
                     ),
-                    value: S.of(context).en_yeni_urunler,
-                    groupValue: siralamaolcutu,
+                    value: 'enyeniurunler',
+                    groupValue:
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).siralamaolcutu,
                     onChanged: (String? value) {
                       setState(() {
-                        siralamaolcutu =
-                            (siralamaolcutu == value) ? "" : value!;
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .siralamaolcutu = (Provider.of<Urunlerprovider>(
+                                      context,
+                                      listen: false,
+                                    ).siralamaolcutu ==
+                                    value)
+                                ? ""
+                                : value!;
                       });
                     },
                   ),
@@ -271,8 +377,10 @@ class _TumurunlerState extends State<Tumurunler> {
                 Center(
                   child: TextButton(
                     onPressed: () async {
-                      debugPrint('Seçilen: $siralamaolcutu');
-                      await urunlerisirala(siralamaolcutu);
+                      debugPrint(
+                        'Seçilen: $Provider.of<Urunlerprovider>(context, listen: false).siralamaolcutu',
+                      );
+                      await degisikliklerikaydet();
                       Navigator.pop(context);
                     },
                     child: Text(
@@ -291,57 +399,6 @@ class _TumurunlerState extends State<Tumurunler> {
         );
       },
     );
-  }
-
-  Future<void> urunlerisirala(String siralamaolcutu) async {
-    List<Ozelurunkarti> yeniliste = List.from(
-      urunler,
-    ); // Yeni bir kopya oluştur
-    if (siralamaolcutu == S.of(context).onerilen) {
-      setState(() {
-        debugPrint('onerilen');
-        urunler = yeniliste.reversed.toList();
-      });
-    } else if (siralamaolcutu == S.of(context).en_dusuk_fiyat) {
-      yeniliste.sort(
-        (a, b) => a.urun.urunfiyati.compareTo(b.urun.urunfiyati),
-      ); // Küçükten büyüğe sırala
-      setState(() {
-        debugPrint('endusukfiyat');
-
-        urunler = yeniliste;
-      });
-    } else if (siralamaolcutu == S.of(context).en_yuksek_fiyat) {
-      yeniliste.sort(
-        (a, b) => b.urun.urunfiyati.compareTo(a.urun.urunfiyati),
-      ); // Büyükten küçüğe sırala
-      setState(() {
-        debugPrint('enyuksekfiyat');
-
-        urunler = yeniliste;
-      });
-    } else if (siralamaolcutu == S.of(context).en_cok_begenilen) {
-      yeniliste.sort(
-        (a, b) => b.urun.begenisayisi.compareTo(a.urun.begenisayisi),
-      ); // Büyükten küçüğe sırala
-      setState(() {
-        debugPrint('en cok begenilen');
-
-        urunler = yeniliste;
-      });
-    } else if (siralamaolcutu == S.of(context).en_yeni_urunler) {
-      setState(() {
-        debugPrint('en yeni');
-
-        urunler = yeniliste.reversed.toList();
-      });
-    } else {
-      setState(() {
-        debugPrint('diger');
-
-        urunler = yeniliste.reversed.toList();
-      });
-    }
   }
 
   void filitredialogugoster(BuildContext context) {
@@ -508,9 +565,27 @@ class _TumurunlerState extends State<Tumurunler> {
                     ),
                     TextButton(
                       onPressed: () async {
-                        seciliOgeler.clear();
-                        urunler.clear();
-                        await kartlariolustur();
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).secilimateryalOgeler.clear();
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).secilirenkOgeler.clear();
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).seciliortamOgeler.clear();
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).seciliturOgeler.clear();
+                        Provider.of<Urunlerprovider>(
+                          context,
+                          listen: false,
+                        ).secilifiyatOgeler.clear();
+                        await degisikliklerikaydet();
                         Navigator.pop(context);
                       },
                       child: Text(
@@ -563,12 +638,24 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("1000-2000"),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilifiyatOgeler.contains({'min': 1000, 'max': 2000}),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("1000-2000")
-                            : seciliOgeler.remove("1000-2000");
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilifiyatOgeler.add({'min': 1000, 'max': 2000})
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilifiyatOgeler.remove({
+                              'min': 1000,
+                              'max': 2000,
+                            });
                       });
                     },
                   ),
@@ -582,12 +669,24 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("2000-3000"),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilifiyatOgeler.contains({'min': 2000, 'max': 3000}),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("2000-3000")
-                            : seciliOgeler.remove("2000-3000");
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilifiyatOgeler.add({'min': 2000, 'max': 3000})
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilifiyatOgeler.remove({
+                              'min': 2000,
+                              'max': 3000,
+                            });
                       });
                     },
                   ),
@@ -601,12 +700,24 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("3000-4000"),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilifiyatOgeler.contains({'min': 3000, 'max': 4000}),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("3000-4000")
-                            : seciliOgeler.remove("3000-4000");
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilifiyatOgeler.add({'min': 3000, 'max': 4000})
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilifiyatOgeler.remove({
+                              'min': 3000,
+                              'max': 4000,
+                            });
                       });
                     },
                   ),
@@ -620,12 +731,24 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains("4000-5000"),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilifiyatOgeler.contains({'min': 4000, 'max': 5000}),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add("4000-5000")
-                            : seciliOgeler.remove("4000-5000");
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilifiyatOgeler.add({'min': 4000, 'max': 5000})
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilifiyatOgeler.remove({
+                              'min': 4000,
+                              'max': 5000,
+                            });
                       });
                     },
                   ),
@@ -634,12 +757,11 @@ class _TumurunlerState extends State<Tumurunler> {
               actions: [
                 TextButton(
                   onPressed: () async {
-                    debugPrint('$seciliOgeler');
-                    if (seciliOgeler.contains('4000-5000') ||
-                        seciliOgeler.contains('3000-4000') ||
-                        seciliOgeler.contains('1000-2000') ||
-                        seciliOgeler.contains('2000-3000')) {
-                      await fiyatfilitresi(seciliOgeler);
+                    if (Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilifiyatOgeler.isNotEmpty) {
+                      await degisikliklerikaydet();
                     }
                     Navigator.pop(context);
                   },
@@ -658,49 +780,6 @@ class _TumurunlerState extends State<Tumurunler> {
         );
       },
     );
-  }
-
-  Future<void> fiyatfilitresi(List<String> secimler) async {
-    List<Ozelurunkarti> yeniliste = [];
-    // Fiyat filtresi işlemleri burada yapılabilir.
-
-    if (secimler.contains('1000-2000')) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.urunfiyati >= 1000 &&
-            urunler[i].urun.urunfiyati <= 2000) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    if (secimler.contains('2000-3000')) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.urunfiyati > 2000 &&
-            urunler[i].urun.urunfiyati <= 3000) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    if (secimler.contains('3000-4000')) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.urunfiyati > 3000 &&
-            urunler[i].urun.urunfiyati <= 4000) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    if (secimler.contains('4000-5000')) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.urunfiyati > 4000 &&
-            urunler[i].urun.urunfiyati <= 5000) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-
-    setState(() {
-      urunler = yeniliste.toList();
-      bulunanurunsayisi = urunler.length;
-    });
   }
 
   void materyaldialogu(BuildContext context) {
@@ -734,12 +813,21 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains(S.of(context).celik),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilimateryalOgeler.contains('Çelik'),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add(S.of(context).celik)
-                            : seciliOgeler.remove(S.of(context).celik);
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilimateryalOgeler.add('Çelik')
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilimateryalOgeler.remove('Çelik');
                       });
                     },
                   ),
@@ -753,12 +841,21 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains(S.of(context).ahsap),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilimateryalOgeler.contains('Ahşap'),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add(S.of(context).ahsap)
-                            : seciliOgeler.remove(S.of(context).ahsap);
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilimateryalOgeler.add('Ahşap')
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilimateryalOgeler.remove('Ahşap');
                       });
                     },
                   ),
@@ -772,12 +869,21 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains(S.of(context).metal),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilimateryalOgeler.contains('Metal'),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add(S.of(context).metal)
-                            : seciliOgeler.remove(S.of(context).metal);
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilimateryalOgeler.add('Metal')
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilimateryalOgeler.remove('Metal');
                       });
                     },
                   ),
@@ -786,11 +892,11 @@ class _TumurunlerState extends State<Tumurunler> {
               actions: [
                 TextButton(
                   onPressed: () async {
-                    debugPrint('$seciliOgeler');
-                    if (seciliOgeler.contains(S.of(context).metal) ||
-                        seciliOgeler.contains(S.of(context).ahsap) ||
-                        seciliOgeler.contains(S.of(context).celik)) {
-                      await materyalfilitresi(seciliOgeler);
+                    if (Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilimateryalOgeler.isNotEmpty) {
+                      await degisikliklerikaydet();
                     }
                     Navigator.pop(context);
                   },
@@ -809,37 +915,6 @@ class _TumurunlerState extends State<Tumurunler> {
         );
       },
     );
-  }
-
-  Future<void> materyalfilitresi(List<String> secimler) async {
-    List<Ozelurunkarti> yeniliste = [];
-    // Fiyat filtresi işlemleri burada yapılabilir.
-    if (secimler.contains(S.of(context).celik)) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.materyali == S.of(context).celik) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    if (secimler.contains(S.of(context).ahsap)) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.materyali == S.of(context).ahsap) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    if (secimler.contains(S.of(context).metal)) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.materyali == S.of(context).metal) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    debugPrint('yeniliste urunler listesine aktarildi');
-    setState(() {
-      urunler = yeniliste.toList();
-      bulunanurunsayisi = urunler.length;
-    });
   }
 
   void ortamdialogu(BuildContext context) {
@@ -873,12 +948,21 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains(S.of(context).kafe),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).seciliortamOgeler.contains('Kafe'),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add(S.of(context).kafe)
-                            : seciliOgeler.remove(S.of(context).kafe);
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliortamOgeler.add('Kafe')
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliortamOgeler.remove('Kafe');
                       });
                     },
                   ),
@@ -892,12 +976,21 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains(S.of(context).ofis),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).seciliortamOgeler.contains('Ofis'),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add(S.of(context).ofis)
-                            : seciliOgeler.remove(S.of(context).ofis);
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliortamOgeler.add('Ofis')
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliortamOgeler.remove('Ofis');
                       });
                     },
                   ),
@@ -911,12 +1004,21 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains(S.of(context).ev),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).seciliortamOgeler.contains('Ev'),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add(S.of(context).ev)
-                            : seciliOgeler.remove(S.of(context).ev);
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliortamOgeler.add('Ev')
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliortamOgeler.remove('Ev');
                       });
                     },
                   ),
@@ -925,11 +1027,11 @@ class _TumurunlerState extends State<Tumurunler> {
               actions: [
                 TextButton(
                   onPressed: () async {
-                    debugPrint('$seciliOgeler');
-                    if (seciliOgeler.contains(S.of(context).ev) ||
-                        seciliOgeler.contains(S.of(context).kafe) ||
-                        seciliOgeler.contains(S.of(context).ofis)) {
-                      await ortamfilitresi(seciliOgeler);
+                    if (Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).seciliortamOgeler.isNotEmpty) {
+                      await degisikliklerikaydet();
                     }
                     Navigator.pop(context);
                   },
@@ -948,38 +1050,6 @@ class _TumurunlerState extends State<Tumurunler> {
         );
       },
     );
-  }
-
-  Future<void> ortamfilitresi(List<String> secimler) async {
-    List<Ozelurunkarti> yeniliste = [];
-    // Fiyat filtresi işlemleri burada yapılabilir.
-    if (secimler.contains(S.of(context).kafe)) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.ortami == S.of(context).kafe) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    if (secimler.contains(S.of(context).ofis)) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.ortami == S.of(context).ofis) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    if (secimler.contains(S.of(context).ev)) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.ortami == S.of(context).ev) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    debugPrint('yeniliste urunler listesine aktarildi');
-
-    setState(() {
-      urunler = yeniliste.toList();
-      bulunanurunsayisi = urunler.length;
-    });
   }
 
   void turdialogu(BuildContext context) {
@@ -1013,12 +1083,21 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains(S.of(context).masa),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).seciliturOgeler.contains('masa'),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add(S.of(context).masa)
-                            : seciliOgeler.remove(S.of(context).masa);
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliturOgeler.add('masa')
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliturOgeler.remove('masa');
                       });
                     },
                   ),
@@ -1032,12 +1111,21 @@ class _TumurunlerState extends State<Tumurunler> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    value: seciliOgeler.contains(S.of(context).sandalye),
+                    value: Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).seciliturOgeler.contains('sandalye'),
                     onChanged: (bool? value) {
                       setState(() {
                         value!
-                            ? seciliOgeler.add(S.of(context).sandalye)
-                            : seciliOgeler.remove(S.of(context).sandalye);
+                            ? Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliturOgeler.add('sandalye')
+                            : Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliturOgeler.remove('sandalye');
                       });
                     },
                   ),
@@ -1046,10 +1134,11 @@ class _TumurunlerState extends State<Tumurunler> {
               actions: [
                 TextButton(
                   onPressed: () async {
-                    debugPrint('$seciliOgeler');
-                    if (seciliOgeler.contains(S.of(context).masa) ||
-                        seciliOgeler.contains(S.of(context).sandalye)) {
-                      await turfilitresi(seciliOgeler);
+                    if (Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).seciliturOgeler.isNotEmpty) {
+                      await degisikliklerikaydet();
                     }
                     Navigator.pop(context);
                   },
@@ -1070,29 +1159,11 @@ class _TumurunlerState extends State<Tumurunler> {
     );
   }
 
-  Future<void> turfilitresi(List<String> secimler) async {
-    List<Ozelurunkarti> yeniliste = [];
-    // Fiyat filtresi işlemleri burada yapılabilir.
-    if (secimler.contains(S.of(context).masa)) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.turu == S.of(context).masa) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-    if (secimler.contains(S.of(context).sandalye)) {
-      for (int i = 0; i < urunler.length; i++) {
-        if (urunler[i].urun.turu == S.of(context).sandalye) {
-          yeniliste.add(urunler[i]);
-        }
-      }
-    }
-
-    debugPrint('yeniliste urunler listesine aktarildi');
-
+  Future<void> degisikliklerikaydet() async {
     setState(() {
-      urunler = yeniliste.toList();
-      bulunanurunsayisi = urunler.length;
+      urunkartlari.clear();
     });
+    Provider.of<Urunlerprovider>(context, listen: false).urunler.clear();
+    await getMoreUrunler();
   }
 }

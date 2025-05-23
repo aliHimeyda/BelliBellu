@@ -386,6 +386,19 @@
      "hataliSifreVeyaMail": "كلمة المرور أو البريد الإلكتروني غير صحيح",
     "duzenle": "تعديل",
     "sifreb": "كلمة المرور",
-    "adres": "العنوان"
+    "adres": "العنوان",
+     "renk_gumus": "فضي",
+  "renk_kahverengi": "بني",
+  "renk_gri": "رمادي",
+  "renk_siyah": "أسود",
+  "renk_bej": "بيج",
+  "renk_lacivert": "كحلي",
+  "renk_beyaz": "أبيض",
+  "renk_mavi": "أزرق",
+  "renk_yesil": "أخضر",
+  "renk_sari": "أصفر",
+  "renk_bordo": "أحمر غامق",
+  "renk_turuncu": "برتقالي",
+  "renk_kirmizi": "أحمر"
 }
 

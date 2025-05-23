@@ -386,5 +386,18 @@
      "hataliSifreVeyaMail": "Incorrect password or email address",
      "duzenle": "Edit",
      "sifreb": "Password",
-     "adres": "Address"
+     "adres": "Address",
+     "renk_gumus": "Silver",
+  "renk_kahverengi": "Brown",
+  "renk_gri": "Gray",
+  "renk_siyah": "Black",
+  "renk_bej": "Beige",
+  "renk_lacivert": "Navy",
+  "renk_beyaz": "White",
+  "renk_mavi": "Blue",
+  "renk_yesil": "Green",
+  "renk_sari": "Yellow",
+  "renk_bordo": "Maroon",
+  "renk_turuncu": "Orange",
+  "renk_kirmizi": "Red"
 }

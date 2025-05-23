@@ -3,6 +3,8 @@ import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
+import 'package:bellibellu/services/seridlerprovider.dart';
+import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +16,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class Urunkartiicerigi extends StatefulWidget {
-  final Urunler urun;
-  final List<Serid> seridler;
-  const Urunkartiicerigi({Key? key, required this.urun, required this.seridler})
-    : super(key: key);
+  final Map<String, dynamic> urun;
+  const Urunkartiicerigi({Key? key, required this.urun}) : super(key: key);
 
   @override
   State<Urunkartiicerigi> createState() => _UrunkartiicerigiState();
@@ -25,6 +25,7 @@ class Urunkartiicerigi extends StatefulWidget {
 
 class _UrunkartiicerigiState extends State<Urunkartiicerigi>
     with AutomaticKeepAliveClientMixin {
+  bool begenilmismi = false;
   final List<Map<String, String>> soruCevaplar = [
     {
       "musteri": "A*** K***",
@@ -199,11 +200,6 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
   ];
   @override
   bool get wantKeepAlive => true;
-  final List<Serid> seridler = [
-    Serid(S.current.yeniurunler, 9),
-    Serid(S.current.urunSerisi2025, 9),
-    Serid(S.current.begenebilecegin, 9),
-  ];
   @override
   void initState() {
     super.initState();
@@ -211,6 +207,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
 
   @override
   Widget build(BuildContext context) {
+    final String currentPath = GoRouterState.of(context).uri.toString();
+    bool showBottomNavBar = currentPath == Paths.urundetaylari;
     int uzunluk = 100 + random.nextInt(201);
     int genislik = 50 + random.nextInt(151);
     super.build(context); // Bu satır önemli
@@ -241,7 +239,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ),
                               child: Image.network(
-                                widget.urun.resimYolu,
+                                widget.urun['urunResmi'],
                                 fit: BoxFit.fitHeight,
                               ),
                             ),
@@ -260,7 +258,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                       Align(
                                         alignment: Alignment.topLeft,
                                         child: Text(
-                                          widget.urun.urunAdi,
+                                          widget.urun['urunAdi'],
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -271,21 +269,21 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                         S
                                             .of(context)
                                             .urun_aciklamasi(
-                                              widget.urun.urunAdi,
+                                              widget.urun['urunAdi'],
                                               Cevirici.malzemeCevir(
                                                 context,
-                                                widget.urun.materyali,
+                                                widget.urun['materyali'],
                                               ),
                                               Cevirici.turCevir(
                                                 context,
-                                                widget.urun.turu,
+                                                widget.urun['tur'],
                                               ),
                                               Cevirici.ortamCevir(
                                                 context,
-                                                widget.urun.ortami,
+                                                widget.urun['ortam'],
                                               ),
-                                              uzunluk,
-                                              genislik,
+                                              widget.urun['uzunluk'],
+                                              widget.urun['genislik'],
                                             ),
                                         style: TextStyle(fontSize: 11),
                                       ),
@@ -294,7 +292,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ),
                             ),
-        
+
                             SizedBox(height: 20),
                             KisacaOzellikler(context),
                             Container(
@@ -308,7 +306,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ),
                             ),
-        
+
                             SizedBox(height: 30),
                             Padding(
                               padding: const EdgeInsets.only(left: 8),
@@ -351,7 +349,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                               ),
                             ),
                             SizedBox(height: 15),
-        
+
                             Padding(
                               padding: const EdgeInsets.only(left: 8),
                               child: Text(
@@ -363,9 +361,9 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ),
                             ),
-        
+
                             katagorilerseridi(context),
-        
+
                             Container(
                               height: 30,
                               decoration: BoxDecoration(
@@ -426,18 +424,18 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ],
                             ),
-        
+
                             SizedBox(width: 5),
                             Text(
                               S
                                   .of(context)
                                   .urun_aciklamasi(
-                                    widget.urun.urunAdi,
-                                    widget.urun.materyali,
-                                    widget.urun.turu,
-                                    widget.urun.ortami,
-                                    uzunluk,
-                                    genislik,
+                                    widget.urun['urunAdi'],
+                                    widget.urun['materyali'],
+                                    widget.urun['tur'],
+                                    widget.urun['ortam'],
+                                    widget.urun['uzunluk'],
+                                    widget.urun['genislik'],
                                   ),
                               style: TextStyle(
                                 color: Renkler.kahverengi,
@@ -448,13 +446,18 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             GestureDetector(
                               onTap: () {
                                 debugPrint('tiklandi');
-                                popup(uzunluk, genislik);
+                                popup();
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  color: const Color.fromARGB(255, 198, 211, 187),
+                                  color: const Color.fromARGB(
+                                    255,
+                                    198,
+                                    211,
+                                    187,
+                                  ),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -464,7 +467,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ),
                             ),
-        
+
                             Container(
                               height: 30,
                               decoration: BoxDecoration(
@@ -568,8 +571,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ),
                             ),
-        
-                            seridler[0],
+
+                            Provider.of<Seridlerprovider>(context).seridler[0],
                             Container(
                               height: 10,
                               decoration: BoxDecoration(
@@ -581,7 +584,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ),
                             ),
-                            seridler[1],
+                            Provider.of<Seridlerprovider>(context).seridler[1],
                             Container(
                               height: 10,
                               decoration: BoxDecoration(
@@ -594,12 +597,11 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                               ),
                             ),
                             SizedBox(height: 20),
-        
+
                             GestureDetector(
                               onTap: () async {
-                                Navigator.pop(context);
                                 await urunlerigetir(
-                                  '${Cevirici.malzemeCevir(context, widget.urun.materyali)}',
+                                  '${Cevirici.malzemeCevir(context, widget.urun['materyali'])}',
                                   context,
                                 );
                               },
@@ -615,7 +617,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                   ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       S
@@ -623,7 +626,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                           .daha_fazla_materyal(
                                             Cevirici.malzemeCevir(
                                               context,
-                                              widget.urun.materyali,
+                                              widget.urun['materyali'],
                                             ),
                                           ),
                                       style: TextStyle(
@@ -643,9 +646,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                             GestureDetector(
                               onTap: () async {
-                                Navigator.pop(context);
                                 await urunlerigetir(
-                                  '${Cevirici.ortamCevir(context, widget.urun.ortami)}',
+                                  '${Cevirici.ortamCevir(context, widget.urun['ortam'])}',
                                   context,
                                 );
                               },
@@ -661,7 +663,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                   ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       S
@@ -669,7 +672,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                           .daha_fazla_materyal(
                                             Cevirici.ortamCevir(
                                               context,
-                                              widget.urun.ortami,
+                                              widget.urun['ortam'],
                                             ),
                                           ),
                                       style: TextStyle(
@@ -689,9 +692,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                             GestureDetector(
                               onTap: () async {
-                                Navigator.pop(context);
                                 await urunlerigetir(
-                                  '${Cevirici.turCevir(context, widget.urun.turu)}',
+                                  '${Cevirici.turCevir(context, widget.urun['tur'])}',
                                   context,
                                 );
                               },
@@ -707,7 +709,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                   ),
                                 ),
                                 child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       S
@@ -715,7 +718,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                           .daha_fazla_materyal(
                                             Cevirici.turCevir(
                                               context,
-                                              widget.urun.turu,
+                                              widget.urun['tur'],
                                             ),
                                           ),
                                       style: TextStyle(
@@ -741,27 +744,28 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                 ),
               ),
               favoriteIcon(),
-              bottomnavigation(context),
+              showBottomNavBar ? bottomnavigation(context) : SizedBox(),
             ],
           ),
         ),
-         Provider.of<Loadingprovider>(context,listen: false).isloading?
-        Center(
-          child: Container(
-            width: MediaQuery.sizeOf(context).width,
-            height: MediaQuery.sizeOf(context).height,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(83, 138, 103, 32),
-            ),
-            child: Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(color: Renkler.kahverengi),
+        Provider.of<Loadingprovider>(context, listen: false).isloading
+            ? Center(
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(83, 138, 103, 32),
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(color: Renkler.kahverengi),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ):SizedBox()
+            )
+            : SizedBox(),
       ],
     );
   }
@@ -775,7 +779,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
           color: const Color.fromARGB(255, 182, 205, 162),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: seridler[2],
+        child: Provider.of<Seridlerprovider>(context).seridler[2],
       ),
     );
   }
@@ -960,7 +964,6 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                 ),
                 GestureDetector(
                   onTap: () async {
-                    Navigator.pop(context);
                     await urunlerigetir(S.of(context).metal, context);
                     debugPrint('tiklandi');
                   },
@@ -1012,7 +1015,6 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                 ),
                 GestureDetector(
                   onTap: () async {
-                    Navigator.pop(context);
                     await urunlerigetir(S.of(context).ahsap, context);
                     debugPrint('tiklandi');
                   },
@@ -1064,7 +1066,6 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                 ),
                 GestureDetector(
                   onTap: () async {
-                    Navigator.pop(context);
                     await urunlerigetir(S.of(context).masa, context);
                     debugPrint('tiklandi');
                   },
@@ -1116,7 +1117,6 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                 ),
                 GestureDetector(
                   onTap: () async {
-                    Navigator.pop(context);
                     await urunlerigetir(S.of(context).sandalye, context);
                     debugPrint('tiklandi');
                   },
@@ -1168,7 +1168,6 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                 ),
                 GestureDetector(
                   onTap: () async {
-                    Navigator.pop(context);
                     await urunlerigetir(S.of(context).ev, context);
                     debugPrint('tiklandi');
                   },
@@ -1220,7 +1219,6 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                 ),
                 GestureDetector(
                   onTap: () async {
-                    Navigator.pop(context);
                     await urunlerigetir(S.of(context).ofis, context);
                     debugPrint('tiklandi');
                   },
@@ -1278,7 +1276,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
     );
   }
 
-  Future popup(uzunluk, genislik) => showDialog(
+  Future popup() => showDialog(
     context: context,
 
     builder:
@@ -1333,7 +1331,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${widget.urun.agirligi}',
+                                    '${widget.urun['agirlik']}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1363,7 +1361,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${Cevirici.malzemeCevir(context, widget.urun.materyali)}',
+                                    '${Cevirici.malzemeCevir(context, widget.urun['materyali'])}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1393,7 +1391,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${Cevirici.ortamCevir(context, widget.urun.ortami)}',
+                                    '${Cevirici.ortamCevir(context, widget.urun['ortam'])}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1423,7 +1421,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${Cevirici.turCevir(context, widget.urun.turu)}',
+                                    '${Cevirici.turCevir(context, widget.urun['tur'])}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1454,7 +1452,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${widget.urun.urunAdi}',
+                                    '${widget.urun['urunAdi']}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1489,12 +1487,12 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                         S
                             .of(context)
                             .urun_aciklamasi(
-                              widget.urun.urunAdi,
-                              widget.urun.materyali,
-                              widget.urun.turu,
-                              widget.urun.ortami,
-                              uzunluk,
-                              genislik,
+                              widget.urun['urunAdi'],
+                              widget.urun['materyali'],
+                              widget.urun['tur'],
+                              widget.urun['ortam'],
+                              widget.urun['uzunluk'],
+                              widget.urun['genislik'],
                             ),
                         style: TextStyle(
                           color: Renkler.kahverengi,
@@ -1514,7 +1512,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            widget.urun.urunAdi,
+                            widget.urun['urunAdi'],
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1536,7 +1534,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            widget.urun.agirligi,
+                            widget.urun['agirlik'].toString(),
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1560,7 +1558,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                           Text(
                             Cevirici.malzemeCevir(
                               context,
-                              widget.urun.materyali,
+                              widget.urun['materyali'],
                             ),
                             style: TextStyle(
                               color: Renkler.kahverengi,
@@ -1583,7 +1581,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            Cevirici.ortamCevir(context, widget.urun.ortami),
+                            Cevirici.ortamCevir(context, widget.urun['ortam']),
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1605,7 +1603,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            Cevirici.turCevir(context, widget.urun.turu),
+                            Cevirici.turCevir(context, widget.urun['tur']),
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1627,7 +1625,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            '1 y.',
+                            widget.urun['garantiSuresi'],
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1653,26 +1651,23 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                       child: IconButton(
                         padding: const EdgeInsets.all(0),
                         onPressed: () {
-                          debugPrint('${widget.urun.urunAdi} tiklandi');
-                          widget.urun.begenilmismi
-                              ? widget.urun.begenilmismi = false
-                              : widget.urun.begenilmismi = true;
+                          debugPrint('${widget.urun['urunAdi']} tiklandi');
+                          begenilmismi
+                              ? begenilmismi = false
+                              : begenilmismi = true;
                           setState(() {
-                            if (widget.urun.begenilmismi) {
+                            if (begenilmismi) {
                               widget.colored(color: Renkler.kirmizi);
-                              begenilenekaydet(widget.urun.urunAdi);
+                              begenilenekaydet(widget.urun['urunAdi']);
                             } else {
                               widget.colored(color: Colors.white);
-                              begenilendensil(widget.urun.urunAdi);
+                              begenilendensil(widget.urun['urunAdi']);
                             }
                           });
                         },
                         icon: Icon(
                           Icons.favorite,
-                          color:
-                              widget.urun.begenilmismi
-                                  ? Renkler.kirmizi
-                                  : Colors.white,
+                          color: begenilmismi ? Renkler.kirmizi : Colors.white,
                           size: 20,
                         ),
                       ),
@@ -1833,7 +1828,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${widget.urun.agirligi}',
+                  '${widget.urun['agirlik']}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1860,7 +1855,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${Cevirici.malzemeCevir(context, widget.urun.materyali)}',
+                  '${Cevirici.malzemeCevir(context, widget.urun['materyali'])}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1887,7 +1882,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${Cevirici.ortamCevir(context, widget.urun.ortami)}',
+                  '${Cevirici.ortamCevir(context, widget.urun['ortam'])}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1914,7 +1909,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${Cevirici.turCevir(context, widget.urun.turu)}',
+                  '${Cevirici.turCevir(context, widget.urun['tur'])}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1942,7 +1937,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${widget.urun.urunAdi}',
+                  '${widget.urun['urunAdi']}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1969,23 +1964,21 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
           child: IconButton(
             padding: const EdgeInsets.all(0),
             onPressed: () {
-              debugPrint('${widget.urun.urunAdi} tiklandi');
-              widget.urun.begenilmismi
-                  ? widget.urun.begenilmismi = false
-                  : widget.urun.begenilmismi = true;
+              debugPrint('${widget.urun['urunAdi']} tiklandi');
+              begenilmismi ? begenilmismi = false : begenilmismi = true;
               setState(() {
-                if (widget.urun.begenilmismi) {
+                if (begenilmismi) {
                   widget.colored(color: Renkler.kirmizi);
-                  begenilenekaydet(widget.urun.urunAdi);
+                  begenilenekaydet(widget.urun['urunAdi']);
                 } else {
                   widget.colored(color: Colors.white);
-                  begenilendensil(widget.urun.urunAdi);
+                  begenilendensil(widget.urun['urunAdi']);
                 }
               });
             },
             icon: Icon(
               Icons.favorite,
-              color: widget.urun.begenilmismi ? Renkler.kirmizi : Colors.white,
+              color: begenilmismi ? Renkler.kirmizi : Colors.white,
               size: 20,
             ),
           ),
@@ -2038,7 +2031,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '(${widget.urun.urunfiyati})TL',
+                  '(${widget.urun['fiyat']})TL',
                   style: TextStyle(fontSize: 15, color: Renkler.kahverengi),
                 ),
               ],
@@ -2050,52 +2043,108 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
   }
 
   Future<void> urunlerigetir(String aranan, context) async {
+    Provider.of<Urunlerprovider>(context, listen: false).currentPage = 1;
+    Provider.of<Urunlerprovider>(
+      context,
+      listen: false,
+    ).secilimateryalOgeler.clear();
+    Provider.of<Urunlerprovider>(
+      context,
+      listen: false,
+    ).seciliortamOgeler.clear();
+    Provider.of<Urunlerprovider>(
+      context,
+      listen: false,
+    ).seciliturOgeler.clear();
+    Provider.of<Urunlerprovider>(
+      context,
+      listen: false,
+    ).secilifiyatOgeler.clear();
+    Provider.of<Urunlerprovider>(context, listen: false).siralamaolcutu = '';
+    Provider.of<Urunlerprovider>(context, listen: false).urunAdi = '';
+    Provider.of<Urunlerprovider>(context, listen: false).tarihegore = '';
     debugPrint('urunlerigetir metoduna gelen kelime : $aranan');
-
-    List<Urunler> bulunanurunler = [];
     List<String> kelimeler = aranan.toLowerCase().split(
       " ",
     ); // Kullanıcının girdiği kelimeleri parçala.
-
-    for (Urunler urun in Urunler.urunler) {
-      bool tumKelimelerEslesiyor =
-          true; // Tüm kelimeleri içerip içermediğini kontrol edeceğiz.
-
+    List<String> renkler = [
+      "Gümüş",
+      "Kahverengi",
+      "Gri",
+      "Siyah",
+      "Bej",
+      "Lacivert",
+      "Beyaz",
+      "Mavi",
+      "Yeşil",
+      "Sarı",
+      "Bordo",
+      "Turuncu",
+      "Kırmızı",
+    ];
+    List<String> materyaller = ["Ahşap", "Çelik", "Metal"];
+    List<String> ortamlar = ["Kafe", "Ofis", "Ev"];
+    List<String> turler = ["Sandalye", "Masa"];
+    bool eslesenkelimevarmi = false;
+    for (String renk in renkler) {
       for (String kelime in kelimeler) {
-        if (!(urun.urunAdi.toLowerCase().contains(kelime) ||
-            Cevirici.malzemeCevir(
-              context,
-              urun.materyali,
-            ).toLowerCase().contains(kelime) ||
-            Cevirici.ortamCevir(
-              context,
-              urun.ortami,
-            ).toLowerCase().contains(kelime) ||
-            Cevirici.turCevir(
-              context,
-              urun.turu,
-            ).toLowerCase().contains(kelime))) {
-          tumKelimelerEslesiyor =
-              false; // Eğer bir kelime bile eşleşmezse, ürünü eklemeyiz.
-          break;
+        if (Cevirici.renkCevir(context, renk).toLowerCase().contains(kelime)) {
+          Provider.of<Urunlerprovider>(context).secilirenkOgeler.add(kelime);
+          eslesenkelimevarmi = true;
         }
       }
-
-      if (tumKelimelerEslesiyor) {
-        bulunanurunler.add(urun);
+    }
+    for (String materyal in materyaller) {
+      for (String kelime in kelimeler) {
+        if (Cevirici.malzemeCevir(
+          context,
+          materyal,
+        ).toLowerCase().contains(kelime)) {
+          Provider.of<Urunlerprovider>(
+            context,
+            listen: false,
+          ).secilimateryalOgeler.add(kelime);
+          eslesenkelimevarmi = true;
+        }
+      }
+    }
+    for (String ortam in ortamlar) {
+      for (String kelime in kelimeler) {
+        if (Cevirici.ortamCevir(
+          context,
+          ortam,
+        ).toLowerCase().contains(kelime)) {
+          Provider.of<Urunlerprovider>(
+            context,
+            listen: false,
+          ).seciliortamOgeler.add(kelime);
+          eslesenkelimevarmi = true;
+        }
+      }
+    }
+    for (String tur in turler) {
+      for (String kelime in kelimeler) {
+        if (Cevirici.turCevir(context, tur).toLowerCase().contains(kelime)) {
+          Provider.of<Urunlerprovider>(
+            context,
+            listen: false,
+          ).seciliturOgeler.add(kelime);
+          eslesenkelimevarmi = true;
+        }
       }
     }
 
-    if (bulunanurunler.isNotEmpty) {
-      GoRouter.of(context).push('/ozelurunler', extra: bulunanurunler);
-    } else {
-      debugPrint("Eşleşen ürün bulunamadı.");
+    if (kelimeler.length == 1 && !eslesenkelimevarmi) {
+      Provider.of<Urunlerprovider>(context, listen: false).urunAdi =
+          kelimeler.first;
     }
+
+    GoRouter.of(context).push(Paths.tumurunler);
   }
 
   Future<void> sendSMS() async {
     final Uri whatsappUri = Uri.parse(
-      "whatsapp://send?phone=905372943871&text=*${widget.urun.urunAdi}* kodlu *${widget.urun.materyali}* *${widget.urun.turu}* hakkinda soru sormak istiyordum",
+      "whatsapp://send?phone=905372943871&text=*${widget.urun['urunAdi']}* kodlu *${widget.urun['materyali']}* *${widget.urun['tur']}* hakkinda soru sormak istiyordum",
     );
 
     try {

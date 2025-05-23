@@ -1,28 +1,52 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/loadingprovider.dart';
+import 'package:bellibellu/services/urunlerVT.dart';
+import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class Serid extends StatefulWidget {
-  String vasif;
-  int sayi;
-  Serid(this.vasif, this.sayi, {super.key});
+  final String vasif;
+  Map<String, dynamic> seridkategorisi = {};
+  Serid({super.key, required this.vasif, required this.seridkategorisi});
 
   @override
   State<Serid> createState() => _SeridState();
 }
 
 class _SeridState extends State<Serid> {
-  // final Future<void> _urunlerFuture =
+  late List<Map<String, dynamic>> urunler = [];
+  @override
+  void initState() {
+    getfirsturuns();
+    super.initState();
+  }
+
+  Future<void> getfirsturuns() async {
+    Provider.of<Urunlerprovider>(context, listen: false).urunler.clear();
+    final newItems = await Urunlervt.getMoreUrun(
+      widget.seridkategorisi['currentPage'],
+      widget.seridkategorisi['secilimateryalOgeler'] as List<String>? ?? [],
+      widget.seridkategorisi['seciliortamOgeler'] as List<String>? ?? [],
+      widget.seridkategorisi['seciliturOgeler'] as List<String>? ?? [],
+      widget.seridkategorisi['secilifiyatOgeler'] as List<Map<String, int>>? ??
+          [],
+      widget.seridkategorisi['siralamaolcutu'] as String?,
+      widget.seridkategorisi['urunAdi'] as String?,
+      widget.seridkategorisi['tarihegore'] as String?,
+    );
+    urunler.addAll(newItems);
+  }
+
   @override
   Widget build(BuildContext context) {
     const int urunKartiGenisligi = 150;
-    int arttirma = Urunler.urunler.length ~/ widget.sayi;
-    debugPrint(arttirma.toString());
     debugPrint('${widget.vasif} olusturuldu');
 
     // return FutureBuilder<void>(
@@ -59,9 +83,47 @@ class _SeridState extends State<Serid> {
                 onTap: () {
                   final routeName = GoRouterState.of(context).name;
                   final index = GoRouterState.of(context).uri.toString();
+                  Provider.of<Urunlerprovider>(context, listen: false)
+                      .currentPage = widget.seridkategorisi['currentPage'];
+                  Provider.of<Urunlerprovider>(
+                        context,
+                        listen: false,
+                      ).secilimateryalOgeler =
+                      widget.seridkategorisi['secilimateryalOgeler']
+                          as List<String>? ??
+                      [];
+                  Provider.of<Urunlerprovider>(
+                        context,
+                        listen: false,
+                      ).seciliortamOgeler =
+                      widget.seridkategorisi['seciliortamOgeler']
+                          as List<String>? ??
+                      [];
+                  Provider.of<Urunlerprovider>(
+                        context,
+                        listen: false,
+                      ).seciliturOgeler =
+                      widget.seridkategorisi['seciliturOgeler']
+                          as List<String>? ??
+                      [];
+                  Provider.of<Urunlerprovider>(
+                        context,
+                        listen: false,
+                      ).secilifiyatOgeler =
+                      widget.seridkategorisi['secilifiyatOgeler']
+                          as List<Map<String, int>>? ??
+                      [];
+                  Provider.of<Urunlerprovider>(
+                        context,
+                        listen: false,
+                      ).siralamaolcutu =
+                      widget.seridkategorisi['siralamaolcutu'] ?? '';
+                  Provider.of<Urunlerprovider>(context, listen: false).urunAdi =
+                      widget.seridkategorisi['urunAdi'] ?? '';
+                  Provider.of<Urunlerprovider>(context, listen: false)
+                      .tarihegore = widget.seridkategorisi['tarihegore'] ?? '';
                   if (routeName == null && index == '/urundetaylari') {
                     Navigator.pop(context);
-
                     GoRouter.of(
                       context,
                     ).push('/tumurunler'); // Sayfaya nesneyi geçir)
@@ -70,7 +132,7 @@ class _SeridState extends State<Serid> {
                     context.push('/tumurunler'); // Sayfaya nesneyi geçir)
                   }
                 },
-                child:  Row(
+                child: Row(
                   children: [
                     Text(
                       S.of(context).tumurunler,
@@ -99,12 +161,8 @@ class _SeridState extends State<Serid> {
             child: Wrap(
               spacing: 10,
               children: [
-                for (
-                  int i = random.nextInt(9);
-                  i < Urunler.urunler.length;
-                  i += arttirma
-                )
-                  Urunkarti(urun: Urunler.urunler[i]),
+                for (Map<String, dynamic> urun in urunler)
+                  Urunkarti(urun: urun),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -132,6 +190,40 @@ class _SeridState extends State<Serid> {
                       onTap: () {
                         final routeName = GoRouterState.of(context).name;
                         final index = GoRouterState.of(context).uri.toString();
+                        Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).currentPage =
+                            widget.seridkategorisi['currentPage'];
+                        Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilimateryalOgeler =
+                            widget.seridkategorisi['secilimateryalOgeler'];
+                        Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliortamOgeler =
+                            widget.seridkategorisi['seciliortamOgeler'];
+                        Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).seciliturOgeler =
+                            widget.seridkategorisi['seciliturOgeler'];
+                        Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).secilifiyatOgeler =
+                            widget.seridkategorisi['secilifiyatOgeler'];
+                        Provider.of<Urunlerprovider>(
+                              context,
+                              listen: false,
+                            ).siralamaolcutu =
+                            widget.seridkategorisi['siralamaolcutu'];
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .urunAdi = widget.seridkategorisi['urunAdi'];
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .tarihegore = widget.seridkategorisi['tarihegore'];
                         if (routeName == null && index == '/urundetaylari') {
                           Navigator.pop(context);
 
@@ -153,7 +245,7 @@ class _SeridState extends State<Serid> {
                               CrossAxisAlignment
                                   .center, // 📌 Yatay eksende ortala
                           children: [
-                             Text(
+                            Text(
                               S.of(context).tumurunler,
                               style: TextStyle(
                                 color: Renkler.kahverengi,

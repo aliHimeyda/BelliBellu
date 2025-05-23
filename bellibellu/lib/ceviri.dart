@@ -51,4 +51,25 @@ class Cevirici {
 
     return turMap[turkceMetin] ?? turkceMetin;
   }
+
+  static String renkCevir(BuildContext context, String turkceMetin) {
+    final ceviriler = S.of(context);
+    Map<String, String> renkMap = {
+      "Gümüş": ceviriler.renk_gumus,
+      "Kahverengi": ceviriler.renk_kahverengi,
+      "Gri": ceviriler.renk_gri,
+      "Siyah": ceviriler.renk_siyah,
+      "Bej": ceviriler.renk_bej,
+      "Lacivert": ceviriler.renk_lacivert,
+      "Beyaz": ceviriler.renk_beyaz,
+      "Mavi": ceviriler.renk_mavi,
+      "Yeşil": ceviriler.renk_yesil,
+      "Sarı": ceviriler.renk_sari,
+      "Bordo": ceviriler.renk_bordo,
+      "Turuncu": ceviriler.renk_turuncu,
+      "Kırmızı": ceviriler.renk_kirmizi,
+    };
+
+    return renkMap[turkceMetin] ?? turkceMetin;
+  }
 }

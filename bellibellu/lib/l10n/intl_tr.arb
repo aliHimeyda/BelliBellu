@@ -390,5 +390,18 @@
   "hataliSifreVeyaMail": "Hatalı şifre veya mail adresi",
   "duzenle": "Düzenle",
   "sifreb": "Şifre",
-  "adres": "Adres"
+  "adres": "Adres",
+  "renk_gumus": "Gümüş",
+  "renk_kahverengi": "Kahverengi",
+  "renk_gri": "Gri",
+  "renk_siyah": "Siyah",
+  "renk_bej": "Bej",
+  "renk_lacivert": "Lacivert",
+  "renk_beyaz": "Beyaz",
+  "renk_mavi": "Mavi",
+  "renk_yesil": "Yeşil",
+  "renk_sari": "Sarı",
+  "renk_bordo": "Bordo",
+  "renk_turuncu": "Turuncu",
+  "renk_kirmizi": "Kırmızı"
 }

@@ -1,5 +1,6 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/urunlerVT.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
@@ -20,21 +21,19 @@ class Ensongezilenurunler extends ChangeNotifier {
       begenilenUrunwidgeti.clear();
       if (urunadlari.length <= 15) {
         for (int i = 0; i < urunadlari.length; i++) {
-          for (int j = 0; j < Urunler.urunler.length; j++) {
-            if (Urunler.urunler[j].urunAdi == urunadlari[i]) {
-              Ozelurunkarti kart = Ozelurunkarti(urun: Urunler.urunler[j]);
-              begenilenUrunwidgeti.add(kart);
-            }
-          }
+          Map<String, dynamic> urun = await Urunlervt.getUrunByAd(
+            urunadlari[i],
+          );
+          Ozelurunkarti kart = Ozelurunkarti(urun: urun);
+          begenilenUrunwidgeti.add(kart);
         }
       } else {
         for (int i = urunadlari.length - 1; i > urunadlari.length - 16; i--) {
-          for (int j = 0; j < Urunler.urunler.length; j++) {
-            if (Urunler.urunler[j].urunAdi == urunadlari[i]) {
-              Ozelurunkarti kart = Ozelurunkarti(urun: Urunler.urunler[j]);
-              begenilenUrunwidgeti.add(kart);
-            }
-          }
+          Map<String, dynamic> urun = await Urunlervt.getUrunByAd(
+            urunadlari[i],
+          );
+          Ozelurunkarti kart = Ozelurunkarti(urun: urun);
+          begenilenUrunwidgeti.add(kart);
         }
       }
     }

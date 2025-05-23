@@ -1,3 +1,4 @@
+import 'package:bellibellu/services/urunlerVT.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class Urunkarti extends StatefulWidget {
   // String ortami;
   // String agirligi;
   // bool begenilmismi;
-  final Urunler urun;
+  final Map<String, dynamic> urun;
   Urunkarti({super.key, required this.urun});
 
   @override
@@ -33,16 +34,12 @@ class _UrunkartiState extends State<Urunkarti> {
 
   @override
   Widget build(BuildContext context) {
+    bool begenilmismi = false;
     return GestureDetector(
       onTap: () async {
-        await ensongezilenekaydet(widget.urun.urunAdi);
-
-        List<Serid> seridler = await seridlerigetir(context);
+        await ensongezilenekaydet(widget.urun['urunAdi']);
         // Sayfa açıldığında dinleyici ekleyerek kapat
-        context.push(
-          '/urundetaylari',
-          extra: {'urun': widget.urun, 'seridler': seridler},
-        );
+        context.push('/urundetaylari', extra: {'urun': widget.urun});
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -73,7 +70,7 @@ class _UrunkartiState extends State<Urunkarti> {
                 child: Stack(
                   children: [
                     Image.network(
-                      widget.urun.resimYolu,
+                      widget.urun['urunResmi'],
                       width: urunKartiGenisligi - 2,
                       height: urunKartiGenisligi * 1.2,
                       fit: BoxFit.cover,
@@ -93,26 +90,24 @@ class _UrunkartiState extends State<Urunkarti> {
                           child: IconButton(
                             padding: const EdgeInsets.all(0),
                             onPressed: () {
-                              debugPrint('${widget.urun.urunAdi} tiklandi');
-                              widget.urun.begenilmismi
-                                  ? widget.urun.begenilmismi = false
-                                  : widget.urun.begenilmismi = true;
+                              debugPrint('${widget.urun['urunAdi']} tiklandi');
+                              begenilmismi
+                                  ? begenilmismi = false
+                                  : begenilmismi = true;
                               setState(() {
-                                if (widget.urun.begenilmismi) {
+                                if (begenilmismi) {
                                   widget.colored(color: Renkler.kirmizi);
-                                  begenilenekaydet(widget.urun.urunAdi);
+                                  begenilenekaydet(widget.urun['urunAdi']);
                                 } else {
                                   widget.colored(color: Colors.white);
-                                  begenilendensil(widget.urun.urunAdi);
+                                  begenilendensil(widget.urun['urunAdi']);
                                 }
                               });
                             },
                             icon: Icon(
                               Icons.favorite,
                               color:
-                                  widget.urun.begenilmismi
-                                      ? Renkler.kirmizi
-                                      : Colors.white,
+                                  begenilmismi ? Renkler.kirmizi : Colors.white,
                               size: 15,
                             ),
                           ),
@@ -123,14 +118,14 @@ class _UrunkartiState extends State<Urunkarti> {
                 ),
               ),
               Text(
-                widget.urun.urunAdi,
+                widget.urun['urunAdi'],
                 style: const TextStyle(
                   color: Renkler.kahverengi,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                '${widget.urun.urunfiyati} TL   ❤${widget.urun.begenisayisi}',
+                '${widget.urun['fiyat']} TL   ❤${widget.urun['begeniSayisi']}',
                 style: const TextStyle(color: Renkler.kahverengi),
               ),
             ],
@@ -142,13 +137,14 @@ class _UrunkartiState extends State<Urunkarti> {
 }
 
 class Ozelurunkarti extends StatefulWidget {
-  final Urunler urun;
+  final Map<String, dynamic> urun;
   Ozelurunkarti({super.key, required this.urun});
   @override
   State<Ozelurunkarti> createState() => _OzelurunkartiState();
 }
 
 class _OzelurunkartiState extends State<Ozelurunkarti> {
+  bool begenilmismi = false;
   int urunKartiGenisligi = 150;
 
   get urun => this.urun;
@@ -156,13 +152,9 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await ensongezilenekaydet(widget.urun.urunAdi);
-        List<Serid> seridler = await seridlerigetir(context);
+        await ensongezilenekaydet(widget.urun['urunAdi']);
         // Sayfa açıldığında dinleyici ekleyerek kapat
-        context.push(
-          '/urundetaylari',
-          extra: {'urun': widget.urun, 'seridler': seridler},
-        );
+        context.push('/urundetaylari', extra: {'urun': widget.urun});
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -191,7 +183,7 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
                       left: Radius.circular(10),
                     ),
                     child: Image.network(
-                      widget.urun.resimYolu,
+                      widget.urun['urunResmi'],
                       width:
                           ((MediaQuery.of(context).size.width / 3) * 1.7) - 10,
                       height: urunKartiGenisligi * 1.1,
@@ -206,14 +198,14 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            widget.urun.urunAdi,
+                            widget.urun['urunAdi'],
                             style: const TextStyle(
                               color: Renkler.kahverengi,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
-                            '❤${widget.urun.begenisayisi}    ${widget.urun.urunfiyati} TL',
+                            '❤${widget.urun['begeniSayisi']}    ${widget.urun['fiyat']} TL',
                             style: const TextStyle(color: Renkler.kahverengi),
                           ),
                         ],
@@ -237,26 +229,23 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
                     child: IconButton(
                       padding: const EdgeInsets.all(0),
                       onPressed: () {
-                        debugPrint('${widget.urun.urunAdi} tiklandi');
-                        widget.urun.begenilmismi
-                            ? widget.urun.begenilmismi = false
-                            : widget.urun.begenilmismi = true;
+                        debugPrint('${widget.urun['urunAdi']} tiklandi');
+                        begenilmismi
+                            ? begenilmismi = false
+                            : begenilmismi = true;
                         setState(() {
-                          if (widget.urun.begenilmismi) {
+                          if (begenilmismi) {
                             widget.colored(color: Renkler.kirmizi);
-                            begenilenekaydet(widget.urun.urunAdi);
+                            begenilenekaydet(widget.urun['urunAdi']);
                           } else {
                             widget.colored(color: Colors.white);
-                            begenilendensil(widget.urun.urunAdi);
+                            begenilendensil(widget.urun['urunAdi']);
                           }
                         });
                       },
                       icon: Icon(
                         Icons.favorite,
-                        color:
-                            widget.urun.begenilmismi
-                                ? Renkler.kirmizi
-                                : Colors.white,
+                        color: begenilmismi ? Renkler.kirmizi : Colors.white,
                         size: 15,
                       ),
                     ),
@@ -297,32 +286,18 @@ void begenilenekaydet(String urunadi) async {
 Future<void> ensongezilenekaydet(String urunadi) async {
   final pref = await SharedPreferences.getInstance();
   List<String>? ensongezilen = await pref.getStringList('ensongezilenurunler');
-  for (int i = 0; i < Urunler.urunler.length; i++) {
-    if (Urunler.urunler[i].urunAdi == urunadi) {
-      if (ensongezilen.isEmpty) {
-        await pref.setStringList('ensongezilenurunler', [
-          Urunler.urunler[i].urunAdi,
-        ]);
-      } else {
-        if (!(ensongezilen!.contains(Urunler.urunler[i].urunAdi))) {
-          ensongezilen.add(Urunler.urunler[i].urunAdi);
-          await pref.setStringList('ensongezilenurunler', ensongezilen);
-          debugPrint('keydedildi: $ensongezilen');
-          break;
-        }
+  Map<String, dynamic> urun = await Urunlervt.getUrunByAd(urunadi);
+  if (urun['urunAdi'] == urunadi) {
+    if (ensongezilen.isEmpty) {
+      await pref.setStringList('ensongezilenurunler', [urun['urunAdi']]);
+    } else {
+      if (!(ensongezilen!.contains(urun['urunAdi']))) {
+        ensongezilen.add(urun['urunAdi']);
+        await pref.setStringList('ensongezilenurunler', ensongezilen);
+        debugPrint('keydedildi: $ensongezilen');
       }
     }
   }
-}
-
-Future<List<Serid>> seridlerigetir(context) async {
-  final List<Serid> seridler = [
-    Serid('Yeni Urunlere Goz At', 9),
-    Serid('2025 Uretimi', 9),
-    Serid('Begenebilecegin Urunler', 9),
-  ];
-
-  return seridler;
 }
 
 void begenilendensil(String urunadi) async {

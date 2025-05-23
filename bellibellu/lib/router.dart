@@ -9,7 +9,6 @@ import 'package:bellibellu/kaydedilenler.dart';
 import 'package:bellibellu/loginsayfasi.dart';
 import 'package:bellibellu/logosayfasi.dart';
 import 'package:bellibellu/menu.dart';
-import 'package:bellibellu/ozelurunler.dart';
 import 'package:bellibellu/profilsayfasi.dart';
 import 'package:bellibellu/sepetsayfasi.dart';
 import 'package:bellibellu/sohbeticerigisayfasi.dart';
@@ -34,7 +33,6 @@ class Paths {
   static const String menu = '/menu';
   static const String urundetaylari = '/urundetaylari';
   static const String tumurunler = '/tumurunler';
-  static const String ozelurunler = '/ozelurunler';
   static const String ensongezilenler = '/ensongezilenler';
   static const String yorumlarsayfasi = '/yorumlarsayfasi';
   static const String sorularsayfasi = '/sorularsayfasi';
@@ -122,20 +120,7 @@ final router = GoRouter(
             ),
           ],
         ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Paths.ozelurunler,
-              builder: (context, state) {
-                final urunler =
-                    state.extra as List<Urunler>; // Extra ile gelen veriyi al
-                return Ozelurunler(
-                  gelenurunler: urunler,
-                ); // Sayfaya nesneyi geçir
-              },
-            ),
-          ],
-        ),
+
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -143,14 +128,11 @@ final router = GoRouter(
               builder: (context, state) {
                 final data =
                     state.extra
-                        as Map<String, Object>; // Extra ile gelen veriyi al
-                final urun = data['urun'] as Urunler; // Urun nesnesini al
-                final seridler = data['seridler'] as List<Serid>;
+                        as Map<String, dynamic>; // Extra ile gelen veriyi al
+                final urun =
+                    data['urun'] as Map<String, dynamic>; // Urun nesnesini al
 
-                return Urunkartiicerigi(
-                  urun: urun,
-                  seridler: seridler,
-                ); // Sayfaya nesneyi geçir
+                return Urunkartiicerigi(urun: urun); // Sayfaya nesneyi geçir
               },
             ),
           ],
