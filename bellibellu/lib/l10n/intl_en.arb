@@ -167,7 +167,7 @@
    "@garanti_suresi": { "description": "Warranty Period label" },
   "garanti_suresi": "WARRANTY PERIOD :",
   "@urunlerin_garanti_suresi": { "description": "Product warranty period information" },
-  "urunlerin_garanti_suresi": "The warranty period of the products is 1 year.",
+  "urunlerin_garanti_suresi": "The warranty period of the products is {garanti_suresi} year.",
 
   "@bu_urun_turkiyede_uretilmistir": { "description": "Product manufacturing location information" },
   "bu_urun_turkiyede_uretilmistir": "This product is manufactured in Turkey.",

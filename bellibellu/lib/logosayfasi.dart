@@ -67,7 +67,6 @@ class _LogosayfasiState extends State<Logosayfasi> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-
     seridlerial();
   }
 
@@ -108,9 +107,11 @@ class _LogosayfasiState extends State<Logosayfasi> {
     ];
     for (int i = 0; i < 5; i++) {
       Serid serid = Serid(vasif: vasiflar[i], seridkategorisi: kategoriler[i]);
-      Provider.of<Seridlerprovider>(context).seridler.add(serid);
+      Provider.of<Seridlerprovider>(
+                    context,
+                    listen: false,
+                  ).seridler.add(serid);
     }
-    Provider.of<Seridlerprovider>(context).seridleriguncelle();
   }
 
   @override

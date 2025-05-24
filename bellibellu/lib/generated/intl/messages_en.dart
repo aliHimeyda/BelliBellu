@@ -56,7 +56,10 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m15(kod, materyal, tur, ortam, uzunluk, genislik) =>
       "Our product with code ${kod} is handcrafted and made from ${materyal}. It is a suitable ${tur} for the ${ortam} environment. Length: ${uzunluk} cm, Width: ${genislik} cm.";
 
-  static String m16(error) => "WhatsApp could not be opened! Error: ${error}";
+  static String m16(garanti_suresi) =>
+      "The warranty period of the products is ${garanti_suresi} year.";
+
+  static String m17(error) => "WhatsApp could not be opened! Error: ${error}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -322,9 +325,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "urun_sorularim": MessageLookupByLibrary.simpleMessage("Product Questions"),
     "urunler": MessageLookupByLibrary.simpleMessage("Products"),
     "urunleri_getir": MessageLookupByLibrary.simpleMessage("Get Products"),
-    "urunlerin_garanti_suresi": MessageLookupByLibrary.simpleMessage(
-      "The warranty period of the products is 1 year.",
-    ),
+    "urunlerin_garanti_suresi": m16,
     "uyari": MessageLookupByLibrary.simpleMessage("WARNING !"),
     "uyelik_sozlesmesi": MessageLookupByLibrary.simpleMessage(
       "Membership Agreement",
@@ -340,7 +341,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "ve": MessageLookupByLibrary.simpleMessage(" and the "),
     "veya": MessageLookupByLibrary.simpleMessage("or"),
     "whatsapp": MessageLookupByLibrary.simpleMessage("WhatsApp"),
-    "whatsappAciklamasi": m16,
+    "whatsappAciklamasi": m17,
     "yanit_kargo_verilecek": MessageLookupByLibrary.simpleMessage(
       "It will be shipped shortly",
     ),

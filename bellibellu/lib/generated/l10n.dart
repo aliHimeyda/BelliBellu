@@ -590,13 +590,13 @@ class S {
     );
   }
 
-  /// `The warranty period of the products is 1 year.`
-  String get urunlerin_garanti_suresi {
+  /// `The warranty period of the products is {garanti_suresi} year.`
+  String urunlerin_garanti_suresi(Object garanti_suresi) {
     return Intl.message(
-      'The warranty period of the products is 1 year.',
+      'The warranty period of the products is $garanti_suresi year.',
       name: 'urunlerin_garanti_suresi',
       desc: 'Product warranty period information',
-      args: [],
+      args: [garanti_suresi],
     );
   }
 

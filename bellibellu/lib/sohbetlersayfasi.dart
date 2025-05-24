@@ -24,7 +24,7 @@ class _SaticiMesajlarimPageState extends State<SaticiMesajlarimPage>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
         Scaffold(
           backgroundColor: Renkler.kuyubeyaz,
@@ -58,23 +58,24 @@ class _SaticiMesajlarimPageState extends State<SaticiMesajlarimPage>
             ],
           ),
         ),
-         Provider.of<Loadingprovider>(context,listen: false).isloading?
-        Center(
-          child: Container(
-            width: MediaQuery.sizeOf(context).width,
-            height: MediaQuery.sizeOf(context).height,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(83, 138, 103, 32),
-            ),
-            child: Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(color: Renkler.kahverengi),
+        Provider.of<Loadingprovider>(context, listen: false).isloading
+            ? Center(
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(83, 138, 103, 32),
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(color: Renkler.kahverengi),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ):SizedBox()
+            )
+            : SizedBox(),
       ],
     );
   }

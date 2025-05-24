@@ -2,8 +2,10 @@ import 'package:bellibellu/ceviri.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/seridlerprovider.dart';
+import 'package:bellibellu/services/urunlerVT.dart';
 import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
@@ -16,8 +18,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class Urunkartiicerigi extends StatefulWidget {
-  final Map<String, dynamic> urun;
-  const Urunkartiicerigi({Key? key, required this.urun}) : super(key: key);
+  final String urunAdi;
+  const Urunkartiicerigi({Key? key, required this.urunAdi}) : super(key: key);
 
   @override
   State<Urunkartiicerigi> createState() => _UrunkartiicerigiState();
@@ -25,7 +27,9 @@ class Urunkartiicerigi extends StatefulWidget {
 
 class _UrunkartiicerigiState extends State<Urunkartiicerigi>
     with AutomaticKeepAliveClientMixin {
-  bool begenilmismi = false;
+  late Future<void> urunugetir;
+  late Map<String, dynamic> urun;
+
   final List<Map<String, String>> soruCevaplar = [
     {
       "musteri": "A*** K***",
@@ -46,165 +50,28 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
       "soru": "İndirim yapılıyor mu?",
       "cevap": "Şu an için özel bir indirim bulunmamaktadır.",
     },
-    {
-      "musteri": "A*** Ç***",
-      "tarih": "23 Mayıs 2023 | 19:15",
-      "soru": "Hangi kargo firması ile gönderiyorsunuz?",
-      "cevap": "Aras Kargo ve Yurtiçi Kargo ile gönderim yapıyoruz.",
-    },
-    {
-      "musteri": "F*** K***",
-      "tarih": "8 Haziran 2022 | 11:10",
-      "soru": "Ürün orijinal mi?",
-      "cevap": "Evet, ürün %100 orijinal ve üretici garantilidir.",
-    },
-    {
-      "musteri": "E*** Ş***",
-      "tarih": "2 Temmuz 2021 | 16:00",
-      "soru": "Bu ürün hangi malzemeden üretilmiştir?",
-      "cevap": "Ürün paslanmaz çelikten üretilmiştir.",
-    },
-    {
-      "musteri": "C*** E***",
-      "tarih": "15 Ağustos 2020 | 21:40",
-      "soru": "Fiyatına kargo dahil mi?",
-      "cevap": "Hayır, kargo ücreti fiyatımıza dahil değildir.",
-    },
-    {
-      "musteri": "D*** T***",
-      "tarih": "3 Eylül 2019 | 07:20",
-      "soru": "Ürünün küçük boyutu var mı?",
-      "cevap": "Evet, küçük boyutlu seçeneklerimiz de mevcuttur.",
-    },
-    {
-      "musteri": "H*** A***",
-      "tarih": "20 Ekim 2022 | 13:05",
-      "soru": "Bu modelin farklı renkleri var mı?",
-      "cevap":
-          "Evet, bu modelin kırmızı, mavi ve siyah renkleri bulunmaktadır.",
-    },
-    {
-      "musteri": "M*** G***",
-      "tarih": "18 Kasım 2021 | 18:50",
-      "soru": "Ürünün garantisi var mı?",
-      "cevap": "Evet, ürün 2 yıl garantilidir.",
-    },
-    {
-      "musteri": "A*** C***",
-      "tarih": "1 Ocak 2020 | 12:00",
-      "soru": "Bu ürün kaç günde teslim edilir?",
-      "cevap": "3 iş günü içinde teslim edilir.",
-    },
-    {
-      "musteri": "H*** E***",
-      "tarih": "7 Şubat 2023 | 17:25",
-      "soru": "Ürünün içeriği sağlığa zararlı mı?",
-      "cevap": "Hayır, tamamen doğal ve sağlığa zararsızdır.",
-    },
-    {
-      "musteri": "Y*** Ç***",
-      "tarih": "25 Nisan 2021 | 08:30",
-      "soru": "Ürün rengi soluyor mu?",
-      "cevap": "Hayır, ürün uzun süre renk korumasına sahiptir.",
-    },
-    {
-      "musteri": "C*** A***",
-      "tarih": "13 Temmuz 2022 | 15:10",
-      "soru": "Kırık ürün çıkarsa iade alıyor musunuz?",
-      "cevap": "Evet, kırık veya hasarlı ürünlerde ücretsiz değişim yapıyoruz.",
-    },
-    {
-      "musteri": "K*** B***",
-      "tarih": "30 Kasım 2020 | 10:45",
-      "soru": "Bu ürünü hediye paketi yapabilir misiniz?",
-      "cevap": "Evet, sipariş sırasında hediye paketi seçeneği mevcuttur.",
-    },
-    {
-      "musteri": "E*** Y***",
-      "tarih": "5 Mart 2019 | 09:00",
-      "soru": "Ürün kutulu mu geliyor?",
-      "cevap": "Evet, orijinal kutusunda gönderilmektedir.",
-    },
-    {
-      "musteri": "S*** A***",
-      "tarih": "12 Nisan 2021 | 18:20",
-      "soru": "Ürünün ölçüleri nedir?",
-      "cevap": "Ürün açıklamalarında detaylı ölçü bilgisi mevcuttur.",
-    },
-    {
-      "musteri": "B*** A***",
-      "tarih": "18 Haziran 2022 | 20:15",
-      "soru": "Kırılır mı?",
-      "cevap": "Ürün dayanıklıdır, ancak düşmelere karşı dikkatli olunmalıdır.",
-    },
-    {
-      "musteri": "G*** T***",
-      "tarih": "27 Eylül 2021 | 14:10",
-      "soru": "Montaj gerektiriyor mu?",
-      "cevap": "Hayır, montaj gerektirmeyen bir üründür.",
-    },
-    {
-      "musteri": "S*** D***",
-      "tarih": "6 Kasım 2023 | 10:40",
-      "soru": "Geri iade süresi kaç gün?",
-      "cevap": "14 gün içinde iade hakkınız bulunmaktadır.",
-    },
-    {
-      "musteri": "A*** A***",
-      "tarih": "21 Aralık 2019 | 08:30",
-      "soru": "Ürünün parçaları eksik geldi, ne yapmalıyım?",
-      "cevap": "Müşteri hizmetlerimizle iletişime geçebilirsiniz.",
-    },
-    {
-      "musteri": "E*** K***",
-      "tarih": "10 Ocak 2022 | 16:50",
-      "soru": "Ürün ses çıkarıyor mu?",
-      "cevap": "Hayır, sessiz çalışan bir üründür.",
-    },
-    {
-      "musteri": "N*** K***",
-      "tarih": "29 Mayıs 2020 | 22:10",
-      "soru": "Kargo ücreti ne kadar?",
-      "cevap": "Kargo ücreti sipariş tutarına göre değişmektedir.",
-    },
-    {
-      "musteri": "B*** Y***",
-      "tarih": "14 Temmuz 2021 | 13:25",
-      "soru": "Ürünün iç malzemesi nedir?",
-      "cevap": "Ürün plastik ve metal karışımıdır.",
-    },
-    {
-      "musteri": "S*** K***",
-      "tarih": "9 Eylül 2022 | 19:05",
-      "soru": "Bu ürün çocuklar için uygun mu?",
-      "cevap": "Evet, 3 yaş ve üzeri çocuklar için uygundur.",
-    },
-    {
-      "musteri": "V*** U***",
-      "tarih": "22 Kasım 2023 | 11:40",
-      "soru": "Şarjlı mı çalışıyor?",
-      "cevap": "Evet, USB şarj ile çalışmaktadır.",
-    },
-    {
-      "musteri": "G*** E***",
-      "tarih": "3 Ocak 2024 | 20:15",
-      "soru": "Ürün hafif mi?",
-      "cevap": "Evet, oldukça hafif ve taşınabilir bir üründür.",
-    },
-    {
-      "musteri": "M*** C***",
-      "tarih": "15 Şubat 2021 | 14:50",
-      "soru": "Kargo süresi kaç gün?",
-      "cevap": "Yoğunluğa göre 3-5 iş günü sürebilmektedir.",
-    },
   ];
   @override
   bool get wantKeepAlive => true;
+
+  static bool get begenibilgisi => begenibilgisi;
   @override
   void initState() {
+    urunugetir = Urunugetir();
     super.initState();
   }
 
+  Future<void> Urunugetir() async {
+    urun = await Urunlervt.getUrunByAd(
+      widget.urunAdi,
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'].toString(),
+    );
+  }
+
+  late bool begenilmismi = urun['begenilmismi'] == 1 ? true : false;
   @override
   Widget build(BuildContext context) {
     final String currentPath = GoRouterState.of(context).uri.toString();
@@ -212,336 +79,99 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
     int uzunluk = 100 + random.nextInt(201);
     int genislik = 50 + random.nextInt(151);
     super.build(context); // Bu satır önemli
-    return Stack(
-      children: [
-        Scaffold(
-          backgroundColor: const Color.fromRGBO(245, 241, 241, 1),
-          body: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 100),
-                child: ListView(
-                  children: [
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width - 10,
-                              height: 350,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Renkler.kahverengi,
-                                    width: 3,
-                                  ),
-                                ),
-                              ),
-                              child: Image.network(
-                                widget.urun['urunResmi'],
-                                fit: BoxFit.fitHeight,
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            Container(
-                              child: Center(
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: 25,
-                                    right: 25,
-                                    top: 0,
-                                    bottom: 5,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          widget.urun['urunAdi'],
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        S
-                                            .of(context)
-                                            .urun_aciklamasi(
-                                              widget.urun['urunAdi'],
-                                              Cevirici.malzemeCevir(
-                                                context,
-                                                widget.urun['materyali'],
-                                              ),
-                                              Cevirici.turCevir(
-                                                context,
-                                                widget.urun['tur'],
-                                              ),
-                                              Cevirici.ortamCevir(
-                                                context,
-                                                widget.urun['ortam'],
-                                              ),
-                                              widget.urun['uzunluk'],
-                                              widget.urun['genislik'],
-                                            ),
-                                        style: TextStyle(fontSize: 11),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            SizedBox(height: 20),
-                            KisacaOzellikler(context),
-                            Container(
-                              height: 30,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Renkler.kahverengi,
-                                    width: 0.5,
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            SizedBox(height: 30),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    S.of(context).sik_sorulanlar,
-                                    style: TextStyle(
-                                      color: Renkler.kahverengi,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  TextButton(
-                                    onPressed: () {
-                                      context.push(Paths.sorularsayfasi);
-                                    },
-                                    style: TextButton.styleFrom(
-                                      foregroundColor:
-                                          Renkler.kahverengi, // Yazı rengi
-                                    ),
-                                    child: Text(
-                                      S.of(context).tumunuGorButonu('12'),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            sorucevaplar(context),
-                            Container(
-                              height: 30,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Renkler.kahverengi,
-                                    width: 0.5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 15),
-
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Text(
-                                S.of(context).kategoriler,
-                                style: TextStyle(
-                                  color: Renkler.kahverengi,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-
-                            katagorilerseridi(context),
-
-                            Container(
-                              height: 30,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Renkler.kahverengi,
-                                    width: 0.5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8),
-                              child: Text(
-                                S.of(context).urun_ozellikleri,
-                                style: TextStyle(
-                                  color: Renkler.kahverengi,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 30),
-                            KisacaOzellikler(context),
-                            SizedBox(height: 10),
-                            Row(
+    return FutureBuilder(
+      future: urunugetir,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator(color: Renkler.kahverengi),
+          );
+        } else if (snapshot.hasError) {
+          return Center(child: Text("Bir hata oluştu: ${snapshot.error}"));
+        }
+        return Stack(
+          children: [
+            Scaffold(
+              backgroundColor: const Color.fromRGBO(245, 241, 241, 1),
+              body: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 100),
+                    child: ListView(
+                      children: [
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
                               children: [
-                                Icon(
-                                  Icons.circle,
-                                  color: Renkler.kahverengi,
-                                  size: 6,
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  S.of(context).bu_urun_turkiyede_uretilmistir,
-                                  style: TextStyle(
-                                    color: Renkler.kahverengi,
-                                    fontSize: 12,
+                                Container(
+                                  width: MediaQuery.of(context).size.width - 10,
+                                  height: 350,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Renkler.kahverengi,
+                                        width: 3,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Image.network(
+                                    urun['urunResmi'],
+                                    fit: BoxFit.fitHeight,
                                   ),
                                 ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.circle,
-                                  color: Renkler.kahverengi,
-                                  size: 6,
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  S.of(context).urunlerin_garanti_suresi,
-                                  style: TextStyle(
-                                    color: Renkler.kahverengi,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-
-                            SizedBox(width: 5),
-                            Text(
-                              S
-                                  .of(context)
-                                  .urun_aciklamasi(
-                                    widget.urun['urunAdi'],
-                                    widget.urun['materyali'],
-                                    widget.urun['tur'],
-                                    widget.urun['ortam'],
-                                    widget.urun['uzunluk'],
-                                    widget.urun['genislik'],
-                                  ),
-                              style: TextStyle(
-                                color: Renkler.kahverengi,
-                                fontSize: 12,
-                              ),
-                            ),
-                            SizedBox(height: 20),
-                            GestureDetector(
-                              onTap: () {
-                                debugPrint('tiklandi');
-                                popup();
-                              },
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  color: const Color.fromARGB(
-                                    255,
-                                    198,
-                                    211,
-                                    187,
-                                  ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                SizedBox(height: 15),
+                                Container(
                                   child: Center(
-                                    child: Text(S.of(context).tum_ozellikler),
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            Container(
-                              height: 30,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Renkler.kahverengi,
-                                    width: 0.5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Başlık ve Puan
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0,
-                                    vertical: 8.0,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        S.of(context).baslikDegerlendirme,
-                                        style: TextStyle(
-                                          color: Renkler.kahverengi,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: 25,
+                                        right: 25,
+                                        top: 0,
+                                        bottom: 5,
                                       ),
-                                      const Spacer(),
-                                      TextButton(
-                                        onPressed: () {
-                                          context.push(Paths.yorumlarsayfasi);
-                                        },
-                                        style: TextButton.styleFrom(
-                                          foregroundColor:
-                                              Renkler.kahverengi, // Yazı rengi
-                                        ),
-                                        child: Text(
-                                          S.of(context).tumunuGorButonu('adet'),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                // Puan Göstergesi
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0,
-                                  ),
-                                  child: Text(
-                                    S.of(context).puanYorumMetni('12', '3'),
-                                    style: TextStyle(color: Renkler.kahverengi),
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                // Yorumlar - kaydırılabilir
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: List.generate(
-                                      5,
-                                      (index) => yorumKarti(
-                                        isim: "M** P**",
-                                        tarih: "22 Eylül 2024",
-                                        yorum:
-                                            "Öncelikle çok güzel ve özenle paketlenmişti. Kargo da zamanında geldi. Saat gayet güzel ve çok hoş.",
-                                        satici: "Art Saatçilik",
+                                      child: Column(
+                                        children: [
+                                          Align(
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              urun['urunAdi'],
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            S
+                                                .of(context)
+                                                .urun_aciklamasi(
+                                                  urun['urunAdi'],
+                                                  Cevirici.malzemeCevir(
+                                                    context,
+                                                    urun['materyali'],
+                                                  ),
+                                                  Cevirici.turCevir(
+                                                    context,
+                                                    urun['tur'],
+                                                  ),
+                                                  Cevirici.ortamCevir(
+                                                    context,
+                                                    urun['ortam'],
+                                                  ),
+                                                  urun['uzunluk'],
+                                                  urun['genislik'],
+                                                ),
+                                            style: TextStyle(fontSize: 11),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
                                 ),
+
+                                SizedBox(height: 20),
+                                KisacaOzellikler(context),
                                 Container(
                                   height: 30,
                                   decoration: BoxDecoration(
@@ -553,220 +183,497 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                 ),
+
+                                SizedBox(height: 30),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        S.of(context).sik_sorulanlar,
+                                        style: TextStyle(
+                                          color: Renkler.kahverengi,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      TextButton(
+                                        onPressed: () {
+                                          context.push(Paths.sorularsayfasi);
+                                        },
+                                        style: TextButton.styleFrom(
+                                          foregroundColor:
+                                              Renkler.kahverengi, // Yazı rengi
+                                        ),
+                                        child: Text(
+                                          S.of(context).tumunuGorButonu('12'),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                sorucevaplar(context),
+                                Container(
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Renkler.kahverengi,
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 15),
+
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: Text(
+                                    S.of(context).kategoriler,
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+
+                                katagorilerseridi(context),
+
+                                Container(
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Renkler.kahverengi,
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: Text(
+                                    S.of(context).urun_ozellikleri,
+                                    style: TextStyle(
+                                      color: Renkler.kahverengi,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 30),
+                                KisacaOzellikler(context),
+                                SizedBox(height: 10),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.circle,
+                                      color: Renkler.kahverengi,
+                                      size: 6,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      S
+                                          .of(context)
+                                          .bu_urun_turkiyede_uretilmistir,
+                                      style: TextStyle(
+                                        color: Renkler.kahverengi,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.circle,
+                                      color: Renkler.kahverengi,
+                                      size: 6,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      S
+                                          .of(context)
+                                          .urunlerin_garanti_suresi(
+                                            urun['garantiSuresi']
+                                                .toString()
+                                                .substring(0, 1),
+                                          ),
+                                      style: TextStyle(
+                                        color: Renkler.kahverengi,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                SizedBox(width: 5),
+                                Text(
+                                  S
+                                      .of(context)
+                                      .urun_aciklamasi(
+                                        urun['urunAdi'],
+                                        urun['materyali'],
+                                        urun['tur'],
+                                        urun['ortam'],
+                                        urun['uzunluk'],
+                                        urun['genislik'],
+                                      ),
+                                  style: TextStyle(
+                                    color: Renkler.kahverengi,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                GestureDetector(
+                                  onTap: () {
+                                    debugPrint('tiklandi');
+                                    popup();
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        198,
+                                        211,
+                                        187,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: Text(
+                                          S.of(context).tum_ozellikler,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                Container(
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Renkler.kahverengi,
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Başlık ve Puan
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0,
+                                        vertical: 8.0,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            S.of(context).baslikDegerlendirme,
+                                            style: TextStyle(
+                                              color: Renkler.kahverengi,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          TextButton(
+                                            onPressed: () {
+                                              context.push(
+                                                Paths.yorumlarsayfasi,
+                                              );
+                                            },
+                                            style: TextButton.styleFrom(
+                                              foregroundColor:
+                                                  Renkler
+                                                      .kahverengi, // Yazı rengi
+                                            ),
+                                            child: Text(
+                                              S
+                                                  .of(context)
+                                                  .tumunuGorButonu('adet'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // Puan Göstergesi
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 16.0,
+                                      ),
+                                      child: Text(
+                                        S.of(context).puanYorumMetni('12', '3'),
+                                        style: TextStyle(
+                                          color: Renkler.kahverengi,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    // Yorumlar - kaydırılabilir
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: Row(
+                                        children: List.generate(
+                                          5,
+                                          (index) => yorumKarti(
+                                            isim: "M** P**",
+                                            tarih: "22 Eylül 2024",
+                                            yorum:
+                                                "Öncelikle çok güzel ve özenle paketlenmişti. Kargo da zamanında geldi. Saat gayet güzel ve çok hoş.",
+                                            satici: "Art Saatçilik",
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                            color: Renkler.kahverengi,
+                                            width: 0.5,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 20),
+                                ozelkapakliserid(
+                                  context,
+                                  S.of(context).begenebilecegin,
+                                ),
+                                Container(
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Renkler.kahverengi,
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                Provider.of<Seridlerprovider>(
+                                  context,
+                                  listen: false,
+                                ).seridler[0],
+                                Container(
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Renkler.kahverengi,
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Provider.of<Seridlerprovider>(
+                                  context,
+                                  listen: false,
+                                ).seridler[4],
+                                Container(
+                                  height: 10,
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Renkler.kahverengi,
+                                        width: 0.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+
+                                GestureDetector(
+                                  onTap: () async {
+                                    await urunlerigetir(
+                                      '${Cevirici.malzemeCevir(context, urun['materyali'])}',
+                                      context,
+                                    );
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width - 5,
+                                    height: 65,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                        width: 0.5,
+                                        color: Renkler.kahverengi,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          S
+                                              .of(context)
+                                              .daha_fazla_materyal(
+                                                Cevirici.malzemeCevir(
+                                                  context,
+                                                  urun['materyali'],
+                                                ),
+                                              ),
+                                          style: TextStyle(
+                                            color: Renkler.kahverengi,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.chevron_right,
+                                          size: 15,
+                                          color: Renkler.kahverengi,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    await urunlerigetir(
+                                      '${Cevirici.ortamCevir(context, urun['ortam'])}',
+                                      context,
+                                    );
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width - 5,
+                                    height: 65,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                        width: 0.5,
+                                        color: Renkler.kahverengi,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          S
+                                              .of(context)
+                                              .daha_fazla_materyal(
+                                                Cevirici.ortamCevir(
+                                                  context,
+                                                  urun['ortam'],
+                                                ),
+                                              ),
+                                          style: TextStyle(
+                                            color: Renkler.kahverengi,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.chevron_right,
+                                          size: 15,
+                                          color: Renkler.kahverengi,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () async {
+                                    await urunlerigetir(
+                                      '${Cevirici.turCevir(context, urun['tur'])}',
+                                      context,
+                                    );
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width - 5,
+                                    height: 65,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      color: Renkler.kuyubeyaz,
+                                      border: Border.all(
+                                        width: 0.5,
+                                        color: Renkler.kahverengi,
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          S
+                                              .of(context)
+                                              .daha_fazla_materyal(
+                                                Cevirici.turCevir(
+                                                  context,
+                                                  urun['tur'],
+                                                ),
+                                              ),
+                                          style: TextStyle(
+                                            color: Renkler.kahverengi,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.chevron_right,
+                                          size: 15,
+                                          color: Renkler.kahverengi,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
-                            SizedBox(height: 20),
-                            ozelkapakliserid(
-                              context,
-                              S.of(context).begenebilecegin,
-                            ),
-                            Container(
-                              height: 10,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Renkler.kahverengi,
-                                    width: 0.5,
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            Provider.of<Seridlerprovider>(context).seridler[0],
-                            Container(
-                              height: 10,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Renkler.kahverengi,
-                                    width: 0.5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Provider.of<Seridlerprovider>(context).seridler[1],
-                            Container(
-                              height: 10,
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Renkler.kahverengi,
-                                    width: 0.5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 20),
-
-                            GestureDetector(
-                              onTap: () async {
-                                await urunlerigetir(
-                                  '${Cevirici.malzemeCevir(context, widget.urun['materyali'])}',
-                                  context,
-                                );
-                              },
-                              child: Container(
-                                width: MediaQuery.of(context).size.width - 5,
-                                height: 65,
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Renkler.kuyubeyaz,
-                                  border: Border.all(
-                                    width: 0.5,
-                                    color: Renkler.kahverengi,
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      S
-                                          .of(context)
-                                          .daha_fazla_materyal(
-                                            Cevirici.malzemeCevir(
-                                              context,
-                                              widget.urun['materyali'],
-                                            ),
-                                          ),
-                                      style: TextStyle(
-                                        color: Renkler.kahverengi,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right,
-                                      size: 15,
-                                      color: Renkler.kahverengi,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                await urunlerigetir(
-                                  '${Cevirici.ortamCevir(context, widget.urun['ortam'])}',
-                                  context,
-                                );
-                              },
-                              child: Container(
-                                width: MediaQuery.of(context).size.width - 5,
-                                height: 65,
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Renkler.kuyubeyaz,
-                                  border: Border.all(
-                                    width: 0.5,
-                                    color: Renkler.kahverengi,
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      S
-                                          .of(context)
-                                          .daha_fazla_materyal(
-                                            Cevirici.ortamCevir(
-                                              context,
-                                              widget.urun['ortam'],
-                                            ),
-                                          ),
-                                      style: TextStyle(
-                                        color: Renkler.kahverengi,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right,
-                                      size: 15,
-                                      color: Renkler.kahverengi,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                await urunlerigetir(
-                                  '${Cevirici.turCevir(context, widget.urun['tur'])}',
-                                  context,
-                                );
-                              },
-                              child: Container(
-                                width: MediaQuery.of(context).size.width - 5,
-                                height: 65,
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Renkler.kuyubeyaz,
-                                  border: Border.all(
-                                    width: 0.5,
-                                    color: Renkler.kahverengi,
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      S
-                                          .of(context)
-                                          .daha_fazla_materyal(
-                                            Cevirici.turCevir(
-                                              context,
-                                              widget.urun['tur'],
-                                            ),
-                                          ),
-                                      style: TextStyle(
-                                        color: Renkler.kahverengi,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right,
-                                      size: 15,
-                                      color: Renkler.kahverengi,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  favoriteIcon(),
+                  showBottomNavBar ? bottomnavigation(context) : SizedBox(),
+                ],
+              ),
+            ),
+            Provider.of<Loadingprovider>(context, listen: false).isloading
+                ? Center(
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: MediaQuery.sizeOf(context).height,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(83, 138, 103, 32),
+                    ),
+                    child: Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          color: Renkler.kahverengi,
                         ),
                       ),
                     ),
-                  ],
-                ),
-              ),
-              favoriteIcon(),
-              showBottomNavBar ? bottomnavigation(context) : SizedBox(),
-            ],
-          ),
-        ),
-        Provider.of<Loadingprovider>(context, listen: false).isloading
-            ? Center(
-              child: Container(
-                width: MediaQuery.sizeOf(context).width,
-                height: MediaQuery.sizeOf(context).height,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(83, 138, 103, 32),
-                ),
-                child: Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(color: Renkler.kahverengi),
                   ),
-                ),
-              ),
-            )
-            : SizedBox(),
-      ],
+                )
+                : SizedBox(),
+          ],
+        );
+      },
     );
   }
 
@@ -779,7 +686,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
           color: const Color.fromARGB(255, 182, 205, 162),
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Provider.of<Seridlerprovider>(context).seridler[2],
+        child:
+            Provider.of<Seridlerprovider>(context, listen: false).seridler[2],
       ),
     );
   }
@@ -1331,7 +1239,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${widget.urun['agirlik']}',
+                                    '${urun['agirlik']}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1361,7 +1269,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${Cevirici.malzemeCevir(context, widget.urun['materyali'])}',
+                                    '${Cevirici.malzemeCevir(context, urun['materyali'])}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1391,7 +1299,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${Cevirici.ortamCevir(context, widget.urun['ortam'])}',
+                                    '${Cevirici.ortamCevir(context, urun['ortam'])}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1421,7 +1329,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${Cevirici.turCevir(context, widget.urun['tur'])}',
+                                    '${Cevirici.turCevir(context, urun['tur'])}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1452,7 +1360,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                   ),
                                   Text(
-                                    '${widget.urun['urunAdi']}',
+                                    '${urun['urunAdi']}',
                                     style: TextStyle(
                                       color: Renkler.kahverengi,
                                       fontSize: 10,
@@ -1475,7 +1383,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                       ),
 
                       Text(
-                        '_${S.of(context).urunlerin_garanti_suresi}',
+                        '_${S.of(context).urunlerin_garanti_suresi(urun['garantiSuresi'].toString().substring(0, 1))}',
                         style: TextStyle(
                           color: Renkler.kahverengi,
                           fontSize: 12,
@@ -1487,12 +1395,12 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                         S
                             .of(context)
                             .urun_aciklamasi(
-                              widget.urun['urunAdi'],
-                              widget.urun['materyali'],
-                              widget.urun['tur'],
-                              widget.urun['ortam'],
-                              widget.urun['uzunluk'],
-                              widget.urun['genislik'],
+                              urun['urunAdi'],
+                              urun['materyali'],
+                              urun['tur'],
+                              urun['ortam'],
+                              urun['uzunluk'],
+                              urun['genislik'],
                             ),
                         style: TextStyle(
                           color: Renkler.kahverengi,
@@ -1512,7 +1420,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            widget.urun['urunAdi'],
+                            urun['urunAdi'],
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1534,7 +1442,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            widget.urun['agirlik'].toString(),
+                            urun['agirlik'].toString(),
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1556,10 +1464,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            Cevirici.malzemeCevir(
-                              context,
-                              widget.urun['materyali'],
-                            ),
+                            Cevirici.malzemeCevir(context, urun['materyali']),
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1581,7 +1486,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            Cevirici.ortamCevir(context, widget.urun['ortam']),
+                            Cevirici.ortamCevir(context, urun['ortam']),
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1603,7 +1508,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            Cevirici.turCevir(context, widget.urun['tur']),
+                            Cevirici.turCevir(context, urun['tur']),
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1617,7 +1522,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${S.of(context).garanti_suresi} :',
+                            '${S.of(context).garanti_suresi}',
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1625,7 +1530,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            widget.urun['garantiSuresi'],
+                            urun['garantiSuresi'].toString().substring(0, 1),
+
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1650,20 +1556,34 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                     child: Center(
                       child: IconButton(
                         padding: const EdgeInsets.all(0),
-                        onPressed: () {
-                          debugPrint('${widget.urun['urunAdi']} tiklandi');
+                        onPressed: () async {
+                          debugPrint('${urun['urunAdi']} tiklandi');
                           begenilmismi
                               ? begenilmismi = false
                               : begenilmismi = true;
-                          setState(() {
-                            if (begenilmismi) {
+                          if (begenilmismi) {
+                            setState(() {
                               widget.colored(color: Renkler.kirmizi);
-                              begenilenekaydet(widget.urun['urunAdi']);
-                            } else {
+                            });
+                            await begenilenekaydet(
+                              urun['urunID'],
+                              Provider.of<Kullanicilarprovider>(
+                                context,
+                                listen: false,
+                              ).currentkullanici['kullaniciID'],
+                            );
+                          } else {
+                            setState(() {
                               widget.colored(color: Colors.white);
-                              begenilendensil(widget.urun['urunAdi']);
-                            }
-                          });
+                            });
+                            begenilendensil(
+                              urun['urunID'],
+                              Provider.of<Kullanicilarprovider>(
+                                context,
+                                listen: false,
+                              ).currentkullanici['kullaniciID'],
+                            );
+                          }
                         },
                         icon: Icon(
                           Icons.favorite,
@@ -1828,7 +1748,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${widget.urun['agirlik']}',
+                  '${urun['agirlik']}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1855,7 +1775,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${Cevirici.malzemeCevir(context, widget.urun['materyali'])}',
+                  '${Cevirici.malzemeCevir(context, urun['materyali'])}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1882,7 +1802,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${Cevirici.ortamCevir(context, widget.urun['ortam'])}',
+                  '${Cevirici.ortamCevir(context, urun['ortam'])}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1909,7 +1829,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${Cevirici.turCevir(context, widget.urun['tur'])}',
+                  '${Cevirici.turCevir(context, urun['tur'])}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1937,7 +1857,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '${widget.urun['urunAdi']}',
+                  '${urun['urunAdi']}',
                   style: TextStyle(color: Renkler.kahverengi, fontSize: 10),
                 ),
               ],
@@ -1963,18 +1883,32 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
         child: Center(
           child: IconButton(
             padding: const EdgeInsets.all(0),
-            onPressed: () {
-              debugPrint('${widget.urun['urunAdi']} tiklandi');
+            onPressed: () async {
+              debugPrint('${urun['urunAdi']} tiklandi');
               begenilmismi ? begenilmismi = false : begenilmismi = true;
-              setState(() {
-                if (begenilmismi) {
+              if (begenilmismi) {
+                setState(() {
                   widget.colored(color: Renkler.kirmizi);
-                  begenilenekaydet(widget.urun['urunAdi']);
-                } else {
+                });
+                await begenilenekaydet(
+                  urun['urunID'],
+                  Provider.of<Kullanicilarprovider>(
+                    context,
+                    listen: false,
+                  ).currentkullanici['kullaniciID'],
+                );
+              } else {
+                setState(() {
                   widget.colored(color: Colors.white);
-                  begenilendensil(widget.urun['urunAdi']);
-                }
-              });
+                });
+                begenilendensil(
+                  urun['urunID'],
+                  Provider.of<Kullanicilarprovider>(
+                    context,
+                    listen: false,
+                  ).currentkullanici['kullaniciID'],
+                );
+              }
             },
             icon: Icon(
               Icons.favorite,
@@ -2031,7 +1965,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   ),
                 ),
                 Text(
-                  '(${widget.urun['fiyat']})TL',
+                  '(${urun['fiyat']})TL',
                   style: TextStyle(fontSize: 15, color: Renkler.kahverengi),
                 ),
               ],
@@ -2144,7 +2078,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
 
   Future<void> sendSMS() async {
     final Uri whatsappUri = Uri.parse(
-      "whatsapp://send?phone=905372943871&text=*${widget.urun['urunAdi']}* kodlu *${widget.urun['materyali']}* *${widget.urun['tur']}* hakkinda soru sormak istiyordum",
+      "whatsapp://send?phone=905372943871&text=*${urun['urunAdi']}* kodlu *${urun['materyali']}* *${urun['tur']}* hakkinda soru sormak istiyordum",
     );
 
     try {

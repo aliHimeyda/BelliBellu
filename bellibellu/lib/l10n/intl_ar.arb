@@ -166,7 +166,7 @@
    "@garanti_suresi": { "description": "ملصق فترة الضمان" },
   "garanti_suresi": "فترة الضمان :",
     "@urunlerin_garanti_suresi": { "description": "معلومات فترة ضمان المنتجات" },
-  "urunlerin_garanti_suresi": "فترة الضمان للمنتجات هي سنة واحدة.",
+  "urunlerin_garanti_suresi": "فترة الضمان للمنتجات هي {garanti_suresi} سنة .",
 
   "@bu_urun_turkiyede_uretilmistir": { "description": "معلومات مكان تصنيع المنتج" },
   "bu_urun_turkiyede_uretilmistir": "هذا المنتج مصنوع في تركيا.",

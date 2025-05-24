@@ -1,3 +1,4 @@
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/urunlerVT.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
@@ -7,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class Urunkarti extends StatefulWidget {
@@ -28,18 +30,18 @@ class Urunkarti extends StatefulWidget {
 }
 
 class _UrunkartiState extends State<Urunkarti> {
+  late bool begenilmismi = widget.urun['begenilmismi'] == 1 ? true : false;
   int urunKartiGenisligi = 150;
 
   get urun => this.urun;
 
   @override
   Widget build(BuildContext context) {
-    bool begenilmismi = false;
     return GestureDetector(
       onTap: () async {
         await ensongezilenekaydet(widget.urun['urunAdi']);
         // Sayfa açıldığında dinleyici ekleyerek kapat
-        context.push('/urundetaylari', extra: {'urun': widget.urun});
+        context.push('/urundetaylari', extra: widget.urun['urunAdi']);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -75,45 +77,6 @@ class _UrunkartiState extends State<Urunkarti> {
                       height: urunKartiGenisligi * 1.2,
                       fit: BoxFit.cover,
                     ),
-                    Positioned(
-                      top: 5,
-                      right: 5,
-                      child: Container(
-                        width: 22,
-                        height: 22,
-                        decoration: BoxDecoration(
-                          color: Renkler.krem,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Renkler.kahverengi),
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            padding: const EdgeInsets.all(0),
-                            onPressed: () {
-                              debugPrint('${widget.urun['urunAdi']} tiklandi');
-                              begenilmismi
-                                  ? begenilmismi = false
-                                  : begenilmismi = true;
-                              setState(() {
-                                if (begenilmismi) {
-                                  widget.colored(color: Renkler.kirmizi);
-                                  begenilenekaydet(widget.urun['urunAdi']);
-                                } else {
-                                  widget.colored(color: Colors.white);
-                                  begenilendensil(widget.urun['urunAdi']);
-                                }
-                              });
-                            },
-                            icon: Icon(
-                              Icons.favorite,
-                              color:
-                                  begenilmismi ? Renkler.kirmizi : Colors.white,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -144,7 +107,7 @@ class Ozelurunkarti extends StatefulWidget {
 }
 
 class _OzelurunkartiState extends State<Ozelurunkarti> {
-  bool begenilmismi = false;
+  late bool begenilmismi = widget.urun['begenilmismi'] == 1 ? true : false;
   int urunKartiGenisligi = 150;
 
   get urun => this.urun;
@@ -154,7 +117,7 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
       onTap: () async {
         await ensongezilenekaydet(widget.urun['urunAdi']);
         // Sayfa açıldığında dinleyici ekleyerek kapat
-        context.push('/urundetaylari', extra: {'urun': widget.urun});
+        context.push('/urundetaylari', extra: widget.urun['urunAdi']);
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -228,20 +191,35 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
                   child: Center(
                     child: IconButton(
                       padding: const EdgeInsets.all(0),
-                      onPressed: () {
+                      onPressed: () async {
                         debugPrint('${widget.urun['urunAdi']} tiklandi');
                         begenilmismi
                             ? begenilmismi = false
                             : begenilmismi = true;
-                        setState(() {
-                          if (begenilmismi) {
+
+                        if (begenilmismi) {
+                          setState(() {
                             widget.colored(color: Renkler.kirmizi);
-                            begenilenekaydet(widget.urun['urunAdi']);
-                          } else {
+                          });
+                          await begenilenekaydet(
+                            widget.urun['urunID'],
+                            Provider.of<Kullanicilarprovider>(
+                              context,
+                              listen: false,
+                            ).currentkullanici['kullaniciID'],
+                          );
+                        } else {
+                          setState(() {
                             widget.colored(color: Colors.white);
-                            begenilendensil(widget.urun['urunAdi']);
-                          }
-                        });
+                          });
+                          begenilendensil(
+                            widget.urun['urunID'],
+                            Provider.of<Kullanicilarprovider>(
+                              context,
+                              listen: false,
+                            ).currentkullanici['kullaniciID'],
+                          );
+                        }
                       },
                       icon: Icon(
                         Icons.favorite,
@@ -260,33 +238,14 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
   }
 }
 
-void begenilenekaydet(String urunadi) async {
-  final pref = await SharedPreferences.getInstance();
-  List<String>? begenilen = await pref.getStringList('begenilenurunler');
-
-  for (int i = 0; i < Urunler.urunler.length; i++) {
-    if (Urunler.urunler[i].urunAdi == urunadi) {
-      Urunler.urunler[i].begenilmismi = true;
-      Urunler.urunler[i].begenisayisi++;
-
-      if (begenilen.isEmpty) {
-        await pref.setStringList('begenilenurunler', [
-          Urunler.urunler[i].urunAdi,
-        ]);
-      } else {
-        begenilen!.add(Urunler.urunler[i].urunAdi);
-        await pref.setStringList('begenilenurunler', begenilen);
-        debugPrint('keydedildi: $begenilen');
-        break;
-      }
-    }
-  }
+Future<void> begenilenekaydet(int urunID, int kullaniciID) async {
+  await Urunlervt.urunu_kaydedilenlere_kaydet(kullaniciID, urunID);
 }
 
 Future<void> ensongezilenekaydet(String urunadi) async {
   final pref = await SharedPreferences.getInstance();
   List<String>? ensongezilen = await pref.getStringList('ensongezilenurunler');
-  Map<String, dynamic> urun = await Urunlervt.getUrunByAd(urunadi);
+  Map<String, dynamic> urun = await Urunlervt.getgezilmisUrunByAd(urunadi);
   if (urun['urunAdi'] == urunadi) {
     if (ensongezilen.isEmpty) {
       await pref.setStringList('ensongezilenurunler', [urun['urunAdi']]);
@@ -300,23 +259,6 @@ Future<void> ensongezilenekaydet(String urunadi) async {
   }
 }
 
-void begenilendensil(String urunadi) async {
-  final pref = await SharedPreferences.getInstance();
-  List<String>? begenilen = await pref.getStringList('begenilenurunler');
-  for (int i = 0; i < Urunler.urunler.length; i++) {
-    if (Urunler.urunler[i].urunAdi == urunadi) {
-      Urunler.urunler[i].begenilmismi = false;
-
-      if (begenilen.isEmpty) {
-        await pref.setStringList('begenilenurunler', [
-          Urunler.urunler[i].urunAdi,
-        ]);
-      } else {
-        begenilen!.remove(Urunler.urunler[i].urunAdi);
-        await pref.setStringList('begenilenurunler', begenilen);
-        debugPrint('keydedildi: $begenilen');
-        break;
-      }
-    }
-  }
+Future<void> begenilendensil(int urunID, int kullaniciID) async {
+  await Urunlervt.urunu_kaydedilenlerden_sil(kullaniciID, urunID);
 }

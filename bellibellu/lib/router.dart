@@ -47,7 +47,6 @@ class Paths {
 
 // ignore: non_constant_identifier_names
 final router = GoRouter(
-  refreshListenable: KaydedilenUrunler(), // Değişiklikleri dinle
   navigatorKey: routerkey,
 
   initialLocation:
@@ -126,13 +125,11 @@ final router = GoRouter(
             GoRoute(
               path: Paths.urundetaylari,
               builder: (context, state) {
-                final data =
-                    state.extra
-                        as Map<String, dynamic>; // Extra ile gelen veriyi al
-                final urun =
-                    data['urun'] as Map<String, dynamic>; // Urun nesnesini al
+                final urunAdi = state.extra as String;
 
-                return Urunkartiicerigi(urun: urun); // Sayfaya nesneyi geçir
+                return Urunkartiicerigi(
+                  urunAdi: urunAdi,
+                ); // Sayfaya nesneyi geçir
               },
             ),
           ],

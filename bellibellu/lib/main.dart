@@ -5,6 +5,7 @@ import 'package:bellibellu/logosayfasi.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/seridlerprovider.dart';
+import 'package:bellibellu/services/siparislerprovider.dart';
 import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,6 +31,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => Urunlerprovider()),
         ChangeNotifierProvider(create: (context) => Loadingprovider()),
         ChangeNotifierProvider(create: (context) => Seridlerprovider()),
+        ChangeNotifierProvider(create: (context) => Siparislerprovider()),
       ],
       child: const Program(),
     ),

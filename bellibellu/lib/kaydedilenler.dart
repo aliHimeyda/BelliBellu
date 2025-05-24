@@ -1,37 +1,14 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
+import 'package:bellibellu/services/seridlerprovider.dart';
+import 'package:bellibellu/services/urunlerVT.dart';
+import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-class KaydedilenUrunler extends ChangeNotifier {
-  static List<Ozelurunkarti> begenilenUrunwidgeti = [];
-
-  static Future<List<Ozelurunkarti>> dataguncelle() async {
-    final pref = await SharedPreferences.getInstance();
-    debugPrint('Kaydedilenler giriliyor');
-
-    List<String>? urunadlari = await pref.getStringList('begenilenurunler');
-
-    debugPrint('setstate calisiyor...');
-
-    if (urunadlari != null && urunadlari.isNotEmpty) {
-      begenilenUrunwidgeti.clear();
-      for (int i = 0; i < urunadlari.length; i++) {
-        for (int j = 0; j < Urunler.urunler.length; j++) {
-          if (Urunler.urunler[j].urunAdi == urunadlari[i]) {
-            // Ozelurunkarti kart = Ozelurunkarti(urun: Urunler.urunler[j]);
-            // begenilenUrunwidgeti.add(kart);
-          }
-        }
-      }
-    }
-
-    debugPrint('kaydedilen urunlerin sayisi ${begenilenUrunwidgeti.length}');
-    return begenilenUrunwidgeti;
-  }
-}
 
 class Kaydedilenler extends StatefulWidget {
   const Kaydedilenler({super.key});
@@ -41,23 +18,50 @@ class Kaydedilenler extends StatefulWidget {
 }
 
 class _KaydedilenlerState extends State<Kaydedilenler> {
-  List<Ozelurunkarti> begenilenurunler = [];
+  late Future<void> _ilkYukleme;
+  late int currentPage = 1;
+  final ScrollController _scrollController = ScrollController();
+  late List<Ozelurunkarti> urunkartlari = [];
+  bool urunlistesisonumu = false;
+  Future<void> kartlariolustur(List<Map<String, dynamic>> yeniurunler) async {
+    for (Map<String, dynamic> urun in yeniurunler) {
+      Ozelurunkarti kart = Ozelurunkarti(urun: urun);
+
+      urunkartlari.add(kart);
+    }
+    setState(() {
+      urunkartlari;
+    });
+  }
 
   @override
   void initState() {
+    _ilkYukleme = getMoreUrunler();
     super.initState();
-    guncelle();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels -
+              _scrollController.position.maxScrollExtent <=
+          200) {
+        if (!urunlistesisonumu) {
+          currentPage++;
+          getMoreUrunler();
+        }
+      }
+    });
   }
 
-  void guncelle() async {
-    List<Ozelurunkarti> yeniliste = await KaydedilenUrunler.dataguncelle();
-    debugPrint(
-      'setstate calisiyor .... yeniliste boyutu : ${yeniliste.length}',
+  Future<void> getMoreUrunler() async {
+    final newItems = await Urunlervt.getMoreKaydedilenUrun(
+      currentPage,
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
     );
-
-    setState(() {
-      begenilenurunler = yeniliste;
-    });
+    if (newItems.length < 15) {
+      urunlistesisonumu = true;
+    }
+    kartlariolustur(newItems);
   }
 
   @override
@@ -66,33 +70,38 @@ class _KaydedilenlerState extends State<Kaydedilenler> {
       backgroundColor: Renkler.kuyubeyaz,
       body: Stack(
         children: [
-          ListView(
-            padding: EdgeInsets.only(top: 50, bottom: 20),
-
-            children: [
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child:
-                      begenilenurunler.isNotEmpty
-                          ? Wrap(
-                            runSpacing: 20,
-                            spacing: 20,
-                            children: [
-                              for (Ozelurunkarti urun in begenilenurunler) urun,
-                            ],
-                          )
-                          : Text(
-                            S.of(context).begenilen_urun_listesi_bos,
-                            style: TextStyle(
-                              color: Renkler.kahverengi,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                ),
-              ),
-            ],
+          FutureBuilder(
+            future: _ilkYukleme,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(color: Renkler.kahverengi),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text("Bir hata oluştu: ${snapshot.error}"),
+                );
+              } else if (!snapshot.hasData) {
+                return ListView.builder(
+                  controller: _scrollController,
+                  itemCount: urunkartlari.length,
+                  itemBuilder: (context, index) {
+                    return urunkartlari[index];
+                  },
+                );
+              } else {
+                return Center(
+                  child: Text(
+                    S.of(context).begenilen_urun_listesi_bos,
+                    style: TextStyle(
+                      color: Renkler.kahverengi,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                );
+              }
+            },
           ),
           Positioned(
             bottom: 10,
@@ -102,7 +111,10 @@ class _KaydedilenlerState extends State<Kaydedilenler> {
               width: 50,
               height: 50,
               child: ElevatedButton(
-                onPressed: guncelle,
+                onPressed: () {
+                  urunkartlari.clear();
+                  getMoreUrunler();
+                },
 
                 child: Center(
                   child: Icon(

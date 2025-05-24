@@ -169,7 +169,7 @@
    "@garanti_suresi": { "description": "Garanti Süresi etiketi" },
   "garanti_suresi": "GARANTİ SÜRESİ :",
    "@urunlerin_garanti_suresi": { "description": "Ürünlerin garanti süresi bilgisi" },
-  "urunlerin_garanti_suresi": "Ürünlerin garanti süresi 1 yıldır.",
+  "urunlerin_garanti_suresi": "Ürünlerin garanti süresi {garanti_suresi} yıldır.",
 
   "@bu_urun_turkiyede_uretilmistir": { "description": "Ürünün üretildiği yer bilgisi" },
   "bu_urun_turkiyede_uretilmistir": "Bu ürün Türkiye'de üretilmiştir.",

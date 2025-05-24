@@ -161,7 +161,10 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
                     Column(
                       children: [
                         for (Serid serid
-                            in Provider.of<Seridlerprovider>(context).seridler)
+                            in Provider.of<Seridlerprovider>(
+                              context,
+                              listen: false,
+                            ).seridler)
                           serid,
                         yildizlikatagoriler(context),
                       ],
@@ -903,6 +906,7 @@ class _AnasayfaicerigiState extends State<Anasayfaicerigi> {
         ).toLowerCase().contains(kelime)) {
           Provider.of<Urunlerprovider>(
             context,
+            listen: false,
           ).secilimateryalOgeler.add(kelime);
           eslesenkelimevarmi = true;
         }

@@ -3,6 +3,7 @@ import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
+import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -250,6 +251,30 @@ class _MenuState extends State<Menu> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    Provider.of<Urunlerprovider>(context, listen: false)
+                        .currentPage = 1;
+                    Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilimateryalOgeler.clear();
+                    Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).seciliortamOgeler.clear();
+                    Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).seciliturOgeler.clear();
+                    Provider.of<Urunlerprovider>(
+                      context,
+                      listen: false,
+                    ).secilifiyatOgeler.clear();
+                    Provider.of<Urunlerprovider>(context, listen: false)
+                        .siralamaolcutu = '';
+                    Provider.of<Urunlerprovider>(context, listen: false)
+                        .urunAdi = '';
+                    Provider.of<Urunlerprovider>(context, listen: false)
+                        .tarihegore = '';
                     context.push(Paths.tumurunler);
                   },
                   child: Padding(

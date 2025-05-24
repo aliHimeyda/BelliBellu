@@ -21,7 +21,7 @@ class Ensongezilenurunler extends ChangeNotifier {
       begenilenUrunwidgeti.clear();
       if (urunadlari.length <= 15) {
         for (int i = 0; i < urunadlari.length; i++) {
-          Map<String, dynamic> urun = await Urunlervt.getUrunByAd(
+          Map<String, dynamic> urun = await Urunlervt.getgezilmisUrunByAd(
             urunadlari[i],
           );
           Ozelurunkarti kart = Ozelurunkarti(urun: urun);
@@ -29,7 +29,7 @@ class Ensongezilenurunler extends ChangeNotifier {
         }
       } else {
         for (int i = urunadlari.length - 1; i > urunadlari.length - 16; i--) {
-          Map<String, dynamic> urun = await Urunlervt.getUrunByAd(
+          Map<String, dynamic> urun = await Urunlervt.getgezilmisUrunByAd(
             urunadlari[i],
           );
           Ozelurunkarti kart = Ozelurunkarti(urun: urun);

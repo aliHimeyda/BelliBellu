@@ -1,5 +1,6 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/urunlerVT.dart';
 import 'package:bellibellu/services/urunlerprovider.dart';
@@ -50,7 +51,9 @@ class _TumurunlerState extends State<Tumurunler> {
   final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
-    getMoreUrunler();
+    Future.delayed(Duration.zero, () {
+      getMoreUrunler();
+    });
     _scrollController.addListener(() {
       if (_scrollController.position.pixels -
               _scrollController.position.maxScrollExtent <=
@@ -74,6 +77,10 @@ class _TumurunlerState extends State<Tumurunler> {
       siralamaolcutu,
       urunAdi,
       tarihegore,
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
     );
     if (newItems.length < 15) {
       urunlistesisonumu = true;
@@ -565,14 +572,12 @@ class _TumurunlerState extends State<Tumurunler> {
                     ),
                     TextButton(
                       onPressed: () async {
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .currentPage = 1;
                         Provider.of<Urunlerprovider>(
                           context,
                           listen: false,
                         ).secilimateryalOgeler.clear();
-                        Provider.of<Urunlerprovider>(
-                          context,
-                          listen: false,
-                        ).secilirenkOgeler.clear();
                         Provider.of<Urunlerprovider>(
                           context,
                           listen: false,
@@ -585,6 +590,12 @@ class _TumurunlerState extends State<Tumurunler> {
                           context,
                           listen: false,
                         ).secilifiyatOgeler.clear();
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .siralamaolcutu = '';
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .urunAdi = '';
+                        Provider.of<Urunlerprovider>(context, listen: false)
+                            .tarihegore = '';
                         await degisikliklerikaydet();
                         Navigator.pop(context);
                       },
