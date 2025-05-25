@@ -179,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Free shipping for orders above 200 TL",
     ),
     "kargo_firmasi": MessageLookupByLibrary.simpleMessage("Shipping Company"),
+    "kargo_ucreti": MessageLookupByLibrary.simpleMessage("Shipping Fee"),
     "kargo_verilecek": MessageLookupByLibrary.simpleMessage(
       "Will be shipped shortly",
     ),
@@ -256,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sayfa_baslik": MessageLookupByLibrary.simpleMessage("Order Details"),
     "sepet_detayi": MessageLookupByLibrary.simpleMessage("Cart Details"),
     "sepete_ekle": MessageLookupByLibrary.simpleMessage("Add to Cart"),
+    "sepete_eklendi": MessageLookupByLibrary.simpleMessage("Added to cart"),
     "sepeti_onayla": MessageLookupByLibrary.simpleMessage("Confirm Cart"),
     "sepetim": MessageLookupByLibrary.simpleMessage("My Cart"),
     "sepetim_baslik": m8,

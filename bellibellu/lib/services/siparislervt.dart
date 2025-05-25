@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class Siparislervt {
   static const String baseUrl = 'http://10.0.2.2:3000';
 
-  static Future<bool> siparisEkle(int kullaniciID, int urunID) async {
+  static Future<int?> siparisEkle(int kullaniciID, int urunID) async {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/siparis_ekle'),
@@ -14,19 +14,21 @@ class Siparislervt {
       );
 
       if (response.statusCode == 200) {
-        print(" Sipariş başarıyla eklendi");
-        return true;
+        final data = jsonDecode(response.body);
+        print('servisten gelen data urunsayisi : ${data['urunSayisi']}');
+
+        return data['urunSayisi']; // sadece urunSayisi dönüyoruz
       } else {
-        print(" Hata: ${response.statusCode} - ${response.body}");
-        return false;
+        print("Hata: ${response.statusCode} - ${response.body}");
+        return null;
       }
     } catch (e) {
-      print(" Hata oluştu: $e");
-      return false;
+      print("Hata oluştu: $e");
+      return null;
     }
   }
 
-  static Future<bool> siparistenUrunSil(int kullaniciID, int urunID) async {
+  static Future<int?> siparistenUrunSil(int kullaniciID, int urunID) async {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/siparis_sil'),
@@ -35,15 +37,16 @@ class Siparislervt {
       );
 
       if (response.statusCode == 200) {
-        print(" Ürün siparişten silindi.");
-        return true;
+        final data = jsonDecode(response.body);
+        print('servisten gelen data urunsayisi : ${data['urunSayisi']}');
+        return data['urunSayisi']; // sadece urunSayisi dönüyoruz
       } else {
-        print(" Sunucu hatası: ${response.statusCode} - ${response.body}");
-        return false;
+        print("Hata: ${response.statusCode} - ${response.body}");
+        return null;
       }
     } catch (e) {
       print(" Hata oluştu: $e");
-      return false;
+      return null;
     }
   }
 

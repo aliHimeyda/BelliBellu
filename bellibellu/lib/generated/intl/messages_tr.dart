@@ -183,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "200 TL ve Üzeri Kargo Bedava",
     ),
     "kargo_firmasi": MessageLookupByLibrary.simpleMessage("Kargo Firması"),
+    "kargo_ucreti": MessageLookupByLibrary.simpleMessage("Kargo Ücreti"),
     "kargo_verilecek": MessageLookupByLibrary.simpleMessage(
       "Birazdan kargoya verilecek",
     ),
@@ -266,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sayfa_baslik": MessageLookupByLibrary.simpleMessage("Sipariş Detayları"),
     "sepet_detayi": MessageLookupByLibrary.simpleMessage("Sepet Detayı"),
     "sepete_ekle": MessageLookupByLibrary.simpleMessage("Sepete Ekle"),
+    "sepete_eklendi": MessageLookupByLibrary.simpleMessage("Sepete eklendi"),
     "sepeti_onayla": MessageLookupByLibrary.simpleMessage("Sepeti Onayla"),
     "sepetim": MessageLookupByLibrary.simpleMessage("Sepetim"),
     "sepetim_baslik": m8,

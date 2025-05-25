@@ -1,190 +1,29 @@
+import 'package:bellibellu/ceviri.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
+import 'package:bellibellu/services/siparislerprovider.dart';
+import 'package:bellibellu/services/siparislervt.dart';
+import 'package:bellibellu/services/sorularprovider.dart';
+import 'package:bellibellu/services/sorularvt.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class Sorularsayfasi extends StatefulWidget {
-  const Sorularsayfasi({super.key});
+  final int urunID;
+  const Sorularsayfasi({super.key, required this.urunID});
 
   @override
   State<Sorularsayfasi> createState() => _SorularsayfasiState();
 }
 
 class _SorularsayfasiState extends State<Sorularsayfasi> {
-  final List<Map<String, String>> soruCevaplar = [
-    {
-      "musteri": "A*** K***",
-      "tarih": "10 Şubat 2020 | 23:29",
-      "soru": "Merhaba, ürünün çeliği paslanmaz değil mi?",
-      "cevap": "Evet efendim, paslanmaz çelikten üretilmiştir.",
-    },
-    {
-      "musteri": "M*** D***",
-      "tarih": "12 Mart 2021 | 14:45",
-      "soru": "Bu ürün suya dayanıklı mı?",
-      "cevap":
-          "Evet, suya dayanıklıdır ancak uzun süre su altında tutmamanız önerilir.",
-    },
-    {
-      "musteri": "Z*** Y***",
-      "tarih": "5 Nisan 2022 | 09:30",
-      "soru": "İndirim yapılıyor mu?",
-      "cevap": "Şu an için özel bir indirim bulunmamaktadır.",
-    },
-    {
-      "musteri": "A*** Ç***",
-      "tarih": "23 Mayıs 2023 | 19:15",
-      "soru": "Hangi kargo firması ile gönderiyorsunuz?",
-      "cevap": "Aras Kargo ve Yurtiçi Kargo ile gönderim yapıyoruz.",
-    },
-    {
-      "musteri": "F*** K***",
-      "tarih": "8 Haziran 2022 | 11:10",
-      "soru": "Ürün orijinal mi?",
-      "cevap": "Evet, ürün %100 orijinal ve üretici garantilidir.",
-    },
-    {
-      "musteri": "E*** Ş***",
-      "tarih": "2 Temmuz 2021 | 16:00",
-      "soru": "Bu ürün hangi malzemeden üretilmiştir?",
-      "cevap": "Ürün paslanmaz çelikten üretilmiştir.",
-    },
-    {
-      "musteri": "C*** E***",
-      "tarih": "15 Ağustos 2020 | 21:40",
-      "soru": "Fiyatına kargo dahil mi?",
-      "cevap": "Hayır, kargo ücreti fiyatımıza dahil değildir.",
-    },
-    {
-      "musteri": "D*** T***",
-      "tarih": "3 Eylül 2019 | 07:20",
-      "soru": "Ürünün küçük boyutu var mı?",
-      "cevap": "Evet, küçük boyutlu seçeneklerimiz de mevcuttur.",
-    },
-    {
-      "musteri": "H*** A***",
-      "tarih": "20 Ekim 2022 | 13:05",
-      "soru": "Bu modelin farklı renkleri var mı?",
-      "cevap":
-          "Evet, bu modelin kırmızı, mavi ve siyah renkleri bulunmaktadır.",
-    },
-    {
-      "musteri": "M*** G***",
-      "tarih": "18 Kasım 2021 | 18:50",
-      "soru": "Ürünün garantisi var mı?",
-      "cevap": "Evet, ürün 2 yıl garantilidir.",
-    },
-    {
-      "musteri": "A*** C***",
-      "tarih": "1 Ocak 2020 | 12:00",
-      "soru": "Bu ürün kaç günde teslim edilir?",
-      "cevap": "3 iş günü içinde teslim edilir.",
-    },
-    {
-      "musteri": "H*** E***",
-      "tarih": "7 Şubat 2023 | 17:25",
-      "soru": "Ürünün içeriği sağlığa zararlı mı?",
-      "cevap": "Hayır, tamamen doğal ve sağlığa zararsızdır.",
-    },
-    {
-      "musteri": "Y*** Ç***",
-      "tarih": "25 Nisan 2021 | 08:30",
-      "soru": "Ürün rengi soluyor mu?",
-      "cevap": "Hayır, ürün uzun süre renk korumasına sahiptir.",
-    },
-    {
-      "musteri": "C*** A***",
-      "tarih": "13 Temmuz 2022 | 15:10",
-      "soru": "Kırık ürün çıkarsa iade alıyor musunuz?",
-      "cevap": "Evet, kırık veya hasarlı ürünlerde ücretsiz değişim yapıyoruz.",
-    },
-    {
-      "musteri": "K*** B***",
-      "tarih": "30 Kasım 2020 | 10:45",
-      "soru": "Bu ürünü hediye paketi yapabilir misiniz?",
-      "cevap": "Evet, sipariş sırasında hediye paketi seçeneği mevcuttur.",
-    },
-    {
-      "musteri": "E*** Y***",
-      "tarih": "5 Mart 2019 | 09:00",
-      "soru": "Ürün kutulu mu geliyor?",
-      "cevap": "Evet, orijinal kutusunda gönderilmektedir.",
-    },
-    {
-      "musteri": "S*** A***",
-      "tarih": "12 Nisan 2021 | 18:20",
-      "soru": "Ürünün ölçüleri nedir?",
-      "cevap": "Ürün açıklamalarında detaylı ölçü bilgisi mevcuttur.",
-    },
-    {
-      "musteri": "B*** A***",
-      "tarih": "18 Haziran 2022 | 20:15",
-      "soru": "Kırılır mı?",
-      "cevap": "Ürün dayanıklıdır, ancak düşmelere karşı dikkatli olunmalıdır.",
-    },
-    {
-      "musteri": "G*** T***",
-      "tarih": "27 Eylül 2021 | 14:10",
-      "soru": "Montaj gerektiriyor mu?",
-      "cevap": "Hayır, montaj gerektirmeyen bir üründür.",
-    },
-    {
-      "musteri": "S*** D***",
-      "tarih": "6 Kasım 2023 | 10:40",
-      "soru": "Geri iade süresi kaç gün?",
-      "cevap": "14 gün içinde iade hakkınız bulunmaktadır.",
-    },
-    {
-      "musteri": "A*** A***",
-      "tarih": "21 Aralık 2019 | 08:30",
-      "soru": "Ürünün parçaları eksik geldi, ne yapmalıyım?",
-      "cevap": "Müşteri hizmetlerimizle iletişime geçebilirsiniz.",
-    },
-    {
-      "musteri": "E*** K***",
-      "tarih": "10 Ocak 2022 | 16:50",
-      "soru": "Ürün ses çıkarıyor mu?",
-      "cevap": "Hayır, sessiz çalışan bir üründür.",
-    },
-    {
-      "musteri": "N*** K***",
-      "tarih": "29 Mayıs 2020 | 22:10",
-      "soru": "Kargo ücreti ne kadar?",
-      "cevap": "Kargo ücreti sipariş tutarına göre değişmektedir.",
-    },
-    {
-      "musteri": "B*** Y***",
-      "tarih": "14 Temmuz 2021 | 13:25",
-      "soru": "Ürünün iç malzemesi nedir?",
-      "cevap": "Ürün plastik ve metal karışımıdır.",
-    },
-    {
-      "musteri": "S*** K***",
-      "tarih": "9 Eylül 2022 | 19:05",
-      "soru": "Bu ürün çocuklar için uygun mu?",
-      "cevap": "Evet, 3 yaş ve üzeri çocuklar için uygundur.",
-    },
-    {
-      "musteri": "V*** U***",
-      "tarih": "22 Kasım 2023 | 11:40",
-      "soru": "Şarjlı mı çalışıyor?",
-      "cevap": "Evet, USB şarj ile çalışmaktadır.",
-    },
-    {
-      "musteri": "G*** E***",
-      "tarih": "3 Ocak 2024 | 20:15",
-      "soru": "Ürün hafif mi?",
-      "cevap": "Evet, oldukça hafif ve taşınabilir bir üründür.",
-    },
-    {
-      "musteri": "M*** C***",
-      "tarih": "15 Şubat 2021 | 14:50",
-      "soru": "Kargo süresi kaç gün?",
-      "cevap": "Yoğunluğa göre 3-5 iş günü sürebilmektedir.",
-    },
-  ];
-  String seciliSiralama = "Önerilen Sıralama";
+  final ScrollController _scrollController = ScrollController();
+  late Future<void> sorularigetir;
+  late String seciliSiralama = '';
+  late bool sorularlistesisonumu = false;
 
   void siralamaPopupAc() {
     showModalBottomSheet(
@@ -211,6 +50,14 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                       setState(() {
                         seciliSiralama = value!;
                       });
+                      Provider.of<Sorularprovider>(context, listen: false)
+                          .currentPage = 1;
+                      Provider.of<Sorularprovider>(
+                        context,
+                        listen: false,
+                      ).soru_cevaplar.clear();
+
+                      getmoresorular();
                       Navigator.pop(context);
                     },
                   );
@@ -219,6 +66,47 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, () {
+      seciliSiralama = S.of(context).onerilen_siralama;
+      Provider.of<Sorularprovider>(
+                context,
+                listen: false,
+              ).soru_cevaplar.length <
+              15
+          ? sorularlistesisonumu = true
+          : false;
+    });
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels -
+              _scrollController.position.maxScrollExtent <=
+          200) {
+        if (!sorularlistesisonumu) {
+          context.watch<Sorularprovider>().currentPage++;
+          getmoresorular();
+        }
+      }
+    });
+    super.initState();
+  }
+
+  Future<void> getmoresorular() async {
+    final newItems = await Sorularvt.sorulariGetir(
+      urunID: widget.urunID,
+      page: Provider.of<Sorularprovider>(context, listen: false).currentPage,
+      siralamaOlcutu: Cevirici.siralamacevir(context, seciliSiralama),
+    );
+    if (newItems.length < 15) {
+      sorularlistesisonumu = true;
+    }
+    Provider.of<Sorularprovider>(
+      context,
+      listen: false,
+    ).soru_cevaplar.addAll(newItems);
+    Provider.of<Sorularprovider>(context, listen: false).guncelle();
   }
 
   @override
@@ -247,7 +135,14 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                 child: Row(
                   children: [
                     Text(
-                      S.of(context).soru_cevap('34'),
+                      S
+                          .of(context)
+                          .soru_cevap(
+                            context
+                                .watch<Sorularprovider>()
+                                .soru_cevaplar
+                                .length,
+                          ),
                       style: TextStyle(color: Renkler.kahverengi),
                     ),
                     const Spacer(),
@@ -262,15 +157,18 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                   ],
                 ),
               ),
-        
+
               const Divider(color: Renkler.kahverengi),
-        
+
               // Yorum Listesi
               Expanded(
                 child: ListView.builder(
-                  itemCount: soruCevaplar.length,
+                  controller: _scrollController,
+                  itemCount:
+                      context.watch<Sorularprovider>().soru_cevaplar.length,
                   itemBuilder: (context, index) {
-                    final s = soruCevaplar[index];
+                    final s =
+                        context.watch<Sorularprovider>().soru_cevaplar[index];
                     return Container(
                       width: MediaQuery.of(context).size.width / 1.2,
                       decoration: BoxDecoration(color: Renkler.kuyubeyaz),
@@ -282,7 +180,7 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  s['musteri']!,
+                                  '${s['musteriAdi']} ${s['musteriSoyadi']}',
                                   style: TextStyle(
                                     color: Renkler.kahverengi,
                                     fontSize: 12,
@@ -290,7 +188,9 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                                   ),
                                 ),
                                 Text(
-                                  s['tarih']!,
+                                  DateFormat(
+                                    'dd.MM.yyyy',
+                                  ).format(DateTime.parse(s['soruTarihi'])),
                                   style: TextStyle(
                                     color: Renkler.kahverengi,
                                     fontSize: 12,
@@ -303,7 +203,7 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                s['soru']!,
+                                s['soruMetni'],
                                 style: TextStyle(
                                   color: Renkler.kahverengi,
                                   fontSize: 10,
@@ -312,7 +212,8 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                             ),
                             SizedBox(height: 30),
                             Container(
-                              width: MediaQuery.of(context).size.width / 1.2 - 50,
+                              width:
+                                  MediaQuery.of(context).size.width / 1.2 - 50,
                               height: 80,
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 239, 226, 204),
@@ -329,7 +230,7 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                                     Align(
                                       alignment: Alignment.topLeft,
                                       child: Text(
-                                        'Ali HIMEYDA',
+                                        '${s['saticiAdi']} ${s['saticiSoyadi']}',
                                         style: TextStyle(
                                           color: Renkler.kahverengi,
                                           fontSize: 12,
@@ -338,7 +239,7 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                                       ),
                                     ),
                                     Text(
-                                      s['cevap']!,
+                                      s['cevapMetni'],
                                       style: TextStyle(
                                         color: Renkler.kahverengi,
                                         fontSize: 12,
@@ -360,23 +261,24 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
           ),
           bottomNavigationBar: altButonlar(context),
         ),
-         Provider.of<Loadingprovider>(context,listen: false).isloading?
-        Center(
-          child: Container(
-            width: MediaQuery.sizeOf(context).width,
-            height: MediaQuery.sizeOf(context).height,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(83, 138, 103, 32),
-            ),
-            child: Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(color: Renkler.kahverengi),
+        Provider.of<Loadingprovider>(context, listen: false).isloading
+            ? Center(
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(83, 138, 103, 32),
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(color: Renkler.kahverengi),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ):SizedBox()
+            )
+            : SizedBox(),
       ],
     );
   }
@@ -417,7 +319,7 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
               const SizedBox(height: 16),
               TextField(
                 controller: _telefonController,
-                keyboardType: TextInputType.phone,
+                keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: S.of(context).soru_sor,
                   border: OutlineInputBorder(
@@ -471,8 +373,18 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
           // Sepete Ekle Butonu
           Expanded(
             child: ElevatedButton(
-              onPressed: () {
-                // Sepete ekle işlemi
+              onPressed: () async {
+                await siparisEkle(widget.urunID);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      S.of(context).sepete_eklendi,
+                      style: TextStyle(color: Renkler.kahverengi),
+                    ),
+                    duration: Duration(seconds: 2),
+                    backgroundColor: Renkler.krem,
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -485,5 +397,47 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
         ],
       ),
     );
+  }
+
+  Future<void> siparisEkle(int urunID) async {
+    final yenieklenen = await Siparislervt.siparisEkle(
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
+      urunID,
+    );
+    await siparisleriYukle();
+    Provider.of<Siparislerprovider>(
+      context,
+      listen: false,
+    ).siparisleriGuncelle();
+  }
+
+  Future<void> siparisleriYukle() async {
+    Provider.of<Siparislerprovider>(
+      context,
+      listen: false,
+    ).siparisler = await Siparislervt.tumSiparisleriGetir(
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
+    );
+
+    Provider.of<Siparislerprovider>(context, listen: false).siparisler.forEach((
+      satici,
+      urunler,
+    ) {
+      print('Satıcı: $satici');
+      for (var urun in urunler) {
+        if (urun['secili'] == 1) {
+          urun['secili'] = true;
+        } else {
+          urun['secili'] = false;
+        }
+        print('  Ürün: ${urun['urunAdi']} - Fiyat: ${urun['toplamTutar']}');
+      }
+    });
   }
 }

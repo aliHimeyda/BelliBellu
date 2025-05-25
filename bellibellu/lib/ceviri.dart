@@ -52,6 +52,17 @@ class Cevirici {
     return turMap[turkceMetin] ?? turkceMetin;
   }
 
+  static String siralamacevir(BuildContext context, String turkceMetin) {
+    final ceviriler = S.of(context);
+    Map<String, String> siralamaMap = {
+      ceviriler.onerilen_siralama: "onerilen",
+      ceviriler.yeniden_eskiye: "enyeni",
+      ceviriler.eskiden_yeniye: "eneski",
+    };
+
+    return siralamaMap[turkceMetin] ?? turkceMetin;
+  }
+
   static String renkCevir(BuildContext context, String turkceMetin) {
     final ceviriler = S.of(context);
     Map<String, String> renkMap = {

@@ -399,5 +399,7 @@
   "renk_sari": "Yellow",
   "renk_bordo": "Maroon",
   "renk_turuncu": "Orange",
-  "renk_kirmizi": "Red"
+  "renk_kirmizi": "Red",
+   "kargo_ucreti": "Shipping Fee",
+   "sepete_eklendi": "Added to cart"
 }

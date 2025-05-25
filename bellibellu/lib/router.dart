@@ -146,7 +146,10 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Paths.yorumlarsayfasi,
-              builder: (context, state) => YorumlarSayfasi(),
+              builder: (context, state) {
+                final urunID = state.extra as int;
+                return YorumlarSayfasi(urunID: urunID);
+              },
             ),
           ],
         ),
@@ -154,7 +157,10 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Paths.sorularsayfasi,
-              builder: (context, state) => Sorularsayfasi(),
+              builder: (context, state) {
+                final urunID = state.extra as int;
+                return Sorularsayfasi(urunID: urunID);
+              },
             ),
           ],
         ),

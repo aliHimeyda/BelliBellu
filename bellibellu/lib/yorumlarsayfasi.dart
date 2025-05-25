@@ -1,55 +1,34 @@
+import 'package:bellibellu/ceviri.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
+import 'package:bellibellu/services/sorularprovider.dart';
+import 'package:bellibellu/services/yorumlarprovider.dart';
+import 'package:bellibellu/services/yorumlarvt.dart';
+import 'package:bellibellu/urunkarti.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class YorumlarSayfasi extends StatefulWidget {
-  const YorumlarSayfasi({super.key});
+  final int urunID;
+  const YorumlarSayfasi({super.key, required this.urunID});
 
   @override
   State<YorumlarSayfasi> createState() => _YorumlarSayfasiState();
 }
 
 class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
-  String seciliSiralama = "Önerilen Sıralama";
+  final ScrollController _scrollController = ScrollController();
+  late String seciliSiralama = '';
+  late bool yorumlarlistesisonumu = false;
 
-  final List<Map<String, String>> yorumlar = [
-    {
-      "isim": "M** P**",
-      "tarih": "22 Eylül 2024",
-      "yorum":
-          "Öncelikle çok güzel ve özenle paketlenmişti. kargo da zamanında geldi saat gayet güzel ve çok hoş duruyo kesinlikle tavsiye ediyorum:)",
-      "boy": "165 cm",
-      "kilo": "55 kg",
-    },
-    {
-      "isim": "P** Ç** D**",
-      "tarih": "14 Mayıs 2025",
-      "yorum": "fiyat performans ürünü güzel",
-      "boy": "175 cm",
-      "kilo": "65 kg",
-    },
-    {
-      "isim": "F** Ç**",
-      "tarih": "13 Mayıs 2025",
-      "yorum": "arkadaşıma hediye almıştım çok beğendi gayet başarılı bir ürün",
-      "boy": "165 cm",
-      "kilo": "55 kg",
-    },
-    {
-      "isim": "***** *****",
-      "tarih": "12 Mayıs 2025",
-      "yorum": "fotoğraftaki gibi elime ulaştı",
-    },
-    {
-      "isim": "f** c**",
-      "tarih": "12 Mayıs 2025",
-      "yorum": "güzel ürün teşekkürler",
-      "boy": "170 cm",
-      "kilo": "70 kg",
-    },
-  ];
+  String gizliAdSoyad(String ad, String soyad) {
+    String gizliAd = ad.isNotEmpty ? '${ad[0]}******' : '';
+    String gizliSoyad = soyad.isNotEmpty ? '${soyad[0]}******' : '';
+    return '$gizliAd $gizliSoyad';
+  }
 
   void siralamaPopupAc() {
     showModalBottomSheet(
@@ -76,6 +55,14 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
                       setState(() {
                         seciliSiralama = value!;
                       });
+                      Provider.of<Yorumlarprovider>(context, listen: false)
+                          .currentPage = 1;
+                      Provider.of<Yorumlarprovider>(
+                        context,
+                        listen: false,
+                      ).yorumlar.clear();
+
+                      getmoreyorumlar();
                       Navigator.pop(context);
                     },
                   );
@@ -84,6 +71,43 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero, () {
+      seciliSiralama = S.of(context).onerilen_siralama;
+      Provider.of<Yorumlarprovider>(context, listen: false).yorumlar.length < 15
+          ? yorumlarlistesisonumu = true
+          : false;
+    });
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels -
+              _scrollController.position.maxScrollExtent <=
+          200) {
+        if (!yorumlarlistesisonumu) {
+          context.watch<Yorumlarprovider>().currentPage++;
+          getmoreyorumlar();
+        }
+      }
+    });
+    super.initState();
+  }
+
+  Future<void> getmoreyorumlar() async {
+    final newItems = await Yorumlarvt.yorumlariGetir(
+      urunID: widget.urunID,
+      page: Provider.of<Sorularprovider>(context, listen: false).currentPage,
+      siralamaOlcutu: Cevirici.siralamacevir(context, seciliSiralama),
+    );
+    if (newItems.length < 15) {
+      yorumlarlistesisonumu = true;
+    }
+    Provider.of<Yorumlarprovider>(
+      context,
+      listen: false,
+    ).yorumlar.addAll(newItems);
+    Provider.of<Yorumlarprovider>(context, listen: false).guncelle();
   }
 
   @override
@@ -105,7 +129,25 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
             ),
             actions: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  begenilenekaydet(
+                    widget.urunID,
+                    Provider.of<Kullanicilarprovider>(
+                      context,
+                      listen: false,
+                    ).currentkullanici['kullaniciID'],
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        S.of(context).enCokBegenilenler,
+                        style: TextStyle(color: Renkler.kahverengi),
+                      ),
+                      duration: Duration(seconds: 2),
+                      backgroundColor: Renkler.krem,
+                    ),
+                  );
+                },
                 child: Icon(Icons.favorite_border, color: Renkler.kahverengi),
               ),
               SizedBox(width: 10),
@@ -120,7 +162,12 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
                 child: Row(
                   children: [
                     Text(
-                      S.of(context).puanYorumMetni('12', '34'),
+                      S
+                          .of(context)
+                          .puanYorumMetni(
+                            context.watch<Yorumlarprovider>().yorumlar.length,
+                            context.watch<Yorumlarprovider>().yorumlar.length,
+                          ),
                       style: TextStyle(color: Renkler.kahverengi),
                     ),
                     const Spacer(),
@@ -141,31 +188,26 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
               // Yorum Listesi
               Expanded(
                 child: ListView.builder(
-                  itemCount: yorumlar.length,
+                  itemCount: context.watch<Yorumlarprovider>().yorumlar.length,
                   itemBuilder: (context, index) {
-                    final yorum = yorumlar[index];
+                    final y = context.watch<Yorumlarprovider>().yorumlar[index];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ListTile(
                           leading: const Icon(Icons.person),
-                          title: Text("${yorum["isim"]} | ${yorum["tarih"]}"),
+                          title: Text(
+                            "${gizliAdSoyad(y['musteriAdi'], y['musteriSoyadi'])}| ${DateFormat('dd.MM.yyyy').format(DateTime.parse(y['yorumTarihi']))}",
+                          ),
                           subtitle: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(height: 8),
-                              Text(yorum["yorum"] ?? ""),
-                              if (yorum["boy"] != null && yorum["kilo"] != null)
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 4),
-                                  child: Text(
-                                    "${yorum["boy"]} • ${yorum["kilo"]}",
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                ),
+                              Text(y["yorumMetni"] ?? ""),
+
                               const SizedBox(height: 8),
                               Text(
-                                "${S.of(context).satici_bilgisi('satici')}",
+                                "${S.of(context).satici_bilgisi('${y['saticiAdi']} ${y['saticiSoyadi']}')}",
                                 style: const TextStyle(
                                   color: Renkler.kahverengi,
                                   fontSize: 12,
@@ -222,7 +264,13 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
                 side: const BorderSide(color: Renkler.kahverengi),
                 foregroundColor: Renkler.kahverengi,
               ),
-              child: Text(S.of(context).soru_cevap('34')),
+              child: Text(
+                S
+                    .of(context)
+                    .soru_cevap(
+                      context.watch<Sorularprovider>().soru_cevaplar.length,
+                    ),
+              ),
             ),
           ),
           const SizedBox(width: 8),

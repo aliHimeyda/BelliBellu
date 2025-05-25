@@ -170,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "شحن مجاني للطلبات فوق 200 ليرة",
     ),
     "kargo_firmasi": MessageLookupByLibrary.simpleMessage("شركة الشحن"),
+    "kargo_ucreti": MessageLookupByLibrary.simpleMessage("رسوم الشحن"),
     "kargo_verilecek": MessageLookupByLibrary.simpleMessage(
       "سيتم الشحن قريبًا",
     ),
@@ -239,6 +240,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "sayfa_baslik": MessageLookupByLibrary.simpleMessage("تفاصيل الطلب"),
     "sepet_detayi": MessageLookupByLibrary.simpleMessage("تفاصيل السلة"),
     "sepete_ekle": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
+    "sepete_eklendi": MessageLookupByLibrary.simpleMessage(
+      "تمت الإضافة إلى السلة",
+    ),
     "sepeti_onayla": MessageLookupByLibrary.simpleMessage("تأكيد السلة"),
     "sepetim": MessageLookupByLibrary.simpleMessage("سلتي"),
     "sepetim_baslik": m8,

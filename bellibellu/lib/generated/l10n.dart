@@ -1856,6 +1856,26 @@ class S {
   String get renk_kirmizi {
     return Intl.message('Red', name: 'renk_kirmizi', desc: '', args: []);
   }
+
+  /// `Shipping Fee`
+  String get kargo_ucreti {
+    return Intl.message(
+      'Shipping Fee',
+      name: 'kargo_ucreti',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Added to cart`
+  String get sepete_eklendi {
+    return Intl.message(
+      'Added to cart',
+      name: 'sepete_eklendi',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

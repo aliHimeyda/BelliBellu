@@ -5,6 +5,7 @@ import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/siparislerprovider.dart';
 import 'package:bellibellu/services/siparislervt.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class SepetSayfasi extends StatefulWidget {
@@ -64,6 +65,21 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
     return toplam;
   }
 
+  double get kargoUcreti {
+    double toplam = 0.0;
+    Provider.of<Siparislerprovider>(context, listen: false).siparisler.forEach((
+      satici,
+      urunler,
+    ) {
+      for (var urun in urunler) {
+        if (urun['secili'] == true) {
+          toplam += urun['kargoUcreti'];
+        }
+      }
+    });
+    return toplam;
+  }
+
   void toggleSatici(String satici, bool? value) {
     setState(() {
       for (var urun
@@ -80,7 +96,11 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
     return Provider.of<Siparislerprovider>(
       context,
       listen: false,
-    ).siparisler[satici]!.every((urun) => urun['secili'] == true);
+    ).siparisler[satici]!.every((urun) {
+      urun['secili'] == true;
+      seciliurunlerionayaekle();
+      return urun['secili'] == true;
+    });
   }
 
   void toggleUrun(String satici, int index, bool? value) {
@@ -90,6 +110,30 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
             listen: false,
           ).siparisler[satici]![index]['secili'] =
           value;
+    });
+    seciliurunlerionayaekle();
+  }
+
+  void seciliurunlerionayaekle() {
+    Provider.of<Siparislerprovider>(
+      context,
+      listen: false,
+    ).onaylanmisSiparisler.clear();
+    Provider.of<Siparislerprovider>(context, listen: false).siparisler.forEach((
+      satici,
+      urun,
+    ) {
+      for (Map<String, dynamic> u in urun) {
+        if (u['secili']) {
+          Provider.of<Siparislerprovider>(
+            context,
+            listen: false,
+          ).onaylanmisSiparisler.add(u);
+          debugPrint(
+            "dizi boyutu (onaylanmis olanlar) :${Provider.of<Siparislerprovider>(context, listen: false).onaylanmisSiparisler.length.toString()}_______________",
+          );
+        }
+      }
     });
   }
 
@@ -151,19 +195,40 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
                 }),
               ),
               const Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
                 children: [
-                  Text(
-                    S.of(context).toplam,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Renkler.kahverengi,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        S.of(context).toplam,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Renkler.kahverengi,
+                        ),
+                      ),
+                      Text(
+                        "${toplamFiyat.toStringAsFixed(2)} TL",
+                        style: TextStyle(color: Renkler.kahverengi),
+                      ),
+                    ],
                   ),
-                  Text(
-                    "${toplamFiyat.toStringAsFixed(2)} TL",
-                    style: TextStyle(color: Renkler.kahverengi),
+                  SizedBox(height: 5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        S.of(context).kargo_ucreti,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Renkler.kahverengi,
+                        ),
+                      ),
+                      Text(
+                        "${kargoUcreti.toStringAsFixed(2)} TL",
+                        style: TextStyle(color: Renkler.kahverengi),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -196,7 +261,8 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
                   S
                       .of(context)
                       .sepetim_baslik(
-                        Provider.of<Siparislerprovider>(context, listen: false)
+                        context
+                            .watch<Siparislerprovider>()
                             .siparisler
                             .values
                             .fold<int>(
@@ -210,16 +276,19 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
               ),
               body: ListView.builder(
                 itemCount:
-                    Provider.of<Siparislerprovider>(
-                      context,
-                      listen: false,
-                    ).siparisler.entries.toList().length,
+                    context
+                        .watch<Siparislerprovider>()
+                        .siparisler
+                        .entries
+                        .toList()
+                        .length,
                 itemBuilder: (context, index) {
                   final entry =
-                      Provider.of<Siparislerprovider>(
-                        context,
-                        listen: false,
-                      ).siparisler.entries.toList()[index];
+                      context
+                          .watch<Siparislerprovider>()
+                          .siparisler
+                          .entries
+                          .toList()[index];
                   final String satici = entry.key;
                   final List<Map<String, dynamic>> urunler = entry.value;
 
@@ -302,7 +371,18 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
                                                     size: 16,
                                                     color: Renkler.kahverengi,
                                                   ),
-                                                  onPressed: () {},
+                                                  onPressed: () async {
+                                                    int? yeniadet =
+                                                        await siparisSil(
+                                                          urun['urunID'],
+                                                        );
+                                                    if (yeniadet != null) {
+                                                      setState(() {
+                                                        urun['urunSayisi'] =
+                                                            yeniadet;
+                                                      });
+                                                    }
+                                                  },
                                                 ),
                                                 Container(
                                                   padding:
@@ -334,7 +414,18 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
                                                     size: 16,
                                                     color: Renkler.kahverengi,
                                                   ),
-                                                  onPressed: () {},
+                                                  onPressed: () async {
+                                                    int? yeniadet =
+                                                        await siparisEkle(
+                                                          urun['urunID'],
+                                                        );
+                                                    if (yeniadet != null) {
+                                                      setState(() {
+                                                        urun['urunSayisi'] =
+                                                            yeniadet;
+                                                      });
+                                                    }
+                                                  },
                                                 ),
                                               ],
                                             ),
@@ -356,10 +447,12 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
                 },
               ),
               bottomNavigationBar:
-                  (Provider.of<Siparislerprovider>(
-                            context,
-                            listen: false,
-                          ).siparisler.entries.toList().length >
+                  (context
+                              .watch<Siparislerprovider>()
+                              .siparisler
+                              .entries
+                              .toList()
+                              .length >
                           0)
                       ? Container(
                         padding: const EdgeInsets.symmetric(
@@ -385,7 +478,7 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
                                     color: Renkler.kahverengi,
                                   ),
                                   Text(
-                                    " ${toplamFiyat.toStringAsFixed(2)} TL",
+                                    " ${(kargoUcreti + toplamFiyat).toStringAsFixed(2)} TL",
                                     style: const TextStyle(
                                       fontSize: 16,
                                       color: Renkler.kahverengi,
@@ -396,7 +489,9 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
                             ),
                             const Spacer(),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                await onaylanmisurunleriOnayla();
+                              },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Renkler.kahverengi,
                               ),
@@ -434,5 +529,76 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
         );
       },
     );
+  }
+
+  Future<void> onaylanmisurunleriOnayla() async {}
+  Future<int?> siparisEkle(int urunID) async {
+    final result = await Siparislervt.siparisEkle(
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
+      urunID,
+    );
+    if (result != null) {
+      int urunSayisi = result;
+      print("Güncellenmiş urunSayisi: $urunSayisi");
+      return urunSayisi;
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'islem hatasi',
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+      return null;
+    }
+  }
+
+  Future<int?> siparisSil(int urunID) async {
+    final result = await Siparislervt.siparistenUrunSil(
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
+      urunID,
+    );
+    if (result != null) {
+      int urunSayisi = result;
+      print("Güncellenmiş urunSayisi: $urunSayisi");
+      return urunSayisi;
+    } else {
+      final siparisProvider = Provider.of<Siparislerprovider>(
+        context,
+        listen: false,
+      );
+
+      // 🔁 Map'in bir kopyası üzerinden gezin
+      Map<String, List<Map<String, dynamic>>> kopya = Map.from(
+        siparisProvider.siparisler,
+      );
+
+      kopya.forEach((satici, urunler) {
+        urunler.removeWhere(
+          (urun) => urun['urunSayisi'] == 1 && urun['urunID'] == urunID,
+        );
+
+        siparisProvider.siparisleriGuncelle();
+
+        if (urunler.isEmpty) {
+          siparisProvider.siparisler.remove(
+            satici,
+          ); // 🔥 Orijinal map'e müdahale
+          siparisProvider.siparisleriGuncelle();
+        }
+      });
+
+      debugPrint('islem hatasi : ');
+      return null;
+    }
   }
 }

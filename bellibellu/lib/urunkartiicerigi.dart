@@ -5,14 +5,21 @@ import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/seridlerprovider.dart';
+import 'package:bellibellu/services/siparislerprovider.dart';
+import 'package:bellibellu/services/siparislervt.dart';
+import 'package:bellibellu/services/sorularprovider.dart';
+import 'package:bellibellu/services/sorularvt.dart';
 import 'package:bellibellu/services/urunlerVT.dart';
 import 'package:bellibellu/services/urunlerprovider.dart';
+import 'package:bellibellu/services/yorumlarprovider.dart';
+import 'package:bellibellu/services/yorumlarvt.dart';
 import 'package:bellibellu/urunler.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
 import 'package:bellibellu/urunkarti.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,43 +32,28 @@ class Urunkartiicerigi extends StatefulWidget {
   State<Urunkartiicerigi> createState() => _UrunkartiicerigiState();
 }
 
+String gizliAdSoyad(String ad, String soyad) {
+  String gizliAd = ad.isNotEmpty ? '${ad[0]}******' : '';
+  String gizliSoyad = soyad.isNotEmpty ? '${soyad[0]}******' : '';
+  return '$gizliAd $gizliSoyad';
+}
+
 class _UrunkartiicerigiState extends State<Urunkartiicerigi>
     with AutomaticKeepAliveClientMixin {
   late Future<void> urunugetir;
   late Map<String, dynamic> urun;
 
-  final List<Map<String, String>> soruCevaplar = [
-    {
-      "musteri": "A*** K***",
-      "tarih": "10 Şubat 2020 | 23:29",
-      "soru": "Merhaba, ürünün çeliği paslanmaz değil mi?",
-      "cevap": "Evet efendim, paslanmaz çelikten üretilmiştir.",
-    },
-    {
-      "musteri": "M*** D***",
-      "tarih": "12 Mart 2021 | 14:45",
-      "soru": "Bu ürün suya dayanıklı mı?",
-      "cevap":
-          "Evet, suya dayanıklıdır ancak uzun süre su altında tutmamanız önerilir.",
-    },
-    {
-      "musteri": "Z*** Y***",
-      "tarih": "5 Nisan 2022 | 09:30",
-      "soru": "İndirim yapılıyor mu?",
-      "cevap": "Şu an için özel bir indirim bulunmamaktadır.",
-    },
-  ];
   @override
   bool get wantKeepAlive => true;
 
   static bool get begenibilgisi => begenibilgisi;
   @override
   void initState() {
-    urunugetir = Urunugetir();
+    urunugetir = Urunugetir(context);
     super.initState();
   }
 
-  Future<void> Urunugetir() async {
+  Future<void> Urunugetir(BuildContext context) async {
     urun = await Urunlervt.getUrunByAd(
       widget.urunAdi,
       Provider.of<Kullanicilarprovider>(
@@ -69,6 +61,16 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
         listen: false,
       ).currentkullanici['kullaniciID'].toString(),
     );
+    Provider.of<Sorularprovider>(
+      context,
+      listen: false,
+    ).soru_cevaplar = await Sorularvt.sorulariGetir(urunID: urun['urunID']);
+    Provider.of<Sorularprovider>(context, listen: false).guncelle();
+    Provider.of<Yorumlarprovider>(
+      context,
+      listen: false,
+    ).yorumlar = await Yorumlarvt.yorumlariGetir(urunID: urun['urunID']);
+    Provider.of<Yorumlarprovider>(context, listen: false).guncelle();
   }
 
   late bool begenilmismi = urun['begenilmismi'] == 1 ? true : false;
@@ -200,14 +202,24 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                       const Spacer(),
                                       TextButton(
                                         onPressed: () {
-                                          context.push(Paths.sorularsayfasi);
+                                          context.push(
+                                            Paths.sorularsayfasi,
+                                            extra: urun['urunID'],
+                                          );
                                         },
                                         style: TextButton.styleFrom(
                                           foregroundColor:
                                               Renkler.kahverengi, // Yazı rengi
                                         ),
                                         child: Text(
-                                          S.of(context).tumunuGorButonu('12'),
+                                          S
+                                              .of(context)
+                                              .tumunuGorButonu(
+                                                context
+                                                    .watch<Sorularprovider>()
+                                                    .soru_cevaplar
+                                                    .length,
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -391,6 +403,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                             onPressed: () {
                                               context.push(
                                                 Paths.yorumlarsayfasi,
+                                                extra: urun['urunID'],
                                               );
                                             },
                                             style: TextButton.styleFrom(
@@ -401,7 +414,14 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                             child: Text(
                                               S
                                                   .of(context)
-                                                  .tumunuGorButonu('adet'),
+                                                  .tumunuGorButonu(
+                                                    context
+                                                        .watch<
+                                                          Yorumlarprovider
+                                                        >()
+                                                        .yorumlar
+                                                        .length,
+                                                  ),
                                             ),
                                           ),
                                         ],
@@ -413,7 +433,18 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                         horizontal: 16.0,
                                       ),
                                       child: Text(
-                                        S.of(context).puanYorumMetni('12', '3'),
+                                        S
+                                            .of(context)
+                                            .puanYorumMetni(
+                                              context
+                                                  .watch<Yorumlarprovider>()
+                                                  .yorumlar
+                                                  .length,
+                                              context
+                                                  .watch<Yorumlarprovider>()
+                                                  .yorumlar
+                                                  .length,
+                                            ),
                                         style: TextStyle(
                                           color: Renkler.kahverengi,
                                         ),
@@ -421,21 +452,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                     ),
                                     const SizedBox(height: 12),
                                     // Yorumlar - kaydırılabilir
-                                    SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        children: List.generate(
-                                          5,
-                                          (index) => yorumKarti(
-                                            isim: "M** P**",
-                                            tarih: "22 Eylül 2024",
-                                            yorum:
-                                                "Öncelikle çok güzel ve özenle paketlenmişti. Kargo da zamanında geldi. Saat gayet güzel ve çok hoş.",
-                                            satici: "Art Saatçilik",
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    yorumlarseridi(context),
+                                    const SizedBox(height: 12),
                                     Container(
                                       height: 30,
                                       decoration: BoxDecoration(
@@ -1634,7 +1652,8 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
         child: Wrap(
           spacing: 10,
           children: [
-            for (Map<String, String> s in soruCevaplar)
+            for (Map<String, dynamic> s
+                in context.watch<Sorularprovider>().soru_cevaplar)
               Container(
                 width: MediaQuery.of(context).size.width / 1.2,
                 height: 180,
@@ -1651,7 +1670,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            s['musteri']!,
+                            '${s['musteriAdi']} ${s['musteriSoyadi']}',
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1659,7 +1678,9 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                             ),
                           ),
                           Text(
-                            s['tarih']!,
+                            DateFormat(
+                              'dd.MM.yyyy',
+                            ).format(DateTime.parse(s['soruTarihi'])),
                             style: TextStyle(
                               color: Renkler.kahverengi,
                               fontSize: 12,
@@ -1672,7 +1693,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          s['soru']!,
+                          s['soruMetni'],
                           style: TextStyle(
                             color: Renkler.kahverengi,
                             fontSize: 10,
@@ -1694,7 +1715,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  'Ali HIMEYDA',
+                                  '${s['saticiAdi']} ${s['saticiSoyadi']}',
                                   style: TextStyle(
                                     color: Renkler.kahverengi,
                                     fontSize: 12,
@@ -1703,7 +1724,7 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                 ),
                               ),
                               Text(
-                                s['cevap']!,
+                                s['cevapMetni'],
                                 style: TextStyle(
                                   color: Renkler.kahverengi,
                                   fontSize: 12,
@@ -1714,6 +1735,79 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                         ),
                       ),
                     ],
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  SingleChildScrollView yorumlarseridi(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: EdgeInsets.only(left: 8, top: 30),
+        child: Wrap(
+          spacing: 10,
+          children: [
+            for (Map<String, dynamic> y
+                in context.watch<Yorumlarprovider>().yorumlar)
+              Flexible(
+                child: Container(
+                  width: MediaQuery.of(context).size.width / 1.2,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 0.6, color: Renkler.kahverengi),
+                    color: const Color.fromARGB(255, 198, 211, 187),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              gizliAdSoyad(y['musteriAdi'], y['musteriSoyadi']),
+                              style: TextStyle(
+                                color: Renkler.kahverengi,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            Text(
+                              DateFormat(
+                                'dd.MM.yyyy',
+                              ).format(DateTime.parse(y['yorumTarihi'])),
+                              style: TextStyle(
+                                color: Renkler.kahverengi,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 12),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            y['yorumMetni'].toString().length > 200
+                                ? '${y['yorumMetni'].toString().substring(0, 200)}...'
+                                : y['yorumMetni'],
+                            style: TextStyle(
+                              color: Renkler.kahverengi,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 30),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -1953,8 +2047,18 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                 SizedBox(
                   width: 150,
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Sepete ekle işlemi
+                    onPressed: () async {
+                      await siparisEkle(urun['urunID']);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            S.of(context).sepete_eklendi,
+                            style: TextStyle(color: Renkler.kahverengi),
+                          ),
+                          duration: Duration(seconds: 2),
+                          backgroundColor: Renkler.krem,
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -2133,5 +2237,47 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
         ],
       ),
     );
+  }
+
+  Future<void> siparisEkle(int urunID) async {
+    await Siparislervt.siparisEkle(
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
+      urunID,
+    );
+    await siparisleriYukle();
+    await Provider.of<Siparislerprovider>(
+      context,
+      listen: false,
+    ).siparisleriGuncelle();
+  }
+
+  Future<void> siparisleriYukle() async {
+    Provider.of<Siparislerprovider>(
+      context,
+      listen: false,
+    ).siparisler = await Siparislervt.tumSiparisleriGetir(
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
+    );
+
+    Provider.of<Siparislerprovider>(context, listen: false).siparisler.forEach((
+      satici,
+      urunler,
+    ) {
+      print('Satıcı: $satici');
+      for (var urun in urunler) {
+        if (urun['secili'] == 1) {
+          urun['secili'] = true;
+        } else {
+          urun['secili'] = false;
+        }
+        print('  Ürün: ${urun['urunAdi']} - Fiyat: ${urun['toplamTutar']}');
+      }
+    });
   }
 }
