@@ -154,11 +154,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "fiyat": MessageLookupByLibrary.simpleMessage("Fiyat"),
     "fiyata_gore": MessageLookupByLibrary.simpleMessage("Fiyata Göre :"),
     "garanti_suresi": MessageLookupByLibrary.simpleMessage("GARANTİ SÜRESİ :"),
+    "gecersizKartUyarisi": MessageLookupByLibrary.simpleMessage(
+      "Lütfen geçerli bir kart numarası girin.",
+    ),
     "gecmis": MessageLookupByLibrary.simpleMessage("Geçmiş"),
     "giris_yap": MessageLookupByLibrary.simpleMessage("Giriş Yap"),
     "gmail": MessageLookupByLibrary.simpleMessage("Gmail"),
     "gonder": MessageLookupByLibrary.simpleMessage("Gönder"),
     "haritada": MessageLookupByLibrary.simpleMessage("Haritada"),
+    "hataOlustu": MessageLookupByLibrary.simpleMessage("Hata oluştu"),
     "hataliSifreVeyaMail": MessageLookupByLibrary.simpleMessage(
       "Hatalı şifre veya mail adresi",
     ),
@@ -171,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "iletisimBasligi": MessageLookupByLibrary.simpleMessage("İletişim:"),
     "indirim": MessageLookupByLibrary.simpleMessage("İndirim"),
     "ingilizce": MessageLookupByLibrary.simpleMessage("İngilizce"),
+    "islem_basarili": MessageLookupByLibrary.simpleMessage("İşlem başarılı"),
     "kabul_ettiniz": MessageLookupByLibrary.simpleMessage(
       " kabul etmiş sayılırsınız.",
     ),
@@ -187,6 +192,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "kargo_verilecek": MessageLookupByLibrary.simpleMessage(
       "Birazdan kargoya verilecek",
     ),
+    "kartBilgisiGir": MessageLookupByLibrary.simpleMessage("Kart Bilgisi Gir"),
+    "kartNumarasi": MessageLookupByLibrary.simpleMessage("Kart Numarası"),
     "kategoriler": MessageLookupByLibrary.simpleMessage("Kategoriler"),
     "kayit_ol": MessageLookupByLibrary.simpleMessage("Kayıt Ol"),
     "konu": MessageLookupByLibrary.simpleMessage("Konu"),
@@ -197,12 +204,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Kayıtlı butonuna basarak ",
     ),
     "listeler": MessageLookupByLibrary.simpleMessage("Listeler"),
+    "lutfenSepettenUrunSecin": MessageLookupByLibrary.simpleMessage(
+      "Lütfen sepetten ürün seçin",
+    ),
     "masa": MessageLookupByLibrary.simpleMessage("Masa"),
     "masaonerisi": MessageLookupByLibrary.simpleMessage("Masa"),
     "materyal": MessageLookupByLibrary.simpleMessage("Materyal"),
     "materyale_gore": MessageLookupByLibrary.simpleMessage("Materyale Göre :"),
     "menu": MessageLookupByLibrary.simpleMessage("Menü"),
     "merhaba_kullanici": m3,
+    "mesajDurumuGonderildi": MessageLookupByLibrary.simpleMessage("gönderildi"),
     "mesaj_yazin": MessageLookupByLibrary.simpleMessage(
       "Mesajınızı yazınız...",
     ),

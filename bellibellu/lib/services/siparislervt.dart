@@ -78,4 +78,37 @@ class Siparislervt {
       return {};
     }
   }
+
+  static Future<bool> siparisiOnayla({
+    required int siparisID,
+    required int saticiID,
+    required int kullaniciID,
+    required String kartnumarasi,
+  }) async {
+    final url = Uri.parse("$baseUrl/siparisonayla");
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "siparisID": siparisID,
+          "saticiID": saticiID,
+          "kullaniciID": kullaniciID,
+          "kartnumarasi": kartnumarasi,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        print(" Sipariş onaylandı: ${response.body}");
+        return true;
+      } else {
+        print(" Sunucu hatası: ${response.statusCode}");
+        return false;
+      }
+    } catch (e) {
+      print(" Hata oluştu: $e");
+      return false;
+    }
+  }
 }

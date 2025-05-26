@@ -50,7 +50,7 @@ class Sorularvt {
       body: jsonEncode({
         "kullaniciID": kullaniciID,
         "urunID": urunID,
-        "sorumetni": soruMetni,
+        "soruMetni": soruMetni,
         "saticiID": saticiID,
       }),
     );

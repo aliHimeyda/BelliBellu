@@ -120,7 +120,10 @@ class _MenuState extends State<Menu> {
                         mainAxisSpacing: 12,
                         physics: NeverScrollableScrollPhysics(),
                         children: [
-                          buton(S.of(context).siparisler, Icons.shopping_bag),
+                          buton(
+                            S.of(context).baslik_siparislerim,
+                            Icons.shopping_bag,
+                          ),
                           buton(S.of(context).hesap, Icons.person_outline),
                         ],
                       ),
@@ -503,7 +506,11 @@ class _MenuState extends State<Menu> {
   Widget buton(String metin, IconData ikon) {
     return OutlinedButton.icon(
       onPressed: () {
-        context.push(Paths.gecmissiparisler);
+        if (metin == S.of(context).baslik_siparislerim) {
+          context.push(Paths.gecmissiparisler);
+        } else if (metin == S.of(context).hesap) {
+          context.push(Paths.profilsayfasi);
+        }
       },
       icon: Icon(ikon, color: Renkler.kahverengi),
       label: Text(metin, style: const TextStyle(color: Renkler.kahverengi)),

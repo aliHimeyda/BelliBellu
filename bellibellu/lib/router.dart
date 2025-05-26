@@ -147,8 +147,8 @@ final router = GoRouter(
             GoRoute(
               path: Paths.yorumlarsayfasi,
               builder: (context, state) {
-                final urunID = state.extra as int;
-                return YorumlarSayfasi(urunID: urunID);
+                final IDler = state.extra as List<dynamic>;
+                return YorumlarSayfasi(urunID: IDler[0], saticiID: IDler[1]);
               },
             ),
           ],
@@ -158,8 +158,8 @@ final router = GoRouter(
             GoRoute(
               path: Paths.sorularsayfasi,
               builder: (context, state) {
-                final urunID = state.extra as int;
-                return Sorularsayfasi(urunID: urunID);
+                final IDler = state.extra as List<dynamic>;
+                return Sorularsayfasi(urunID: IDler[0], saticiID: IDler[1]);
               },
             ),
           ],

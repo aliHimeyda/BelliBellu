@@ -154,11 +154,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "fiyat": MessageLookupByLibrary.simpleMessage("Price"),
     "fiyata_gore": MessageLookupByLibrary.simpleMessage("By Price :"),
     "garanti_suresi": MessageLookupByLibrary.simpleMessage("WARRANTY PERIOD :"),
+    "gecersizKartUyarisi": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid card number.",
+    ),
     "gecmis": MessageLookupByLibrary.simpleMessage("History"),
     "giris_yap": MessageLookupByLibrary.simpleMessage("Login"),
     "gmail": MessageLookupByLibrary.simpleMessage("Gmail"),
     "gonder": MessageLookupByLibrary.simpleMessage("Send"),
     "haritada": MessageLookupByLibrary.simpleMessage("On map"),
+    "hataOlustu": MessageLookupByLibrary.simpleMessage("An error occurred"),
     "hataliSifreVeyaMail": MessageLookupByLibrary.simpleMessage(
       "Incorrect password or email address",
     ),
@@ -169,6 +173,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "iletisimBasligi": MessageLookupByLibrary.simpleMessage("Contact:"),
     "indirim": MessageLookupByLibrary.simpleMessage("Discount"),
     "ingilizce": MessageLookupByLibrary.simpleMessage("English"),
+    "islem_basarili": MessageLookupByLibrary.simpleMessage(
+      "Operation successful",
+    ),
     "kabul_ettiniz": MessageLookupByLibrary.simpleMessage("."),
     "kafe": MessageLookupByLibrary.simpleMessage("Cafe"),
     "kafeurunlerionerisi": MessageLookupByLibrary.simpleMessage(
@@ -183,6 +190,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "kargo_verilecek": MessageLookupByLibrary.simpleMessage(
       "Will be shipped shortly",
     ),
+    "kartBilgisiGir": MessageLookupByLibrary.simpleMessage(
+      "Enter Card Information",
+    ),
+    "kartNumarasi": MessageLookupByLibrary.simpleMessage("Card Number"),
     "kategoriler": MessageLookupByLibrary.simpleMessage("Categories"),
     "kayit_ol": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "konu": MessageLookupByLibrary.simpleMessage("Subject"),
@@ -193,12 +204,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "By clicking Sign Up, you accept the ",
     ),
     "listeler": MessageLookupByLibrary.simpleMessage("Lists"),
+    "lutfenSepettenUrunSecin": MessageLookupByLibrary.simpleMessage(
+      "Please select a product from the cart",
+    ),
     "masa": MessageLookupByLibrary.simpleMessage("Table"),
     "masaonerisi": MessageLookupByLibrary.simpleMessage("Table"),
     "materyal": MessageLookupByLibrary.simpleMessage("Material"),
     "materyale_gore": MessageLookupByLibrary.simpleMessage("By Material :"),
     "menu": MessageLookupByLibrary.simpleMessage("Menu"),
     "merhaba_kullanici": m3,
+    "mesajDurumuGonderildi": MessageLookupByLibrary.simpleMessage("sent"),
     "mesaj_yazin": MessageLookupByLibrary.simpleMessage("Type your message..."),
     "metal": MessageLookupByLibrary.simpleMessage("Metal"),
     "metalmasaonerisi": MessageLookupByLibrary.simpleMessage("Metal table"),

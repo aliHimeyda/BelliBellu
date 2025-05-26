@@ -1876,6 +1876,76 @@ class S {
       args: [],
     );
   }
+
+  /// `sent`
+  String get mesajDurumuGonderildi {
+    return Intl.message(
+      'sent',
+      name: 'mesajDurumuGonderildi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred`
+  String get hataOlustu {
+    return Intl.message(
+      'An error occurred',
+      name: 'hataOlustu',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Card Information`
+  String get kartBilgisiGir {
+    return Intl.message(
+      'Enter Card Information',
+      name: 'kartBilgisiGir',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Card Number`
+  String get kartNumarasi {
+    return Intl.message(
+      'Card Number',
+      name: 'kartNumarasi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid card number.`
+  String get gecersizKartUyarisi {
+    return Intl.message(
+      'Please enter a valid card number.',
+      name: 'gecersizKartUyarisi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a product from the cart`
+  String get lutfenSepettenUrunSecin {
+    return Intl.message(
+      'Please select a product from the cart',
+      name: 'lutfenSepettenUrunSecin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Operation successful`
+  String get islem_basarili {
+    return Intl.message(
+      'Operation successful',
+      name: 'islem_basarili',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

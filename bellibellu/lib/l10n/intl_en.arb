@@ -401,5 +401,12 @@
   "renk_turuncu": "Orange",
   "renk_kirmizi": "Red",
    "kargo_ucreti": "Shipping Fee",
-   "sepete_eklendi": "Added to cart"
+   "sepete_eklendi": "Added to cart",
+   "mesajDurumuGonderildi": "sent",
+     "hataOlustu": "An error occurred",
+     "kartBilgisiGir": "Enter Card Information",
+  "kartNumarasi": "Card Number",
+  "gecersizKartUyarisi": "Please enter a valid card number.",
+  "lutfenSepettenUrunSecin": "Please select a product from the cart",
+   "islem_basarili": "Operation successful"
 }

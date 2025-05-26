@@ -204,7 +204,10 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                         onPressed: () {
                                           context.push(
                                             Paths.sorularsayfasi,
-                                            extra: urun['urunID'],
+                                            extra: [
+                                              urun['urunID'],
+                                              urun['SaticiID'],
+                                            ],
                                           );
                                         },
                                         style: TextButton.styleFrom(
@@ -403,7 +406,10 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                                             onPressed: () {
                                               context.push(
                                                 Paths.yorumlarsayfasi,
-                                                extra: urun['urunID'],
+                                                extra: [
+                                                  urun['urunID'],
+                                                  urun['SaticiID'],
+                                                ],
                                               );
                                             },
                                             style: TextButton.styleFrom(

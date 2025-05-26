@@ -490,7 +490,22 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
                             const Spacer(),
                             ElevatedButton(
                               onPressed: () async {
-                                await onaylanmisurunleriOnayla();
+                                if (Provider.of<Siparislerprovider>(
+                                  context,
+                                  listen: false,
+                                ).onaylanmisSiparisler.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Renkler.kahverengi,
+                                      content: Text(
+                                        S.of(context).lutfenSepettenUrunSecin,
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  kartPopupGoster(context);
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Renkler.kahverengi,
@@ -531,7 +546,10 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
     );
   }
 
-  Future<void> onaylanmisurunleriOnayla() async {}
+  Future<bool> onaylanmisurunleriOnayla() async {
+    return true;
+  }
+
   Future<int?> siparisEkle(int urunID) async {
     final result = await Siparislervt.siparisEkle(
       Provider.of<Kullanicilarprovider>(
@@ -600,5 +618,127 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
       debugPrint('islem hatasi : ');
       return null;
     }
+  }
+
+  void kartPopupGoster(BuildContext context) {
+    final TextEditingController kartController = TextEditingController();
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Renkler.kuyubeyaz,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 20,
+            right: 20,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+            top: 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                S.of(context).kartBilgisiGir,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Renkler.kahverengi,
+                ),
+              ),
+              SizedBox(height: 12),
+              TextField(
+                controller: kartController,
+                keyboardType: TextInputType.number,
+                maxLength: 16,
+                decoration: InputDecoration(
+                  labelText: S.of(context).kartNumarasi,
+                  labelStyle: TextStyle(color: Renkler.kahverengi),
+                  border: OutlineInputBorder(),
+                  fillColor: Renkler.kahverengi,
+                  focusColor: Renkler.kahverengi,
+                ),
+              ),
+              SizedBox(height: 12),
+              ElevatedButton(
+                onPressed: () async {
+                  if (kartController.text.length < 16) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Renkler.kahverengi,
+                        content: Text(
+                          S.of(context).gecersizKartUyarisi,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    );
+                    return;
+                  } else {
+                    List<bool> basari = [];
+                    for (Map<String, dynamic> siparis
+                        in Provider.of<Siparislerprovider>(
+                          context,
+                          listen: false,
+                        ).onaylanmisSiparisler) {
+                      bool b = await Siparislervt.siparisiOnayla(
+                        siparisID: siparis['siparisID'],
+                        saticiID: siparis['SaticiID'],
+                        kullaniciID:
+                            Provider.of<Kullanicilarprovider>(
+                              context,
+                              listen: false,
+                            ).currentkullanici['kullaniciID'],
+                        kartnumarasi: kartController.text,
+                      );
+                      if (b) {
+                        basari.add(b);
+                      }
+                    }
+
+                    if (basari.isEmpty || basari.length == 0) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Renkler.kahverengi,
+                          content: Text(
+                            S.of(context).hataOlustu,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                      Navigator.pop(context);
+                    } else {
+                      Provider.of<Siparislerprovider>(
+                        context,
+                        listen: false,
+                      ).urunleriTemizle();
+                      Navigator.pop(context);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Renkler.kahverengi,
+                          content: Text(
+                            S.of(context).islem_basarili,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Renkler.krem),
+                ),
+                child: Text(
+                  S.of(context).gonder,
+                  style: TextStyle(color: Renkler.kahverengi),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

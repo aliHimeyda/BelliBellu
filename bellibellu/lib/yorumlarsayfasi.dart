@@ -1,6 +1,7 @@
 import 'package:bellibellu/ceviri.dart';
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/sorularprovider.dart';
@@ -8,12 +9,18 @@ import 'package:bellibellu/services/yorumlarprovider.dart';
 import 'package:bellibellu/services/yorumlarvt.dart';
 import 'package:bellibellu/urunkarti.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class YorumlarSayfasi extends StatefulWidget {
   final int urunID;
-  const YorumlarSayfasi({super.key, required this.urunID});
+  final int saticiID;
+  const YorumlarSayfasi({
+    super.key,
+    required this.urunID,
+    required this.saticiID,
+  });
 
   @override
   State<YorumlarSayfasi> createState() => _YorumlarSayfasiState();
@@ -258,7 +265,11 @@ class _YorumlarSayfasiState extends State<YorumlarSayfasi> {
           Expanded(
             child: OutlinedButton(
               onPressed: () {
-                // Soru & Cevap sayfasına git
+                context.pop();
+                context.push(
+                  Paths.sorularsayfasi,
+                  extra: [widget.urunID, widget.saticiID],
+                );
               },
               style: OutlinedButton.styleFrom(
                 side: const BorderSide(color: Renkler.kahverengi),

@@ -6,4 +6,30 @@ class Siparislerprovider with ChangeNotifier {
   Future<void> siparisleriGuncelle() async {
     notifyListeners();
   }
+
+  void urunleriTemizle() {
+    // siparisler'i geçici olarak düzenleyeceğimiz bir kopya oluşturuyoruz
+    final Map<String, List<Map<String, dynamic>>> temizlenmisSiparisler = {};
+
+    siparisler.forEach((kategori, urunListesi) {
+      // Bu kategori için filtrelenmiş (yani onaylanmamis) ürünler
+      List<Map<String, dynamic>> filtrelenmisUrunler =
+          urunListesi.where((urun) {
+            // Eğer bu urun onaylanmisSiparisler içinde YOKSA, listede kalmaya devam eder
+            return !onaylanmisSiparisler.any(
+              (onayli) => onayli['urunID'] == urun['urunID'],
+            );
+          }).toList();
+
+      // Eğer bu kategoride hâlâ ürün varsa, güncel listeyi ekle
+      if (filtrelenmisUrunler.isNotEmpty) {
+        temizlenmisSiparisler[kategori] = filtrelenmisUrunler;
+      }
+    });
+
+    // Güncellenmiş siparisler’i atıyoruz
+    siparisler = temizlenmisSiparisler;
+    onaylanmisSiparisler.clear();
+    notifyListeners();
+  }
 }

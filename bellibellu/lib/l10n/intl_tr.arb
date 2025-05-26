@@ -405,5 +405,12 @@
   "renk_turuncu": "Turuncu",
   "renk_kirmizi": "Kırmızı",
    "kargo_ucreti": "Kargo Ücreti",
-    "sepete_eklendi": "Sepete eklendi"
+    "sepete_eklendi": "Sepete eklendi",
+    "mesajDurumuGonderildi": "gönderildi",
+      "hataOlustu": "Hata oluştu",
+      "kartBilgisiGir": "Kart Bilgisi Gir",
+  "kartNumarasi": "Kart Numarası",
+  "gecersizKartUyarisi": "Lütfen geçerli bir kart numarası girin.",
+  "lutfenSepettenUrunSecin": "Lütfen sepetten ürün seçin",
+  "islem_basarili": "İşlem başarılı"
 }

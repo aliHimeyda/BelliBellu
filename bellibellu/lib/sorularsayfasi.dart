@@ -13,7 +13,12 @@ import 'package:provider/provider.dart';
 
 class Sorularsayfasi extends StatefulWidget {
   final int urunID;
-  const Sorularsayfasi({super.key, required this.urunID});
+  final int saticiID;
+  const Sorularsayfasi({
+    super.key,
+    required this.urunID,
+    required this.saticiID,
+  });
 
   @override
   State<Sorularsayfasi> createState() => _SorularsayfasiState();
@@ -24,6 +29,7 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
   late Future<void> sorularigetir;
   late String seciliSiralama = '';
   late bool sorularlistesisonumu = false;
+  final TextEditingController text = TextEditingController();
 
   void siralamaPopupAc() {
     showModalBottomSheet(
@@ -284,7 +290,6 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
   }
 
   void _telefonPopup(BuildContext context) {
-    final TextEditingController _telefonController = TextEditingController();
     showModalBottomSheet(
       backgroundColor: Renkler.kuyubeyaz,
       context: context,
@@ -318,7 +323,8 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: _telefonController,
+                controller: text,
+                maxLines: 3,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: S.of(context).soru_sor,
@@ -335,14 +341,16 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Renkler.kahverengi, // Buton rengi
                   ),
-                  onPressed: () async {},
+                  onPressed: () async {
+                    await sorugonder();
+                  },
                   child: Text(
                     S.of(context).gonder,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 300),
             ],
           ),
         );
@@ -439,5 +447,41 @@ class _SorularsayfasiState extends State<Sorularsayfasi> {
         print('  Ürün: ${urun['urunAdi']} - Fiyat: ${urun['toplamTutar']}');
       }
     });
+  }
+
+  Future<void> sorugonder() async {
+    bool basari = await Sorularvt.soruEkle(
+      kullaniciID:
+          Provider.of<Kullanicilarprovider>(
+            context,
+            listen: false,
+          ).currentkullanici['kullaniciID'],
+      urunID: widget.urunID,
+      saticiID: widget.saticiID,
+      soruMetni: text.text,
+    );
+    if (basari) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S.of(context).mesajDurumuGonderildi,
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S.of(context).hataOlustu,
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    }
   }
 }
