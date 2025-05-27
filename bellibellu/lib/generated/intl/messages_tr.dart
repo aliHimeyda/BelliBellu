@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "alisverise_devam_et": MessageLookupByLibrary.simpleMessage(
       "Alışverişe Devam Et",
     ),
+    "analiz": MessageLookupByLibrary.simpleMessage("Analiz"),
     "anasayfa": MessageLookupByLibrary.simpleMessage("Anasayfa"),
     "anladim": MessageLookupByLibrary.simpleMessage("Anladım"),
     "ara_toplam": MessageLookupByLibrary.simpleMessage("Ara Toplam"),
@@ -96,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "begenebilecegin": MessageLookupByLibrary.simpleMessage(
       "Beğenebileceğin Ürünler",
     ),
+    "begeniSayisi": MessageLookupByLibrary.simpleMessage("Beğeni Sayısı"),
     "begenilen_urun_listesi_bos": MessageLookupByLibrary.simpleMessage(
       "Beğenilen ürün listesi boş !!",
     ),
@@ -126,10 +128,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "duzenle": MessageLookupByLibrary.simpleMessage("Düzenle"),
     "efsaneUrunler": MessageLookupByLibrary.simpleMessage("Efsane Ürünler"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "enCokBegenilenUrun": MessageLookupByLibrary.simpleMessage(
+      "En Çok Beğenilen Ürün",
+    ),
     "enCokBegenilenler": MessageLookupByLibrary.simpleMessage(
       "En Çok Beğenilenler",
     ),
     "enCokFavori": MessageLookupByLibrary.simpleMessage("En Çok Favorilenen"),
+    "enCokSatilanUrun": MessageLookupByLibrary.simpleMessage(
+      "En Çok Satılan Ürün",
+    ),
+    "enSonFaaliyetBilgileri": MessageLookupByLibrary.simpleMessage(
+      "En Son Faaliyet Bilgileri",
+    ),
     "en_cok_begenilen": MessageLookupByLibrary.simpleMessage(
       "En Çok Beğenilen",
     ),
@@ -159,12 +170,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "filtrele": MessageLookupByLibrary.simpleMessage("Filtrele"),
     "fiyat": MessageLookupByLibrary.simpleMessage("Fiyat"),
     "fiyata_gore": MessageLookupByLibrary.simpleMessage("Fiyata Göre :"),
+    "garantiSuresi": MessageLookupByLibrary.simpleMessage("Garanti Süresi"),
     "garanti_suresi": MessageLookupByLibrary.simpleMessage("GARANTİ SÜRESİ :"),
     "gecersizKartUyarisi": MessageLookupByLibrary.simpleMessage(
       "Lütfen geçerli bir kart numarası girin.",
     ),
     "gecmis": MessageLookupByLibrary.simpleMessage("Geçmiş"),
     "gecmisBos": MessageLookupByLibrary.simpleMessage("Geçmiş boş"),
+    "genislik": MessageLookupByLibrary.simpleMessage("Genişlik"),
     "giris_yap": MessageLookupByLibrary.simpleMessage("Giriş Yap"),
     "gmail": MessageLookupByLibrary.simpleMessage("Gmail"),
     "gonder": MessageLookupByLibrary.simpleMessage("Gönder"),
@@ -254,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "ozelurunler": MessageLookupByLibrary.simpleMessage("ÖZEL ÜRÜNLER"),
     "puanYorumMetni": m4,
     "puan_yorum": m5,
+    "renk": MessageLookupByLibrary.simpleMessage("Renk"),
     "renk_bej": MessageLookupByLibrary.simpleMessage("Bej"),
     "renk_beyaz": MessageLookupByLibrary.simpleMessage("Beyaz"),
     "renk_bordo": MessageLookupByLibrary.simpleMessage("Bordo"),
@@ -287,6 +301,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "satici_takip_et": MessageLookupByLibrary.simpleMessage(
       "Satıcıyı Takip Et",
     ),
+    "satilmaSayisi": MessageLookupByLibrary.simpleMessage("Satılma Sayısı"),
     "sayfa_baslik": MessageLookupByLibrary.simpleMessage("Sipariş Detayları"),
     "sepetBos": MessageLookupByLibrary.simpleMessage("Sepet boş"),
     "sepet_detayi": MessageLookupByLibrary.simpleMessage("Sepet Detayı"),
@@ -317,13 +332,20 @@ class MessageLookup extends MessageLookupByLibrary {
       "Siparişim ne zaman kargoya verilecek? Dün sipariş verdim, en geç yarın kargoda yazılmıştı",
     ),
     "soru_sor": MessageLookupByLibrary.simpleMessage("Soru Sor"),
+    "stokDurumu": MessageLookupByLibrary.simpleMessage("Stok Durumu"),
     "stok_yarin": MessageLookupByLibrary.simpleMessage(
       "Ürün yarın stoklara giriyor.",
+    ),
+    "suyaDayanikliMi": MessageLookupByLibrary.simpleMessage(
+      "Suya Dayanıklı mı?",
     ),
     "tahmini_teslimat": MessageLookupByLibrary.simpleMessage(
       "Tahmini Teslimat",
     ),
     "takimKodu": MessageLookupByLibrary.simpleMessage("Takım Kodu"),
+    "takimListesiBos": MessageLookupByLibrary.simpleMessage(
+      "Takım listesi boş",
+    ),
     "takimlar": MessageLookupByLibrary.simpleMessage("Takımlar"),
     "tekrar_hosgeldiniz": MessageLookupByLibrary.simpleMessage(
       "Tekrar Hoş Geldiniz!",
@@ -343,6 +365,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "teslimat_no": MessageLookupByLibrary.simpleMessage("Teslimat No"),
     "tiklandiMesaji": MessageLookupByLibrary.simpleMessage("Tıklandı!"),
     "toplam": MessageLookupByLibrary.simpleMessage("Toplam"),
+    "toplamSatisMiktari": MessageLookupByLibrary.simpleMessage(
+      "Toplam Satış Miktarı",
+    ),
+    "toplamSatisSayisi": MessageLookupByLibrary.simpleMessage(
+      "Toplam Satış Sayısı",
+    ),
     "toplam_fiyat": m14,
     "tum_ozellikler": MessageLookupByLibrary.simpleMessage("TÜM ÖZELLİKLER"),
     "tumunuGorButonu": m15,
@@ -351,9 +379,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "ture_gore": MessageLookupByLibrary.simpleMessage("Tür\'e Göre :"),
     "turkce": MessageLookupByLibrary.simpleMessage("Türkçe"),
     "turkce_kodu": MessageLookupByLibrary.simpleMessage("TR"),
+    "urunAdi": MessageLookupByLibrary.simpleMessage("Ürün Adı"),
     "urunBulunamadi": MessageLookupByLibrary.simpleMessage(
       "Eşleşen ürün bulunamadı.",
     ),
+    "urunEkleme": MessageLookupByLibrary.simpleMessage("Ürün Ekleme"),
+    "urunResmi": MessageLookupByLibrary.simpleMessage("Ürün Resmi"),
     "urunSerisi2025": MessageLookupByLibrary.simpleMessage("2025 Ürünleri"),
     "urun_aciklamasi": m16,
     "urun_degerlendir": MessageLookupByLibrary.simpleMessage(
@@ -368,6 +399,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "urun_sorularim": MessageLookupByLibrary.simpleMessage("Ürün Sorularım"),
     "urunler": MessageLookupByLibrary.simpleMessage("Ürünler"),
     "urunleri_getir": MessageLookupByLibrary.simpleMessage("Ürünleri Getir"),
+    "urunlerim": MessageLookupByLibrary.simpleMessage("Ürünlerim"),
     "urunlerin_garanti_suresi": m17,
     "uyari": MessageLookupByLibrary.simpleMessage("UYARI !"),
     "uyelik_sozlesmesi": MessageLookupByLibrary.simpleMessage(
@@ -381,6 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "uygulamadaki_urunlerin_ureticisidir": MessageLookupByLibrary.simpleMessage(
       "Uygulamadaki ürünlerin üreticisidir",
     ),
+    "uzunluk": MessageLookupByLibrary.simpleMessage("Uzunluk"),
     "ve": MessageLookupByLibrary.simpleMessage("’nu ve "),
     "veya": MessageLookupByLibrary.simpleMessage("veya"),
     "whatsapp": MessageLookupByLibrary.simpleMessage("WhatsApp"),
@@ -391,10 +424,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "yanit_sistem_bildirim": MessageLookupByLibrary.simpleMessage(
       "Evet, sistem otomatik bildirim gönderir.",
     ),
+    "yayinlananUrunSayisi": MessageLookupByLibrary.simpleMessage(
+      "Yayınlanan Ürün Sayısı",
+    ),
+    "yayinlananUrunYok": MessageLookupByLibrary.simpleMessage(
+      "Yayınlanan ürün yok",
+    ),
     "yeniden_eskiye": MessageLookupByLibrary.simpleMessage("Yeniden Eskiye"),
     "yeniurunler": MessageLookupByLibrary.simpleMessage("Yeni Ürünlere Göz At"),
     "yildizliKategoriler": MessageLookupByLibrary.simpleMessage(
       "Yıldızlı Kategoriler",
     ),
+    "yorumEkle": MessageLookupByLibrary.simpleMessage("Yorum Ekle"),
   };
 }

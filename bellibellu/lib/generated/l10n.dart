@@ -2031,6 +2031,176 @@ class S {
       args: [],
     );
   }
+
+  /// `Packages list is empty`
+  String get takimListesiBos {
+    return Intl.message(
+      'Packages list is empty',
+      name: 'takimListesiBos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Comment`
+  String get yorumEkle {
+    return Intl.message('Add Comment', name: 'yorumEkle', desc: '', args: []);
+  }
+
+  /// `My Products`
+  String get urunlerim {
+    return Intl.message('My Products', name: 'urunlerim', desc: '', args: []);
+  }
+
+  /// `Analytics`
+  String get analiz {
+    return Intl.message('Analytics', name: 'analiz', desc: '', args: []);
+  }
+
+  /// `No published product`
+  String get yayinlananUrunYok {
+    return Intl.message(
+      'No published product',
+      name: 'yayinlananUrunYok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of Likes`
+  String get begeniSayisi {
+    return Intl.message(
+      'Number of Likes',
+      name: 'begeniSayisi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Published Products`
+  String get yayinlananUrunSayisi {
+    return Intl.message(
+      'Published Products',
+      name: 'yayinlananUrunSayisi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Sales Count`
+  String get toplamSatisSayisi {
+    return Intl.message(
+      'Total Sales Count',
+      name: 'toplamSatisSayisi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Sales Amount`
+  String get toplamSatisMiktari {
+    return Intl.message(
+      'Total Sales Amount',
+      name: 'toplamSatisMiktari',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Best Selling Product`
+  String get enCokSatilanUrun {
+    return Intl.message(
+      'Best Selling Product',
+      name: 'enCokSatilanUrun',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Most Liked Product`
+  String get enCokBegenilenUrun {
+    return Intl.message(
+      'Most Liked Product',
+      name: 'enCokBegenilenUrun',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Latest Activity Information`
+  String get enSonFaaliyetBilgileri {
+    return Intl.message(
+      'Latest Activity Information',
+      name: 'enSonFaaliyetBilgileri',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of Sales`
+  String get satilmaSayisi {
+    return Intl.message(
+      'Number of Sales',
+      name: 'satilmaSayisi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product Image`
+  String get urunResmi {
+    return Intl.message('Product Image', name: 'urunResmi', desc: '', args: []);
+  }
+
+  /// `Water Resistant?`
+  String get suyaDayanikliMi {
+    return Intl.message(
+      'Water Resistant?',
+      name: 'suyaDayanikliMi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warranty Period`
+  String get garantiSuresi {
+    return Intl.message(
+      'Warranty Period',
+      name: 'garantiSuresi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stock Status`
+  String get stokDurumu {
+    return Intl.message('Stock Status', name: 'stokDurumu', desc: '', args: []);
+  }
+
+  /// `Product Name`
+  String get urunAdi {
+    return Intl.message('Product Name', name: 'urunAdi', desc: '', args: []);
+  }
+
+  /// `Color`
+  String get renk {
+    return Intl.message('Color', name: 'renk', desc: '', args: []);
+  }
+
+  /// `Width`
+  String get genislik {
+    return Intl.message('Width', name: 'genislik', desc: '', args: []);
+  }
+
+  /// `Length`
+  String get uzunluk {
+    return Intl.message('Length', name: 'uzunluk', desc: '', args: []);
+  }
+
+  /// `Add Product`
+  String get urunEkleme {
+    return Intl.message('Add Product', name: 'urunEkleme', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

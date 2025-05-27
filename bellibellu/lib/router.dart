@@ -1,3 +1,4 @@
+import 'package:bellibellu/analiz.dart';
 import 'package:bellibellu/anasayfa.dart';
 import 'package:bellibellu/anasayfaicerigi.dart';
 import 'package:bellibellu/ensongezilenler.dart';
@@ -11,17 +12,21 @@ import 'package:bellibellu/logosayfasi.dart';
 import 'package:bellibellu/menu.dart';
 import 'package:bellibellu/profilsayfasi.dart';
 import 'package:bellibellu/sepetsayfasi.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/sohbeticerigisayfasi.dart';
 import 'package:bellibellu/sohbetlersayfasi.dart';
 import 'package:bellibellu/sorularsayfasi.dart';
 import 'package:bellibellu/takimlar.dart';
 import 'package:bellibellu/tumurunler.dart';
+import 'package:bellibellu/urunekleme.dart';
 import 'package:bellibellu/urunkartiicerigi.dart';
 import 'package:bellibellu/urunler.dart';
+import 'package:bellibellu/urunlerim.dart';
 import 'package:bellibellu/urunlerseridi.dart';
 import 'package:bellibellu/yorumlarsayfasi.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 final routerkey = GlobalKey<NavigatorState>();
 
@@ -32,6 +37,7 @@ class Paths {
   static const String takimlar = '/takimlar';
   static const String iletisim = '/iletisim';
   static const String kaydedilenler = '/kaydedilenler';
+  static const String analiz = '/analiz';
   static const String menu = '/menu';
   static const String urundetaylari = '/urundetaylari';
   static const String tumurunler = '/tumurunler';
@@ -39,12 +45,14 @@ class Paths {
   static const String yorumlarsayfasi = '/yorumlarsayfasi';
   static const String sorularsayfasi = '/sorularsayfasi';
   static const String sepetsayfasi = '/sepetsayfasi';
+  static const String urunlerim = '/urunlerim';
   static const String loginsayfasi = '/loginsayfasi';
   static const String profilsayfasi = '/profilsayfasi';
   static const String gecmissiparisler = '/gecmissiparisler';
   static const String gecmissiparisdetaylari = '/gecmissiparisdetaylari';
   static const String sohbetlersayfasi = '/sohbetlersayfasi';
   static const String sohbeticerigisayfasi = '/sohbeticerigisayfasi';
+  static const String urunekleme = '/urunekleme';
 }
 
 // ignore: non_constant_identifier_names
@@ -88,22 +96,40 @@ final router = GoRouter(
             ),
           ],
         ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Paths.kaydedilenler,
-              builder: (context, state) => Kaydedilenler(),
+        Cihazbellegi.ismusteri ?? false
+            ? StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: Paths.kaydedilenler,
+                  builder: (context, state) => Kaydedilenler(),
+                ),
+              ],
+            )
+            : StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: Paths.analiz,
+                  builder: (context, state) => AnalizSayfasi(),
+                ),
+              ],
             ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: Paths.sepetsayfasi,
-              builder: (context, state) => SepetSayfasi(),
+        Cihazbellegi.ismusteri ?? false
+            ? StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: Paths.sepetsayfasi,
+                  builder: (context, state) => SepetSayfasi(),
+                ),
+              ],
+            )
+            : StatefulShellBranch(
+              routes: [
+                GoRoute(
+                  path: Paths.urunlerim,
+                  builder: (context, state) => Urunlerim(),
+                ),
+              ],
             ),
-          ],
-        ),
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -222,6 +248,14 @@ final router = GoRouter(
             GoRoute(
               path: Paths.sohbeticerigisayfasi,
               builder: (context, state) => SohbetIcerigiSayfasi(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.urunekleme,
+              builder: (context, state) => Urunekleme(),
             ),
           ],
         ),

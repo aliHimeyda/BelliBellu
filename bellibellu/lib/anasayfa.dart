@@ -3,8 +3,10 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class Anasayfa extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -91,23 +93,45 @@ class Anasayfa extends StatelessWidget {
                         label: S.of(context).kategoriler,
                       ),
                       NavigationDestination(
-                        icon: Icon(
-                          Icons.indeterminate_check_box,
-                          color: Renkler.kahverengi,
-                        ),
+                        icon: Icon(Icons.table_bar, color: Renkler.kahverengi),
                         label: S.of(context).takimlar,
                       ),
-                      NavigationDestination(
-                        icon: Icon(Icons.favorite, color: Renkler.kahverengi),
-                        label: S.of(context).favorilerim,
-                      ),
-                      NavigationDestination(
-                        icon: Icon(
-                          Icons.shopping_cart,
-                          color: Renkler.kahverengi,
-                        ),
-                        label: S.of(context).sepetim,
-                      ),
+                      Provider.of<Kullanicilarprovider>(
+                            context,
+                            listen: false,
+                          ).ismusteri
+                          ? NavigationDestination(
+                            icon: Icon(
+                              Icons.favorite,
+                              color: Renkler.kahverengi,
+                            ),
+                            label: S.of(context).favorilerim,
+                          )
+                          : NavigationDestination(
+                            icon: Icon(
+                              Icons.bar_chart,
+                              color: Renkler.kahverengi,
+                            ),
+                            label: S.of(context).analiz,
+                          ),
+                      Provider.of<Kullanicilarprovider>(
+                            context,
+                            listen: false,
+                          ).ismusteri
+                          ? NavigationDestination(
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: Renkler.kahverengi,
+                            ),
+                            label: S.of(context).sepetim,
+                          )
+                          : NavigationDestination(
+                            icon: Icon(
+                              Icons.indeterminate_check_box,
+                              color: Renkler.kahverengi,
+                            ),
+                            label: S.of(context).urunlerim,
+                          ),
                       NavigationDestination(
                         icon: Icon(
                           Icons.person_outlined,

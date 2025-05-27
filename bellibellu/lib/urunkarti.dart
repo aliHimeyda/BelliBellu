@@ -177,59 +177,65 @@ class _OzelurunkartiState extends State<Ozelurunkarti> {
                   ),
                 ],
               ),
-              Positioned(
-                top: 5,
-                right: 5,
-                child: Container(
-                  width: 22,
-                  height: 22,
-                  decoration: BoxDecoration(
-                    color: Renkler.krem,
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Renkler.kahverengi),
-                  ),
-                  child: Center(
-                    child: IconButton(
-                      padding: const EdgeInsets.all(0),
-                      onPressed: () async {
-                        debugPrint('${widget.urun['urunAdi']} tiklandi');
-                        begenilmismi
-                            ? begenilmismi = false
-                            : begenilmismi = true;
+              Provider.of<Kullanicilarprovider>(
+                    context,
+                    listen: false,
+                  ).ismusteri
+                  ? Positioned(
+                    top: 5,
+                    right: 5,
+                    child: Container(
+                      width: 22,
+                      height: 22,
+                      decoration: BoxDecoration(
+                        color: Renkler.krem,
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Renkler.kahverengi),
+                      ),
+                      child: Center(
+                        child: IconButton(
+                          padding: const EdgeInsets.all(0),
+                          onPressed: () async {
+                            debugPrint('${widget.urun['urunAdi']} tiklandi');
+                            begenilmismi
+                                ? begenilmismi = false
+                                : begenilmismi = true;
 
-                        if (begenilmismi) {
-                          setState(() {
-                            widget.colored(color: Renkler.kirmizi);
-                          });
-                          await begenilenekaydet(
-                            widget.urun['urunID'],
-                            Provider.of<Kullanicilarprovider>(
-                              context,
-                              listen: false,
-                            ).currentkullanici['kullaniciID'],
-                          );
-                        } else {
-                          setState(() {
-                            widget.colored(color: Colors.white);
-                          });
-                          begenilendensil(
-                            widget.urun['urunID'],
-                            Provider.of<Kullanicilarprovider>(
-                              context,
-                              listen: false,
-                            ).currentkullanici['kullaniciID'],
-                          );
-                        }
-                      },
-                      icon: Icon(
-                        Icons.favorite,
-                        color: begenilmismi ? Renkler.kirmizi : Colors.white,
-                        size: 15,
+                            if (begenilmismi) {
+                              setState(() {
+                                widget.colored(color: Renkler.kirmizi);
+                              });
+                              await begenilenekaydet(
+                                widget.urun['urunID'],
+                                Provider.of<Kullanicilarprovider>(
+                                  context,
+                                  listen: false,
+                                ).currentkullanici['kullaniciID'],
+                              );
+                            } else {
+                              setState(() {
+                                widget.colored(color: Colors.white);
+                              });
+                              begenilendensil(
+                                widget.urun['urunID'],
+                                Provider.of<Kullanicilarprovider>(
+                                  context,
+                                  listen: false,
+                                ).currentkullanici['kullaniciID'],
+                              );
+                            }
+                          },
+                          icon: Icon(
+                            Icons.favorite,
+                            color:
+                                begenilmismi ? Renkler.kirmizi : Colors.white,
+                            size: 15,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
+                  )
+                  : SizedBox(),
             ],
           ),
         ),

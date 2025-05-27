@@ -2,6 +2,8 @@ import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
+import 'package:bellibellu/services/siparislerprovider.dart';
+import 'package:bellibellu/services/siparislervt.dart';
 import 'package:bellibellu/services/urunlerVT.dart';
 import 'package:bellibellu/services/urunlerprovider.dart';
 import 'package:bellibellu/urunkarti.dart';
@@ -93,77 +95,82 @@ class _TakimlarState extends State<Takimlar> {
                       Text(
                         '${S.of(context).takimKodu}: ${context.watch<Urunlerprovider>().takimlar[index]['takimID']}',
                       ),
-                      Container(
-                        width: 22,
-                        height: 22,
-                        decoration: BoxDecoration(
-                          color: Renkler.krem,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(color: Renkler.kahverengi),
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            padding: const EdgeInsets.all(0),
-                            onPressed: () async {
-                              Provider.of<Urunlerprovider>(
-                                        context,
-                                        listen: false,
-                                      ).takimlar[index]['begenilmismi'] ==
-                                      0
-                                  ? Provider.of<Urunlerprovider>(
-                                        context,
-                                        listen: false,
-                                      ).takimlar[index]['begenilmismi'] =
-                                      false
-                                  : Provider.of<Urunlerprovider>(
-                                        context,
-                                        listen: false,
-                                      ).takimlar[index]['begenilmismi'] =
-                                      true;
-
-                              if (Provider.of<Urunlerprovider>(
-                                    context,
-                                    listen: false,
-                                  ).takimlar[index]['begenilmismi'] ==
-                                  true) {
-                                setState(() {
-                                  widget.colored(color: Renkler.kirmizi);
-                                });
-                                // await begenilenekaydet(
-                                //   context.watch<Urunlerprovider>().takimlar[index]['takimID'],
-                                //   Provider.of<Kullanicilarprovider>(
-                                //     context,
-                                //     listen: false,
-                                //   ).currentkullanici['kullaniciID'],
-                                // );
-                              } else {
-                                setState(() {
-                                  widget.colored(color: Colors.white);
-                                });
-                                // begenilendensil(
-                                //  context.watch<Urunlerprovider>().takimlar[index]['takimID'],
-                                //   Provider.of<Kullanicilarprovider>(
-                                //     context,
-                                //     listen: false,
-                                //   ).currentkullanici['kullaniciID'],
-                                // );
-                              }
-                            },
-                            icon: Icon(
-                              Icons.favorite,
-                              color:
+                      Provider.of<Kullanicilarprovider>(
+                            context,
+                            listen: false,
+                          ).ismusteri
+                          ? Container(
+                            width: 22,
+                            height: 22,
+                            decoration: BoxDecoration(
+                              color: Renkler.krem,
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(color: Renkler.kahverengi),
+                            ),
+                            child: Center(
+                              child: IconButton(
+                                padding: const EdgeInsets.all(0),
+                                onPressed: () async {
                                   Provider.of<Urunlerprovider>(
                                             context,
                                             listen: false,
                                           ).takimlar[index]['begenilmismi'] ==
-                                          1
-                                      ? Renkler.kirmizi
-                                      : Colors.white,
-                              size: 15,
+                                          0
+                                      ? Provider.of<Urunlerprovider>(
+                                            context,
+                                            listen: false,
+                                          ).takimlar[index]['begenilmismi'] =
+                                          false
+                                      : Provider.of<Urunlerprovider>(
+                                            context,
+                                            listen: false,
+                                          ).takimlar[index]['begenilmismi'] =
+                                          true;
+
+                                  if (Provider.of<Urunlerprovider>(
+                                        context,
+                                        listen: false,
+                                      ).takimlar[index]['begenilmismi'] ==
+                                      true) {
+                                    setState(() {
+                                      widget.colored(color: Renkler.kirmizi);
+                                    });
+                                    // await begenilenekaydet(
+                                    //   context.watch<Urunlerprovider>().takimlar[index]['takimID'],
+                                    //   Provider.of<Kullanicilarprovider>(
+                                    //     context,
+                                    //     listen: false,
+                                    //   ).currentkullanici['kullaniciID'],
+                                    // );
+                                  } else {
+                                    setState(() {
+                                      widget.colored(color: Colors.white);
+                                    });
+                                    // begenilendensil(
+                                    //  context.watch<Urunlerprovider>().takimlar[index]['takimID'],
+                                    //   Provider.of<Kullanicilarprovider>(
+                                    //     context,
+                                    //     listen: false,
+                                    //   ).currentkullanici['kullaniciID'],
+                                    // );
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.favorite,
+                                  color:
+                                      Provider.of<Urunlerprovider>(
+                                                context,
+                                                listen: false,
+                                              ).takimlar[index]['begenilmismi'] ==
+                                              1
+                                          ? Renkler.kirmizi
+                                          : Colors.white,
+                                  size: 15,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
+                          )
+                          : SizedBox(),
                     ],
                   ),
                   Divider(color: Renkler.kahverengi),
@@ -271,6 +278,99 @@ class _TakimlarState extends State<Takimlar> {
                             .takimlar[index]['toplamFiyat']
                             .toString(),
                       ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          OutlinedButton(
+                            onPressed: () {},
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(color: Renkler.kahverengi),
+                            ),
+                            child: Text(
+                              S.of(context).soru_sor,
+                              style: TextStyle(
+                                color: Renkler.kahverengi,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              if (Provider.of<Kullanicilarprovider>(
+                                context,
+                                listen: false,
+                              ).ismusteri) {
+                                for (
+                                  int i = 0;
+                                  i <
+                                      Provider.of<Urunlerprovider>(
+                                            context,
+                                            listen: false,
+                                          ).takimlar[index]['sandalyeSayisi'] +
+                                          1;
+                                  i++
+                                ) {
+                                  if (i <=
+                                      Provider.of<Urunlerprovider>(
+                                            context,
+                                            listen: false,
+                                          ).takimlar[index]['sandalyeSayisi'] -
+                                          1) {
+                                    await siparisEkle(
+                                      Provider.of<Urunlerprovider>(
+                                        context,
+                                        listen: false,
+                                      ).takimlar[index]['sandalyeurunID'],
+                                    );
+                                  } else {
+                                    await siparisEkle(
+                                      Provider.of<Urunlerprovider>(
+                                        context,
+                                        listen: false,
+                                      ).takimlar[index]['masaurunID'],
+                                    );
+                                  }
+                                }
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      S.of(context).sepete_eklendi,
+                                      style: TextStyle(
+                                        color: Renkler.kahverengi,
+                                      ),
+                                    ),
+                                    duration: Duration(seconds: 2),
+                                    backgroundColor: Renkler.krem,
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      S.of(context).hataOlustu,
+                                      style: TextStyle(
+                                        color: Renkler.kahverengi,
+                                      ),
+                                    ),
+                                    duration: Duration(seconds: 2),
+                                    backgroundColor: Renkler.krem,
+                                  ),
+                                );
+                              }
+                            },
+                            child: Text(
+                              S.of(context).sepete_ekle,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Renkler.kahverengi,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ],
@@ -301,13 +401,13 @@ class _TakimlarState extends State<Takimlar> {
                       width: 80,
                       height: 80,
                       child: Image.asset(
-                        'assets/heart.png',
+                        'assets/emptybox.png',
                         color: Renkler.kahverengi,
                       ),
                     ),
                     SizedBox(height: 10),
                     Text(
-                      S.of(context).begenilen_urun_listesi_bos,
+                      S.of(context).takimListesiBos,
                       style: TextStyle(
                         fontSize: 16,
                         color: Renkler.kahverengi,
@@ -356,5 +456,47 @@ class _TakimlarState extends State<Takimlar> {
         ],
       ),
     );
+  }
+
+  Future<void> siparisEkle(int urunID) async {
+    await Siparislervt.siparisEkle(
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
+      urunID,
+    );
+    await siparisleriYukle();
+    await Provider.of<Siparislerprovider>(
+      context,
+      listen: false,
+    ).siparisleriGuncelle();
+  }
+
+  Future<void> siparisleriYukle() async {
+    Provider.of<Siparislerprovider>(
+      context,
+      listen: false,
+    ).siparisler = await Siparislervt.tumSiparisleriGetir(
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
+    );
+
+    Provider.of<Siparislerprovider>(context, listen: false).siparisler.forEach((
+      satici,
+      urunler,
+    ) {
+      print('Satıcı: $satici');
+      for (var urun in urunler) {
+        if (urun['secili'] == 1) {
+          urun['secili'] = true;
+        } else {
+          urun['secili'] = false;
+        }
+        print('  Ürün: ${urun['urunAdi']} - Fiyat: ${urun['toplamTutar']}');
+      }
+    });
   }
 }

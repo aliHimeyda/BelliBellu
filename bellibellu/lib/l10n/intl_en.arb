@@ -427,7 +427,36 @@
   "sandalyeAdi": "Chair Name",
    "masaSatici": "Table Seller",
   "sandalyeSatici": "Chair Seller",
-   "sandalyeSayisi": "Number of Chairs"
+   "sandalyeSayisi": "Number of Chairs",
+    "takimListesiBos": "Packages list is empty",
+    "yorumEkle": "Add Comment",
+    "urunlerim": "My Products",
+    "analiz": "Analysis",
+    "yayinlananUrunYok": "No published product",
+     "begeniSayisi": "Number of Likes",
+  "yayinlananUrunSayisi": "Published Products",
+  "toplamSatisSayisi": "Total Sales Count",
+  "toplamSatisMiktari": "Total Sales Amount",
+   "enCokSatilanUrun": "Best Selling Product",
+  "enCokBegenilenUrun": "Most Liked Product",
+  "analiz": "Analytics",
+  "enSonFaaliyetBilgileri": "Latest Activity Information",
+   "satilmaSayisi": "Number of Sales",
+  "begeniSayisi": "Number of Likes",
+    "urunResmi": "Product Image",
+  "suyaDayanikliMi": "Water Resistant?",
+  "garantiSuresi": "Warranty Period",
+  "stokDurumu": "Stock Status",
+   "urunAdi": "Product Name",
+   "renk": "Color",
+   "genislik": "Width",
+  "uzunluk": "Length",
+    "urunEkleme": "Add Product"
+
+
+
+
+
 
 
 }

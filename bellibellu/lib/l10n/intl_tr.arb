@@ -431,6 +431,34 @@
   "sandalyeAdi": "Sandalye Adı",
   "masaSatici": "Masa Satıcı",
   "sandalyeSatici": "Sandalye Satıcı",
-  "sandalyeSayisi": "Sandalye Sayısı"
+  "sandalyeSayisi": "Sandalye Sayısı",
+    "takimListesiBos": "Takım listesi boş",
+    "yorumEkle": "Yorum Ekle",
+    "urunlerim": "Ürünlerim",
+    "analiz": "Analiz",
+    "yayinlananUrunYok": "Yayınlanan ürün yok",
+     "begeniSayisi": "Beğeni Sayısı",
+  "yayinlananUrunSayisi": "Yayınlanan Ürün Sayısı",
+  "toplamSatisSayisi": "Toplam Satış Sayısı",
+  "toplamSatisMiktari": "Toplam Satış Miktarı",
+   "enCokSatilanUrun": "En Çok Satılan Ürün",
+  "enCokBegenilenUrun": "En Çok Beğenilen Ürün",
+  "analiz": "Analiz",
+  "enSonFaaliyetBilgileri": "En Son Faaliyet Bilgileri",
+   "satilmaSayisi": "Satılma Sayısı",
+  "begeniSayisi": "Beğeni Sayısı",
+   "urunResmi": "Ürün Resmi",
+  "suyaDayanikliMi": "Suya Dayanıklı mı?",
+  "garantiSuresi": "Garanti Süresi",
+  "stokDurumu": "Stok Durumu",
+    "urunAdi": "Ürün Adı",
+    "renk": "Renk",
+      "genislik": "Genişlik",
+  "uzunluk": "Uzunluk",
+    "urunEkleme": "Ürün Ekleme"
+
+
+
+
 
 }

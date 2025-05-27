@@ -554,6 +554,7 @@ class Katagoriler extends StatelessWidget {
         ).toLowerCase().contains(kelime)) {
           Provider.of<Urunlerprovider>(
             context,
+            listen: false,
           ).secilimateryalOgeler.add(kelime);
           eslesenkelimevarmi = true;
         }
@@ -565,7 +566,10 @@ class Katagoriler extends StatelessWidget {
           context,
           ortam,
         ).toLowerCase().contains(kelime)) {
-          Provider.of<Urunlerprovider>(context).seciliortamOgeler.add(kelime);
+          Provider.of<Urunlerprovider>(
+            context,
+            listen: false,
+          ).seciliortamOgeler.add(kelime);
           eslesenkelimevarmi = true;
         }
       }
@@ -573,7 +577,10 @@ class Katagoriler extends StatelessWidget {
     for (String tur in turler) {
       for (String kelime in kelimeler) {
         if (Cevirici.turCevir(context, tur).toLowerCase().contains(kelime)) {
-          Provider.of<Urunlerprovider>(context).seciliturOgeler.add(kelime);
+          Provider.of<Urunlerprovider>(
+            context,
+            listen: false,
+          ).seciliturOgeler.add(kelime);
           eslesenkelimevarmi = true;
         }
       }
@@ -582,7 +589,8 @@ class Katagoriler extends StatelessWidget {
     if (eslesenkelimevarmi) {
       return;
     } else if (kelimeler.length == 1) {
-      Provider.of<Urunlerprovider>(context).urunAdi = kelimeler.first;
+      Provider.of<Urunlerprovider>(context, listen: false).urunAdi =
+          kelimeler.first;
     }
 
     GoRouter.of(context).push(Paths.tumurunler);

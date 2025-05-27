@@ -5,6 +5,7 @@ import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/siparislerprovider.dart';
 import 'package:bellibellu/services/siparislervt.dart';
+import 'package:bellibellu/services/yorumlarvt.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -187,17 +188,18 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
                               DateTime.parse(
                                 context
                                     .watch<Siparislerprovider>()
-                                    .gecmissiparisler[faturaID]![0]['siparisTarihi'],
+                                    .gecmissiparisler[faturaID]![index]['siparisTarihi'],
                               ),
                             ),
 
                             toplam: toplamfiyat.toString(),
-                            urunler: [
+                            urunresimleri: [
                               ...urunler.asMap().entries.map((entry) {
                                 final Map<String, dynamic> urun = entry.value;
                                 return urun['urunResmi'];
                               }).toList(),
                             ],
+                            urunler: urunler,
                             faturaID: int.parse(faturaID),
                           );
                         },
@@ -274,94 +276,125 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
     );
   }
 
-  void _telefonPopup(BuildContext context) {
-    final TextEditingController _telefonController = TextEditingController();
+  void _telefonPopup(
+    BuildContext context,
+    List<Map<String, dynamic>> urunler,
+    int toplamadet,
+  ) {
     showModalBottomSheet(
       backgroundColor: Renkler.kuyubeyaz,
       context: context,
+
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (_) {
-        return Padding(
-          padding: EdgeInsets.only(
-            left: 16,
-            right: 16,
-            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
-            top: 24,
-          ),
-          child: ListView.builder(
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return buildCard(
-                children: [
-                  Row(
-                    children: [
-                      Icon(Icons.check, color: Colors.green, size: 10),
-                      SizedBox(width: 8),
-                      Text(
-                        S.of(context).teslim_edildi,
-                        style: TextStyle(color: Colors.green, fontSize: 10),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  Text(S.of(context).teslimat_bilgisi('adet', 'tarih')),
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Text("${S.of(context).kargo_firmasi}: "),
-                      Text(
-                        "trendyol express",
-                        style: TextStyle(color: Renkler.kahverengi),
-                      ),
-                      Spacer(),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/masalarresmi.png',
-                        fit: BoxFit.contain,
-                        width: 70,
-                        height: 70,
-                      ),
-                      SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "RADOON",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            Text("Dokunmatik Kalem Tüm Cihazlara Uyumlu"),
-                            Text('${S.of(context).adet}:'),
-                            Text(
-                              "255 TL",
+        return SizedBox(
+          height: 500,
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 16,
+              right: 16,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+              top: 24,
+            ),
+            child: ListView.builder(
+              itemCount: urunler.length,
+              itemBuilder: (context, index) {
+                return buildCard(
+                  children: [
+                    Row(
+                      children: [
+                        urunler[index]['teslim_durumu'] == 1
+                            ? Icon(Icons.check, color: Colors.green)
+                            : Icon(Icons.lock_clock, color: Renkler.kahverengi),
+                        SizedBox(width: 8),
+                        urunler[index]['teslim_durumu'] == 1
+                            ? Text(
+                              S.of(context).teslim_edildi,
+                              style: TextStyle(color: Colors.green),
+                            )
+                            : Text(
+                              S.of(context).bekliyor,
                               style: TextStyle(color: Renkler.kahverengi),
                             ),
-                            SizedBox(height: 4),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text(
-                                S.of(context).urun_degerlendir,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Renkler.kahverengi,
-                              ),
-                            ),
-                          ],
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      children: [
+                        Text("${S.of(context).kargo_firmasi}: "),
+                        Text(
+                          urunler[index]['kargosirketi'],
+                          style: TextStyle(color: Renkler.kahverengi),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              );
-            },
+                        Spacer(),
+                      ],
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 80,
+                          height: 80,
+                          child: Image.network(
+                            urunler[index]['urunResmi'],
+                            fit: BoxFit.contain,
+                            width: 70,
+                            height: 70,
+                          ),
+                        ),
+                        SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              buildRow(
+                                S.of(context).ad,
+                                urunler[index]['urunAdi'],
+                                valueColor: Renkler.kahverengi,
+                              ),
+                              buildRow(
+                                S.of(context).adet,
+                                (urunler[index]['urunSayisi'] *
+                                        (toplamadet / urunler.length).toInt())
+                                    .toString(),
+                                valueColor: Renkler.kahverengi,
+                              ),
+                              buildRow(
+                                S.of(context).fiyat,
+                                urunler[index]['fiyat'].toString(),
+                                valueColor: Renkler.kahverengi,
+                              ),
+                              SizedBox(height: 4),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    _yorumPopup(
+                                      context,
+                                      urunler[index]['urunID'],
+                                    );
+                                  },
+                                  child: Text(
+                                    S.of(context).urun_degerlendir,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Renkler.kahverengi,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              },
+            ),
           ),
         );
       },
@@ -371,18 +404,29 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
   Widget buildSiparisCard({
     required String tarih,
     required String toplam,
-    required List<String> urunler,
+    required List<String> urunresimleri,
+    required List<Map<String, dynamic>> urunler,
     required int faturaID,
   }) {
-    final Set<String> gorulenUrunler = {};
+    final Set<String> gorulenUrunresimleri = {};
     final List<Widget> urunGorselleri = [];
 
-    for (String e in urunler) {
-      if (!gorulenUrunler.contains(e)) {
-        gorulenUrunler.add(e);
+    for (String e in urunresimleri) {
+      if (!gorulenUrunresimleri.contains(e)) {
+        gorulenUrunresimleri.add(e);
         urunGorselleri.add(
           SizedBox(width: 50, height: 50, child: Image.network(e)),
         );
+      }
+    }
+    final List<Map<String, dynamic>> tekrarsizurunler = [];
+    final Set<dynamic> eklenenUrunIDler = {};
+
+    for (final urun in urunler) {
+      final urunID = urun['urunID'];
+      if (!eklenenUrunIDler.contains(urunID)) {
+        eklenenUrunIDler.add(urunID);
+        tekrarsizurunler.add(urun);
       }
     }
 
@@ -425,7 +469,7 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    _telefonPopup(context);
+                    _telefonPopup(context, tekrarsizurunler, urunler.length);
                   },
                   child: Text(
                     S.of(context).degerlendir,
@@ -474,5 +518,111 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
         child: Column(children: children),
       ),
     );
+  }
+
+  void _yorumPopup(BuildContext context, int urunID) {
+    final TextEditingController text = TextEditingController();
+    showModalBottomSheet(
+      backgroundColor: Renkler.kuyubeyaz,
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 16,
+            top: 24,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 4,
+                width: 40,
+                decoration: BoxDecoration(
+                  color: Renkler.kahverengi,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Text(
+                S.of(context).yorumEkle,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: text,
+                maxLines: 3,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: S.of(context).yorumEkle,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Renkler.kahverengi, // Buton rengi
+                  ),
+                  onPressed: () async {
+                    await yorumgonder(text.text, urunID);
+                    context.pop();
+                  },
+                  child: Text(
+                    S.of(context).gonder,
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 300),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> yorumgonder(String yorum, int urunID) async {
+    bool basari = await Yorumlarvt.yorumEkle(
+      kullaniciID:
+          Provider.of<Kullanicilarprovider>(
+            context,
+            listen: false,
+          ).currentkullanici['kullaniciID'],
+      urunID: urunID,
+      yorumMetni: yorum,
+    );
+    if (basari) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S.of(context).mesajDurumuGonderildi,
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            S.of(context).hataOlustu,
+            style: TextStyle(color: Renkler.kahverengi),
+          ),
+          duration: Duration(seconds: 2),
+          backgroundColor: Renkler.krem,
+        ),
+      );
+    }
   }
 }

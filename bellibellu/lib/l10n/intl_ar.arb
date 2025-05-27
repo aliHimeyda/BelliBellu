@@ -427,7 +427,36 @@
   "sandalyeAdi": "اسم الكرسي",
    "sandalyeSayisi": "عدد الكراسي",
      "masaSatici": "بائع الطاولة",
-  "sandalyeSatici": "بائع الكراسي"
+  "sandalyeSatici": "بائع الكراسي",
+   "takimListesiBos": "قائمة الفرق فارغة",
+   "yorumEkle": "أضف تعليقًا",
+   "urunlerim": "منتجاتي",
+   "analiz": "تحليل",
+   "yayinlananUrunYok": "لا يوجد منتج منشور",
+   "begeniSayisi": "عدد الإعجابات",
+  "yayinlananUrunSayisi": "عدد المنتجات المنشورة",
+  "toplamSatisSayisi": "إجمالي عدد المبيعات",
+  "toplamSatisMiktari": "إجمالي مبلغ المبيعات",
+   "enCokSatilanUrun": "المنتج الأكثر مبيعًا",
+  "enCokBegenilenUrun": "المنتج الأكثر إعجابًا",
+  "analiz": "تحليلات",
+  "enSonFaaliyetBilgileri": "معلومات النشاط الأخيرة",
+    "satilmaSayisi": "عدد المبيعات",
+  "begeniSayisi": "عدد الإعجابات",
+   "urunResmi": "صورة المنتج",
+  "suyaDayanikliMi": "هل مقاوم للماء؟",
+  "garantiSuresi": "مدة الضمان",
+  "stokDurumu": "حالة المخزون",
+   "urunAdi": "اسم المنتج",
+    "renk": "اللون",
+    "genislik": "العرض",
+  "uzunluk": "الطول",
+   "urunEkleme": "إضافة منتج"
+
+
+
+
+
 
 
 }

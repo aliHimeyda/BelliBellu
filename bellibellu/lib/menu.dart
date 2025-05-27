@@ -99,37 +99,42 @@ class _MenuState extends State<Menu> {
             Wrap(
               alignment: WrapAlignment.center,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 12,
-                  ),
-                  color: Renkler.kuyubeyaz,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Üst bar: Merhaba, Ayarlar, Bildirim, Dil
-                      const SizedBox(height: 16),
-
-                      // Butonlar
-                      GridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 2,
-                        childAspectRatio: 3,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        physics: NeverScrollableScrollPhysics(),
+                Provider.of<Kullanicilarprovider>(
+                      context,
+                      listen: false,
+                    ).ismusteri
+                    ? Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
+                      color: Renkler.kuyubeyaz,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buton(
-                            S.of(context).baslik_siparislerim,
-                            Icons.shopping_bag,
+                          // Üst bar: Merhaba, Ayarlar, Bildirim, Dil
+                          const SizedBox(height: 16),
+
+                          // Butonlar
+                          GridView.count(
+                            shrinkWrap: true,
+                            crossAxisCount: 2,
+                            childAspectRatio: 3,
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12,
+                            physics: NeverScrollableScrollPhysics(),
+                            children: [
+                              buton(
+                                S.of(context).baslik_siparislerim,
+                                Icons.shopping_bag,
+                              ),
+                              buton(S.of(context).hesap, Icons.person_outline),
+                            ],
                           ),
-                          buton(S.of(context).hesap, Icons.person_outline),
                         ],
                       ),
-                    ],
-                  ),
-                ),
+                    )
+                    : SizedBox(),
                 GestureDetector(
                   onTap: () {
                     context.push(
@@ -174,7 +179,16 @@ class _MenuState extends State<Menu> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    context.push(Paths.kaydedilenler); // Sayfaya nesneyi geçir)
+                    if (Provider.of<Kullanicilarprovider>(
+                      context,
+                      listen: false,
+                    ).ismusteri) {
+                      context.push(
+                        Paths.kaydedilenler,
+                      ); // Sayfaya nesneyi geçir)
+                    } else {
+                      context.push(Paths.urunlerim);
+                    }
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -194,12 +208,22 @@ class _MenuState extends State<Menu> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.favorite,
+                              Provider.of<Kullanicilarprovider>(
+                                    context,
+                                    listen: false,
+                                  ).ismusteri
+                                  ? Icons.favorite
+                                  : Icons.indeterminate_check_box,
                               color: Renkler.kahverengi,
                               size: 60,
                             ),
                             Text(
-                              S.of(context).favorilerim,
+                              Provider.of<Kullanicilarprovider>(
+                                    context,
+                                    listen: false,
+                                  ).ismusteri
+                                  ? S.of(context).favorilerim
+                                  : S.of(context).urunlerim,
                               style: TextStyle(
                                 color: Renkler.kahverengi,
                                 fontSize: 15,

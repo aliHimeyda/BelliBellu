@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Cihazbellegi {
   static bool? girisyapildimi;
+  static bool? ismusteri;
   static Future<String?> girisyapanmail() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? girismaili = prefs.getString('girisyapanmail');
@@ -23,6 +24,12 @@ class Cihazbellegi {
   static Future<bool?> giriskontrolu() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final bool? repeat = prefs.getBool('girisbilgisi');
+    return repeat;
+  }
+
+  static Future<bool?> ismusterikontrolu() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? repeat = prefs.getBool('ismusteri');
     return repeat;
   }
 }
@@ -72,14 +79,26 @@ class _LogosayfasiState extends State<Logosayfasi> {
 
   void giriskontrolu(BuildContext context) async {
     Cihazbellegi.girisyapildimi = await Cihazbellegi.giriskontrolu();
+    Cihazbellegi.ismusteri = await Cihazbellegi.ismusterikontrolu();
     if (Cihazbellegi.girisyapildimi == true) {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       String? mail = prefs.getString('girisyapanmail');
       debugPrint(mail);
-      Provider.of<Kullanicilarprovider>(
-        context,
-        listen: false,
-      ).currentkullanici = await Kullanicilarvt.getmusteriBymail(mail!);
+      if (Cihazbellegi.ismusteri == true) {
+        Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
+            true;
+        Provider.of<Kullanicilarprovider>(
+          context,
+          listen: false,
+        ).currentkullanici = await Kullanicilarvt.getmusteriBymail(mail!);
+      } else {
+        Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
+            false;
+        Provider.of<Kullanicilarprovider>(
+          context,
+          listen: false,
+        ).currentkullanici = await Kullanicilarvt.getsaticiBymail(mail!);
+      }
     }
     debugPrint('giris bilgisi: ${Cihazbellegi.girisyapildimi}');
   }
@@ -107,10 +126,7 @@ class _LogosayfasiState extends State<Logosayfasi> {
     ];
     for (int i = 0; i < 5; i++) {
       Serid serid = Serid(vasif: vasiflar[i], seridkategorisi: kategoriler[i]);
-      Provider.of<Seridlerprovider>(
-                    context,
-                    listen: false,
-                  ).seridler.add(serid);
+      Provider.of<Seridlerprovider>(context, listen: false).seridler.add(serid);
     }
   }
 

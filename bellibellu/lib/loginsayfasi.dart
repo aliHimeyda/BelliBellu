@@ -793,6 +793,10 @@ class _LoginpageState extends State<Loginpage> {
   Future<void> cihazagirisbilgisinikaydet() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool('girisbilgisi', girisyapildimi);
+    await prefs.setBool(
+      'ismusteri',
+      Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri,
+    );
     await prefs.setString('girisyapanmail', girisyapanmail);
   }
 

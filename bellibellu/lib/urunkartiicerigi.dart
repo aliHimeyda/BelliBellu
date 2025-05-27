@@ -1566,58 +1566,64 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                     ],
                   ),
                 ),
-                Positioned(
-                  top: 5,
-                  right: 3,
-                  child: Container(
-                    width: 27,
-                    height: 27,
-                    decoration: BoxDecoration(
-                      color: Renkler.krem,
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: Renkler.kahverengi),
-                    ),
-                    child: Center(
-                      child: IconButton(
-                        padding: const EdgeInsets.all(0),
-                        onPressed: () async {
-                          debugPrint('${urun['urunAdi']} tiklandi');
-                          begenilmismi
-                              ? begenilmismi = false
-                              : begenilmismi = true;
-                          if (begenilmismi) {
-                            setState(() {
-                              widget.colored(color: Renkler.kirmizi);
-                            });
-                            await begenilenekaydet(
-                              urun['urunID'],
-                              Provider.of<Kullanicilarprovider>(
-                                context,
-                                listen: false,
-                              ).currentkullanici['kullaniciID'],
-                            );
-                          } else {
-                            setState(() {
-                              widget.colored(color: Colors.white);
-                            });
-                            begenilendensil(
-                              urun['urunID'],
-                              Provider.of<Kullanicilarprovider>(
-                                context,
-                                listen: false,
-                              ).currentkullanici['kullaniciID'],
-                            );
-                          }
-                        },
-                        icon: Icon(
-                          Icons.favorite,
-                          color: begenilmismi ? Renkler.kirmizi : Colors.white,
-                          size: 20,
+                Provider.of<Kullanicilarprovider>(
+                      context,
+                      listen: false,
+                    ).ismusteri
+                    ? Positioned(
+                      top: 5,
+                      right: 3,
+                      child: Container(
+                        width: 27,
+                        height: 27,
+                        decoration: BoxDecoration(
+                          color: Renkler.krem,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: Renkler.kahverengi),
+                        ),
+                        child: Center(
+                          child: IconButton(
+                            padding: const EdgeInsets.all(0),
+                            onPressed: () async {
+                              debugPrint('${urun['urunAdi']} tiklandi');
+                              begenilmismi
+                                  ? begenilmismi = false
+                                  : begenilmismi = true;
+                              if (begenilmismi) {
+                                setState(() {
+                                  widget.colored(color: Renkler.kirmizi);
+                                });
+                                await begenilenekaydet(
+                                  urun['urunID'],
+                                  Provider.of<Kullanicilarprovider>(
+                                    context,
+                                    listen: false,
+                                  ).currentkullanici['kullaniciID'],
+                                );
+                              } else {
+                                setState(() {
+                                  widget.colored(color: Colors.white);
+                                });
+                                begenilendensil(
+                                  urun['urunID'],
+                                  Provider.of<Kullanicilarprovider>(
+                                    context,
+                                    listen: false,
+                                  ).currentkullanici['kullaniciID'],
+                                );
+                              }
+                            },
+                            icon: Icon(
+                              Icons.favorite,
+                              color:
+                                  begenilmismi ? Renkler.kirmizi : Colors.white,
+                              size: 20,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
+                    )
+                    : SizedBox(),
                 Positioned(
                   top: 5,
                   left: 3,
@@ -1968,57 +1974,59 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
     );
   }
 
-  Positioned favoriteIcon() {
-    return Positioned(
-      top: 35,
-      right: 10,
-      child: Container(
-        width: 27,
-        height: 27,
-        decoration: BoxDecoration(
-          color: Renkler.krem,
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Renkler.kahverengi),
-        ),
-        child: Center(
-          child: IconButton(
-            padding: const EdgeInsets.all(0),
-            onPressed: () async {
-              debugPrint('${urun['urunAdi']} tiklandi');
-              begenilmismi ? begenilmismi = false : begenilmismi = true;
-              if (begenilmismi) {
-                setState(() {
-                  widget.colored(color: Renkler.kirmizi);
-                });
-                await begenilenekaydet(
-                  urun['urunID'],
-                  Provider.of<Kullanicilarprovider>(
-                    context,
-                    listen: false,
-                  ).currentkullanici['kullaniciID'],
-                );
-              } else {
-                setState(() {
-                  widget.colored(color: Colors.white);
-                });
-                begenilendensil(
-                  urun['urunID'],
-                  Provider.of<Kullanicilarprovider>(
-                    context,
-                    listen: false,
-                  ).currentkullanici['kullaniciID'],
-                );
-              }
-            },
-            icon: Icon(
-              Icons.favorite,
-              color: begenilmismi ? Renkler.kirmizi : Colors.white,
-              size: 20,
+  Widget favoriteIcon() {
+    return Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri
+        ? Positioned(
+          top: 35,
+          right: 10,
+          child: Container(
+            width: 27,
+            height: 27,
+            decoration: BoxDecoration(
+              color: Renkler.krem,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(color: Renkler.kahverengi),
+            ),
+            child: Center(
+              child: IconButton(
+                padding: const EdgeInsets.all(0),
+                onPressed: () async {
+                  debugPrint('${urun['urunAdi']} tiklandi');
+                  begenilmismi ? begenilmismi = false : begenilmismi = true;
+                  if (begenilmismi) {
+                    setState(() {
+                      widget.colored(color: Renkler.kirmizi);
+                    });
+                    await begenilenekaydet(
+                      urun['urunID'],
+                      Provider.of<Kullanicilarprovider>(
+                        context,
+                        listen: false,
+                      ).currentkullanici['kullaniciID'],
+                    );
+                  } else {
+                    setState(() {
+                      widget.colored(color: Colors.white);
+                    });
+                    begenilendensil(
+                      urun['urunID'],
+                      Provider.of<Kullanicilarprovider>(
+                        context,
+                        listen: false,
+                      ).currentkullanici['kullaniciID'],
+                    );
+                  }
+                },
+                icon: Icon(
+                  Icons.favorite,
+                  color: begenilmismi ? Renkler.kirmizi : Colors.white,
+                  size: 20,
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        )
+        : SizedBox();
   }
 
   Positioned bottomnavigation(BuildContext context) {
@@ -2038,7 +2046,23 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   width: 90,
                   child: OutlinedButton(
                     onPressed: () async {
-                      await sendSMS();
+                      if (Provider.of<Kullanicilarprovider>(
+                        context,
+                        listen: false,
+                      ).ismusteri) {
+                        await sendSMS();
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              S.of(context).hataOlustu,
+                              style: TextStyle(color: Renkler.kahverengi),
+                            ),
+                            duration: Duration(seconds: 2),
+                            backgroundColor: Renkler.krem,
+                          ),
+                        );
+                      }
                     },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Renkler.kahverengi),
@@ -2054,17 +2078,34 @@ class _UrunkartiicerigiState extends State<Urunkartiicerigi>
                   width: 150,
                   child: ElevatedButton(
                     onPressed: () async {
-                      await siparisEkle(urun['urunID']);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            S.of(context).sepete_eklendi,
-                            style: TextStyle(color: Renkler.kahverengi),
+                      if (Provider.of<Kullanicilarprovider>(
+                            context,
+                            listen: false,
+                          ).ismusteri ==
+                          true) {
+                        await siparisEkle(urun['urunID']);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              S.of(context).sepete_eklendi,
+                              style: TextStyle(color: Renkler.kahverengi),
+                            ),
+                            duration: Duration(seconds: 2),
+                            backgroundColor: Renkler.krem,
                           ),
-                          duration: Duration(seconds: 2),
-                          backgroundColor: Renkler.krem,
-                        ),
-                      );
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              S.of(context).hataOlustu,
+                              style: TextStyle(color: Renkler.kahverengi),
+                            ),
+                            duration: Duration(seconds: 2),
+                            backgroundColor: Renkler.krem,
+                          ),
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
