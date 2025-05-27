@@ -1946,6 +1946,91 @@ class S {
       args: [],
     );
   }
+
+  /// `Address information is missing, please enter your address.`
+  String get adresEksik {
+    return Intl.message(
+      'Address information is missing, please enter your address.',
+      name: 'adresEksik',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{0} Delivery, {1} Product`
+  String teslimatUrunSayisi(Object adetTeslimat, Object adetUrun) {
+    return Intl.message(
+      '{0} Delivery, {1} Product',
+      name: 'teslimatUrunSayisi',
+      desc: 'Shows number of deliveries and products',
+      args: [adetTeslimat, adetUrun],
+    );
+  }
+
+  /// `Pending`
+  String get bekliyor {
+    return Intl.message('Pending', name: 'bekliyor', desc: '', args: []);
+  }
+
+  /// `Cart is empty`
+  String get sepetBos {
+    return Intl.message('Cart is empty', name: 'sepetBos', desc: '', args: []);
+  }
+
+  /// `No past orders`
+  String get gecmisBos {
+    return Intl.message(
+      'No past orders',
+      name: 'gecmisBos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Packages`
+  String get takimlar {
+    return Intl.message('Packages', name: 'takimlar', desc: '', args: []);
+  }
+
+  /// `Package Code`
+  String get takimKodu {
+    return Intl.message('Package Code', name: 'takimKodu', desc: '', args: []);
+  }
+
+  /// `Table Name`
+  String get masaAdi {
+    return Intl.message('Table Name', name: 'masaAdi', desc: '', args: []);
+  }
+
+  /// `Chair Name`
+  String get sandalyeAdi {
+    return Intl.message('Chair Name', name: 'sandalyeAdi', desc: '', args: []);
+  }
+
+  /// `Table Seller`
+  String get masaSatici {
+    return Intl.message('Table Seller', name: 'masaSatici', desc: '', args: []);
+  }
+
+  /// `Chair Seller`
+  String get sandalyeSatici {
+    return Intl.message(
+      'Chair Seller',
+      name: 'sandalyeSatici',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of Chairs`
+  String get sandalyeSayisi {
+    return Intl.message(
+      'Number of Chairs',
+      name: 'sandalyeSayisi',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

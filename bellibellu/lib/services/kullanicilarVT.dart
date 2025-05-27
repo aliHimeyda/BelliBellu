@@ -89,11 +89,9 @@ class Kullanicilarvt {
     Map<String, dynamic> musteri,
   ) async {
     try {
-      // Tarihi SQL uyumlu formata çevir (yyyy-MM-dd)
       String isoTarih = DateFormat(
         'yyyy-MM-dd',
-      ).format(DateFormat('dd.MM.yyyy').parse(musteri['dogumTarihi']));
-
+      ).format(DateTime.parse(musteri['dogumTarihi']));
       // Güncellenecek veriler
       final Map<String, dynamic> guncelVeri = {
         'id': musteri['kullaniciID'],

@@ -1,5 +1,6 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
+import 'package:bellibellu/services/kullanicilarVT.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
 import 'package:bellibellu/services/siparislerprovider.dart';
@@ -251,297 +252,362 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
         } else if (snapshot.hasError) {
           return Center(child: Text("Bir hata oluştu: ${snapshot.error}"));
         }
-        return Stack(
-          children: [
-            Scaffold(
-              backgroundColor: Colors.white,
-              appBar: AppBar(
-                backgroundColor: Renkler.kahverengi,
-                title: Text(
-                  S
-                      .of(context)
-                      .sepetim_baslik(
-                        context
-                            .watch<Siparislerprovider>()
-                            .siparisler
-                            .values
-                            .fold<int>(
-                              0,
-                              (sum, urunler) => sum + urunler.length,
-                            )
-                            .toString(),
-                      ),
-                  style: TextStyle(color: Colors.white),
+        if (context
+                .watch<Siparislerprovider>()
+                .siparisler
+                .entries
+                .toList()
+                .length >
+            0) {
+          return Stack(
+            children: [
+              Scaffold(
+                backgroundColor: Renkler.kuyubeyaz,
+                appBar: AppBar(
+                  backgroundColor: Renkler.kahverengi,
+                  title: Text(
+                    S
+                        .of(context)
+                        .sepetim_baslik(
+                          context
+                              .watch<Siparislerprovider>()
+                              .siparisler
+                              .values
+                              .fold<int>(
+                                0,
+                                (sum, urunler) => sum + urunler.length,
+                              )
+                              .toString(),
+                        ),
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-              ),
-              body: ListView.builder(
-                itemCount:
-                    context
-                        .watch<Siparislerprovider>()
-                        .siparisler
-                        .entries
-                        .toList()
-                        .length,
-                itemBuilder: (context, index) {
-                  final entry =
+                body: ListView.builder(
+                  itemCount:
                       context
                           .watch<Siparislerprovider>()
                           .siparisler
                           .entries
-                          .toList()[index];
-                  final String satici = entry.key;
-                  final List<Map<String, dynamic>> urunler = entry.value;
+                          .toList()
+                          .length,
+                  itemBuilder: (context, index) {
+                    final entry =
+                        context
+                            .watch<Siparislerprovider>()
+                            .siparisler
+                            .entries
+                            .toList()[index];
+                    final String satici = entry.key;
+                    final List<Map<String, dynamic>> urunler = entry.value;
 
-                  return Card(
-                    color: const Color.fromARGB(255, 250, 241, 226),
-                    margin: const EdgeInsets.all(12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CheckboxListTile(
-                          value: tumUrunlerSecili(satici),
-                          activeColor: Renkler.kahverengi,
-                          onChanged: (val) => toggleSatici(satici, val),
-                          title: Text(
-                            satici,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                    return Card(
+                      color: const Color.fromARGB(255, 250, 241, 226),
+                      margin: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CheckboxListTile(
+                            value: tumUrunlerSecili(satici),
+                            activeColor: Renkler.kahverengi,
+                            onChanged: (val) => toggleSatici(satici, val),
+                            title: Text(
+                              satici,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                        ),
-                        ...urunler.asMap().entries.map((entry) {
-                          final int urunIndex = entry.key;
-                          final Map<String, dynamic> urun = entry.value;
-                          return Column(
-                            children: [
-                              Divider(color: Renkler.kahverengi),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 20,
-                                ),
-                                margin: const EdgeInsets.symmetric(vertical: 6),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Checkbox(
-                                      activeColor: Renkler.kahverengi,
-                                      value: urun['secili'],
-                                      onChanged:
-                                          (val) => toggleUrun(
-                                            satici,
-                                            urunIndex,
-                                            val,
-                                          ),
-                                    ),
-                                    Container(
-                                      width: 120,
-                                      height: 120,
-                                      child: Image.network(
-                                        urun['urunResmi'],
-                                        fit: BoxFit.cover,
+                          ...urunler.asMap().entries.map((entry) {
+                            final int urunIndex = entry.key;
+                            final Map<String, dynamic> urun = entry.value;
+                            return Column(
+                              children: [
+                                Divider(color: Renkler.kahverengi),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 20,
+                                  ),
+                                  margin: const EdgeInsets.symmetric(
+                                    vertical: 6,
+                                  ),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Checkbox(
+                                        activeColor: Renkler.kahverengi,
+                                        value: urun['secili'],
+                                        onChanged:
+                                            (val) => toggleUrun(
+                                              satici,
+                                              urunIndex,
+                                              val,
+                                            ),
                                       ),
-                                    ),
-                                    const SizedBox(width: 15),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            urun['urunAdi'],
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Container(
-                                            height: 35,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: Renkler.kahverengi
-                                                    .withOpacity(0.4),
+                                      Container(
+                                        width: 120,
+                                        height: 120,
+                                        child: Image.network(
+                                          urun['urunResmi'],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 15),
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              urun['urunAdi'],
+                                              style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(24),
                                             ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.remove,
-                                                    size: 16,
-                                                    color: Renkler.kahverengi,
-                                                  ),
-                                                  onPressed: () async {
-                                                    int? yeniadet =
-                                                        await siparisSil(
-                                                          urun['urunID'],
-                                                        );
-                                                    if (yeniadet != null) {
-                                                      setState(() {
-                                                        urun['urunSayisi'] =
-                                                            yeniadet;
-                                                      });
-                                                    }
-                                                  },
+                                            const SizedBox(height: 4),
+                                            Container(
+                                              height: 35,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Renkler.kahverengi
+                                                      .withOpacity(0.4),
                                                 ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                        horizontal: 8,
-                                                        vertical: 4,
-                                                      ),
-                                                  decoration: BoxDecoration(
-                                                    color: Renkler.kahverengi
-                                                        .withOpacity(0.1),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          12,
-                                                        ),
-                                                  ),
-                                                  child: Text(
-                                                    urun['urunSayisi']
-                                                        .toString(),
-                                                    style: const TextStyle(
+                                                borderRadius:
+                                                    BorderRadius.circular(24),
+                                              ),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  IconButton(
+                                                    icon: const Icon(
+                                                      Icons.remove,
+                                                      size: 16,
                                                       color: Renkler.kahverengi,
-                                                      fontWeight:
-                                                          FontWeight.bold,
+                                                    ),
+                                                    onPressed: () async {
+                                                      int? yeniadet =
+                                                          await siparisSil(
+                                                            urun['urunID'],
+                                                          );
+                                                      if (yeniadet != null) {
+                                                        setState(() {
+                                                          urun['urunSayisi'] =
+                                                              yeniadet;
+                                                        });
+                                                      }
+                                                    },
+                                                  ),
+                                                  Container(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                          horizontal: 8,
+                                                          vertical: 4,
+                                                        ),
+                                                    decoration: BoxDecoration(
+                                                      color: Renkler.kahverengi
+                                                          .withOpacity(0.1),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            12,
+                                                          ),
+                                                    ),
+                                                    child: Text(
+                                                      urun['urunSayisi']
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                        color:
+                                                            Renkler.kahverengi,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                IconButton(
-                                                  icon: const Icon(
-                                                    Icons.add,
-                                                    size: 16,
-                                                    color: Renkler.kahverengi,
+                                                  IconButton(
+                                                    icon: const Icon(
+                                                      Icons.add,
+                                                      size: 16,
+                                                      color: Renkler.kahverengi,
+                                                    ),
+                                                    onPressed: () async {
+                                                      int? yeniadet =
+                                                          await siparisEkle(
+                                                            urun['urunID'],
+                                                          );
+                                                      if (yeniadet != null) {
+                                                        setState(() {
+                                                          urun['urunSayisi'] =
+                                                              yeniadet;
+                                                        });
+                                                      }
+                                                    },
                                                   ),
-                                                  onPressed: () async {
-                                                    int? yeniadet =
-                                                        await siparisEkle(
-                                                          urun['urunID'],
-                                                        );
-                                                    if (yeniadet != null) {
-                                                      setState(() {
-                                                        urun['urunSayisi'] =
-                                                            yeniadet;
-                                                      });
-                                                    }
-                                                  },
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Text("Fiyat: ${urun['fiyat']} TL"),
-                                        ],
+                                            const SizedBox(height: 4),
+                                            Text("Fiyat: ${urun['fiyat']} TL"),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          }).toList(),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+                bottomNavigationBar:
+                    (context
+                                .watch<Siparislerprovider>()
+                                .siparisler
+                                .entries
+                                .toList()
+                                .length >
+                            0)
+                        ? Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 12,
+                          ),
+                          color: Renkler.krem,
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: detayGoster,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      S.of(context).toplam,
+                                      style: TextStyle(
+                                        color: Renkler.kahverengi,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const Icon(
+                                      Icons.keyboard_arrow_up,
+                                      color: Renkler.kahverengi,
+                                    ),
+                                    Text(
+                                      " ${(kargoUcreti + toplamFiyat).toStringAsFixed(2)} TL",
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Renkler.kahverengi,
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ],
-                          );
-                        }).toList(),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              bottomNavigationBar:
-                  (context
-                              .watch<Siparislerprovider>()
-                              .siparisler
-                              .entries
-                              .toList()
-                              .length >
-                          0)
-                      ? Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
-                        ),
-                        color: Renkler.krem,
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: detayGoster,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    S.of(context).toplam,
-                                    style: TextStyle(
-                                      color: Renkler.kahverengi,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const Icon(
-                                    Icons.keyboard_arrow_up,
-                                    color: Renkler.kahverengi,
-                                  ),
-                                  Text(
-                                    " ${(kargoUcreti + toplamFiyat).toStringAsFixed(2)} TL",
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      color: Renkler.kahverengi,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const Spacer(),
-                            ElevatedButton(
-                              onPressed: () async {
-                                if (Provider.of<Siparislerprovider>(
-                                  context,
-                                  listen: false,
-                                ).onaylanmisSiparisler.isEmpty) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: Renkler.kahverengi,
-                                      content: Text(
-                                        S.of(context).lutfenSepettenUrunSecin,
-                                        style: TextStyle(color: Colors.white),
+                              const Spacer(),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  if (Provider.of<Siparislerprovider>(
+                                    context,
+                                    listen: false,
+                                  ).onaylanmisSiparisler.isEmpty) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Renkler.kahverengi,
+                                        content: Text(
+                                          S.of(context).lutfenSepettenUrunSecin,
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                } else {
-                                  kartPopupGoster(context);
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Renkler.kahverengi,
+                                    );
+                                  } else {
+                                    if (Provider.of<Kullanicilarprovider>(
+                                          context,
+                                          listen: false,
+                                        ).currentkullanici['adres'] ==
+                                        null) {
+                                      adresPopupGoster(context);
+                                    } else {
+                                      kartPopupGoster(context);
+                                    }
+                                  }
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Renkler.kahverengi,
+                                ),
+                                child: Text(
+                                  S.of(context).sepeti_onayla,
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
-                              child: Text(
-                                S.of(context).sepeti_onayla,
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                      : SizedBox(),
-            ),
-            Provider.of<Loadingprovider>(context, listen: false).isloading
-                ? Center(
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: MediaQuery.sizeOf(context).height,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(83, 138, 103, 32),
-                    ),
-                    child: Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator(
-                          color: Renkler.kahverengi,
+                            ],
+                          ),
+                        )
+                        : SizedBox(),
+              ),
+              Provider.of<Loadingprovider>(context, listen: false).isloading
+                  ? Center(
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: MediaQuery.sizeOf(context).height,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(83, 138, 103, 32),
+                      ),
+                      child: Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CircularProgressIndicator(
+                            color: Renkler.kahverengi,
+                          ),
                         ),
                       ),
                     ),
+                  )
+                  : SizedBox(),
+            ],
+          );
+        } else {
+          return Center(
+            child: Container(
+              width: 250,
+              height: 250,
+              decoration: BoxDecoration(
+                color: Renkler.krem,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
                   ),
-                )
-                : SizedBox(),
-          ],
-        );
+                ],
+              ),
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      height: 80,
+                      child: Image.asset(
+                        'assets/sepetebos.png',
+                        color: Renkler.kahverengi,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      S.of(context).sepetBos,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Renkler.kahverengi,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
       },
     );
   }
@@ -732,6 +798,117 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
                 ),
                 child: Text(
                   S.of(context).gonder,
+                  style: TextStyle(color: Renkler.kahverengi),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void adresPopupGoster(BuildContext context) {
+    final TextEditingController adrescontroller = TextEditingController();
+
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Renkler.kuyubeyaz,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: 20,
+            right: 20,
+            bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+            top: 20,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                S.of(context).adresEksik,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Renkler.kahverengi,
+                ),
+              ),
+              SizedBox(height: 12),
+              TextField(
+                controller: adrescontroller,
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: S.of(context).adres,
+                  labelStyle: TextStyle(color: Renkler.kahverengi),
+                  border: OutlineInputBorder(),
+                  fillColor: Renkler.kahverengi,
+                  focusColor: Renkler.kahverengi,
+                ),
+              ),
+              SizedBox(height: 12),
+              ElevatedButton(
+                onPressed: () async {
+                  if (adrescontroller.text.length < 16) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Renkler.kahverengi,
+                        content: Text(
+                          S.of(context).hataOlustu,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    );
+                    return;
+                  } else {
+                    debugPrint(
+                      Provider.of<Kullanicilarprovider>(
+                        context,
+                        listen: false,
+                      ).currentkullanici['adres'].toString(),
+                    );
+                    Provider.of<Kullanicilarprovider>(
+                          context,
+                          listen: false,
+                        ).currentkullanici['adres'] =
+                        adrescontroller.text;
+                    bool basari = await Kullanicilarvt.updateMusteriBilgileri(
+                      Provider.of<Kullanicilarprovider>(
+                        context,
+                        listen: false,
+                      ).currentkullanici,
+                    );
+                    if (basari) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Renkler.kahverengi,
+                          content: Text(
+                            S.of(context).islem_basarili,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Renkler.kahverengi,
+                          content: Text(
+                            S.of(context).hataOlustu,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    }
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Renkler.krem),
+                ),
+                child: Text(
+                  S.of(context).kayit_ol,
                   style: TextStyle(color: Renkler.kahverengi),
                 ),
               ),

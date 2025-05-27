@@ -174,4 +174,49 @@ class Urunlervt {
       return false;
     }
   }
+
+
+  static Future<List<Map<String, dynamic>>> getMoretakim(
+    int page,
+    List<String>? secilimateryalOgeler,
+    List<String>? seciliortamOgeler,
+    List<String>? seciliturOgeler,
+    List<Map<String, int>>? secilifiyatOgeler,
+    String? siralamaolcutu,
+    String? arananurunAdi,
+    String? tarihegore,
+    int kullaniciID,
+  ) async {
+    final limit = 15;
+    String materyalJson = jsonEncode(secilimateryalOgeler);
+    String ortamJson = jsonEncode(seciliortamOgeler);
+    String turJson = jsonEncode(seciliturOgeler);
+    String fiyatJson = jsonEncode(secilifiyatOgeler);
+
+    final uri = Uri.parse('$baseUrl/takimlar').replace(
+      queryParameters: {
+        'page': page.toString(),
+        'limit': limit.toString(),
+        'secilimateryalOgeler': materyalJson,
+        'seciliortamOgeler': ortamJson,
+        'seciliturOgeler': turJson,
+        'secilifiyatOgeler': fiyatJson,
+        'secilirenkOgeler': fiyatJson,
+        'siralamaolcutu': siralamaolcutu,
+        'arananurunAdi': arananurunAdi,
+        'tarihegore': tarihegore,
+        'kullaniciID': kullaniciID.toString(),
+      },
+    );
+    loadmore = true;
+    final response = await http.get(uri);
+    loadmore = false;
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      print(data);
+      return List<Map<String, dynamic>>.from(data);
+    } else {
+      throw Exception('Ürünler alınamadı');
+    }
+  }
 }

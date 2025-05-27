@@ -1,20 +1,43 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
+import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:bellibellu/services/loadingprovider.dart';
+import 'package:bellibellu/services/siparislerprovider.dart';
+import 'package:bellibellu/services/siparislervt.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class Gecmissiparislersayfasi extends StatefulWidget {
+  const Gecmissiparislersayfasi({super.key});
   @override
   State<Gecmissiparislersayfasi> createState() =>
       _GecmissiparislersayfasiState();
 }
 
 class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
+  late Future<void> gecmissiparisleriyukle;
   TextEditingController _textcontroller = TextEditingController();
   List<bool> selectedlist = [true, false, false];
+  @override
+  void initState() {
+    super.initState();
+    gecmissiparisleriyukle = gecmissiparisleriyuklem();
+  }
+
+  Future<void> gecmissiparisleriyuklem() async {
+    Provider.of<Siparislerprovider>(
+      context,
+      listen: false,
+    ).gecmissiparisler = await Siparislervt.tumgecmisSiparisleriGetir(
+      Provider.of<Kullanicilarprovider>(
+        context,
+        listen: false,
+      ).currentkullanici['kullaniciID'],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +68,10 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
                     ),
                     floatingLabelStyle: TextStyle(color: Renkler.kahverengi),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Renkler.kahverengi, width: 2.0),
+                      borderSide: BorderSide(
+                        color: Renkler.kahverengi,
+                        width: 2.0,
+                      ),
                     ),
                   ),
                   onChanged: (value) {},
@@ -54,7 +80,10 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
               SizedBox(height: 12),
               // Kategori Butonları
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   spacing: 14,
@@ -104,48 +133,143 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
                   ],
                 ),
               ),
-        
+
               // Arama Kutusu
               SizedBox(height: 12),
-        
+
               // Sipariş Listesi
-              Expanded(
-                child: ListView(
-                  padding: EdgeInsets.all(12),
-                  children: [
-                    buildSiparisCard(
-                      tarih: '24 Mart 2025',
-                      toplam: '1088.91 TL',
-                      urunler: ['📦', '🔌', '📘', '✏️'],
-                    ),
-                    buildSiparisCard(
-                      tarih: '18 Mart 2025',
-                      toplam: '651.90 TL',
-                      urunler: ['✏️', '🧴', '🧴', '☀️'],
-                    ),
-                  ],
-                ),
+              FutureBuilder(
+                future: gecmissiparisleriyukle,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Renkler.kahverengi,
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Bir hata oluştu: ${snapshot.error}"),
+                    );
+                  }
+                  if (context
+                          .watch<Siparislerprovider>()
+                          .gecmissiparisler
+                          .entries
+                          .toList()
+                          .length >
+                      0) {
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount:
+                            context
+                                .watch<Siparislerprovider>()
+                                .gecmissiparisler
+                                .entries
+                                .toList()
+                                .length,
+                        itemBuilder: (context, index) {
+                          final entry =
+                              context
+                                  .watch<Siparislerprovider>()
+                                  .gecmissiparisler
+                                  .entries
+                                  .toList()[index];
+                          final String faturaID = entry.key;
+                          final List<Map<String, dynamic>> urunler =
+                              entry.value;
+                          int toplamfiyat = 0;
+                          for (Map<String, dynamic> urun in urunler) {
+                            toplamfiyat += (urun['toplamFiyat'] as num).toInt();
+                          }
+                          return buildSiparisCard(
+                            tarih: DateFormat('dd.MM.yyyy').format(
+                              DateTime.parse(
+                                context
+                                    .watch<Siparislerprovider>()
+                                    .gecmissiparisler[faturaID]![0]['siparisTarihi'],
+                              ),
+                            ),
+
+                            toplam: toplamfiyat.toString(),
+                            urunler: [
+                              ...urunler.asMap().entries.map((entry) {
+                                final Map<String, dynamic> urun = entry.value;
+                                return urun['urunResmi'];
+                              }).toList(),
+                            ],
+                            faturaID: int.parse(faturaID),
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return Center(
+                      child: Container(
+                        width: 250,
+                        height: 250,
+                        decoration: BoxDecoration(
+                          color: Renkler.krem,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 8,
+                              offset: Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SizedBox(
+                                width: 80,
+                                height: 80,
+                                child: Image.asset(
+                                  'assets/sepetebos.png',
+                                  color: Renkler.kahverengi,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                S.of(context).sepetBos,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Renkler.kahverengi,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                },
               ),
             ],
           ),
         ),
-         Provider.of<Loadingprovider>(context,listen: false).isloading?
-        Center(
-          child: Container(
-            width: MediaQuery.sizeOf(context).width,
-            height: MediaQuery.sizeOf(context).height,
-            decoration: BoxDecoration(
-              color: const Color.fromARGB(83, 138, 103, 32),
-            ),
-            child: Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: CircularProgressIndicator(color: Renkler.kahverengi),
+        Provider.of<Loadingprovider>(context, listen: false).isloading
+            ? Center(
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(83, 138, 103, 32),
+                ),
+                child: Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(color: Renkler.kahverengi),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ):SizedBox()
+            )
+            : SizedBox(),
       ],
     );
   }
@@ -248,7 +372,20 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
     required String tarih,
     required String toplam,
     required List<String> urunler,
+    required int faturaID,
   }) {
+    final Set<String> gorulenUrunler = {};
+    final List<Widget> urunGorselleri = [];
+
+    for (String e in urunler) {
+      if (!gorulenUrunler.contains(e)) {
+        gorulenUrunler.add(e);
+        urunGorselleri.add(
+          SizedBox(width: 50, height: 50, child: Image.network(e)),
+        );
+      }
+    }
+
     return Card(
       color: Renkler.krem,
       margin: EdgeInsets.only(bottom: 16),
@@ -264,17 +401,7 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
               style: TextStyle(color: Renkler.kahverengi),
             ),
             SizedBox(height: 8),
-            Row(
-              children:
-                  urunler
-                      .map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: Text(e, style: TextStyle(fontSize: 24)),
-                        ),
-                      )
-                      .toList(),
-            ),
+            Row(spacing: 5, children: urunGorselleri),
             SizedBox(height: 8),
             Row(
               children: [
@@ -289,7 +416,7 @@ class _GecmissiparislersayfasiState extends State<Gecmissiparislersayfasi> {
                 Spacer(),
                 TextButton(
                   onPressed: () {
-                    context.push(Paths.gecmissiparisdetaylari);
+                    context.push(Paths.gecmissiparisdetaylari, extra: faturaID);
                   },
                   child: Text(
                     S.of(context).detaylar,

@@ -81,7 +81,8 @@ class _KaydedilenlerState extends State<Kaydedilenler> {
                 return Center(
                   child: Text("Bir hata oluştu: ${snapshot.error}"),
                 );
-              } else if (!snapshot.hasData) {
+              }
+              if (urunkartlari.length != 0) {
                 return ListView.builder(
                   controller: _scrollController,
                   itemCount: urunkartlari.length,
@@ -91,12 +92,44 @@ class _KaydedilenlerState extends State<Kaydedilenler> {
                 );
               } else {
                 return Center(
-                  child: Text(
-                    S.of(context).begenilen_urun_listesi_bos,
-                    style: TextStyle(
-                      color: Renkler.kahverengi,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                  child: Container(
+                    width: 250,
+                    height: 250,
+                    decoration: BoxDecoration(
+                      color: Renkler.krem,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 8,
+                          offset: Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SizedBox(
+                            width: 80,
+                            height: 80,
+                            child: Image.asset(
+                              'assets/heart.png',
+                              color: Renkler.kahverengi,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            S.of(context).begenilen_urun_listesi_bos,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Renkler.kahverengi,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

@@ -14,6 +14,14 @@ class Urunlerprovider with ChangeNotifier {
   late String urunAdi = '';
   late String siralamaolcutu = "";
   late String tarihegore = '';
+  late int takimcurrentPage = 1;
+  late String takimsiralamaolcutu = "";
+  late List<Map<String, int>> secilitakimfiyatOgeler = [];
   late Map<String, dynamic> seridkategorisi = {};
   late List<Ozelurunkarti> ensongezilenurunler = [];
+  late List<Map<String, dynamic>> takimlar = [];
+
+  void guncelle() {
+    notifyListeners();
+  }
 }

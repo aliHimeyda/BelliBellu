@@ -14,6 +14,7 @@ import 'package:bellibellu/sepetsayfasi.dart';
 import 'package:bellibellu/sohbeticerigisayfasi.dart';
 import 'package:bellibellu/sohbetlersayfasi.dart';
 import 'package:bellibellu/sorularsayfasi.dart';
+import 'package:bellibellu/takimlar.dart';
 import 'package:bellibellu/tumurunler.dart';
 import 'package:bellibellu/urunkartiicerigi.dart';
 import 'package:bellibellu/urunler.dart';
@@ -28,6 +29,7 @@ class Paths {
   Paths._();
   static const String anasayfa = '/';
   static const String katagoriler = '/katagoriler';
+  static const String takimlar = '/takimlar';
   static const String iletisim = '/iletisim';
   static const String kaydedilenler = '/kaydedilenler';
   static const String menu = '/menu';
@@ -75,6 +77,14 @@ final router = GoRouter(
             GoRoute(
               path: Paths.katagoriler,
               builder: (context, state) => const Katagoriler(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.takimlar,
+              builder: (context, state) => const Takimlar(),
             ),
           ],
         ),
@@ -192,7 +202,10 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Paths.gecmissiparisdetaylari,
-              builder: (context, state) => Gecmissiparisdetaysayfasi(),
+              builder: (context, state) {
+                final int faturaID = state.extra as int;
+                return Gecmissiparisdetaysayfasi(faturaID: faturaID);
+              },
             ),
           ],
         ),

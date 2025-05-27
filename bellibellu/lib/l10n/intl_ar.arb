@@ -408,6 +408,27 @@
   "kartNumarasi": "رقم البطاقة",
   "gecersizKartUyarisi": "يرجى إدخال رقم بطاقة صالح.",
   "lutfenSepettenUrunSecin": "يرجى اختيار منتج من السلة",
-    "islem_basarili": "تمت العملية بنجاح"
+    "islem_basarili": "تمت العملية بنجاح",
+    "adresEksik": "معلومات العنوان ناقصة، يرجى إدخال عنوانك.",
+     "teslimatUrunSayisi": "{0} عملية تسليم، {1} منتج",
+  "@teslimatUrunSayisi": {
+    "description": "يعرض عدد عمليات التسليم والمنتجات",
+    "placeholders": {
+       "adetTeslimat": {},
+      "adetUrun": {}
+    }
+  },
+   "bekliyor": "قيد الانتظار",
+    "sepetBos": "السلة فارغة",
+    "gecmisBos": "لا توجد طلبات سابقة",
+    "takimlar": "الفرق",
+     "takimKodu": "رمز الفريق",
+      "masaAdi": "اسم الطاولة",
+  "sandalyeAdi": "اسم الكرسي",
+   "sandalyeSayisi": "عدد الكراسي",
+     "masaSatici": "بائع الطاولة",
+  "sandalyeSatici": "بائع الكراسي"
+
+
 }
 

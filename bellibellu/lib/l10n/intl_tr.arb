@@ -412,5 +412,25 @@
   "kartNumarasi": "Kart Numarası",
   "gecersizKartUyarisi": "Lütfen geçerli bir kart numarası girin.",
   "lutfenSepettenUrunSecin": "Lütfen sepetten ürün seçin",
-  "islem_basarili": "İşlem başarılı"
+  "islem_basarili": "İşlem başarılı",
+  "adresEksik": "Adres bilgisi eksik, lütfen adresinizi giriniz.",
+    "teslimatUrunSayisi": "{0} Teslimat, {1} Ürün",
+  "@teslimatUrunSayisi": {
+    "description": "Teslimat ve ürün sayısını belirten metin",
+    "placeholders": {
+      "adetTeslimat": {},
+      "adetUrun": {}
+    }
+  },
+   "bekliyor": "Bekliyor",
+   "sepetBos": "Sepet boş",
+   "gecmisBos": "Geçmiş boş",
+   "takimlar": "Takımlar",
+    "takimKodu": "Takım Kodu",
+      "masaAdi": "Masa Adı",
+  "sandalyeAdi": "Sandalye Adı",
+  "masaSatici": "Masa Satıcı",
+  "sandalyeSatici": "Sandalye Satıcı",
+  "sandalyeSayisi": "Sandalye Sayısı"
+
 }

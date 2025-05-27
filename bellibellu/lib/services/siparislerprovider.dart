@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class Siparislerprovider with ChangeNotifier {
   late Map<String, List<Map<String, dynamic>>> siparisler = {};
   late List<Map<String, dynamic>> onaylanmisSiparisler = [];
+  late Map<String, List<Map<String, dynamic>>> gecmissiparisler = {};
+  late List<Map<String, dynamic>> faturadetayi = [];
   Future<void> siparisleriGuncelle() async {
     notifyListeners();
   }

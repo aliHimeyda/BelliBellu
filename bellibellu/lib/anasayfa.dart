@@ -91,6 +91,13 @@ class Anasayfa extends StatelessWidget {
                         label: S.of(context).kategoriler,
                       ),
                       NavigationDestination(
+                        icon: Icon(
+                          Icons.indeterminate_check_box,
+                          color: Renkler.kahverengi,
+                        ),
+                        label: S.of(context).takimlar,
+                      ),
+                      NavigationDestination(
                         icon: Icon(Icons.favorite, color: Renkler.kahverengi),
                         label: S.of(context).favorilerim,
                       ),

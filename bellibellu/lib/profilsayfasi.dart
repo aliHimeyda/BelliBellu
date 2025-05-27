@@ -242,8 +242,20 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
                   ),
                   _infoTile(
                     context,
-                    S.of(context).adres,
-                    "${Provider.of<Kullanicilarprovider>(context, listen: false).currentkullanici['adres'].toString()}",
+                    S.of(context).adres.substring(0, 5),
+                    ((Provider.of<Kullanicilarprovider>(
+                                      context,
+                                      listen: false,
+                                    ).currentkullanici['adres'] ??
+                                    '')
+                                .toString()
+                                .length >
+                            15)
+                        ? "${(Provider.of<Kullanicilarprovider>(context, listen: false).currentkullanici['adres'] ?? "").toString().substring(0, 15)}....."
+                        : Provider.of<Kullanicilarprovider>(
+                          context,
+                          listen: false,
+                        ).currentkullanici['adres'].toString(),
                     _adresPopup,
                   ),
                 ],

@@ -408,5 +408,26 @@
   "kartNumarasi": "Card Number",
   "gecersizKartUyarisi": "Please enter a valid card number.",
   "lutfenSepettenUrunSecin": "Please select a product from the cart",
-   "islem_basarili": "Operation successful"
+   "islem_basarili": "Operation successful",
+   "adresEksik": "Address information is missing, please enter your address.",
+     "teslimatUrunSayisi": "{0} Delivery, {1} Product",
+  "@teslimatUrunSayisi": {
+    "description": "Shows number of deliveries and products",
+    "placeholders": {
+       "adetTeslimat": {},
+      "adetUrun": {}
+    }
+  },
+   "bekliyor": "Pending",
+    "sepetBos": "Cart is empty",
+    "gecmisBos": "No past orders",
+    "takimlar": "Packages",
+     "takimKodu": "Package Code",
+      "masaAdi": "Table Name",
+  "sandalyeAdi": "Chair Name",
+   "masaSatici": "Table Seller",
+  "sandalyeSatici": "Chair Seller",
+   "sandalyeSayisi": "Number of Chairs"
+
+
 }

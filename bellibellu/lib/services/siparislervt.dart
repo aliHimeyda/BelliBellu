@@ -79,6 +79,55 @@ class Siparislervt {
     }
   }
 
+  static Future<Map<String, List<Map<String, dynamic>>>>
+  tumgecmisSiparisleriGetir(int kullaniciID) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/tum_gecmissiparisler/$kullaniciID'),
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> decodedJson = jsonDecode(response.body);
+
+        final Map<String, List<Map<String, dynamic>>> groupedgecmisSiparisler =
+            {};
+
+        decodedJson.forEach((key, value) {
+          // value burada List<dynamic> olacak, onu List<Map<String, dynamic>>'e cast ediyoruz
+          groupedgecmisSiparisler[key] = List<Map<String, dynamic>>.from(value);
+        });
+
+        return groupedgecmisSiparisler;
+      } else {
+        print(" Hata: ${response.statusCode} - ${response.body}");
+        return {};
+      }
+    } catch (e) {
+      print(" İstek sırasında hata oluştu: $e");
+      return {};
+    }
+  }
+
+  static Future<List<Map<String, dynamic>>> faturadetayigetir(
+    int faturaID,
+  ) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/faturadetayigetir/$faturaID'),
+      );
+
+      if (response.statusCode == 200) {
+        return (jsonDecode(response.body) as List).cast<Map<String, dynamic>>();
+      } else {
+        print(" Hata: ${response.statusCode} - ${response.body}");
+        return [];
+      }
+    } catch (e) {
+      print(" İstek sırasında hata oluştu: $e");
+      return [];
+    }
+  }
+
   static Future<bool> siparisiOnayla({
     required int siparisID,
     required int saticiID,
