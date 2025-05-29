@@ -137,9 +137,14 @@ class _MenuState extends State<Menu> {
                     : SizedBox(),
                 GestureDetector(
                   onTap: () {
-                    context.push(
-                      Paths.ensongezilenler,
-                    ); // Sayfaya nesneyi geçir)
+                    if (Provider.of<Kullanicilarprovider>(
+                      context,
+                      listen: false,
+                    ).ismusteri) {
+                      context.push(Paths.sepetsayfasi);
+                    } else {
+                      context.push(Paths.analiz);
+                    }
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -159,12 +164,16 @@ class _MenuState extends State<Menu> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.history,
+                              context.watch<Kullanicilarprovider>().ismusteri
+                                  ? Icons.payment
+                                  : Icons.analytics,
                               color: Renkler.kahverengi,
                               size: 60,
                             ),
                             Text(
-                              S.of(context).gecmis,
+                              !context.watch<Kullanicilarprovider>().ismusteri
+                                  ? S.of(context).analiz
+                                  : S.of(context).sepetim,
                               style: TextStyle(
                                 color: Renkler.kahverengi,
                                 fontSize: 15,
@@ -380,6 +389,49 @@ class _MenuState extends State<Menu> {
                     ),
                   ),
                 ),
+                GestureDetector(
+                  onTap: () {
+                    context.push(
+                      Paths.ensongezilenler,
+                    ); // Sayfaya nesneyi geçir)
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 2 - 35,
+                      height: MediaQuery.of(context).size.width / 2 - 35,
+                      decoration: BoxDecoration(
+                        color: Renkler.krem,
+                        border: Border.all(
+                          width: 0.4,
+                          color: Renkler.kahverengi,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.history,
+                              color: Renkler.kahverengi,
+                              size: 60,
+                            ),
+                            Text(
+                              S.of(context).gecmis,
+                              style: TextStyle(
+                                color: Renkler.kahverengi,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
                 GestureDetector(
                   onTap: () {
                     context.push(Paths.iletisim);

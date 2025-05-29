@@ -24,6 +24,7 @@ class Anasayfa extends StatelessWidget {
         currentPath != Paths.sorularsayfasi &&
         currentPath != Paths.loginsayfasi &&
         currentPath != Paths.sohbeticerigisayfasi &&
+        currentPath != Paths.sohbetlersayfasi &&
         currentPath != Paths.profilsayfasi;
     return Scaffold(
       // appBar: AppBar(
@@ -96,42 +97,7 @@ class Anasayfa extends StatelessWidget {
                         icon: Icon(Icons.table_bar, color: Renkler.kahverengi),
                         label: S.of(context).takimlar,
                       ),
-                      Provider.of<Kullanicilarprovider>(
-                            context,
-                            listen: false,
-                          ).ismusteri
-                          ? NavigationDestination(
-                            icon: Icon(
-                              Icons.favorite,
-                              color: Renkler.kahverengi,
-                            ),
-                            label: S.of(context).favorilerim,
-                          )
-                          : NavigationDestination(
-                            icon: Icon(
-                              Icons.bar_chart,
-                              color: Renkler.kahverengi,
-                            ),
-                            label: S.of(context).analiz,
-                          ),
-                      Provider.of<Kullanicilarprovider>(
-                            context,
-                            listen: false,
-                          ).ismusteri
-                          ? NavigationDestination(
-                            icon: Icon(
-                              Icons.shopping_cart,
-                              color: Renkler.kahverengi,
-                            ),
-                            label: S.of(context).sepetim,
-                          )
-                          : NavigationDestination(
-                            icon: Icon(
-                              Icons.indeterminate_check_box,
-                              color: Renkler.kahverengi,
-                            ),
-                            label: S.of(context).urunlerim,
-                          ),
+
                       NavigationDestination(
                         icon: Icon(
                           Icons.person_outlined,

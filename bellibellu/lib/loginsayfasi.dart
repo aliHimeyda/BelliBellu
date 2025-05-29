@@ -1,5 +1,6 @@
 import 'package:bellibellu/dildestegiProvaider.dart';
 import 'package:bellibellu/generated/l10n.dart';
+import 'package:bellibellu/logosayfasi.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/kullanicilarVT.dart';
@@ -687,12 +688,15 @@ class _LoginpageState extends State<Loginpage> {
       );
       Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
           false;
-      Provider.of<Kullanicilarprovider>(
+    
+      girisyapanmail = _mailController.text;
+      girisyapildimi = true;
+      Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
+          false;
+            Provider.of<Kullanicilarprovider>(
         context,
         listen: false,
       ).degisikliklerikaydet();
-      girisyapanmail = _mailController.text;
-      girisyapildimi = true;
       cihazagirisbilgisinikaydet();
       context.pushReplacement(Paths.anasayfa);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -756,6 +760,8 @@ class _LoginpageState extends State<Loginpage> {
       ).degisikliklerikaydet();
       girisyapanmail = _mailController.text;
       girisyapildimi = true;
+      Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri =
+          true;
       cihazagirisbilgisinikaydet();
       context.pushReplacement(Paths.anasayfa);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -797,6 +803,8 @@ class _LoginpageState extends State<Loginpage> {
       'ismusteri',
       Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri,
     );
+    Cihazbellegi.ismusteri =
+        Provider.of<Kullanicilarprovider>(context, listen: false).ismusteri;
     await prefs.setString('girisyapanmail', girisyapanmail);
   }
 

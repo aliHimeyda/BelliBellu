@@ -172,7 +172,7 @@ class _UruneklemeState extends State<Urunekleme> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: urunAdi,
                         keyboardType: TextInputType.text,
@@ -185,7 +185,7 @@ class _UruneklemeState extends State<Urunekleme> {
                       ),
                     ),
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: ortam,
                         keyboardType: TextInputType.text,
@@ -204,7 +204,7 @@ class _UruneklemeState extends State<Urunekleme> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: materyali,
                         keyboardType: TextInputType.text,
@@ -217,7 +217,7 @@ class _UruneklemeState extends State<Urunekleme> {
                       ),
                     ),
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: renk,
                         keyboardType: TextInputType.text,
@@ -236,7 +236,7 @@ class _UruneklemeState extends State<Urunekleme> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: fiyat,
                         keyboardType: TextInputType.number,
@@ -249,7 +249,7 @@ class _UruneklemeState extends State<Urunekleme> {
                       ),
                     ),
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: stokdurumu,
                         keyboardType: TextInputType.number,
@@ -268,7 +268,7 @@ class _UruneklemeState extends State<Urunekleme> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: garantisuresi,
                         keyboardType: TextInputType.number,
@@ -281,7 +281,7 @@ class _UruneklemeState extends State<Urunekleme> {
                       ),
                     ),
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: agirlik,
                         keyboardType: TextInputType.number,
@@ -300,7 +300,7 @@ class _UruneklemeState extends State<Urunekleme> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: uzunluk,
                         keyboardType: TextInputType.number,
@@ -313,7 +313,7 @@ class _UruneklemeState extends State<Urunekleme> {
                       ),
                     ),
                     SizedBox(
-                      width: 170,
+                      width: 150,
                       child: TextField(
                         controller: genislik,
                         keyboardType: TextInputType.number,

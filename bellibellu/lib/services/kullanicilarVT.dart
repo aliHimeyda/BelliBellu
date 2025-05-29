@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:riverpod/riverpod.dart';
 
 class Kullanicilarvt {
-  static const String baseUrl = 'http://10.0.2.2:3000';
+  static const String baseUrl = 'https://d713-92-45-16-34.ngrok-free.app';
   static Future<List<dynamic>> getKisiler() async {
     final response = await http.get(Uri.parse('$baseUrl/Kullanici'));
 

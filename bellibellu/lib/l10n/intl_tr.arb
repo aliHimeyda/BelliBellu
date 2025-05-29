@@ -455,7 +455,10 @@
     "renk": "Renk",
       "genislik": "Genişlik",
   "uzunluk": "Uzunluk",
-    "urunEkleme": "Ürün Ekleme"
+    "urunEkleme": "Ürün Ekleme",
+     "urun_sorulari": "Ürün Soruları",
+  "siparis_sorulari": "Sipariş Soruları",
+  "musteri_mesajlarim": "müşteri mesajları"
 
 
 

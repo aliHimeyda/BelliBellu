@@ -2201,6 +2201,36 @@ class S {
   String get urunEkleme {
     return Intl.message('Add Product', name: 'urunEkleme', desc: '', args: []);
   }
+
+  /// `Product Questions`
+  String get urun_sorulari {
+    return Intl.message(
+      'Product Questions',
+      name: 'urun_sorulari',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order Questions`
+  String get siparis_sorulari {
+    return Intl.message(
+      'Order Questions',
+      name: 'siparis_sorulari',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `customer messages`
+  String get musteri_mesajlarim {
+    return Intl.message(
+      'customer messages',
+      name: 'musteri_mesajlarim',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

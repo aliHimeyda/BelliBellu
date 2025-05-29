@@ -451,7 +451,10 @@
    "renk": "Color",
    "genislik": "Width",
   "uzunluk": "Length",
-    "urunEkleme": "Add Product"
+    "urunEkleme": "Add Product",
+      "urun_sorulari": "Product Questions",
+  "siparis_sorulari": "Order Questions",
+  "musteri_mesajlarim": "customer messages"
 
 
 

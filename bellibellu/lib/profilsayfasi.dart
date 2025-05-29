@@ -1,10 +1,13 @@
 import 'package:bellibellu/generated/l10n.dart';
 import 'package:bellibellu/loginsayfasi.dart';
+import 'package:bellibellu/logosayfasi.dart';
+import 'package:bellibellu/main.dart';
 import 'package:bellibellu/renkler.dart';
 import 'package:bellibellu/router.dart';
 import 'package:bellibellu/services/kullanicilarVT.dart';
 import 'package:bellibellu/services/kullanicilarprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grock/grock.dart';
 import 'package:image_picker/image_picker.dart';
@@ -301,7 +304,9 @@ class _ProfilSayfasiState extends State<ProfilSayfasi> {
                     await SharedPreferences.getInstance();
                 await prefs.setBool('girisbilgisi', false);
                 await prefs.setString('girisyapanmail', '');
+                await getitkullanici.reset();
                 context.go(Paths.loginsayfasi);
+                Phoenix.rebirth(context);
               },
               icon: const Icon(Icons.logout),
               label: const Text("Çıkış Yap"),

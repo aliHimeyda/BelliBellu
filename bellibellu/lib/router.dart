@@ -9,6 +9,7 @@ import 'package:bellibellu/katagoriler.dart';
 import 'package:bellibellu/kaydedilenler.dart';
 import 'package:bellibellu/loginsayfasi.dart';
 import 'package:bellibellu/logosayfasi.dart';
+import 'package:bellibellu/main.dart';
 import 'package:bellibellu/menu.dart';
 import 'package:bellibellu/profilsayfasi.dart';
 import 'package:bellibellu/sepetsayfasi.dart';
@@ -96,40 +97,6 @@ final router = GoRouter(
             ),
           ],
         ),
-        Cihazbellegi.ismusteri ?? false
-            ? StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  path: Paths.kaydedilenler,
-                  builder: (context, state) => Kaydedilenler(),
-                ),
-              ],
-            )
-            : StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  path: Paths.analiz,
-                  builder: (context, state) => AnalizSayfasi(),
-                ),
-              ],
-            ),
-        Cihazbellegi.ismusteri ?? false
-            ? StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  path: Paths.sepetsayfasi,
-                  builder: (context, state) => SepetSayfasi(),
-                ),
-              ],
-            )
-            : StatefulShellBranch(
-              routes: [
-                GoRoute(
-                  path: Paths.urunlerim,
-                  builder: (context, state) => Urunlerim(),
-                ),
-              ],
-            ),
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -138,6 +105,39 @@ final router = GoRouter(
             ),
           ],
         ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.kaydedilenler,
+              builder: (context, state) => Kaydedilenler(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.analiz,
+              builder: (context, state) => AnalizSayfasi(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.sepetsayfasi,
+              builder: (context, state) => SepetSayfasi(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: Paths.urunlerim,
+              builder: (context, state) => Urunlerim(),
+            ),
+          ],
+        ),
+
         StatefulShellBranch(
           routes: [
             GoRoute(
@@ -247,7 +247,10 @@ final router = GoRouter(
           routes: [
             GoRoute(
               path: Paths.sohbeticerigisayfasi,
-              builder: (context, state) => SohbetIcerigiSayfasi(),
+              builder: (context, state) {
+                final gereksinim = state.extra as Map<String,dynamic>;
+                return SohbetIcerigiSayfasi(gereksinim : gereksinim);
+              },
             ),
           ],
         ),

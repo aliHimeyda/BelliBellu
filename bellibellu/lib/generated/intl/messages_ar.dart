@@ -230,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "metalmasaonerisi": MessageLookupByLibrary.simpleMessage("طاولة معدن"),
     "metalsandalyeonerisi": MessageLookupByLibrary.simpleMessage("كرسي معدن"),
     "musteri": MessageLookupByLibrary.simpleMessage("العميل"),
+    "musteri_mesajlarim": MessageLookupByLibrary.simpleMessage("رسائل العميل"),
     "odeme_bilgisi": MessageLookupByLibrary.simpleMessage("معلومات الدفع"),
     "ofis": MessageLookupByLibrary.simpleMessage("مكتب"),
     "ofisMobilyalari": MessageLookupByLibrary.simpleMessage("أثاث المكاتب"),
@@ -295,6 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "siparis_no": MessageLookupByLibrary.simpleMessage("رقم الطلب"),
     "siparis_odeme": m10,
     "siparis_ozeti": MessageLookupByLibrary.simpleMessage("ملخص الطلب"),
+    "siparis_sorulari": MessageLookupByLibrary.simpleMessage("أسئلة الطلب"),
     "siparis_sorularim": MessageLookupByLibrary.simpleMessage(
       "أسئلتي عن الطلب",
     ),
@@ -363,6 +365,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "urun_soru_yok": MessageLookupByLibrary.simpleMessage(
       "لا توجد أسئلة عن المنتج بعد",
     ),
+    "urun_sorulari": MessageLookupByLibrary.simpleMessage("أسئلة المنتج"),
     "urun_sorularim": MessageLookupByLibrary.simpleMessage("أسئلتي عن المنتج"),
     "urunler": MessageLookupByLibrary.simpleMessage("المنتجات"),
     "urunleri_getir": MessageLookupByLibrary.simpleMessage("إحضار المنتجات"),

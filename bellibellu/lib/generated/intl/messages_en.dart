@@ -241,6 +241,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "metalmasaonerisi": MessageLookupByLibrary.simpleMessage("Metal table"),
     "metalsandalyeonerisi": MessageLookupByLibrary.simpleMessage("Metal chair"),
     "musteri": MessageLookupByLibrary.simpleMessage("Customer"),
+    "musteri_mesajlarim": MessageLookupByLibrary.simpleMessage(
+      "customer messages",
+    ),
     "odeme_bilgisi": MessageLookupByLibrary.simpleMessage(
       "Payment Information",
     ),
@@ -314,6 +317,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "siparis_no": MessageLookupByLibrary.simpleMessage("Order No"),
     "siparis_odeme": m10,
     "siparis_ozeti": MessageLookupByLibrary.simpleMessage("Order Summary"),
+    "siparis_sorulari": MessageLookupByLibrary.simpleMessage("Order Questions"),
     "siparis_sorularim": MessageLookupByLibrary.simpleMessage(
       "Order Questions",
     ),
@@ -384,6 +388,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "urun_soru_yok": MessageLookupByLibrary.simpleMessage(
       "You have no product questions yet",
     ),
+    "urun_sorulari": MessageLookupByLibrary.simpleMessage("Product Questions"),
     "urun_sorularim": MessageLookupByLibrary.simpleMessage("Product Questions"),
     "urunler": MessageLookupByLibrary.simpleMessage("Products"),
     "urunleri_getir": MessageLookupByLibrary.simpleMessage("Get Products"),

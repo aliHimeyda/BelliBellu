@@ -177,7 +177,7 @@ class _TakimlarState extends State<Takimlar> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 50,
+                    spacing: 20,
                     children: [
                       GestureDetector(
                         onTap: () {

@@ -451,7 +451,10 @@
     "renk": "اللون",
     "genislik": "العرض",
   "uzunluk": "الطول",
-   "urunEkleme": "إضافة منتج"
+   "urunEkleme": "إضافة منتج",
+    "urun_sorulari": "أسئلة المنتج",
+  "siparis_sorulari": "أسئلة الطلب",
+    "musteri_mesajlarim": "رسائل العميل"
 
 
 

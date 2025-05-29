@@ -245,6 +245,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Metal sandalye",
     ),
     "musteri": MessageLookupByLibrary.simpleMessage("Müşteri"),
+    "musteri_mesajlarim": MessageLookupByLibrary.simpleMessage(
+      "müşteri mesajları",
+    ),
     "odeme_bilgisi": MessageLookupByLibrary.simpleMessage("Ödeme Bilgisi"),
     "ofis": MessageLookupByLibrary.simpleMessage("Ofis"),
     "ofisMobilyalari": MessageLookupByLibrary.simpleMessage("Ofis Mobilyaları"),
@@ -318,6 +321,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "siparis_no": MessageLookupByLibrary.simpleMessage("Sipariş No"),
     "siparis_odeme": m10,
     "siparis_ozeti": MessageLookupByLibrary.simpleMessage("Sipariş Özeti"),
+    "siparis_sorulari": MessageLookupByLibrary.simpleMessage(
+      "Sipariş Soruları",
+    ),
     "siparis_sorularim": MessageLookupByLibrary.simpleMessage(
       "Sipariş Sorularım",
     ),
@@ -396,6 +402,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "urun_soru_yok": MessageLookupByLibrary.simpleMessage(
       "Henüz Ürün Sorunuz Yok",
     ),
+    "urun_sorulari": MessageLookupByLibrary.simpleMessage("Ürün Soruları"),
     "urun_sorularim": MessageLookupByLibrary.simpleMessage("Ürün Sorularım"),
     "urunler": MessageLookupByLibrary.simpleMessage("Ürünler"),
     "urunleri_getir": MessageLookupByLibrary.simpleMessage("Ürünleri Getir"),
