@@ -342,14 +342,30 @@ class _SohbetIcerigiSayfasiState extends State<SohbetIcerigiSayfasi> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Renkler.krem,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.only(bottom: 4),
-                child: Text(text),
+              Column(
+                children: [
+                  // ConstrainedBox ekliyoruz ki genişliği sınırlayalım
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: 300,
+                    ), // burada istediğin max genişliği ayarlayabilirsin
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Renkler.krem,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.only(bottom: 4),
+                      child: Text(
+                        text,
+                        style: TextStyle(),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 10, // ya da kaç satırda kessin istiyorsan
+                        softWrap: true,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Text(
                 time,
